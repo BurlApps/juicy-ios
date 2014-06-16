@@ -14,7 +14,6 @@
 		D3A2A875194E60D500FABCC0 /* JuicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A874194E60D500FABCC0 /* JuicyTests.swift */; };
 		D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A2A885194E630300FABCC0 /* Main.storyboard */; };
 		D3A2A88E194E65B400FABCC0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A88D194E65B400FABCC0 /* Parse.framework */; };
-		D3A2A894194E714E00FABCC0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A893194E714E00FABCC0 /* StoreKit.framework */; };
 		D3A2A896194E716000FABCC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A895194E716000FABCC0 /* Social.framework */; };
 		D3A2A898194E717F00FABCC0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A897194E717F00FABCC0 /* Security.framework */; };
 		D3A2A89A194E718A00FABCC0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */; };
@@ -33,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D3050424194EFA7000A92CB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3A2A856194E60D500FABCC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3A2A85D194E60D500FABCC0;
+			remoteInfo = Juicy;
+		};
 		D34DE851194EEFE80035D30E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3A2A856194E60D500FABCC0 /* Project object */;
@@ -92,7 +98,6 @@
 		D3A2A885194E630300FABCC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D3A2A88D194E65B400FABCC0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Juicy-Bridging-Header.h"; sourceTree = "<group>"; };
-		D3A2A893194E714E00FABCC0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D3A2A895194E716000FABCC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D3A2A897194E717F00FABCC0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -130,7 +135,6 @@
 				D3A2A89A194E718A00FABCC0 /* SystemConfiguration.framework in Frameworks */,
 				D3A2A898194E717F00FABCC0 /* Security.framework in Frameworks */,
 				D3A2A896194E716000FABCC0 /* Social.framework in Frameworks */,
-				D3A2A894194E714E00FABCC0 /* StoreKit.framework in Frameworks */,
 				D3A2A88E194E65B400FABCC0 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,7 +252,6 @@
 				D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */,
 				D3A2A897194E717F00FABCC0 /* Security.framework */,
 				D3A2A895194E716000FABCC0 /* Social.framework */,
-				D3A2A893194E714E00FABCC0 /* StoreKit.framework */,
 				D3A2A88D194E65B400FABCC0 /* Parse.framework */,
 			);
 			name = Frameworks;
@@ -291,6 +294,7 @@
 				D3A2A8B4194E724B00FABCC0 /* PBXTargetDependency */,
 				D34DE852194EEFE80035D30E /* PBXTargetDependency */,
 				D34DE854194EEFE90035D30E /* PBXTargetDependency */,
+				D3050425194EFA7000A92CB2 /* PBXTargetDependency */,
 			);
 			name = JuicyTests;
 			productName = JuicyTests;
@@ -309,6 +313,17 @@
 					D3A2A85D194E60D500FABCC0 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = R5K2X99B7E;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.DataProtection = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					D3A2A86D194E60D500FABCC0 = {
 						CreatedOnToolsVersion = 6.0;
@@ -375,6 +390,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D3050425194EFA7000A92CB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3A2A85D194E60D500FABCC0 /* Juicy */;
+			targetProxy = D3050424194EFA7000A92CB2 /* PBXContainerItemProxy */;
+		};
 		D34DE852194EEFE80035D30E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3A2A85D194E60D500FABCC0 /* Juicy */;

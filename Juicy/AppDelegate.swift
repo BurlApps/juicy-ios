@@ -13,15 +13,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
+    var coreData: CoreData = CoreData()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary;
         
         //Initialize Parse
-        let parseApplicationID: String = infoDictionary["ParseApplicationID"] as String;
-        let parseClientKey: String = infoDictionary["ParseClientKey"] as String;
-        Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey);
+        let parseApplicationID: String = infoDictionary["ParseApplicationID"] as String
+        let parseClientKey: String = infoDictionary["ParseClientKey"] as String
+        Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
         return true
     }
@@ -47,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        self.coreData.saveContext()
     }
 
 }

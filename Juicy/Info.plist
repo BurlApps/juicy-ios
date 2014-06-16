@@ -22,6 +22,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>ParseApplicationID</key>
+	<string>${PARSE_APPLICATION_ID}</string>
+	<key>ParseClientKey</key>
+	<string>${PARSE_CLIENT_KEY}</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -32,9 +42,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>ParseApplicationID</key>
-	<string>${PARSE_APPLICATION_ID}</string>
-	<key>ParseClientKey</key>
-	<string>${PARSE_CLIENT_KEY}</string>
 </dict>
 </plist>
