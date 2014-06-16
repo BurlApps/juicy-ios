@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>90118B88-0076-4B60-AD4C-E5636C7ADCD7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Juicy</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>40842BA9-38AD-4EAA-84E3-F8854FEB1094</key>
+		<string>ssh://github.com/bvallelunga/Juicy.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Juicy.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>40842BA9-38AD-4EAA-84E3-F8854FEB1094</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/bvallelunga/Juicy.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>40842BA9-38AD-4EAA-84E3-F8854FEB1094</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>40842BA9-38AD-4EAA-84E3-F8854FEB1094</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
