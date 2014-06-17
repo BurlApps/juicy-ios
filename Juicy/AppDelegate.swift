@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let parseClientKey: String = infoDictionary["ParseClientKey"] as String
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
+        //Initialize Twitter Login
+        let twitterKey: String = infoDictionary["TwitterKey"] as String
+        let twitterSecret: String = infoDictionary["TwitterSecret"] as String
+        PFTwitterUtils.initializeWithConsumerKey(twitterKey, consumerSecret: twitterSecret)
+        
         return true
     }
 

@@ -4,28 +4,141 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Landing View Controller-->
         <scene sceneID="wRI-mk-8P8">
             <objects>
-                <viewController id="XzC-eD-RAq" sceneMemberID="viewController">
+                <viewController id="XzC-eD-RAq" customClass="LandingViewController" customModule="Juicy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DFl-ne-oLk"/>
                         <viewControllerLayoutGuide type="bottom" id="uWO-5c-iA0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W5h-R3-Ebn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNR-IN-6pg">
+                                <rect key="frame" x="30" y="478" width="260" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="DP4-qf-LXf"/>
+                                    <constraint firstAttribute="height" constant="50" id="uLI-n0-Jwo"/>
+                                </constraints>
+                                <state key="normal" title="Authorize With Twitter">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="twitterAuthButtonPressed:" destination="XzC-eD-RAq" eventType="touchUpInside" id="oFl-5P-q5h"/>
+                                </connections>
+                            </button>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Juicy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2e-iy-FgY">
+                                <rect key="frame" x="11" y="242" width="298" height="43"/>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="32"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Social Experiment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="hNa-0t-03r">
+                                <rect key="frame" x="11" y="264" width="298" height="61"/>
+                                <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cNR-IN-6pg" firstAttribute="leading" secondItem="W5h-R3-Ebn" secondAttribute="leading" constant="30" id="iPo-UC-ie0"/>
+                            <constraint firstAttribute="trailing" secondItem="cNR-IN-6pg" secondAttribute="trailing" constant="30" id="pjf-ok-G2L"/>
+                            <constraint firstItem="uWO-5c-iA0" firstAttribute="top" secondItem="cNR-IN-6pg" secondAttribute="bottom" constant="40" id="y2r-S0-whz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="twitterAuthButton" destination="cNR-IN-6pg" id="KTu-2B-33W"/>
+                        <segue destination="DZc-cW-pdh" kind="modal" identifier="loggedIn" modalTransitionStyle="crossDissolve" id="ykM-gc-U3T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eiv-TR-rr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="170"/>
+            <point key="canvasLocation" x="78" y="169"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BgG-ai-9bw">
+            <objects>
+                <navigationController id="DZc-cW-pdh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XGx-By-vva">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Fh0-fW-gpO" kind="relationship" relationship="rootViewController" id="79m-zo-me5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gvA-fo-d67" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512" y="166"/>
+        </scene>
+        <!--View Controller - Item 2-->
+        <scene sceneID="gP8-7v-cTZ">
+            <objects>
+                <viewController id="jCG-TC-DUY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rnj-bJ-IWA"/>
+                        <viewControllerLayoutGuide type="bottom" id="WDd-SC-7Ak"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Um-fJ-MjQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="3K5-s0-Mns"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FRY-vE-daC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1484" y="513"/>
+        </scene>
+        <!--View Controller - Item 1-->
+        <scene sceneID="DaV-cn-XEk">
+            <objects>
+                <viewController id="IHl-Tc-Wav" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="puf-dt-xfW"/>
+                        <viewControllerLayoutGuide type="bottom" id="pgh-32-fD9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X8W-uv-L8y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="729-5q-YMh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f1G-Gl-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1484" y="-181"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="rRe-Na-PQs">
+            <objects>
+                <tabBarController id="Fh0-fW-gpO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Y1G-Q3-22h"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="cxd-Rq-VZ2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="IHl-Tc-Wav" kind="relationship" relationship="viewControllers" id="gRn-wd-CoH"/>
+                        <segue destination="jCG-TC-DUY" kind="relationship" relationship="viewControllers" id="Y08-ng-53D"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k3W-7C-e0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="169"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

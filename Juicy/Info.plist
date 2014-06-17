@@ -26,6 +26,10 @@
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
 	<string>${PARSE_CLIENT_KEY}</string>
+	<key>TwitterKey</key>
+	<string>${TWITTER_KEY}</string>
+	<key>TwitterSecret</key>
+	<string>${TWITTER_SECRET}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -38,6 +42,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
