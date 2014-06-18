@@ -5,5 +5,4 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
 #import <BKEAnimatedGradientView/BKEAnimatedGradientView.h>
-#import <GRKBlurView/GRKBlurView.h>
 #import <VLBCameraView/VLBCameraView.h>

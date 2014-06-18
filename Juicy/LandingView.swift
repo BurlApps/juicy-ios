@@ -27,11 +27,9 @@ class LandingViewController: UIViewController, VLBCameraViewDelegate {
         application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         //Create Realtime Camera View
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            cameraView.frame = self.view.frame
-            cameraView.delegate = self
-            self.view.sendSubviewToBack(cameraView)
-        }
+        self.cameraView.frame = self.view.frame
+        self.cameraView.delegate = self
+        self.view.sendSubviewToBack(self.cameraView)
         
         //Add Basic Gradient
         var gradientView = BKEAnimatedGradientView(frame: self.view.frame)
@@ -48,7 +46,6 @@ class LandingViewController: UIViewController, VLBCameraViewDelegate {
         self.twitterAuthButton.tintColor = UIColor.whiteColor()
         self.twitterAuthButton.backgroundColor = UIColor(white: 1.0, alpha: 0.1)
         self.twitterAuthButton.font = UIFont(name: "Arial-BoldMT", size: 19);
-        
     }
     
     // Mark: IBActions
