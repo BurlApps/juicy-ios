@@ -26,22 +26,18 @@ class LandingViewController: UIViewController, VLBCameraViewDelegate {
         var application = UIApplication.sharedApplication()
         application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
-        
         //Create Realtime Camera View
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             cameraView.frame = self.view.frame
             cameraView.delegate = self
             self.view.sendSubviewToBack(cameraView)
-            
-            
-            //VLBCameraView.
         }
         
         //Add Basic Gradient
         var gradientView = BKEAnimatedGradientView(frame: self.view.frame)
         gradientView.gradientColors = [
-            UIColor(red:0.35, green:0.71, blue:0.86, alpha:0.95),
-            UIColor(red:0.16, green:0.47, blue:0.73, alpha:0.95)
+            UIColor(red:0.35, green:0.71, blue:0.86, alpha:0.925),
+            UIColor(red:0.16, green:0.47, blue:0.73, alpha:0.925)
         ]
         self.view.insertSubview(gradientView, atIndex: 1)
         
