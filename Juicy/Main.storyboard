@@ -16,6 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view appearanceType="aqua" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-JB-XWq" customClass="VLBCameraView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </view>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNR-IN-6pg">
                                 <rect key="frame" x="30" y="478" width="260" height="50"/>
                                 <constraints>
@@ -35,13 +39,15 @@
                                 <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="32"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Social Experiment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="hNa-0t-03r">
                                 <rect key="frame" x="11" y="264" width="298" height="61"/>
                                 <fontDescription key="fontDescription" name="AlNile-Bold" family="Al Nile" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                         </subviews>
@@ -53,29 +59,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraView" destination="UKR-JB-XWq" id="6Sl-mC-qMq"/>
                         <outlet property="twitterAuthButton" destination="cNR-IN-6pg" id="KTu-2B-33W"/>
-                        <segue destination="DZc-cW-pdh" kind="modal" identifier="loggedIn" modalTransitionStyle="crossDissolve" id="ykM-gc-U3T"/>
+                        <segue destination="Fh0-fW-gpO" kind="modal" identifier="loggedIn" modalTransitionStyle="crossDissolve" id="BQk-Kf-v8N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eiv-TR-rr3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="78" y="169"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="BgG-ai-9bw">
-            <objects>
-                <navigationController id="DZc-cW-pdh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XGx-By-vva">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Fh0-fW-gpO" kind="relationship" relationship="rootViewController" id="79m-zo-me5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gvA-fo-d67" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="512" y="166"/>
         </scene>
         <!--View Controller - Item 2-->
         <scene sceneID="gP8-7v-cTZ">
@@ -94,9 +85,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRY-vE-daC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1484" y="513"/>
+            <point key="canvasLocation" x="1092" y="516"/>
         </scene>
-        <!--View Controller - Item 1-->
+        <!--View Controller - Juicy-->
         <scene sceneID="DaV-cn-XEk">
             <objects>
                 <viewController id="IHl-Tc-Wav" sceneMemberID="viewController">
@@ -109,11 +100,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="729-5q-YMh"/>
+                    <navigationItem key="navigationItem" title="Juicy" id="bSD-iy-vAG"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1G-Gl-EEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1484" y="-181"/>
+            <point key="canvasLocation" x="1624" y="-178"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rRe-Na-PQs">
@@ -127,13 +118,32 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="IHl-Tc-Wav" kind="relationship" relationship="viewControllers" id="gRn-wd-CoH"/>
+                        <segue destination="8Vb-iY-W7U" kind="relationship" relationship="viewControllers" id="gRn-wd-CoH"/>
                         <segue destination="jCG-TC-DUY" kind="relationship" relationship="viewControllers" id="Y08-ng-53D"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3W-7C-e0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="954" y="169"/>
+            <point key="canvasLocation" x="562" y="172"/>
+        </scene>
+        <!--Navigation Controller - New Feed-->
+        <scene sceneID="1za-Cv-3Ph">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Vb-iY-W7U" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="New Feed" id="729-5q-YMh"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Imo-us-EjV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IHl-Tc-Wav" kind="relationship" relationship="rootViewController" id="76C-sE-ZWm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gW9-Un-l8L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1092" y="-178"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

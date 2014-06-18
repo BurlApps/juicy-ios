@@ -12,10 +12,7 @@ class LandingViewController: UIViewController, VLBCameraViewDelegate {
 
     // Mark: Outlets
     @IBOutlet var twitterAuthButton : UIButton = nil
-    
-    
-    // Mark: Method Variables
-    var cameraView = VLBCameraView()
+    @IBOutlet var cameraView : VLBCameraView
     
     // Mark: Override Functions
     override func viewDidLoad() {
@@ -32,17 +29,20 @@ class LandingViewController: UIViewController, VLBCameraViewDelegate {
         
         //Create Realtime Camera View
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            self.cameraView.frame = self.view.frame
-            self.cameraView.delegate = self
-            self.view.insertSubview(self.cameraView, atIndex: 0)
+            cameraView.frame = self.view.frame
+            cameraView.delegate = self
+            self.view.sendSubviewToBack(cameraView)
+            
+            
+            //VLBCameraView.
         }
         
         
         //Add Basic Gradient
         var gradientView = BKEAnimatedGradientView(frame: self.view.frame)
         gradientView.gradientColors = [
-            UIColor(red:0.14, green:0.53, blue:0.86, alpha:0.5),
-            UIColor(red:0.14, green:0.53, blue:0.90, alpha:0.5)
+            UIColor(red:0.35, green:0.71, blue:0.86, alpha:0.95),
+            UIColor(red:0.16, green:0.47, blue:0.73, alpha:0.95)
         ]
         self.view.insertSubview(gradientView, atIndex: 1)
         
