@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C23D6F785A54A2AA5E091EF /* libPods.a */; };
 		D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3050422194EF0CC00A92CB2 /* CoreData.swift */; };
-		D3229608194F9C8B00488B63 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3229607194F9C8B00488B63 /* LandingView.swift */; };
+		D32D0612198F69D2005A6CCD /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D0611198F69D2005A6CCD /* LandingView.swift */; };
+		D351EF66198F7B3400532600 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A863194E60D500FABCC0 /* AppDelegate.swift */; };
 		D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */; };
 		D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2A868194E60D500FABCC0 /* Images.xcassets */; };
@@ -89,7 +90,8 @@
 		0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
-		D3229607194F9C8B00488B63 /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		D32D0611198F69D2005A6CCD /* LandingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D3A2A85E194E60D500FABCC0 /* Juicy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juicy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A2A862194E60D500FABCC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3A2A863194E60D500FABCC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D351EF66198F7B3400532600 /* FacebookSDK.framework in Frameworks */,
 				D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */,
 				D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */,
 				D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */,
@@ -158,7 +161,7 @@
 		D3229606194F9C7700488B63 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D3229607194F9C8B00488B63 /* LandingView.swift */,
+				D32D0611198F69D2005A6CCD /* LandingView.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D351EF64198F78D100532600 /* FacebookSDK.framework */,
 				D3A2A8B1194E723400FABCC0 /* Foundation.framework */,
 				D3A2A8AF194E722A00FABCC0 /* UIKit.framework */,
 				D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */,
@@ -425,7 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3229608194F9C8B00488B63 /* LandingView.swift in Sources */,
+				D32D0612198F69D2005A6CCD /* LandingView.swift in Sources */,
 				D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */,
 				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
@@ -576,10 +580,35 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Brian/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AVFoundation,
+					"-framework",
+					AssetsLibrary,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreImage,
+					"-framework",
+					CoreLocation,
+					"-framework",
+					CoreMedia,
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+					"-weak_framework",
+					Accounts,
+					"-weak_framework",
+					Security,
+					"-weak_framework",
+					Social,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
@@ -600,10 +629,35 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/Brian/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					AVFoundation,
+					"-framework",
+					AssetsLibrary,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreImage,
+					"-framework",
+					CoreLocation,
+					"-framework",
+					CoreMedia,
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+					"-weak_framework",
+					Accounts,
+					"-weak_framework",
+					Security,
+					"-weak_framework",
+					Social,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";

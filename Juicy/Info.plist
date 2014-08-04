@@ -20,16 +20,16 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>${FACEBOOK_ID}</string>
+	<key>FacebookDisplayName</key>
+	<string>${FACEBOOK_NAME}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>ParseApplicationID</key>
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
 	<string>${PARSE_CLIENT_KEY}</string>
-	<key>TwitterKey</key>
-	<string>${TWITTER_KEY}</string>
-	<key>TwitterSecret</key>
-	<string>${TWITTER_SECRET}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -42,11 +42,20 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb${FACEBOOK_ID}</string>
+			</array>
+		</dict>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

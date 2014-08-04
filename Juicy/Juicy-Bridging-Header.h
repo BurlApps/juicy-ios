@@ -3,6 +3,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import <Parse/Parse.h>
 #import <BKEAnimatedGradientView/BKEAnimatedGradientView.h>
 #import <VLBCameraView/VLBCameraView.h>
