@@ -21,9 +21,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.040000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="pap-Dv-TDZ">
-                                <rect key="frame" x="0.0" y="238" width="320" height="330"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="zJu-M1-gWo">
                                 <rect key="frame" x="91" y="125" width="139" height="139"/>
                             </imageView>
@@ -33,6 +30,34 @@
                                 <color key="textColor" red="0.93725490196078431" green="0.23529411764705882" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.93408115028344985" green="0.94157217141424476" blue="0.96404523480662985" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="2"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZO-Hp-hCM">
+                                <rect key="frame" x="0.0" y="497" width="320" height="71"/>
+                                <color key="backgroundColor" red="0.2470588235" green="0.37254901959999998" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Connect with Facebook">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectButtonDown:" destination="XzC-eD-RAq" eventType="touchDown" id="GWR-mb-whV"/>
+                                    <action selector="connectButtonReleased:" destination="XzC-eD-RAq" eventType="touchUpInside" id="hXl-ea-Big"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Facebook" translatesAutoresizingMaskIntoConstraints="NO" id="faM-NL-nTT">
+                                <rect key="frame" x="20" y="511" width="44" height="44"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.040000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="pap-Dv-TDZ">
+                                <rect key="frame" x="0.0" y="238" width="320" height="330"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share your juicy moments, anonymously" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="283" translatesAutoresizingMaskIntoConstraints="NO" id="hHd-R8-fzN">
+                                <rect key="frame" x="19" y="367" width="283" height="87"/>
+                                <fontDescription key="fontDescription" name="DevanagariSangamMN-Bold" family="Devanagari Sangam MN" pointSize="21"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.91006827509104349" green="0.91736672092426086" blue="0.93926205842391308" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
                         </subviews>
@@ -45,6 +70,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Facebook" width="256" height="256"/>
         <image name="LandingBackground" width="1920" height="1200"/>
         <image name="Logo" width="1000" height="1000"/>
     </resources>
