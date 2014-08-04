@@ -3,11 +3,16 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Balcony Angels.ttf">
+            <string>BalconyAngels</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Landing View Controller-->
         <scene sceneID="wRI-mk-8P8">
             <objects>
-                <viewController id="XzC-eD-RAq" sceneMemberID="viewController">
+                <viewController id="XzC-eD-RAq" customClass="LandingViewController" customModule="Juicy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DFl-ne-oLk"/>
                         <viewControllerLayoutGuide type="bottom" id="uWO-5c-iA0"/>
@@ -15,6 +20,22 @@
                     <view key="view" contentMode="scaleToFill" id="W5h-R3-Ebn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.040000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="pap-Dv-TDZ">
+                                <rect key="frame" x="0.0" y="238" width="320" height="330"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="zJu-M1-gWo">
+                                <rect key="frame" x="91" y="125" width="139" height="139"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Juicy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkh-Va-O4p">
+                                <rect key="frame" x="97" y="267" width="127" height="79"/>
+                                <fontDescription key="fontDescription" name="BalconyAngels" family="Balcony Angels" pointSize="74"/>
+                                <color key="textColor" red="0.93725490196078431" green="0.23529411764705882" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.93408115028344985" green="0.94157217141424476" blue="0.96404523480662985" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="0.0" height="2"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
@@ -23,6 +44,10 @@
             <point key="canvasLocation" x="-330" y="19"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LandingBackground" width="1920" height="1200"/>
+        <image name="Logo" width="1000" height="1000"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
