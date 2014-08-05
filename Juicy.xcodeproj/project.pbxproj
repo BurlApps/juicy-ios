@@ -12,6 +12,8 @@
 		D351EF66198F7B3400532600 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D351EF68198F817800532600 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D351EF67198F817800532600 /* LandingViewController.swift */; };
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
+		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
+		D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */; };
 		D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A863194E60D500FABCC0 /* AppDelegate.swift */; };
 		D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */; };
 		D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2A868194E60D500FABCC0 /* Images.xcassets */; };
@@ -94,6 +96,8 @@
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF67198F817800532600 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
+		D381C98A19908E7900AA65F6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		D3A2A85E194E60D500FABCC0 /* Juicy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juicy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A2A862194E60D500FABCC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3A2A863194E60D500FABCC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				D351EF67198F817800532600 /* LandingViewController.swift */,
+				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			children = (
 				D3A2A863194E60D500FABCC0 /* AppDelegate.swift */,
 				D3050422194EF0CC00A92CB2 /* CoreData.swift */,
+				D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -442,7 +448,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */,
+				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
+				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D351EF68198F817800532600 /* LandingViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
 			);

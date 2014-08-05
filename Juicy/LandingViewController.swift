@@ -16,13 +16,18 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup Navigation Bar
+        self.navigationController.navigationBarHidden = true
+        
+        // Add Spinner to Connect Button
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         self.spinner.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
         self.spinner.center = CGPointMake(self.connectButton.frame.size.width/2.0, self.connectButton.frame.size.height/2)
         self.connectButton.addSubview(spinner)
         
+        // Move to Feed View if Logged In
         if PFUser.currentUser() {
-            //self.performSegueWithIdentifier("loggedIn", sender: self)
+            self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }
     }
     
@@ -39,12 +44,8 @@ class LandingViewController: UIViewController {
             self.connectButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             self.spinner.stopAnimating()
             
-            if !user {
-                NSLog("Uh oh. The user cancelled the Facebook login.")
-            } else if user.isNew {
-                NSLog("User signed up and logged in through Facebook!")
-            } else {
-                NSLog("User logged in through Facebook!")
+            if user {
+                self.performSegueWithIdentifier("loggedInSegue", sender: self)
             }
         })
     }
