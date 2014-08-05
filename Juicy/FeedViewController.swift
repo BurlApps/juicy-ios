@@ -11,14 +11,19 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Create Text Shadow
+        var shadow = NSShadow()
+        shadow.shadowColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
+        shadow.shadowOffset = CGSizeMake(0, 2);
+        
         // Setup Navigation Bar
         self.navigationController.navigationBarHidden = false
         self.navigationController.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 36)
+            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 38),
+            NSShadowAttributeName: shadow
         ]
-        self.navigationController.edgesForExtendedLayout = UIRectEdge.None
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         // Add Navigation Bottom Border
