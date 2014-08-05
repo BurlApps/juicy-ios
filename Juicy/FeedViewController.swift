@@ -8,6 +8,8 @@
 
 class FeedViewController: UIViewController {
     
+    @IBOutlet weak var createButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +36,9 @@ class FeedViewController: UIViewController {
         
         // Setup View
         self.view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 1, alpha: 1)
+        
+        // Setup Create Button
+        self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
     }
     
     @IBAction func logoutUser(sender: UIBarButtonItem) {
@@ -41,4 +46,11 @@ class FeedViewController: UIViewController {
         self.navigationController.popToRootViewControllerAnimated(false)
     }
     
+    @IBAction func createPostDown(sender: UIButton) {
+        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:1)
+    }
+    
+    @IBAction func createPost(sender: UIButton) {
+        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
+    }
 }
