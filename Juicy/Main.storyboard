@@ -101,7 +101,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Juicy" id="nc2-eB-Ahb">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="SettingsCog" style="plain" id="ZSz-nZ-Te5">
-                            <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.36096722146739135" green="0.36096722146739135" blue="0.36096722146739135" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="logoutUser:" destination="aOS-dg-wo6" id="tKf-UX-JvN"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Bookmarks" style="plain" id="cbK-7j-QhS">
                             <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

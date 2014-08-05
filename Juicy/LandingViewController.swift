@@ -14,9 +14,6 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup Navigation Bar
-        self.navigationController.navigationBarHidden = true
-        
         // Add Spinner to Connect Button
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         self.spinner.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
@@ -27,6 +24,13 @@ class LandingViewController: UIViewController {
         if PFUser.currentUser() {
             self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Setup Navigation Bar
+        self.navigationController.navigationBarHidden = true
     }
     
     @IBAction func connectButtonDown(sender: UIButton) {

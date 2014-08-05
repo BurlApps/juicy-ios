@@ -30,5 +30,10 @@ class FeedViewController: UIViewController {
         // Setup View
         self.view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 1, alpha: 1)
     }
-
+    
+    @IBAction func logoutUser(sender: UIBarButtonItem) {
+        PFUser.logOut()
+        self.navigationController.popToRootViewControllerAnimated(false)
+    }
+    
 }
