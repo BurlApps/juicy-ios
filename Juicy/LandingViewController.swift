@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-import Foundation
-
 class LandingViewController: UIViewController {
     
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
