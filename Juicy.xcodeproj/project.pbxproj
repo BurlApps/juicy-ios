@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C23D6F785A54A2AA5E091EF /* libPods.a */; };
 		D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3050422194EF0CC00A92CB2 /* CoreData.swift */; };
+		D34AE4F41992386200D0D1C8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F31992386200D0D1C8 /* CardView.swift */; };
+		D34AE4F7199238D300D0D1C8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Card.swift */; };
+		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
 		D351EF66198F7B3400532600 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D351EF68198F817800532600 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D351EF67198F817800532600 /* LandingViewController.swift */; };
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
@@ -93,6 +96,9 @@
 		0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		D34AE4F31992386200D0D1C8 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		D34AE4F6199238D300D0D1C8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF67198F817800532600 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
@@ -173,6 +179,23 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		D34AE4F21992381500D0D1C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D34AE4F31992386200D0D1C8 /* CardView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D34AE4F5199238BC00D0D1C8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D34AE4F819923E3A00D0D1C8 /* User.swift */,
+				D34AE4F6199238D300D0D1C8 /* Card.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D351EF6B198F86CF00532600 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +231,8 @@
 				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
 				D3A2A88B194E63BE00FABCC0 /* Classes */,
 				D3229606194F9C7700488B63 /* Controllers */,
+				D34AE4F5199238BC00D0D1C8 /* Models */,
+				D34AE4F21992381500D0D1C8 /* Views */,
 				D3A2A861194E60D500FABCC0 /* Supporting Files */,
 			);
 			path = Juicy;
@@ -447,12 +472,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34AE4F41992386200D0D1C8 /* CardView.swift in Sources */,
 				D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */,
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
+				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D351EF68198F817800532600 /* LandingViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
+				D34AE4F7199238D300D0D1C8 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
