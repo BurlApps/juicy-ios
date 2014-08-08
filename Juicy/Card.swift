@@ -7,40 +7,57 @@
 //
 
 class Card: NSObject {
-    var id: String?
-    var age: Int?
-    var likes: Int?
-    var image: UIImage?
-    var juicy: Bool?
-    var created: NSDate?
-    var creator: User?
-    var aboutUsers: [User]?
     
-    convenience init(options: PFObject) {
-        self.init(options: options)
+    // MARK: Instance Variables
+    var id: String!
+    var age: Int!
+    var likes: Int!
+    var image: UIImage!
+    var juicy: Bool!
+    var created: NSDate!
+    var creator: User!
+    var aboutUsers: [User]!
+    private var parse: PFObject!
+    
+    // MARK: Convenience Methods
+    convenience init(card: PFObject, withRelations: Bool = false) {
+        self.init(card: card, withRelations: withRelations)
         
-        self.id = options["objectId"] as? String
-        self.age = options["age"] as? Int
-        self.likes = options["likes"] as? Int
-        self.image = options["image"] as? UIImage
-        self.juicy = options["juicy"] as? Bool
-        self.created = options["createdAt"] as? NSDate
-        self.creator = options["creator"] as? User
+        self.parse = card
+        self.id = card.objectForKey("objectId") as? String
+        self.age = card.objectForKey("age") as? Int
+        self.likes = card.objectForKey("likes") as? Int
+        self.image = card.objectForKey("image") as? UIImage
+        self.juicy = card.objectForKey("juicy") as? Bool
+        self.created = card.objectForKey("createdAt") as? NSDate
+        
+        if withRelations {
+            self.getCreator()
+            self.getAboutUsers()
+        }
     }
-
-    // TODO: Should I use PFRelations?
-//    func getAboutUsers() -> [User] {
-//        var cards: [Card] = []
-//        var query: PFQuery = PFQuery(className: "Cards")
-//        
-//        query.whereKey("Ids", equalTo: self.id)
-//        query.orderByDescending("createdAt")
-//        
-//        for object in query.findObjects() {
-//            let card = Card(options: object as PFObject)
-//            cards.append(card)
-//        }
-//        
-//        return cards
-//    }
+    
+    // MARK: Instance Methods
+    func getCreator()-> User {
+        let creator: PFUser = self.parse.objectForKey("creator") as PFUser
+        let creatorUser: User = User(user: creator, withRelations: false)
+        self.creator = creatorUser
+        return creatorUser
+    }
+    
+    func getAboutUsers() -> [User] {
+        var users: [User] = []
+        var query: PFQuery = (self.parse.objectForKey("aboutUsersRelation") as PFRelation).query()
+        
+        query.orderByDescending("createdAt")
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
+            for object in objects as [PFUser] {
+                let user = User(user: object)
+                users.append(user)
+            }
+        })
+        
+        self.aboutUsers = users
+        return users
+    }
 }

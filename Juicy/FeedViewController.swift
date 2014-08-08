@@ -12,14 +12,10 @@ class FeedViewController: UIViewController, MDCSwipeToChooseDelegate {
     @IBOutlet weak var createButton: UIButton!
     
     // MARK: Class Variables
-    var frontCardView: MDCSwipeToChooseView
-    var backCardView: MDCSwipeToChooseView
-    var currentCard: MDCSwipeToChooseView
+    var frontCardView: MDCSwipeToChooseView!
+    var backCardView: MDCSwipeToChooseView!
+    var currentCard: MDCSwipeToChooseView!
     var cards = [1, 2, 3]
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
