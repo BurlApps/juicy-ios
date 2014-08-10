@@ -30,8 +30,8 @@
             <objects>
                 <viewController id="XzC-eD-RAq" customClass="LandingViewController" customModule="Juicy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DFl-ne-oLk"/>
-                        <viewControllerLayoutGuide type="bottom" id="uWO-5c-iA0"/>
+                        <viewControllerLayoutGuide type="top" id="kDv-ir-065"/>
+                        <viewControllerLayoutGuide type="bottom" id="W2j-cz-lpP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W5h-R3-Ebn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -91,8 +91,8 @@
             <objects>
                 <viewController storyboardIdentifier="FeedViewController" id="aOS-dg-wo6" customClass="FeedViewController" customModule="Juicy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Y8Y-jC-Z6J"/>
-                        <viewControllerLayoutGuide type="bottom" id="0Cw-ia-EGt"/>
+                        <viewControllerLayoutGuide type="top" id="3VT-bt-saa"/>
+                        <viewControllerLayoutGuide type="bottom" id="zFM-Qs-gQm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="InI-33-sHO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -101,7 +101,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3c-Sk-5pn">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.31372549019607843" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="2"/>
                                 <state key="normal" title="Juice It!">

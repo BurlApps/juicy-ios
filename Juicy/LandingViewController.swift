@@ -54,6 +54,8 @@ class LandingViewController: UIViewController {
             
             if user {
                 self.performSegueWithIdentifier("loggedInSegue", sender: self)
+            } else {
+                self.loginButton.setTitle("Failed To Log In", forState: UIControlState.Normal)
             }
         })
     }

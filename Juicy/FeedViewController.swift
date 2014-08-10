@@ -6,16 +6,18 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class FeedViewController: UIViewController, MDCSwipeToChooseDelegate {
+class FeedViewController: UIViewController, CardViewDelegate {
     
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
     
-    // MARK: Class Variables
-    var frontCardView: MDCSwipeToChooseView!
-    var backCardView: MDCSwipeToChooseView!
-    var currentCard: MDCSwipeToChooseView!
-    var cards = [1, 2, 3]
+    // MARK: Instance Variables
+    var posts = [1,2,3,4,5,6,7,8,9,10]
+    var cards: [CardView]! = []
+    
+    let cardsShown = 3
+    let minRotation: Double = -5
+    let maxRotation: Double = 5
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class FeedViewController: UIViewController, MDCSwipeToChooseDelegate {
         self.navigationController.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 38),
+            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 42),
             NSShadowAttributeName: shadow
         ]
         self.navigationItem.setHidesBackButton(true, animated: false)
@@ -48,106 +50,77 @@ class FeedViewController: UIViewController, MDCSwipeToChooseDelegate {
         // Setup Create Button
         self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
         
-        // Add Front Card
-        self.frontCardView = self.popPersonViewWithFrame(self.frontCardViewFrame())
-        self.view.addSubview(self.frontCardView)
+        // Setup Cards
+        self.setUpCards()
+    }
+    
+    // MARK: Instance Methods
+    func degreeToRadian(degree: Double) -> CGFloat {
+        let result = degree * M_PI / 180
+        return CGFloat(Float(result))
+    }
+    
+    func setUpCards() {
+        let posts = self.posts[0...(self.cardsShown-1)].reverse()
         
-        // Add Back Card
-        self.backCardView = self.popPersonViewWithFrame(self.backCardViewFrame())
-        self.view.insertSubview(self.backCardView, belowSubview:self.frontCardView)
+        for (index, post) in enumerate(posts) {
+            var card = self.createCard(post, transform: index != 1)
+            self.cards.insert(card, atIndex: 0)
+            self.view.addSubview(card)
+        }
     }
     
-    // MARK: MDCSwipeToChooseDelegate Protocol Methods
-    func viewDidCancelSwipe(view: UIView!) {
-        print("Card: \(self.currentCard) was cancelled")
-    }
-    
-    func view(view: UIView!, wasChosenWithDirection direction: MDCSwipeDirection) {
-        // MDCSwipeToChooseView shows "NOPE" on swipes to the left,
-        // and "LIKED" on swipes to the right.
-        if (direction == MDCSwipeDirection.Left) {
-            print("You noped \(self.currentCard)")
-        } else {
-            print("You liked \(self.currentCard)")
+    func createCard(post: Int, transform: Bool) -> CardView {
+        let degrees = (drand48() * (self.maxRotation - self.minRotation + 1)) + self.minRotation
+        let rotation = self.degreeToRadian(degrees)
+        let frame = CGRectMake(self.view.center.x-140, self.view.center.y-140, 280, 280)
+        
+        var card = CardView(frame: frame)
+        card.front.layer.backgroundColor = self.colorIndex(post).CGColor
+        
+        var label = UILabel(frame: CGRectMake(20, 20, 280, 150))
+        label.text = post.description
+        label.textAlignment = NSTextAlignment.Center
+        card.addSubview(label)
+        
+        if transform {
+            card.front.transform = CGAffineTransformMakeRotation(rotation)
         }
         
-        // MDCSwipeToChooseView removes the view from the view hierarchy
-        // after it is swiped (this behavior can be customized via the
-        // MDCSwipeOptions class). Since the front card view is gone, we
-        // move the back card to the front, and create a new back card.
-//        self.frontCardView = self.backCardView;
-//        if self.backCardView == self.popPersonViewWithFrame(self.backCardViewFrame()) {
-//            self.backCardView.alpha = 0
-//            
-//        }
-//        
-//        
-//        if ((self.backCardView = [self popPersonViewWithFrame:[self backCardViewFrame]])) {
-//            // Fade the back card into view.
-//            self.backCardView.alpha = 0.f;
-//            [self.view insertSubview:self.backCardView belowSubview:self.frontCardView];
-//            [UIView animateWithDuration:0.5
-//                delay:0.0
-//                options:UIViewAnimationOptionCurveEaseInOut
-//                animations:^{
-//                self.backCardView.alpha = 1.f;
-//                } completion:nil];
-//        }
-    }
-    
-    // MARK: Internal Methods
-    func setFrontCardView(frontCardView: MDCSwipeToChooseView!) {
-        self.currentCard = frontCardView
-    }
-    
-    func popPersonViewWithFrame(frame: CGRect) -> MDCSwipeToChooseView {
-        // UIView+MDCSwipeToChoose and MDCSwipeToChooseView are heavily customizable.
-        // Each take an "options" argument. Here, we specify the view controller as
-        // a delegate, and provide a custom callback that moves the back card view
-        // based on how far the user has panned the front card view.
-        var options = MDCSwipeToChooseViewOptions()
-        options.delegate = self
-        options.threshold = 160
-        options.onPan = { (state: MDCPanState!) in
-            var frame: CGRect = self.backCardViewFrame()
-            self.backCardView.frame = CGRectMake(frame.origin.x,
-                                                 frame.origin.y - (state.thresholdRatio * 10),
-                                                 CGRectGetWidth(frame),
-                                                 CGRectGetHeight(frame));
-        }
-        
-        let card = MDCSwipeToChooseView(frame: frame, options: options)
-        self.cards.removeAtIndex(0)
         return card
     }
     
-    // MARK: View Construction
-    func frontCardViewFrame() -> CGRect {
-        let horizontalPadding: CGFloat = 20.0
-        let topPadding: CGFloat = 60.0
-        let bottomPadding: CGFloat = 200.0
-        return CGRectMake(horizontalPadding,
-            topPadding,
-            CGRectGetWidth(self.view.frame) - (horizontalPadding * 2),
-            CGRectGetHeight(self.view.frame) - bottomPadding);
+    func colorIndex(index: Int) -> UIColor {
+        var color: UIColor!
+        
+        switch (index % 7) {
+            case 0:
+                color = UIColor.redColor()
+                break;
+            case 1:
+                color = UIColor.yellowColor()
+                break;
+            case 2:
+                color = UIColor.orangeColor()
+                break;
+            case 3:
+                color = UIColor.blueColor()
+                break;
+            case 4:
+                color = UIColor.magentaColor()
+                break;
+            case 5:
+                color = UIColor.greenColor()
+                break;
+            case 6:
+                color = UIColor.purpleColor()
+                break;
+            default:
+                break;
+        }
+        
+        return color;
     }
-    
-    func backCardViewFrame() -> CGRect {
-        let frontFrame: CGRect = self.frontCardViewFrame()
-        return CGRectMake(frontFrame.origin.x,
-            frontFrame.origin.y + 10.0 as CGFloat,
-            CGRectGetWidth(frontFrame),
-            CGRectGetHeight(frontFrame));
-    }
-    
-    // MARK: Control Events
-//    func nopeFrontCardView() {
-//        self.frontCardView(mdc_swipe: MDCSwipeDirection.Left)
-//    }
-//    
-//    func likeFrontCardView() {
-//        self.frontCardView(mdc_swipe: MDCSwipeDirection.Right)
-//    }
     
     // MARK: IBActions
     @IBAction func logoutUser(sender: UIBarButtonItem) {
@@ -161,5 +134,27 @@ class FeedViewController: UIViewController, MDCSwipeToChooseDelegate {
     
     @IBAction func createPost(sender: UIButton) {
         sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
+    }
+    
+    // MARK: CardViewDelegate Methods
+    func cardView(cardView: CardView!, willGoOffscreenFrom location: CardViewLocation) {
+        print(1)
+    }
+    
+    func cardView(cardView: CardView!, willReturnToCenterFrom location: CardViewLocation) {
+        print(2)
+    }
+    
+    func cardView(cardView: CardView!, didGoOffscreenFrom location: CardViewLocation) {
+        print(3)
+        
+        self.cards.removeAtIndex(0)
+        var card = self.createCard(self.posts[0], transform: true)
+        self.cards.append(card)
+        self.view.addSubview(card)
+    }
+    
+    func cardView(cardView: CardView!, didReturnToCenterFrom location: CardViewLocation) {
+        print(4)
     }
 }

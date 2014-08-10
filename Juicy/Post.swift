@@ -1,12 +1,12 @@
 //
-//  Card.swift
+//  post.swift
 //  Juicy
 //
 //  Created by Brian Vallelunga on 8/6/14.
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class Card: NSObject {
+class Post: NSObject {
     
     // MARK: Instance Variables
     var id: String!
@@ -20,16 +20,16 @@ class Card: NSObject {
     private var parse: PFObject!
     
     // MARK: Convenience Methods
-    convenience init(card: PFObject, withRelations: Bool = false) {
-        self.init(card: card, withRelations: withRelations)
+    convenience init(_ post: PFObject, withRelations: Bool = false) {
+        self.init(post, withRelations: withRelations)
         
-        self.parse = card
-        self.id = card.objectForKey("objectId") as? String
-        self.age = card.objectForKey("age") as? Int
-        self.likes = card.objectForKey("likes") as? Int
-        self.image = card.objectForKey("image") as? UIImage
-        self.juicy = card.objectForKey("juicy") as? Bool
-        self.created = card.objectForKey("createdAt") as? NSDate
+        self.parse = post
+        self.id = post.objectForKey("objectId") as? String
+        self.age = post.objectForKey("age") as? Int
+        self.likes = post.objectForKey("likes") as? Int
+        self.image = post.objectForKey("image") as? UIImage
+        self.juicy = post.objectForKey("juicy") as? Bool
+        self.created = post.objectForKey("createdAt") as? NSDate
         
         if withRelations {
             self.getCreator()
@@ -40,7 +40,7 @@ class Card: NSObject {
     // MARK: Instance Methods
     func getCreator()-> User {
         let creator: PFUser = self.parse.objectForKey("creator") as PFUser
-        let creatorUser: User = User(user: creator, withRelations: false)
+        let creatorUser: User = User(creator, withRelations: false)
         self.creator = creatorUser
         return creatorUser
     }
@@ -52,7 +52,7 @@ class Card: NSObject {
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
             for object in objects as [PFUser] {
-                let user = User(user: object)
+                let user = User(object)
                 users.append(user)
             }
         })

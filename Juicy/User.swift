@@ -14,12 +14,12 @@ class User: NSObject {
     var screenName: String!
     var facebook: String!
     var created: NSDate!
-    var savedCards: [Card]!
+    var savedPosts: [Post]!
     private var parse: PFUser!
     
     // MARK: Convenience Methods
-    convenience init(user: PFUser, withRelations: Bool = false) {
-        self.init(user: user, withRelations: withRelations)
+    convenience init(_ user: PFUser, withRelations: Bool = false) {
+        self.init(user, withRelations: withRelations)
         
         self.parse = user
         self.id = user.objectForKey("user") as? String
@@ -29,30 +29,30 @@ class User: NSObject {
         self.created = user.objectForKey("createdAt") as? NSDate
         
         if withRelations {
-            self.getSavedCards()
+            self.getSavedPosts()
         }
     }
     
     // MARK: Instance Methods
-    func getSavedCards() -> [Card] {
-        var cards: [Card] = []
-        var query: PFQuery = (self.parse.objectForKey("savedCardsRelation") as PFRelation).query()
+    func getSavedPosts() -> [Post] {
+        var posts: [Post] = []
+        var query: PFQuery = (self.parse.objectForKey("savedpostsRelation") as PFRelation).query()
         
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
             for object in objects as [PFObject] {
-                let card = Card(card: object)
-                cards.append(card)
+                let post = Post(object)
+                posts.append(post)
             }
         })
         
-        self.savedCards = cards
-        return cards
+        self.savedPosts = posts
+        return posts
     }
     
     // MARK: Class Methods
     class func current(withRelations: Bool) -> User {
-        return User(user: PFUser.currentUser(), withRelations: withRelations)
+        return User(PFUser.currentUser(), withRelations: withRelations)
     }
     
 }
