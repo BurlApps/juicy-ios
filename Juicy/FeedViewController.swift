@@ -8,6 +8,9 @@
 
 class FeedViewController: UIViewController, CardViewDelegate {
     
+    // MARK: CardViewDelegate
+    var cardViewDelegate: CardViewDelegate!
+    
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
     
@@ -16,8 +19,8 @@ class FeedViewController: UIViewController, CardViewDelegate {
     var cards: [CardView]! = []
     
     let cardsShown = 3
-    let minRotation: Double = -5
-    let maxRotation: Double = 5
+    let minRotation: Double = -8
+    let maxRotation: Double = 8
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -61,13 +64,27 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func setUpCards() {
-        let posts = self.posts[0...(self.cardsShown-1)]
-        
-        for (index, post) in enumerate(posts) {
-            var card = self.createCard(post, transform: index != 1)
-            self.cards.insert(card, atIndex: 0)
-            self.view.insertSubview(card, atIndex: 0)
+        for index in 0...(self.cardsShown - 1) {
+            self.autoCard(index != 0)
         }
+    }
+    
+    func autoCard(transform: Bool) -> CardView {
+        if self.cards.count == self.cardsShown {
+            self.cards.removeAtIndex(0)
+        }
+        
+        var card = self.createCard(self.posts[0], transform: transform)
+        self.posts.removeAtIndex(0)
+        
+        if self.cards.isEmpty {
+            self.view.addSubview(card)
+        } else {
+            self.view.insertSubview(card, belowSubview: self.cards.last!)
+        }
+        
+        self.cards.append(card)
+        return card
     }
     
     func createCard(post: Int, transform: Bool) -> CardView {
@@ -80,6 +97,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         label.text = post.description
         label.textAlignment = NSTextAlignment.Center
         card.addSubview(label)
+        card.delegate = self
         
         if transform {
             card.transform = CGAffineTransformMakeRotation(rotation)
@@ -104,16 +122,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
     
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
-        print(123)
-        
-        self.cards.removeAtIndex(0)
-        var card = self.createCard(self.posts[0], transform: true)
-        card.alpha = 0
-        
-        self.cards.append(card)
-        self.view.addSubview(card)
-        UIView.animateWithDuration(0.4, { () -> Void in
-            card.alpha = 1
-        })
+        if !self.posts.isEmpty {
+            var card = self.autoCard(true)
+            card.alpha = 0
+            
+            UIView.animateWithDuration(0.4, { () -> Void in
+                card.alpha = 1
+            })
+        }
     }
 }

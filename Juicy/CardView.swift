@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol CardViewDelegate {
+@objc protocol CardViewDelegate : class {
     optional func cardWillLeaveScreen(card: CardView)
     optional func cardDidLeaveScreen(card: CardView)
     optional func cardWillReturnToCenter(card: CardView)
@@ -28,7 +28,6 @@ class CardView: UIView {
     
     // MARK: Instance Attributes
     var post: Post!
-    private var stackIndex: Int!
     private var neededSwipeDistance: CGFloat!
     private var isOffScreen: Bool!
     private var rotationAngle: CGFloat!
@@ -39,12 +38,12 @@ class CardView: UIView {
     
     // MARK: Default Settings
     private var defaultSwipeDistance: CGFloat = 80
-    private var defaultBorderWidth: CGFloat = 5
+    private var defaultBorderWidth: CGFloat = 4
     private var defaultRotationAngle: CGFloat = 10
     private var defaultDuration: NSTimeInterval = 0.4
     private var defaultDelay: NSTimeInterval = 0
     
-    // MARK: Override UIView Methods
+    // MARK: Convenience Init Method
     convenience init(frame: CGRect, post: Int) {
         self.init(frame:frame)
         //self.post = post
@@ -60,6 +59,7 @@ class CardView: UIView {
         self.layer.shouldRasterize = true
         self.layer.borderColor = UIColor(white: 0, alpha: 0.10).CGColor
         self.layer.borderWidth = self.defaultBorderWidth
+        self.layer.cornerRadius = self.defaultBorderWidth
         
         // Add Background SubView
 //        let backgroundURL =  NSURL(string: self.post.image, relativeToURL: nil)
@@ -134,7 +134,8 @@ class CardView: UIView {
             if absSwipeDistance < self.neededSwipeDistance {
                 self.returnCardViewToStartPointAnimated(true)
             } else {
-                self.delegate?.cardWillLeaveScreen!(self)
+                println(self.delegate)
+                self.delegate?.cardWillLeaveScreen?(self)
                 
                 // Animate off screen
                 UIView.animateWithDuration(self.defaultDuration, delay: self.defaultDelay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
@@ -151,7 +152,7 @@ class CardView: UIView {
                     }
                     
                     gesture.view.layer.position = CGPointMake(offscreenX, gesture.view.layer.position.y)
-                }, completion: { _ in self.delegate?.cardDidLeaveScreen!(self); return () })
+                }, completion: { _ in self.delegate?.cardDidLeaveScreen?(self); return () })
             }
         }
     }
@@ -163,7 +164,7 @@ class CardView: UIView {
                 self.transform = CGAffineTransformIdentity
                 self.layer.position = self.startPointInSuperview
                 self.choiceLabel.alpha = 0
-            }, completion: { _ in self.delegate?.cardWillReturnToCenter!(self); return () })
+            }, completion: { _ in self.delegate?.cardWillReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
             self.layer.position = self.startPointInSuperview
