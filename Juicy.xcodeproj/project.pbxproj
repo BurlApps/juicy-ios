@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C23D6F785A54A2AA5E091EF /* libPods.a */; };
 		D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3050422194EF0CC00A92CB2 /* CoreData.swift */; };
-		D34AE4F41992386200D0D1C8 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F31992386200D0D1C8 /* CardView.swift */; };
-		D34AE4F7199238D300D0D1C8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Card.swift */; };
+		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
 		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
 		D351EF66198F7B3400532600 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D351EF68198F817800532600 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D351EF67198F817800532600 /* LandingViewController.swift */; };
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
+		D367AD1F1995F55100E13C71 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D367AD1E1995F55100E13C71 /* CardView.m */; };
 		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
 		D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */; };
 		D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A863194E60D500FABCC0 /* AppDelegate.swift */; };
@@ -96,12 +96,14 @@
 		0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
-		D34AE4F31992386200D0D1C8 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		D34AE4F6199238D300D0D1C8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF67198F817800532600 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
+		D367AD1D1995F55100E13C71 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		D367AD1E1995F55100E13C71 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		D367AD201995F80D00E13C71 /* Tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tester.playground; sourceTree = "<group>"; };
 		D381C98A19908E7900AA65F6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		D3A2A85E194E60D500FABCC0 /* Juicy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juicy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +184,6 @@
 		D34AE4F21992381500D0D1C8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D34AE4F31992386200D0D1C8 /* CardView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -191,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				D34AE4F819923E3A00D0D1C8 /* User.swift */,
-				D34AE4F6199238D300D0D1C8 /* Card.swift */,
+				D34AE4F6199238D300D0D1C8 /* Post.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -202,6 +203,15 @@
 				D351EF6C198F870B00532600 /* Balcony Angels.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		D367AD1C1995F52000E13C71 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				D367AD1D1995F55100E13C71 /* CardView.h */,
+				D367AD1E1995F55100E13C71 /* CardView.m */,
+			);
+			name = Legacy;
 			sourceTree = "<group>";
 		};
 		D3A2A855194E60D500FABCC0 = {
@@ -228,10 +238,11 @@
 		D3A2A860194E60D500FABCC0 /* Juicy */ = {
 			isa = PBXGroup;
 			children = (
+				D367AD1C1995F52000E13C71 /* Legacy */,
 				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
+				D34AE4F5199238BC00D0D1C8 /* Models */,
 				D3A2A88B194E63BE00FABCC0 /* Classes */,
 				D3229606194F9C7700488B63 /* Controllers */,
-				D34AE4F5199238BC00D0D1C8 /* Models */,
 				D34AE4F21992381500D0D1C8 /* Views */,
 				D3A2A861194E60D500FABCC0 /* Supporting Files */,
 			);
@@ -245,6 +256,7 @@
 				D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */,
 				D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */,
 				D3A2A862194E60D500FABCC0 /* Info.plist */,
+				D367AD201995F80D00E13C71 /* Tester.playground */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -472,15 +484,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D34AE4F41992386200D0D1C8 /* CardView.swift in Sources */,
 				D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */,
+				D367AD1F1995F55100E13C71 /* CardView.m in Sources */,
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D351EF68198F817800532600 /* LandingViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
-				D34AE4F7199238D300D0D1C8 /* Card.swift in Sources */,
+				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
