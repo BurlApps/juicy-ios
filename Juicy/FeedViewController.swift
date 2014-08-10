@@ -61,12 +61,12 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func setUpCards() {
-        let posts = self.posts[0...(self.cardsShown-1)].reverse()
+        let posts = self.posts[0...(self.cardsShown-1)]
         
         for (index, post) in enumerate(posts) {
             var card = self.createCard(post, transform: index != 1)
             self.cards.insert(card, atIndex: 0)
-            self.view.addSubview(card)
+            self.view.insertSubview(card, atIndex: 0)
         }
     }
     
@@ -75,51 +75,17 @@ class FeedViewController: UIViewController, CardViewDelegate {
         let rotation = self.degreeToRadian(degrees)
         let frame = CGRectMake(self.view.center.x-140, self.view.center.y-140, 280, 280)
         
-        var card = CardView(frame: frame)
-        card.front.layer.backgroundColor = self.colorIndex(post).CGColor
-        
+        var card = CardView(frame: frame, post: post)
         var label = UILabel(frame: CGRectMake(20, 20, 280, 150))
         label.text = post.description
         label.textAlignment = NSTextAlignment.Center
         card.addSubview(label)
         
         if transform {
-            card.front.transform = CGAffineTransformMakeRotation(rotation)
+            card.transform = CGAffineTransformMakeRotation(rotation)
         }
         
         return card
-    }
-    
-    func colorIndex(index: Int) -> UIColor {
-        var color: UIColor!
-        
-        switch (index % 7) {
-            case 0:
-                color = UIColor.redColor()
-                break;
-            case 1:
-                color = UIColor.yellowColor()
-                break;
-            case 2:
-                color = UIColor.orangeColor()
-                break;
-            case 3:
-                color = UIColor.blueColor()
-                break;
-            case 4:
-                color = UIColor.magentaColor()
-                break;
-            case 5:
-                color = UIColor.greenColor()
-                break;
-            case 6:
-                color = UIColor.purpleColor()
-                break;
-            default:
-                break;
-        }
-        
-        return color;
     }
     
     // MARK: IBActions
@@ -137,24 +103,17 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: CardViewDelegate Methods
-    func cardView(cardView: CardView!, willGoOffscreenFrom location: CardViewLocation) {
-        print(1)
-    }
-    
-    func cardView(cardView: CardView!, willReturnToCenterFrom location: CardViewLocation) {
-        print(2)
-    }
-    
-    func cardView(cardView: CardView!, didGoOffscreenFrom location: CardViewLocation) {
-        print(3)
+    func cardDidLeaveScreen(card: CardView) {
+        print(123)
         
         self.cards.removeAtIndex(0)
         var card = self.createCard(self.posts[0], transform: true)
+        card.alpha = 0
+        
         self.cards.append(card)
         self.view.addSubview(card)
-    }
-    
-    func cardView(cardView: CardView!, didReturnToCenterFrom location: CardViewLocation) {
-        print(4)
+        UIView.animateWithDuration(0.4, { () -> Void in
+            card.alpha = 1
+        })
     }
 }

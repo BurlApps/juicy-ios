@@ -1,5 +1,5 @@
 //
-//  post.swift
+//  Post.swift
 //  Juicy
 //
 //  Created by Brian Vallelunga on 8/6/14.
@@ -12,7 +12,7 @@ class Post: NSObject {
     var id: String!
     var age: Int!
     var likes: Int!
-    var image: UIImage!
+    var image: String!
     var juicy: Bool!
     var created: NSDate!
     var creator: User!
@@ -24,12 +24,12 @@ class Post: NSObject {
         self.init(post, withRelations: withRelations)
         
         self.parse = post
-        self.id = post.objectForKey("objectId") as? String
-        self.age = post.objectForKey("age") as? Int
-        self.likes = post.objectForKey("likes") as? Int
-        self.image = post.objectForKey("image") as? UIImage
-        self.juicy = post.objectForKey("juicy") as? Bool
-        self.created = post.objectForKey("createdAt") as? NSDate
+        self.id = post.objectForKey("objectId") as String
+        self.age = post.objectForKey("age") as Int
+        self.likes = post.objectForKey("likes") as Int
+        self.juicy = post.objectForKey("juicy") as Bool
+        self.created = post.objectForKey("createdAt") as NSDate
+        self.image = (post.objectForKey("image") as PFFile).url
         
         if withRelations {
             self.getCreator()

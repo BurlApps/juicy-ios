@@ -2,6 +2,6 @@
 
 import UIKit
 
-let a = [1,2]
-
-print(a[0...1])
+enum Planet {
+    case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+}

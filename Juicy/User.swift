@@ -22,11 +22,11 @@ class User: NSObject {
         self.init(user, withRelations: withRelations)
         
         self.parse = user
-        self.id = user.objectForKey("user") as? String
-        self.screenName = user.objectForKey("screenName") as? String
-        self.username = user.objectForKey("username") as? String
-        self.facebook = user.objectForKey("authData") as? String
-        self.created = user.objectForKey("createdAt") as? NSDate
+        self.id = user.objectForKey("user") as String
+        self.screenName = user.objectForKey("screenName") as String
+        self.username = user.objectForKey("username") as String
+        self.facebook = user.objectForKey("authData") as String
+        self.created = user.objectForKey("createdAt") as NSDate
         
         if withRelations {
             self.getSavedPosts()
