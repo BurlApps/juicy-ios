@@ -82,25 +82,6 @@ class CardView: UIView {
         self.container.clipsToBounds = true
         self.addSubview(self.container)
         
-        // Add Background SubView
-        let backgroundURL =  NSURL(string: self.post.image, relativeToURL: nil)
-        let request: NSURLRequest = NSURLRequest(URL: backgroundURL)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-            (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-            if !error {
-                let backgroundImage = UIImage(data: data)
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    var backgroundImageView = UIImageView(image: backgroundImage)
-                    
-                    backgroundImageView.frame = self.container.bounds
-                    backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
-                    self.container.insertSubview(backgroundImageView, atIndex: 0)
-                })
-            }
-        })
-        
         // Add Label SubView
         self.choiceLabel = UILabel(frame: self.container.frame)
         self.choiceLabel.textAlignment = NSTextAlignment.Center
@@ -195,6 +176,14 @@ class CardView: UIView {
     }
     
     // MARK: Public Methods
+    func loadBackground() {
+        // Add Background SubView
+        var background = self.post.getBackground()
+        background.frame = self.container.bounds
+        background.contentMode = UIViewContentMode.ScaleAspectFill
+        self.container.insertSubview(background, atIndex: 0)
+    }
+    
     func returnCardViewToStartPointAnimated(animated: Bool) {
         if animated {
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in

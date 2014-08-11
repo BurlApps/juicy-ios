@@ -12,7 +12,7 @@ class User: NSObject {
     var username: String!
     var displayName: String!
     var savedPosts: [Post]!
-    private var parse: PFUser!
+    var parse: PFUser!
     
     // MARK: Convenience Methods
     convenience init(_ user: PFUser, withRelations: Bool) {
@@ -36,6 +36,8 @@ class User: NSObject {
                 self.displayName = fbUser["name"] as String
                 self.parse["displayName"] = self.displayName
                 self.parse.saveInBackground()
+            } else if error {
+                println(error)
             }
         })
     }
@@ -44,11 +46,16 @@ class User: NSObject {
         var posts: [Post] = []
         var query: PFQuery = (self.parse["savedPosts"] as PFRelation).query()
         
+        query.cachePolicy = kPFCachePolicyCacheElseNetwork
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
-            for object in objects as [PFObject] {
-                let post = Post(object)
-                posts.append(post)
+            if !error && !objects.isEmpty {
+                for object in objects as [PFObject] {
+                    let post = Post(object)
+                    posts.append(post)
+                }
+            } else if error {
+                println(error)
             }
         })
         

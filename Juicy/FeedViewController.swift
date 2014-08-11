@@ -26,6 +26,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     private let defaults = Defaults()
     private var currentUser = User.current(false)
     private var posts: [Post]!
+    private var postsCount = 0
     private var cards: [CardView]! = []
     
     // MARK: UIViewController Overrides
@@ -60,7 +61,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
         
         // Setup Cards
-        self.setUpCards()
+        self.seedCards()
     }
     
     // MARK: IBActions
@@ -83,12 +84,17 @@ class FeedViewController: UIViewController, CardViewDelegate {
         return CGFloat(Float(result))
     }
     
-    func setUpCards() {
-        Post.find(self.currentUser, withRelations: false, callback: { (posts: [Post]) -> Void in
-            self.posts = posts
-            
-            for index in 0...(self.defaults.cardsShown - 1) {
-                self.initCard(index != 0, seeding: true)
+    // TODO: Cycle through cards, not delete them
+    func seedCards() {
+        Post.find(self.currentUser, withRelations: true, skip: self.postsCount, callback: { (posts: [Post]) -> Void in
+            if !posts.isEmpty {
+                self.posts = posts
+                self.postsCount += posts.count
+                let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))
+                
+                for index in 0...max {
+                    self.initCard(index != 0, seeding: true)
+                }
             }
         })
     }
@@ -107,6 +113,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
             self.view.insertSubview(card, belowSubview: self.cards.last!)
         }
         
+        card.loadBackground()
         self.cards.append(card)
         return card
     }
@@ -140,6 +147,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
+            self.seedCards()
         }
     }
     
