@@ -12,6 +12,8 @@ import UIKit
     optional func cardWillLeaveScreen(card: CardView)
     optional func cardDidLeaveScreen(card: CardView)
     optional func cardWillReturnToCenter(card: CardView)
+    optional func cardDidReturnToCenter(card: CardView)
+    optional func cardMovingAroundScreen(card: CardView, delta: CGFloat)
 }
 
 class CardView: UIView {
@@ -22,12 +24,22 @@ class CardView: UIView {
         case TopLeft, TopRight, BottomLeft, BottomRight
     }
     
+    // MARK: Default Settings
+    private struct Defaults {
+        let swipeDistance: CGFloat = 80
+        let borderWidth: CGFloat = 4
+        let rotationAngle: CGFloat = 10
+        let duration: NSTimeInterval = 0.2
+        let delay: NSTimeInterval = 0
+    }
+    
     // MARK: Instance Views
     private var font: UIFont!
     private var choiceLabel: UILabel!
     
     // MARK: Instance Attributes
     var post: Post!
+    private let defaults = Defaults()
     private var neededSwipeDistance: CGFloat!
     private var isOffScreen: Bool!
     private var rotationAngle: CGFloat!
@@ -36,17 +48,13 @@ class CardView: UIView {
     // MARK: Instance Gestures
     private var panGesture: UIPanGestureRecognizer!
     
-    // MARK: Default Settings
-    private var defaultSwipeDistance: CGFloat = 80
-    private var defaultBorderWidth: CGFloat = 4
-    private var defaultRotationAngle: CGFloat = 10
-    private var defaultDuration: NSTimeInterval = 0.4
-    private var defaultDelay: NSTimeInterval = 0
-    
     // MARK: Convenience Init Method
-    convenience init(frame: CGRect, post: Int) {
-        self.init(frame:frame)
+    convenience init(frame: CGRect, post: Post, transform: CGFloat) {
+        self.init(frame: frame)
+        
         //self.post = post
+        self.transform = CGAffineTransformMakeRotation(transform)
+        
         self.setupViews()
         self.setupAttributes()
         self.setupGestures()
@@ -58,8 +66,8 @@ class CardView: UIView {
         self.layer.backgroundColor = UIColor.whiteColor().CGColor
         self.layer.shouldRasterize = true
         self.layer.borderColor = UIColor(white: 0, alpha: 0.10).CGColor
-        self.layer.borderWidth = self.defaultBorderWidth
-        self.layer.cornerRadius = self.defaultBorderWidth
+        self.layer.borderWidth = self.defaults.borderWidth
+        self.layer.cornerRadius = self.defaults.borderWidth
         
         // Add Background SubView
 //        let backgroundURL =  NSURL(string: self.post.image, relativeToURL: nil)
@@ -76,9 +84,9 @@ class CardView: UIView {
     
     private func setupAttributes() {
         self.isOffScreen = false
-        self.neededSwipeDistance = self.defaultSwipeDistance;
+        self.neededSwipeDistance = self.defaults.swipeDistance;
         self.userInteractionEnabled = true;
-        self.rotationAngle = self.defaultRotationAngle;
+        self.rotationAngle = self.defaults.rotationAngle;
     }
     
     private func setupGestures() {
@@ -117,6 +125,8 @@ class CardView: UIView {
                 self.choiceLabel.text = "NOPE";
                 self.choiceLabel.alpha = (delta/self.neededSwipeDistance > 1 ? 1 : delta/self.neededSwipeDistance);
             }
+            
+            self.delegate?.cardMovingAroundScreen!(self, delta: self.choiceLabel.alpha)
         } else if gesture.state == UIGestureRecognizerState.Ended {
             var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
             
@@ -132,13 +142,14 @@ class CardView: UIView {
             let absSwipeDistance: CGFloat = CGFloat(labs(swipeDistance))
             
             if absSwipeDistance < self.neededSwipeDistance {
+                self.delegate?.cardWillReturnToCenter?(self)
                 self.returnCardViewToStartPointAnimated(true)
             } else {
                 println(self.delegate)
                 self.delegate?.cardWillLeaveScreen?(self)
                 
                 // Animate off screen
-                UIView.animateWithDuration(self.defaultDuration, delay: self.defaultDelay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                     var  offscreenX: CGFloat!
                     let superviewOrigin = self.superview?.frame.origin
                     let superviewOriginX = superviewOrigin?.x
@@ -148,7 +159,7 @@ class CardView: UIView {
                     if swipeDistance > 0 {
                         offscreenX = -superviewOriginX! - self.bounds.size.width
                     } else {
-                        offscreenX = superViewWidth!+self.bounds.size.width
+                        offscreenX = superViewWidth! + self.bounds.size.width
                     }
                     
                     gesture.view.layer.position = CGPointMake(offscreenX, gesture.view.layer.position.y)
@@ -160,11 +171,11 @@ class CardView: UIView {
     // MARK: Public Methods
     func returnCardViewToStartPointAnimated(animated: Bool) {
         if animated {
-            UIView.animateWithDuration(self.defaultDuration, delay: self.defaultDelay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.transform = CGAffineTransformIdentity
                 self.layer.position = self.startPointInSuperview
                 self.choiceLabel.alpha = 0
-            }, completion: { _ in self.delegate?.cardWillReturnToCenter?(self); return () })
+            }, completion: { _ in self.delegate?.cardDidReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
             self.layer.position = self.startPointInSuperview

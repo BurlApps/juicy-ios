@@ -14,13 +14,19 @@ class FeedViewController: UIViewController, CardViewDelegate {
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
     
-    // MARK: Instance Variables
-    var posts = [1,2,3,4,5,6,7,8,9,10]
-    var cards: [CardView]! = []
+    // MARK: Default Settings
+    private struct Defaults {
+        let cardsShown: Int = 4
+        let rotation: Double = 8
+        let duration: NSTimeInterval = 0.2
+        let delay: NSTimeInterval = 0
+    }
     
-    let cardsShown = 3
-    let minRotation: Double = -8
-    let maxRotation: Double = 8
+    // MARK: Instance Variables
+    private let defaults = Defaults()
+    private var currentUser = User.current(false)
+    private var posts: [Post]!
+    private var cards: [CardView]! = []
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -57,6 +63,20 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.setUpCards()
     }
     
+    // MARK: IBActions
+    @IBAction func logoutUser(sender: UIBarButtonItem) {
+        PFUser.logOut()
+        self.navigationController.popToRootViewControllerAnimated(false)
+    }
+    
+    @IBAction func createPostDown(sender: UIButton) {
+        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:1)
+    }
+    
+    @IBAction func createPost(sender: UIButton) {
+        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
+    }
+    
     // MARK: Instance Methods
     func degreeToRadian(degree: Double) -> CGFloat {
         let result = degree * M_PI / 180
@@ -64,13 +84,17 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func setUpCards() {
-        for index in 0...(self.cardsShown - 1) {
-            self.autoCard(index != 0)
-        }
+        Post.find(self.currentUser, withRelations: false, callback: { (posts: [Post]) -> Void in
+            self.posts = posts
+            
+            for index in 0...(self.defaults.cardsShown - 1) {
+                self.initCard(index != 0, seeding: true)
+            }
+        })
     }
     
-    func autoCard(transform: Bool) -> CardView {
-        if self.cards.count == self.cardsShown {
+    func initCard(transform: Bool, seeding: Bool) -> CardView {
+        if !seeding {
             self.cards.removeAtIndex(0)
         }
         
@@ -87,48 +111,67 @@ class FeedViewController: UIViewController, CardViewDelegate {
         return card
     }
     
-    func createCard(post: Int, transform: Bool) -> CardView {
-        let degrees = (drand48() * (self.maxRotation - self.minRotation + 1)) + self.minRotation
-        let rotation = self.degreeToRadian(degrees)
-        let frame = CGRectMake(self.view.center.x-140, self.view.center.y-140, 280, 280)
-        
-        var card = CardView(frame: frame, post: post)
-        var label = UILabel(frame: CGRectMake(20, 20, 280, 150))
-        label.text = post.description
-        label.textAlignment = NSTextAlignment.Center
-        card.addSubview(label)
-        card.delegate = self
+    func createCard(post: Post, transform: Bool) -> CardView {
+        let cardWidth = self.view.frame.width - 60
+        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 120
+        let cardX = self.view.center.x - cardWidth/2
+        let cardY = self.navigationController.navigationBar.frame.height + 60 + CGFloat(self.defaults.rotation)
+        let frame = CGRectMake(cardX, cardY, cardWidth, cardHeight)
+        var rotation: CGFloat!
         
         if transform {
-            card.transform = CGAffineTransformMakeRotation(rotation)
+            if self.cards.count == 1 {
+                rotation = self.degreeToRadian(self.defaults.rotation/2)
+            } else {
+                rotation = self.degreeToRadian(self.defaults.rotation)
+            }
+        } else {
+            rotation = 0
         }
         
+        var card = CardView(frame: frame, post: post, transform: rotation)
+        card.delegate = self
         return card
-    }
-    
-    // MARK: IBActions
-    @IBAction func logoutUser(sender: UIBarButtonItem) {
-        PFUser.logOut()
-        self.navigationController.popToRootViewControllerAnimated(false)
-    }
-    
-    @IBAction func createPostDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:1)
-    }
-    
-    @IBAction func createPost(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
     }
     
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
-        if !self.posts.isEmpty {
-            var card = self.autoCard(true)
-            card.alpha = 0
+        if !self.posts.isEmpty {            
+            self.initCard(true, seeding: false)
+        } else {
+            self.cards.removeAtIndex(0)
+        }
+    }
+    
+    func cardWillReturnToCenter(card: CardView) {
+         UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            // 2nd Card
+            if self.cards.count > 1 {
+                let firstRotation = self.degreeToRadian(self.defaults.rotation)/2
+                self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
+            }
             
-            UIView.animateWithDuration(0.4, { () -> Void in
-                card.alpha = 1
-            })
+            // 3rd Card -> 2nd Card
+            if self.cards.count > 2 {
+                let secondRotation = self.degreeToRadian(self.defaults.rotation)
+                self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
+            }
+         }, completion: nil)
+    }
+    
+    func cardMovingAroundScreen(card: CardView, delta: CGFloat) {
+        // 2nd Card -> 1st Card
+        if self.cards.count > 1 {
+            let firstTransform = self.degreeToRadian(self.defaults.rotation)/2
+            let firstRotation = firstTransform + (firstTransform * -1 * abs(delta))
+            self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
+        }
+        
+        // 3rd Card -> 2nd Card
+        if self.cards.count > 2 {
+            let secondTransform = self.degreeToRadian(self.defaults.rotation)
+            let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
+            self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
         }
     }
 }

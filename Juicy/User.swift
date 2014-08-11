@@ -9,24 +9,18 @@
 class User: NSObject {
     
     // MARK: Instance Variables
-    var id: String!
     var username: String!
-    var screenName: String!
-    var facebook: String!
-    var created: NSDate!
+    var displayName: String!
     var savedPosts: [Post]!
     private var parse: PFUser!
     
     // MARK: Convenience Methods
-    convenience init(_ user: PFUser, withRelations: Bool = false) {
-        self.init(user, withRelations: withRelations)
+    convenience init(_ user: PFUser, withRelations: Bool) {
+        self.init()
         
         self.parse = user
-        self.id = user.objectForKey("user") as String
-        self.screenName = user.objectForKey("screenName") as String
-        self.username = user.objectForKey("username") as String
-        self.facebook = user.objectForKey("authData") as String
-        self.created = user.objectForKey("createdAt") as NSDate
+        self.username = user["username"] as String
+        self.displayName = user["displayName"] as? String
         
         if withRelations {
             self.getSavedPosts()
@@ -34,9 +28,21 @@ class User: NSObject {
     }
     
     // MARK: Instance Methods
+    func getFacebookInfo() {
+        var fbRequest = FBRequest.requestForMe()
+        fbRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
+            if !error && result != nil {
+                let fbUser = result as FBGraphObject
+                self.displayName = fbUser["name"] as String
+                self.parse["displayName"] = self.displayName
+                self.parse.saveInBackground()
+            }
+        })
+    }
+    
     func getSavedPosts() -> [Post] {
         var posts: [Post] = []
-        var query: PFQuery = (self.parse.objectForKey("savedpostsRelation") as PFRelation).query()
+        var query: PFQuery = (self.parse["savedPosts"] as PFRelation).query()
         
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
@@ -54,5 +60,4 @@ class User: NSObject {
     class func current(withRelations: Bool) -> User {
         return User(PFUser.currentUser(), withRelations: withRelations)
     }
-    
 }

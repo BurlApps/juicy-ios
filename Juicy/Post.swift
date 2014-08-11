@@ -9,27 +9,22 @@
 class Post: NSObject {
     
     // MARK: Instance Variables
-    var id: String!
     var age: Int!
     var likes: Int!
     var image: String!
     var juicy: Bool!
-    var created: NSDate!
     var creator: User!
     var aboutUsers: [User]!
     private var parse: PFObject!
     
     // MARK: Convenience Methods
     convenience init(_ post: PFObject, withRelations: Bool = false) {
-        self.init(post, withRelations: withRelations)
+        self.init()
         
         self.parse = post
-        self.id = post.objectForKey("objectId") as String
-        self.age = post.objectForKey("age") as Int
-        self.likes = post.objectForKey("likes") as Int
-        self.juicy = post.objectForKey("juicy") as Bool
-        self.created = post.objectForKey("createdAt") as NSDate
-        self.image = (post.objectForKey("image") as PFFile).url
+        self.likes = post["likes"] as Int
+        self.juicy = post["juicy"] as Bool
+        self.image = (post["image"] as? PFFile)?.url
         
         if withRelations {
             self.getCreator()
@@ -37,9 +32,29 @@ class Post: NSObject {
         }
     }
     
+    // MARK: Class Methods
+    class func find(exclude: User, withRelations: Bool, callback: (posts: [Post]) -> Void) {
+        var posts: [Post] = []
+        var query = PFQuery(className: "Posts")
+        
+        //query.whereKey("username", notEqualTo: exclude.username)
+        query.orderByDescending("createdAt")
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+            if !error {
+                for object in objects {
+                    posts.append(Post(object as PFObject, withRelations: withRelations))
+                }
+                
+                callback(posts: posts)
+            } else {
+                NSLog("Error: %@ %@", error, error.userInfo)
+            }
+        })
+    }
+    
     // MARK: Instance Methods
     func getCreator()-> User {
-        let creator: PFUser = self.parse.objectForKey("creator") as PFUser
+        let creator: PFUser = self.parse["creator"] as PFUser
         let creatorUser: User = User(creator, withRelations: false)
         self.creator = creatorUser
         return creatorUser
@@ -47,12 +62,12 @@ class Post: NSObject {
     
     func getAboutUsers() -> [User] {
         var users: [User] = []
-        var query: PFQuery = (self.parse.objectForKey("aboutUsersRelation") as PFRelation).query()
+        var query: PFQuery = (self.parse["aboutUsers"] as PFRelation).query()
         
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
             for object in objects as [PFUser] {
-                let user = User(object)
+                let user = User(object, withRelations: false)
                 users.append(user)
             }
         })

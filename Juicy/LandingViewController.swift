@@ -53,6 +53,10 @@ class LandingViewController: UIViewController {
             self.spinner.stopAnimating()
             
             if user {
+                if user.isNew {
+                    User(user, withRelations: false).getFacebookInfo()
+                }
+                
                 self.performSegueWithIdentifier("loggedInSegue", sender: self)
             } else {
                 self.loginButton.setTitle("Failed To Log In", forState: UIControlState.Normal)
