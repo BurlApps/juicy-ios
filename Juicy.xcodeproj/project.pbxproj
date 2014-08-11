@@ -97,12 +97,13 @@
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		D30A84DD1998BCBC00CBF78F /* seeder.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = seeder.playground; sourceTree = "<group>"; };
+		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF67198F817800532600 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
-		D367AD201995F80D00E13C71 /* Tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Tester.playground; sourceTree = "<group>"; };
 		D381C98A19908E7900AA65F6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		D3A2A85E194E60D500FABCC0 /* Juicy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juicy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +172,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D30A84DC1998BC9E00CBF78F /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				D30A84DD1998BCBC00CBF78F /* seeder.playground */,
+				D30A84DE1998BD0500CBF78F /* tester.playground */,
+			);
+			name = Playgrounds;
+			sourceTree = "<group>";
+		};
 		D3229606194F9C7700488B63 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +239,7 @@
 		D3A2A860194E60D500FABCC0 /* Juicy */ = {
 			isa = PBXGroup;
 			children = (
+				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
 				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
 				D34AE4F5199238BC00D0D1C8 /* Models */,
 				D3A2A88B194E63BE00FABCC0 /* Classes */,
@@ -246,7 +257,6 @@
 				D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */,
 				D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */,
 				D3A2A862194E60D500FABCC0 /* Info.plist */,
-				D367AD201995F80D00E13C71 /* Tester.playground */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -622,7 +632,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -673,7 +682,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;

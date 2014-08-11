@@ -17,7 +17,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     // MARK: Default Settings
     private struct Defaults {
         let cardsShown: Int = 4
-        let rotation: Double = 8
+        let rotation: Double = 6
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
     }
@@ -112,10 +112,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func createCard(post: Post, transform: Bool) -> CardView {
-        let cardWidth = self.view.frame.width - 60
-        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 120
+        let cardWidth = self.view.frame.width - (CGFloat(self.defaults.rotation) * 4) - 20
+        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 100
         let cardX = self.view.center.x - cardWidth/2
-        let cardY = self.navigationController.navigationBar.frame.height + 60 + CGFloat(self.defaults.rotation)
+        let cardY = self.navigationController.navigationBar.frame.height + 45 + CGFloat(self.defaults.rotation)
         let frame = CGRectMake(cardX, cardY, cardWidth, cardHeight)
         var rotation: CGFloat!
         
@@ -136,7 +136,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
-        if !self.posts.isEmpty {            
+        if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)

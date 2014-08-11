@@ -27,14 +27,15 @@ class CardView: UIView {
     // MARK: Default Settings
     private struct Defaults {
         let swipeDistance: CGFloat = 80
-        let borderWidth: CGFloat = 4
-        let rotationAngle: CGFloat = 10
+        let border: CGFloat = 3
+        let radius: CGFloat = 4
+        let rotation: CGFloat = 10
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
     }
     
     // MARK: Instance Views
-    private var font: UIFont!
+    private var container: UIView!
     private var choiceLabel: UILabel!
     
     // MARK: Instance Attributes
@@ -52,9 +53,11 @@ class CardView: UIView {
     convenience init(frame: CGRect, post: Post, transform: CGFloat) {
         self.init(frame: frame)
         
-        //self.post = post
+        // Instance Variables
+        self.post = post
         self.transform = CGAffineTransformMakeRotation(transform)
         
+        // Setup Methods
         self.setupViews()
         self.setupAttributes()
         self.setupGestures()
@@ -65,28 +68,51 @@ class CardView: UIView {
         // Layer Modifications
         self.layer.backgroundColor = UIColor.whiteColor().CGColor
         self.layer.shouldRasterize = true
-        self.layer.borderColor = UIColor(white: 0, alpha: 0.10).CGColor
-        self.layer.borderWidth = self.defaults.borderWidth
-        self.layer.cornerRadius = self.defaults.borderWidth
+        self.layer.borderColor = UIColor(white: 0, alpha: 0.125).CGColor
+        self.layer.borderWidth = self.defaults.border
+        self.layer.cornerRadius = self.defaults.radius
+        self.clipsToBounds = true
+        
+        // Add Container (Everything Goes In The Container)
+        self.container = UIView(frame: CGRectMake(self.defaults.border, self.defaults.border,
+                                                  self.bounds.width - (self.defaults.border*2),
+                                                  self.bounds.height - (self.defaults.border*2)))
+        self.container.backgroundColor = UIColor.whiteColor()
+        self.layer.cornerRadius = self.defaults.radius
+        self.container.clipsToBounds = true
+        self.addSubview(self.container)
         
         // Add Background SubView
-//        let backgroundURL =  NSURL(string: self.post.image, relativeToURL: nil)
-//        let backgroundData = NSData(contentsOfURL: backgroundURL)
-//        let backgroundImage = UIImage(data: backgroundData)
-//        self.addSubview(UIImageView(image: backgroundImage))
+        let backgroundURL =  NSURL(string: self.post.image, relativeToURL: nil)
+        let request: NSURLRequest = NSURLRequest(URL: backgroundURL)
         
-        // Add Label
-        self.choiceLabel = UILabel(frame:CGRectMake(0, 0, 200, 200));
-        self.choiceLabel.alpha = 0;
-        self.choiceLabel.textAlignment = NSTextAlignment.Center;
-        self.addSubview(self.choiceLabel)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+            (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            if !error {
+                let backgroundImage = UIImage(data: data)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    var backgroundImageView = UIImageView(image: backgroundImage)
+                    
+                    backgroundImageView.frame = self.container.bounds
+                    backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
+                    self.container.insertSubview(backgroundImageView, atIndex: 0)
+                })
+            }
+        })
+        
+        // Add Label SubView
+        self.choiceLabel = UILabel(frame: self.container.frame)
+        self.choiceLabel.textAlignment = NSTextAlignment.Center
+        self.choiceLabel.alpha = 0
+        self.container.addSubview(self.choiceLabel)
     }
     
     private func setupAttributes() {
         self.isOffScreen = false
         self.neededSwipeDistance = self.defaults.swipeDistance;
         self.userInteractionEnabled = true;
-        self.rotationAngle = self.defaults.rotationAngle;
+        self.rotationAngle = self.defaults.rotation
     }
     
     private func setupGestures() {
@@ -116,17 +142,15 @@ class CardView: UIView {
             
             gesture.view.transform = CGAffineTransformMakeRotation(self.degreeToRadian(rotation));
             
-            // Show the label
+            // TODO: Show the label
             let delta = self.startPointInSuperview.x - newLocation.x;
-            if delta < 0 {
-                self.choiceLabel.text = "LIKE";
-                self.choiceLabel.alpha = (-delta/self.neededSwipeDistance > 1 ? 1 : -delta/self.neededSwipeDistance);
-            } else {
-                self.choiceLabel.text = "NOPE";
-                self.choiceLabel.alpha = (delta/self.neededSwipeDistance > 1 ? 1 : delta/self.neededSwipeDistance);
-            }
+            var percentage = abs(delta/self.neededSwipeDistance)
+            percentage = (percentage > 1 ? 1 : percentage)
             
-            self.delegate?.cardMovingAroundScreen!(self, delta: self.choiceLabel.alpha)
+            self.choiceLabel.text = (delta < 0 ? "Like" : "Nope")
+            self.choiceLabel.alpha = percentage
+            
+            self.delegate?.cardMovingAroundScreen!(self, delta: percentage)
         } else if gesture.state == UIGestureRecognizerState.Ended {
             var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
             
@@ -145,7 +169,6 @@ class CardView: UIView {
                 self.delegate?.cardWillReturnToCenter?(self)
                 self.returnCardViewToStartPointAnimated(true)
             } else {
-                println(self.delegate)
                 self.delegate?.cardWillLeaveScreen?(self)
                 
                 // Animate off screen
@@ -163,7 +186,10 @@ class CardView: UIView {
                     }
                     
                     gesture.view.layer.position = CGPointMake(offscreenX, gesture.view.layer.position.y)
-                }, completion: { _ in self.delegate?.cardDidLeaveScreen?(self); return () })
+                }, completion: { _ in
+                    self.removeFromSuperview()
+                    self.delegate?.cardDidLeaveScreen?(self)
+                })
             }
         }
     }
