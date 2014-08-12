@@ -33,13 +33,13 @@ class Post: NSObject {
     }
     
     // MARK: Class Methods
-    class func find(exclude: User, withRelations: Bool, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
+    class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
         
         query.limit = limit
         query.skip = skip
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork
+        //query.cachePolicy = kPFCachePolicyCacheElseNetwork
         
         query.orderByDescending("createdAt")
         //query.whereKey("creator", notEqualTo: exclude.parse)

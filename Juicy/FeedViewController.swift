@@ -55,7 +55,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.navigationController.navigationBar.addSubview(overlayView)
         
         // Setup View
-        self.view.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 1, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
         
         // Setup Create Button
         self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
@@ -84,9 +84,8 @@ class FeedViewController: UIViewController, CardViewDelegate {
         return CGFloat(Float(result))
     }
     
-    // TODO: Cycle through cards, not delete them
     func seedCards() {
-        Post.find(self.currentUser, withRelations: true, skip: self.postsCount, callback: { (posts: [Post]) -> Void in
+        Post.find(self.currentUser, withRelations: false, skip: self.postsCount, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty {
                 self.posts = posts
                 self.postsCount += posts.count
@@ -112,15 +111,14 @@ class FeedViewController: UIViewController, CardViewDelegate {
         } else {
             self.view.insertSubview(card, belowSubview: self.cards.last!)
         }
-        
-        card.loadBackground()
+
         self.cards.append(card)
         return card
     }
     
     func createCard(post: Post, transform: Bool) -> CardView {
         let cardWidth = self.view.frame.width - (CGFloat(self.defaults.rotation) * 4) - 20
-        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 100
+        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 150
         let cardX = self.view.center.x - cardWidth/2
         let cardY = self.navigationController.navigationBar.frame.height + 45 + CGFloat(self.defaults.rotation)
         let frame = CGRectMake(cardX, cardY, cardWidth, cardHeight)

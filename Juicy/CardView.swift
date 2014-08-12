@@ -26,17 +26,22 @@ class CardView: UIView {
     
     // MARK: Default Settings
     private struct Defaults {
-        let swipeDistance: CGFloat = 80
-        let border: CGFloat = 3
+        let swipeDistance: CGFloat = 100
+        let border: CGFloat = 4
         let radius: CGFloat = 4
         let rotation: CGFloat = 10
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
+        let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.8).CGColor
+        let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.8).CGColor
     }
     
     // MARK: Instance Views
-    private var container: UIView!
-    private var choiceLabel: UILabel!
+    private var background: UIImageView!
+    private var darkener: UIView!
+    private var darkenerColor: UIColor!
+    private var darkenerBorder: CGColor!
+    private var content: UILabel!
     
     // MARK: Instance Attributes
     var post: Post!
@@ -67,26 +72,42 @@ class CardView: UIView {
     private func setupViews() {
         // Layer Modifications
         self.layer.backgroundColor = UIColor.whiteColor().CGColor
-        self.layer.shouldRasterize = true
-        self.layer.borderColor = UIColor(white: 0, alpha: 0.125).CGColor
-        self.layer.borderWidth = self.defaults.border
         self.layer.cornerRadius = self.defaults.radius
+        self.layer.shouldRasterize = true
         self.clipsToBounds = true
         
-        // Add Container (Everything Goes In The Container)
-        self.container = UIView(frame: CGRectMake(self.defaults.border, self.defaults.border,
-                                                  self.bounds.width - (self.defaults.border*2),
-                                                  self.bounds.height - (self.defaults.border*2)))
-        self.container.backgroundColor = UIColor.whiteColor()
-        self.layer.cornerRadius = self.defaults.radius
-        self.container.clipsToBounds = true
-        self.addSubview(self.container)
+        // Add Background SubView
+        self.background = self.post.getBackground()
+        self.background.frame = self.bounds
+        self.background.contentMode = UIViewContentMode.ScaleAspectFill
+        self.addSubview(self.background)
         
-        // Add Label SubView
-        self.choiceLabel = UILabel(frame: self.container.frame)
-        self.choiceLabel.textAlignment = NSTextAlignment.Center
-        self.choiceLabel.alpha = 0
-        self.container.addSubview(self.choiceLabel)
+        // Add Darkener
+        self.darkener = UIView(frame: self.bounds)
+        self.darkener.layer.borderWidth = self.defaults.border
+        self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.7)
+        self.insertSubview(self.darkener, aboveSubview: self.background)
+        
+        if self.post.juicy == true {
+            self.darkener.layer.borderColor = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.6).CGColor
+        } else {
+            self.darkener.layer.borderColor = UIColor(red:1, green:1, blue:1, alpha:0.4).CGColor
+        }
+        
+        self.darkenerColor = self.darkener.backgroundColor
+        self.darkenerBorder = self.darkener.layer.borderColor
+        
+        // Add Content
+        self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
+        self.content.text = self.post.content
+        self.content.textAlignment = NSTextAlignment.Center
+        self.content.textColor = UIColor.whiteColor()
+        self.content.shadowColor = UIColor(white: 0, alpha: 0.4)
+        self.content.shadowOffset = CGSize(width: 0, height: 2)
+        self.content.font = UIFont(name: "Balcony Angels", size: 36)
+        self.content.numberOfLines = 3
+        self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.insertSubview(self.content, aboveSubview: self.darkener)
     }
     
     private func setupAttributes() {
@@ -123,14 +144,19 @@ class CardView: UIView {
             
             gesture.view.transform = CGAffineTransformMakeRotation(self.degreeToRadian(rotation));
             
-            // TODO: Show the label
             let delta = self.startPointInSuperview.x - newLocation.x;
             var percentage = abs(delta/self.neededSwipeDistance)
             percentage = (percentage > 1 ? 1 : percentage)
+            var newColor: CGColor!
+        
+            if delta < 0 {
+                newColor = self.defaults.likeColor
+            } else {
+                newColor = self.defaults.nopeColor
+            }
             
-            self.choiceLabel.text = (delta < 0 ? "Like" : "Nope")
-            self.choiceLabel.alpha = percentage
-            
+            self.darkener.backgroundColor = self.mixColors(self.darkenerColor.CGColor, colorTwo: newColor, delta: percentage)
+            self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder, colorTwo: newColor, delta: percentage).CGColor
             self.delegate?.cardMovingAroundScreen!(self, delta: percentage)
         } else if gesture.state == UIGestureRecognizerState.Ended {
             var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
@@ -175,26 +201,19 @@ class CardView: UIView {
         }
     }
     
-    // MARK: Public Methods
-    func loadBackground() {
-        // Add Background SubView
-        var background = self.post.getBackground()
-        background.frame = self.container.bounds
-        background.contentMode = UIViewContentMode.ScaleAspectFill
-        self.container.insertSubview(background, atIndex: 0)
-    }
-    
     func returnCardViewToStartPointAnimated(animated: Bool) {
         if animated {
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.transform = CGAffineTransformIdentity
                 self.layer.position = self.startPointInSuperview
-                self.choiceLabel.alpha = 0
+                self.darkener.backgroundColor = self.darkenerColor
+                self.darkener.layer.borderColor = self.darkenerBorder
             }, completion: { _ in self.delegate?.cardDidReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
             self.layer.position = self.startPointInSuperview
-            self.choiceLabel.alpha = 0
+            self.darkener.backgroundColor = self.darkenerColor
+            self.darkener.layer.borderColor = self.darkenerBorder
         }
     }
     
@@ -220,6 +239,27 @@ class CardView: UIView {
     
     private func degreeToRadian(degree: CGFloat) -> CGFloat {
         return degree * CGFloat(M_PI) / 180
+    }
+    
+    private func mixColors(colorOne: CGColor!, colorTwo: CGColor!, delta: CGFloat) -> UIColor {
+        var colorOneComp = CGColorGetComponents(colorOne)
+        var colorOneRed = colorOneComp[0]
+        var colorOneGreen = colorOneComp[1]
+        var colorOneBlue = colorOneComp[2]
+        var colorOneAlpha = colorOneComp[3]
+        
+        var colorTwoComp = CGColorGetComponents(colorTwo)
+        var colorTwoRed = colorTwoComp[0]
+        var colorTwoGreen = colorTwoComp[1]
+        var colorTwoBlue = colorTwoComp[2]
+        var colorTwoAlpha = colorTwoComp[3]
+        
+        var newRed = (colorOneRed * (1 - delta)) + (colorTwoRed * delta)
+        var newGreen = (colorOneGreen * (1 - delta)) + (colorTwoGreen * delta)
+        var newBlue = (colorOneBlue * (1 - delta)) + (colorTwoBlue * delta)
+        var newAlpha = (colorOneAlpha * (1 - delta)) + (colorTwoAlpha * delta)
+        
+        return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
     }
     
     private func applyRotationToView(rotationView: UIView, angle: CGFloat) {
