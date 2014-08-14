@@ -44,7 +44,11 @@ class Post: NSObject {
         
         query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
-        query.whereKey("creator", notEqualTo: exclude.parse)
+        
+        // TODO: Uncomment when posting works
+        //query.whereKey("creator", notEqualTo: exclude.parse)
+        //query.whereKey("likedUsers", notEqualTo: exclude.parse)
+        //query.whereKey("nopedUsers", notEqualTo: exclude.parse)
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             if !error && !objects.isEmpty {
