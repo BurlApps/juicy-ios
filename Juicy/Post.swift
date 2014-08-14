@@ -12,6 +12,7 @@ class Post: NSObject {
     var age: Int!
     var likes: Int!
     var content: String!
+    var image: NSURL!
     var juicy: Bool!
     var creator: User!
     var aboutUsers: [User]!
@@ -25,6 +26,7 @@ class Post: NSObject {
         self.likes = post["likes"] as Int
         self.juicy = post["juicy"] as Bool
         self.content = post["content"] as String
+        self.image = NSURL(string: (self.parse["image"] as PFFile).url)
         
         if withRelations {
             self.getCreator()
@@ -58,12 +60,29 @@ class Post: NSObject {
     }
     
     // MARK: Instance Methods
-    func getBackground()-> PFImageView {
-        var imageView = PFImageView()
-        imageView.image = UIImage()
-        imageView.file = self.parse["image"] as PFFile
-        imageView.loadInBackground()
-        return imageView
+    func getImage(callback: (image: UIImage) -> Void) {
+        let request = NSURLRequest(URL: self.image)
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+            (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            if !error {
+                let image = UIImage(data: data)
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                    // Make a trivial (1x1) graphics context,
+                    // and draw the image into it
+                    UIGraphicsBeginImageContext(CGSizeMake(1,1))
+                    let context = UIGraphicsGetCurrentContext()
+                    CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), image.CGImage)
+                    UIGraphicsEndImageContext()
+                    
+                    // Now the image will have been loaded and decoded
+                    // and is ready to rock for the main thread
+                    dispatch_async(dispatch_get_main_queue(), {
+                        callback(image: image)
+                    })
+                })
+            }
+        })
     }
     
     func getCreator()-> User {

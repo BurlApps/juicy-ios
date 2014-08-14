@@ -7,3 +7,4 @@
 #import <Parse/Parse.h>
 #import <BKEAnimatedGradientView/BKEAnimatedGradientView.h>
 #import <VLBCameraView/VLBCameraView.h>
+#import <SDWebImage/UIImageView+WebCache.h>

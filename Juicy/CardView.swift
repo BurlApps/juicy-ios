@@ -18,33 +18,40 @@ import UIKit
 
 class CardView: UIView {
     
-    // MARK: Instance Variables
-    var delegate: CardViewDelegate?
-    private enum cardViewLocation {
+    // MARK: Class Enums
+    enum Status {
+        case None, Liked, Nope, Shared
+    }
+    
+    private enum CardViewLocation {
         case TopLeft, TopRight, BottomLeft, BottomRight
     }
     
     // MARK: Default Settings
     private struct Defaults {
-        let swipeDistance: CGFloat = 100
+        let swipeDistance: CGFloat = 80
         let border: CGFloat = 4
         let radius: CGFloat = 4
         let rotation: CGFloat = 10
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
-        let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.8).CGColor
-        let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.8).CGColor
+        let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.4).CGColor
+        let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.4).CGColor
     }
     
     // MARK: Instance Views
     private var background: UIImageView!
     private var darkener: UIView!
     private var darkenerColor: UIColor!
-    private var darkenerBorder: CGColor!
+    private var darkenerBorder: UIColor!
     private var content: UILabel!
     
-    // MARK: Instance Attributes
+    // MARK: Public Attributes
     var post: Post!
+    var delegate: CardViewDelegate!
+    var status: Status!
+    
+    // MARK: Instance Attributes
     private let defaults = Defaults()
     private var neededSwipeDistance: CGFloat!
     private var isOffScreen: Bool!
@@ -77,25 +84,29 @@ class CardView: UIView {
         self.clipsToBounds = true
         
         // Add Background SubView
-        self.background = self.post.getBackground()
-        self.background.frame = self.bounds
+        self.background = UIImageView(frame: self.bounds)
         self.background.contentMode = UIViewContentMode.ScaleAspectFill
         self.addSubview(self.background)
+        
+        // Load Background Image
+        self.post.getImage({ (image) -> Void in
+            self.background.image = image
+        })
         
         // Add Darkener
         self.darkener = UIView(frame: self.bounds)
         self.darkener.layer.borderWidth = self.defaults.border
-        self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.7)
+        self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
         if self.post.juicy == true {
-            self.darkener.layer.borderColor = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.6).CGColor
+            self.darkenerBorder = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.7)
         } else {
-            self.darkener.layer.borderColor = UIColor(red:1, green:1, blue:1, alpha:0.4).CGColor
+            self.darkenerBorder = UIColor(red:1, green:1, blue:1, alpha:0.4)
         }
         
         self.darkenerColor = self.darkener.backgroundColor
-        self.darkenerBorder = self.darkener.layer.borderColor
+        self.darkener.layer.borderColor = self.darkenerBorder.CGColor
         
         // Add Content
         self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
@@ -108,6 +119,9 @@ class CardView: UIView {
         self.content.numberOfLines = 3
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.insertSubview(self.content, aboveSubview: self.darkener)
+        
+        // TODO: Coloring Content
+        let content: [Any] = [ "Wow!! That is crazy", User(PFUser.currentUser(), withRelations: false) ]
     }
     
     private func setupAttributes() {
@@ -148,15 +162,18 @@ class CardView: UIView {
             var percentage = abs(delta/self.neededSwipeDistance)
             percentage = (percentage > 1 ? 1 : percentage)
             var newColor: CGColor!
+            var newColorBorder = self.darkenerBorder.colorWithAlphaComponent((1 - percentage)).CGColor
         
             if delta < 0 {
                 newColor = self.defaults.likeColor
+                self.status = .Liked
             } else {
                 newColor = self.defaults.nopeColor
+                self.status = .None
             }
-            
+
             self.darkener.backgroundColor = self.mixColors(self.darkenerColor.CGColor, colorTwo: newColor, delta: percentage)
-            self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder, colorTwo: newColor, delta: percentage).CGColor
+            self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder.CGColor, colorTwo: newColorBorder, delta: percentage).CGColor
             self.delegate?.cardMovingAroundScreen!(self, delta: percentage)
         } else if gesture.state == UIGestureRecognizerState.Ended {
             var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
@@ -207,13 +224,13 @@ class CardView: UIView {
                 self.transform = CGAffineTransformIdentity
                 self.layer.position = self.startPointInSuperview
                 self.darkener.backgroundColor = self.darkenerColor
-                self.darkener.layer.borderColor = self.darkenerBorder
+                self.darkener.layer.borderColor = self.darkenerBorder.CGColor
             }, completion: { _ in self.delegate?.cardDidReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
             self.layer.position = self.startPointInSuperview
             self.darkener.backgroundColor = self.darkenerColor
-            self.darkener.layer.borderColor = self.darkenerBorder
+            self.darkener.layer.borderColor = self.darkenerBorder.CGColor
         }
     }
     
@@ -266,8 +283,8 @@ class CardView: UIView {
         rotationView.transform = CGAffineTransformRotate(rotationView.transform, angle)
     }
     
-    private func getCardViewLocationInSuperView(currentLocation: CGPoint) -> cardViewLocation {
-        var result: cardViewLocation!
+    private func getCardViewLocationInSuperView(currentLocation: CGPoint) -> CardViewLocation {
+        var result: CardViewLocation!
         let superviewSize = self.superview?.frame.size
         let superViewWidth = superviewSize?.width
         let superViewHeight = superviewSize?.height
@@ -276,15 +293,15 @@ class CardView: UIView {
         
         if currentLocation.x < middleX {
             if currentLocation.y < middleY {
-                result = cardViewLocation.TopLeft
+                result = CardViewLocation.TopLeft
             } else {
-                result = cardViewLocation.BottomLeft
+                result = CardViewLocation.BottomLeft
             }
         } else {
             if currentLocation.y < middleY {
-                result = cardViewLocation.TopRight
+                result = CardViewLocation.TopRight
             } else {
-                result = cardViewLocation.BottomRight
+                result = CardViewLocation.BottomRight
             }
         }
         

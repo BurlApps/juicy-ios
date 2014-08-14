@@ -60,6 +60,11 @@ class FeedViewController: UIViewController, CardViewDelegate {
         // Setup Create Button
         self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
         
+        // Add Create Button Top Border
+        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.createButton.frame.size.width, 3))
+        buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.05)
+        self.createButton.addSubview(buttonBorder)
+        
         // Setup Cards
         self.seedCards()
     }
@@ -145,7 +150,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
-            self.seedCards()
+            
+            if self.cards.isEmpty {
+                self.seedCards()
+            }
         }
     }
     
