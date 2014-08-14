@@ -37,6 +37,7 @@ class CardView: UIView {
         let delay: NSTimeInterval = 0
         let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.4).CGColor
         let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.4).CGColor
+        let personColor = UIColor(red:0.31, green:0.95, blue:1, alpha:1)
     }
     
     // MARK: Instance Views
@@ -81,6 +82,7 @@ class CardView: UIView {
         self.layer.backgroundColor = UIColor.whiteColor().CGColor
         self.layer.cornerRadius = self.defaults.radius
         self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.mainScreen().scale
         self.clipsToBounds = true
         
         // Add Background SubView
@@ -110,18 +112,30 @@ class CardView: UIView {
         
         // Add Content
         self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
-        self.content.text = self.post.content
         self.content.textAlignment = NSTextAlignment.Center
         self.content.textColor = UIColor.whiteColor()
-        self.content.shadowColor = UIColor(white: 0, alpha: 0.4)
+        self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.content.shadowOffset = CGSize(width: 0, height: 2)
-        self.content.font = UIFont(name: "Balcony Angels", size: 36)
-        self.content.numberOfLines = 3
+        self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
+        self.content.numberOfLines = 6
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.insertSubview(self.content, aboveSubview: self.darkener)
         
-        // TODO: Coloring Content
-        let content: [Any] = [ "Wow!! That is crazy", User(PFUser.currentUser(), withRelations: false) ]
+        // Coloring Content With Names
+        var content = NSMutableAttributedString()
+        
+        for block in self.post.content {
+            var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
+            
+            if block["color"] as Bool {
+                blockAttrString.addAttribute(NSForegroundColorAttributeName,
+                    value: self.defaults.personColor, range: NSMakeRange(0, blockAttrString.length))
+            }
+            
+            content.appendAttributedString(blockAttrString)
+        }
+        
+        self.content.attributedText = content
     }
     
     private func setupAttributes() {

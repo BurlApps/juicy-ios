@@ -103,8 +103,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
         })
     }
     
-    func initCard(transform: Bool, seeding: Bool) -> CardView {
-        if !seeding {
+    func initCard(transform: Bool, seeding: Bool) -> CardView! {
+        if self.posts.isEmpty {
+            return nil
+        } else if !seeding {
             self.cards.removeAtIndex(0)
         }
         
@@ -126,7 +128,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 150
         let cardX = self.view.center.x - cardWidth/2
         let cardY = self.navigationController.navigationBar.frame.height + 45 + CGFloat(self.defaults.rotation)
-        let frame = CGRectMake(cardX, cardY, cardWidth, cardHeight)
+        let frame = CGRectIntegral(CGRectMake(cardX, cardY, cardWidth, cardHeight))
         var rotation: CGFloat!
         
         if transform {
@@ -145,15 +147,12 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: CardViewDelegate Methods
-    func cardDidLeaveScreen(card: CardView) {
+    func cardDidLeaveScreen(card: CardView) {        
         if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
-            
-            if self.cards.isEmpty {
-                self.seedCards()
-            }
+            self.seedCards()
         }
     }
     
@@ -165,7 +164,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
                 self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
             }
             
-            // 3rd Card -> 2nd Card
+            // 3rd Card
             if self.cards.count > 2 {
                 let secondRotation = self.degreeToRadian(self.defaults.rotation)
                 self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)

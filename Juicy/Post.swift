@@ -11,7 +11,7 @@ class Post: NSObject {
     // MARK: Instance Variables
     var age: Int!
     var likes: Int!
-    var content: String!
+    var content: [AnyObject]!
     var image: NSURL!
     var juicy: Bool!
     var creator: User!
@@ -25,8 +25,8 @@ class Post: NSObject {
         self.parse = post
         self.likes = post["likes"] as Int
         self.juicy = post["juicy"] as Bool
-        self.content = post["content"] as String
         self.image = NSURL(string: (self.parse["image"] as PFFile).url)
+        self.content = post["content"] as [AnyObject]
         
         if withRelations {
             self.getCreator()
@@ -41,7 +41,6 @@ class Post: NSObject {
         
         query.limit = limit
         query.skip = skip
-        //query.cachePolicy = kPFCachePolicyCacheElseNetwork
         
         query.orderByDescending("createdAt")
         //query.whereKey("creator", notEqualTo: exclude.parse)
@@ -99,7 +98,6 @@ class Post: NSObject {
         var query: PFQuery = (self.parse["aboutUsers"] as PFRelation).query()
         
         query.orderByDescending("createdAt")
-        query.cachePolicy = kPFCachePolicyCacheElseNetwork
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in         
             if !error && !objects.isEmpty {
                 for object in objects as [PFUser] {
