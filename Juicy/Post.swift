@@ -42,8 +42,9 @@ class Post: NSObject {
         query.limit = limit
         query.skip = skip
         
+        query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
-        //query.whereKey("creator", notEqualTo: exclude.parse)
+        query.whereKey("creator", notEqualTo: exclude.parse)
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             if !error && !objects.isEmpty {
@@ -97,6 +98,7 @@ class Post: NSObject {
         var users: [User] = []
         var query: PFQuery = (self.parse["aboutUsers"] as PFRelation).query()
         
+        query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in         
             if !error && !objects.isEmpty {

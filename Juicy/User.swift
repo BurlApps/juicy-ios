@@ -46,6 +46,7 @@ class User: NSObject {
         var posts: [Post] = []
         var query: PFQuery = (self.parse["savedPosts"] as PFRelation).query()
         
+        query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
             if !error && !objects.isEmpty {
