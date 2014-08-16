@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc protocol CardViewDelegate : class {
+@objc protocol CardViewDelegate {
     optional func cardWillLeaveScreen(card: CardView)
     optional func cardDidLeaveScreen(card: CardView)
     optional func cardWillReturnToCenter(card: CardView)
@@ -29,12 +29,14 @@ class CardView: UIView {
     
     // MARK: Default Settings
     private struct Defaults {
-        let swipeDistance: CGFloat = 80
+        let swipeDistance: CGFloat = 120
         let border: CGFloat = 4
         let radius: CGFloat = 4
         let rotation: CGFloat = 10
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
+        let regualColor = UIColor(red:1, green:1, blue:1, alpha:0.4)
+        let juicyColor = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.8)
         let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.4).CGColor
         let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.4).CGColor
         let personColor = UIColor(red:0.31, green:0.95, blue:1, alpha:1)
@@ -42,6 +44,7 @@ class CardView: UIView {
     
     // MARK: Instance Views
     private var background: UIImageView!
+    private var choice: UIImageView!
     private var darkener: UIView!
     private var darkenerColor: UIColor!
     private var darkenerBorder: UIColor!
@@ -51,6 +54,7 @@ class CardView: UIView {
     var post: Post!
     var delegate: CardViewDelegate!
     var status: Status!
+    var locked = true
     
     // MARK: Instance Attributes
     private let defaults = Defaults()
@@ -101,14 +105,22 @@ class CardView: UIView {
         self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
-        if self.post.juicy == true {
-            self.darkenerBorder = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.7)
+        if self.post.juicy as Bool {
+            self.darkenerBorder = self.defaults.juicyColor
+            self.darkener.layer.borderWidth += 1
         } else {
-            self.darkenerBorder = UIColor(red:1, green:1, blue:1, alpha:0.4)
+            self.darkenerBorder = self.defaults.regualColor
         }
         
         self.darkenerColor = self.darkener.backgroundColor
         self.darkener.layer.borderColor = self.darkenerBorder.CGColor
+
+        // Add Choice Image
+        self.choice = UIImageView(frame: CGRectMake(75, 75, self.bounds.width - 150, self.bounds.height - 150))
+        self.choice.alpha = 0
+        self.choice.contentMode = UIViewContentMode.ScaleAspectFill;
+        self.insertSubview(self.choice, aboveSubview: self.darkener)
+        
         
         // Add Content
         self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
@@ -116,10 +128,10 @@ class CardView: UIView {
         self.content.textColor = UIColor.whiteColor()
         self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.content.shadowOffset = CGSize(width: 0, height: 2)
-        self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
+        self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         self.content.numberOfLines = 6
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        self.insertSubview(self.content, aboveSubview: self.darkener)
+        self.insertSubview(self.content, aboveSubview: self.choice)
         
         // Coloring Content With Names
         var content = NSMutableAttributedString()
@@ -181,15 +193,19 @@ class CardView: UIView {
             if delta < 0 {
                 newColor = self.defaults.likeColor
                 self.status = .Liked
+                self.choice.image = UIImage(named: "Like")
             } else {
                 newColor = self.defaults.nopeColor
-                self.status = .None
+                self.status = .Nope
+                self.choice.image = UIImage(named: "Nope")
             }
-
+            
+            self.content.alpha = pow((1 - percentage), 4)
+            self.choice.alpha = (percentage * 0.8)
             self.darkener.backgroundColor = self.mixColors(self.darkenerColor.CGColor, colorTwo: newColor, delta: percentage)
             self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder.CGColor, colorTwo: newColorBorder, delta: percentage).CGColor
             self.delegate?.cardMovingAroundScreen!(self, delta: percentage)
-        } else if gesture.state == UIGestureRecognizerState.Ended {
+        } else if  gesture.state == UIGestureRecognizerState.Ended {
             var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
             
             let velocity: CGPoint = gesture.velocityInView(self.superview)
@@ -203,7 +219,7 @@ class CardView: UIView {
             let swipeDistance: Int = Int(self.startPointInSuperview.x - newLocation.x)
             let absSwipeDistance: CGFloat = CGFloat(labs(swipeDistance))
             
-            if absSwipeDistance < self.neededSwipeDistance {
+            if self.locked || absSwipeDistance < self.neededSwipeDistance {
                 self.delegate?.cardWillReturnToCenter?(self)
                 self.returnCardViewToStartPointAnimated(true)
             } else {
@@ -239,12 +255,16 @@ class CardView: UIView {
                 self.layer.position = self.startPointInSuperview
                 self.darkener.backgroundColor = self.darkenerColor
                 self.darkener.layer.borderColor = self.darkenerBorder.CGColor
+                self.choice.alpha = 0
+                self.content.alpha = 1
             }, completion: { _ in self.delegate?.cardDidReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
             self.layer.position = self.startPointInSuperview
             self.darkener.backgroundColor = self.darkenerColor
             self.darkener.layer.borderColor = self.darkenerBorder.CGColor
+            self.choice.alpha = 0
+            self.content.alpha = 1
         }
     }
     

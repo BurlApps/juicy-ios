@@ -28,13 +28,21 @@ class User: NSObject {
     }
     
     // MARK: Instance Methods
-    func getFacebookInfo() {
+    func setExtraInfo() {
         var fbRequest = FBRequest.requestForMe()
         fbRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if !error && result != nil {
                 let fbUser = result as FBGraphObject
-                self.displayName = fbUser["name"] as String
-                self.parse["displayName"] = self.displayName
+                var dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yyyy"
+                
+                self.parse["admin"] = false
+                self.parse["email"] = fbUser["email"] as String
+                self.parse["displayName"] = fbUser["name"] as String
+                self.parse["fullName"] = fbUser["name"] as String
+                self.parse["firstName"] = fbUser["first_name"] as String
+                self.parse["gender"] = fbUser["gender"] as String
+                self.parse["birthday"] = dateFormatter.dateFromString(fbUser["birthday"] as String)
                 self.parse.saveInBackground()
             } else if error {
                 println(error)

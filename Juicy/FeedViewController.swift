@@ -43,15 +43,15 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.navigationController.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 42),
+            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
             NSShadowAttributeName: shadow
         ]
         self.navigationItem.setHidesBackButton(true, animated: false)
         
         // Add Navigation Bottom Border
         var overlayView = UIView(frame: CGRectMake(0, self.navigationController.navigationBar.frame.height,
-                                                    self.view.frame.width, 2))
-        overlayView.backgroundColor = UIColor(red:0.92, green:0.89, blue:0.91, alpha:1)
+                                                    self.view.frame.width, 1))
+        overlayView.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1)
         self.navigationController.navigationBar.addSubview(overlayView)
         
         // Setup View
@@ -114,6 +114,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
+            card.locked = false
             self.view.addSubview(card)
         } else {
             self.view.insertSubview(card, belowSubview: self.cards.last!)
@@ -124,12 +125,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func createCard(post: Post, transform: Bool) -> CardView {
+        // TODO: Come up with better algorithm for calculating the frame (iOs 4s looks bad)
         let cardWidth = self.view.frame.width - (CGFloat(self.defaults.rotation) * 4) - 20
         let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 150
         let cardX = self.view.center.x - cardWidth/2
         let cardY = self.navigationController.navigationBar.frame.height + 45 + CGFloat(self.defaults.rotation)
         let frame = CGRectIntegral(CGRectMake(cardX, cardY, cardWidth, cardHeight))
-        var rotation: CGFloat!
+        var rotation: CGFloat = 0
         
         if transform {
             if self.cards.count == 1 {
@@ -137,8 +139,6 @@ class FeedViewController: UIViewController, CardViewDelegate {
             } else {
                 rotation = self.degreeToRadian(self.defaults.rotation)
             }
-        } else {
-            rotation = 0
         }
         
         var card = CardView(frame: frame, post: post, transform: rotation)
@@ -147,29 +147,42 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: CardViewDelegate Methods
+    func cardWillLeaveScreen(card: CardView) {
+        if self.cards.count > 1 {
+            self.cards[1].locked = false
+        }
+        
+        return ()
+    }
+    
     func cardDidLeaveScreen(card: CardView) {        
         if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
+            self.cards.first?.locked = false
             self.seedCards()
         }
+        
+        return ()
     }
     
     func cardWillReturnToCenter(card: CardView) {
-         UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+        UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
             // 2nd Card
             if self.cards.count > 1 {
                 let firstRotation = self.degreeToRadian(self.defaults.rotation)/2
                 self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
             }
-            
+
             // 3rd Card
             if self.cards.count > 2 {
                 let secondRotation = self.degreeToRadian(self.defaults.rotation)
                 self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
             }
-         }, completion: nil)
+        }, completion: nil)
+        
+        return ()
     }
     
     func cardMovingAroundScreen(card: CardView, delta: CGFloat) {
@@ -186,5 +199,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
             let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
             self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
         }
+        
+        return ()
     }
 }

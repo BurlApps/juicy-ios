@@ -29,8 +29,12 @@ class LandingViewController: UIViewController {
         }
         
         // Setup Login Button
-        self.loginButton.setTitle("Log in With Facebook", forState: UIControlState.Normal)
         self.loginButton.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loginButton.setTitle("Log in With Facebook", forState: UIControlState.Normal)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -55,7 +59,7 @@ class LandingViewController: UIViewController {
             
             if user {
                 if user.isNew {
-                    User(user, withRelations: false).getFacebookInfo()
+                    User(user, withRelations: false).setExtraInfo()
                 }
                 
                 self.performSegueWithIdentifier("loggedInSegue", sender: self)

@@ -38,6 +38,7 @@
 		D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */; };
 		D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AF194E722A00FABCC0 /* UIKit.framework */; };
 		D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8B1194E723400FABCC0 /* Foundation.framework */; };
+		D3D5B564199F29D1006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D3A2A8AF194E722A00FABCC0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3A2A8B1194E723400FABCC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D3D5B563199F29D1006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			children = (
 				D351EF67198F817800532600 /* LandingViewController.swift */,
 				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
+				D3D5B563199F29D1006E43F1 /* PostViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
+				D3D5B564199F29D1006E43F1 /* PostViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D351EF68198F817800532600 /* LandingViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
@@ -674,7 +678,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Debug;
 		};
@@ -723,7 +727,7 @@
 				PROVISIONING_PROFILE = "F2A8C248-7A3D-46A5-8BA4-9B2D1A4EE310";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "arm64 armv7 armv7s";
+				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Release;
 		};

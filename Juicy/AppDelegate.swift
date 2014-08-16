@@ -56,6 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.coreData.saveContext()
     }
+    
+    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+        PFQuery.clearAllCachedResults()
+    }
 
 }
 

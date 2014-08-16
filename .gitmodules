@@ -1,0 +1,3 @@
+[submodule "VLBCameraView"]
+	path = VLBCameraView
+	url = git@github.com:JuicyApp/VLBCameraView.git
