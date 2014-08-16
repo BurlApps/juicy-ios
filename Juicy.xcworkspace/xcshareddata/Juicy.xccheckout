@@ -12,6 +12,8 @@
 	<dict>
 		<key>192B03A1AD2D69018EFA1F7A41D8E052113AFEF0</key>
 		<string>github.com:JuicyApp/iOS.git</string>
+		<key>D10D70C3491E9E3FBBDF5694791E06D19AAB706D</key>
+		<string>github.com:JuicyApp/VLBCameraView.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Juicy.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>192B03A1AD2D69018EFA1F7A41D8E052113AFEF0</key>
 		<string>..</string>
+		<key>D10D70C3491E9E3FBBDF5694791E06D19AAB706D</key>
+		<string>../VLBCameraView/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:JuicyApp/iOS.git</string>
@@ -35,6 +39,14 @@
 			<string>192B03A1AD2D69018EFA1F7A41D8E052113AFEF0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iOS</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D10D70C3491E9E3FBBDF5694791E06D19AAB706D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>VLBCameraView</string>
 		</dict>
 	</array>
 </dict>

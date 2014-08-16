@@ -8,9 +8,6 @@
 
 class FeedViewController: UIViewController, CardViewDelegate {
     
-    // MARK: CardViewDelegate
-    var cardViewDelegate: CardViewDelegate!
-    
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
     

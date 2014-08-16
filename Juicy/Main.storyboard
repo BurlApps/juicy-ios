@@ -183,6 +183,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euZ-6X-554" customClass="VLBCameraView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="424"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRE-0a-tQF">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
                                 <color key="backgroundColor" red="0.23921568627450981" green="0.77647058823529413" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -197,8 +201,8 @@
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="createPost:" destination="aOS-dg-wo6" eventType="touchUpInside" id="b2G-3B-dRz"/>
-                                    <action selector="createPostDown:" destination="aOS-dg-wo6" eventType="touchDown" id="Bbb-Nw-heC"/>
+                                    <action selector="postDown:" destination="HgQ-e5-gqO" eventType="touchDown" id="4VQ-zF-Y12"/>
+                                    <action selector="postTouchInside:" destination="HgQ-e5-gqO" eventType="touchUpInside" id="Y7O-Mv-ZUf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -206,7 +210,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YRE-0a-tQF" secondAttribute="trailing" id="60Q-yF-TyB"/>
                             <constraint firstItem="YRE-0a-tQF" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="7Ag-3G-1X5"/>
+                            <constraint firstAttribute="trailing" secondItem="euZ-6X-554" secondAttribute="trailing" id="DEq-z6-065"/>
+                            <constraint firstItem="euZ-6X-554" firstAttribute="top" secondItem="rce-A7-ZLP" secondAttribute="bottom" id="Mzo-rU-rKD"/>
                             <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="YRE-0a-tQF" secondAttribute="bottom" id="YC4-qq-78J"/>
+                            <constraint firstItem="euZ-6X-554" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="eG0-dM-hvW"/>
+                            <constraint firstItem="YRE-0a-tQF" firstAttribute="top" secondItem="euZ-6X-554" secondAttribute="bottom" id="ktg-cX-fxE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Post" id="nhz-1L-PGI">
@@ -216,8 +224,18 @@
                                 <action selector="cancelPost:" destination="HgQ-e5-gqO" id="r6g-zT-onm"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Kgg-hv-B56">
+                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="toggleCamera:" destination="HgQ-e5-gqO" id="Vtp-BK-QJR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="cameraView" destination="euZ-6X-554" id="hJY-dp-7tK"/>
+                        <outlet property="postButton" destination="YRE-0a-tQF" id="6LU-ux-jqn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJo-ZB-alc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
