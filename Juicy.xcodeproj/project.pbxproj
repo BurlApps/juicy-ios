@@ -100,7 +100,6 @@
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		D30A84DD1998BCBC00CBF78F /* seeder.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = seeder.playground; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -181,7 +180,6 @@
 		D30A84DC1998BC9E00CBF78F /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				D30A84DD1998BCBC00CBF78F /* seeder.playground */,
 				D30A84DE1998BD0500CBF78F /* tester.playground */,
 			);
 			name = Playgrounds;

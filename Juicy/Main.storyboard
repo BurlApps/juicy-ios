@@ -171,7 +171,7 @@
             </objects>
             <point key="canvasLocation" x="136" y="19"/>
         </scene>
-        <!--Capture-->
+        <!--Capture View Controller-->
         <scene sceneID="4Tk-pt-GdP">
             <objects>
                 <viewController storyboardIdentifier="CaptureViewController" id="HgQ-e5-gqO" customClass="CaptureViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -184,7 +184,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3U-3a-BId" customClass="VLBCameraView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRE-0a-tQF">
@@ -208,24 +208,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="z3U-3a-BId" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="1X2-MQ-gdz"/>
                             <constraint firstAttribute="trailing" secondItem="YRE-0a-tQF" secondAttribute="trailing" id="60Q-yF-TyB"/>
-                            <constraint firstItem="z3U-3a-BId" firstAttribute="top" secondItem="rce-A7-ZLP" secondAttribute="bottom" id="6AM-VM-I6Y"/>
                             <constraint firstItem="YRE-0a-tQF" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="7Ag-3G-1X5"/>
+                            <constraint firstAttribute="trailing" secondItem="z3U-3a-BId" secondAttribute="trailing" id="8Q7-OI-S9A"/>
+                            <constraint firstItem="z3U-3a-BId" firstAttribute="top" secondItem="ktR-kV-yBo" secondAttribute="top" id="Hjk-cv-9Tz"/>
+                            <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="z3U-3a-BId" secondAttribute="bottom" id="QVN-M5-pg3"/>
                             <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="YRE-0a-tQF" secondAttribute="bottom" id="YC4-qq-78J"/>
-                            <constraint firstAttribute="trailing" secondItem="z3U-3a-BId" secondAttribute="trailing" id="dzF-UT-DGL"/>
-                            <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="z3U-3a-BId" secondAttribute="bottom" id="rZf-sF-lEK"/>
-                            <constraint firstItem="z3U-3a-BId" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="uKq-2W-6Ki"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Capture" id="nhz-1L-PGI">
+                    <navigationItem key="navigationItem" id="nhz-1L-PGI">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="qeD-Mt-jR9">
-                            <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancelCapture:" destination="HgQ-e5-gqO" id="ahe-M9-lTD"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Kgg-hv-B56">
-                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="toggleCamera:" destination="HgQ-e5-gqO" id="Vtp-BK-QJR"/>
                             </connections>
@@ -255,15 +255,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Post" id="06R-6F-8Nb">
+                    <navigationItem key="navigationItem" id="06R-6F-8Nb">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="eMZ-SM-Ypz">
-                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="canelPost:" destination="cde-Ds-Zhk" id="ggA-80-g3v"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Juice It!" id="Kcb-A0-gHZ">
-                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="Kcb-A0-gHZ">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

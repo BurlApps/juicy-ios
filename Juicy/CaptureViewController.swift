@@ -35,7 +35,19 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.cameraView.awakeFromNib()
+        
+        if !self.cameraView.session.running {
+            self.cameraView.awakeFromNib()
+        }
+        
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        
+        // Configure Navigation Bar
+        self.navigationController.navigationBar.translucent = true
+        self.navigationController.navigationBar.backgroundColor = UIColor.clearColor()
+        self.navigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController.navigationBar.shadowImage = UIImage()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {

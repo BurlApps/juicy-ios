@@ -35,21 +35,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
         shadow.shadowColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
         shadow.shadowOffset = CGSizeMake(0, 2);
         
-        // Setup Navigation Bar
+        // Configure Navigation Bar
         self.navigationController.navigationBarHidden = false
-        self.navigationController.navigationBar.barTintColor = UIColor.whiteColor()
         self.navigationController.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
             NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
             NSShadowAttributeName: shadow
         ]
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        
-        // Add Navigation Bottom Border
-        var overlayView = UIView(frame: CGRectMake(0, self.navigationController.navigationBar.frame.height,
-                                                    self.view.frame.width, 1))
-        overlayView.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1)
-        self.navigationController.navigationBar.addSubview(overlayView)
         
         // Setup View
         self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
@@ -64,6 +56,19 @@ class FeedViewController: UIViewController, CardViewDelegate {
         
         // Setup Cards
         self.seedCards()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        
+        // Configure Navigation Bar
+        self.navigationController.navigationBar.shadowImage = nil
+        self.navigationController.navigationBar.translucent = false
+        self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor()
+        self.navigationController.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
     }
     
     // MARK: IBActions
@@ -111,7 +116,6 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
-            card.locked = false
             self.view.addSubview(card)
         } else {
             self.view.insertSubview(card, belowSubview: self.cards.last!)
@@ -122,13 +126,14 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func createCard(post: Post, transform: Bool) -> CardView {
-        // TODO: Come up with better algorithm for calculating the frame (iOs 4s looks bad)
-        let cardWidth = self.view.frame.width - (CGFloat(self.defaults.rotation) * 4) - 20
-        let cardHeight = self.view.frame.height - self.navigationController.navigationBar.frame.height - self.createButton.layer.frame.height - 150
-        let cardX = self.view.center.x - cardWidth/2
-        let cardY = self.navigationController.navigationBar.frame.height + 45 + CGFloat(self.defaults.rotation)
-        let frame = CGRectIntegral(CGRectMake(cardX, cardY, cardWidth, cardHeight))
         var rotation: CGFloat = 0
+        var frame = UIScreen.mainScreen().bounds
+        let navFrame = self.navigationController.navigationBar.frame
+        
+        frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
+        frame.size.height -= navFrame.origin.y + navFrame.size.height + self.createButton.layer.frame.height + 120
+        frame.origin.x = self.view.center.x - (frame.size.width/2)
+        frame.origin.y += navFrame.size.height - navFrame.origin.y
         
         if transform {
             if self.cards.count == 1 {
@@ -144,24 +149,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: CardViewDelegate Methods
-    func cardWillLeaveScreen(card: CardView) {
-        if self.cards.count > 1 {
-            self.cards[1].locked = false
-        }
-        
-        return ()
-    }
-    
     func cardDidLeaveScreen(card: CardView) {        
         if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
-            self.cards.first?.locked = false
             self.seedCards()
         }
-        
-        return ()
     }
     
     func cardWillReturnToCenter(card: CardView) {
@@ -178,11 +172,12 @@ class FeedViewController: UIViewController, CardViewDelegate {
                 self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
             }
         }, completion: nil)
-        
-        return ()
     }
     
     func cardMovingAroundScreen(card: CardView, delta: CGFloat) {
+        // Unlock First Card
+        self.cards.first?.locked = false
+        
         // 2nd Card -> 1st Card
         if self.cards.count > 1 {
             let firstTransform = self.degreeToRadian(self.defaults.rotation)/2
@@ -196,7 +191,5 @@ class FeedViewController: UIViewController, CardViewDelegate {
             let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
             self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
         }
-        
-        return ()
     }
 }
