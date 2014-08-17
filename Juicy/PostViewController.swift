@@ -8,30 +8,48 @@
 
 import UIKit
 
-class PostViewController: UIViewController {
-    
-    // MARK: IBOutlets
-    @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var previewImageView: UIImageView!
+class PostViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
+    private var textEditor: UITextView!
+    private var previewImageView: UIImageView!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.blueColor()
+        
         // Set Preview Image
-        self.previewImageView.image = self.capturedImage
+        var frame = UIScreen.mainScreen().bounds
+        let navFrame = self.navigationController.navigationBar.frame
+        frame.origin.y += navFrame.origin.y + navFrame.size.height
+        frame.size.height -= navFrame.origin.y + navFrame.size.height - 2
+        
+        self.previewImageView = UIImageView(frame: frame)
+        self.previewImageView.image = RBResizeImage(self.capturedImage, frame.size)
         self.previewImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.view.addSubview(self.previewImageView)
         
-        // Set Post Button Color
-        self.postButton.backgroundColor = UIColor(red:0, green:0.6, blue:1, alpha:1)
+        // Add Darkener
+        var darkener = UIView(frame: self.view.frame)
+        darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        self.view.insertSubview(darkener, aboveSubview: self.previewImageView)
         
-        // Add Border To Post Button
-        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.postButton.frame.size.width, 3))
-        buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.08)
-        self.postButton.addSubview(buttonBorder)
+        // Add Text Editor
+        self.textEditor = UITextView(frame: frame)
+        self.textEditor.frame.size.width -= 40
+        self.textEditor.frame.origin.x += 20
+        self.textEditor.frame.origin.y += 60
+        self.textEditor.delegate = self
+        self.textEditor.scrollEnabled = false
+        self.textEditor.font = UIFont(name: "HelveticaNeue-Bold", size: 24)
+        self.textEditor.textColor = UIColor.whiteColor()
+        self.textEditor.textAlignment = NSTextAlignment.Center
+        self.textEditor.backgroundColor = UIColor(white: 0, alpha: 0)
+        self.textEditor.becomeFirstResponder()
+        self.view.insertSubview(self.textEditor, aboveSubview: darkener)
     }
     
     // MARK: IBActions
@@ -39,11 +57,4 @@ class PostViewController: UIViewController {
         self.navigationController.popViewControllerAnimated(false)
     }
     
-    @IBAction func captureDown(sender: UIButton) {
-        self.postButton.backgroundColor = UIColor(red:0.13, green:0.47, blue:0.81, alpha:1)
-    }
-    
-    @IBAction func captureTouchInside(sender: UIButton) {
-        self.postButton.backgroundColor = UIColor(red:0, green:0.6, blue:1, alpha:1)
-    }
 }

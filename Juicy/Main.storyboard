@@ -183,8 +183,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euZ-6X-554" customClass="VLBCameraView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="424"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z3U-3a-BId" customClass="VLBCameraView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRE-0a-tQF">
@@ -209,12 +209,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YRE-0a-tQF" secondAttribute="trailing" id="60Q-yF-TyB"/>
+                            <constraint firstItem="z3U-3a-BId" firstAttribute="top" secondItem="rce-A7-ZLP" secondAttribute="bottom" id="6AM-VM-I6Y"/>
                             <constraint firstItem="YRE-0a-tQF" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="7Ag-3G-1X5"/>
-                            <constraint firstAttribute="trailing" secondItem="euZ-6X-554" secondAttribute="trailing" id="DEq-z6-065"/>
-                            <constraint firstItem="euZ-6X-554" firstAttribute="top" secondItem="rce-A7-ZLP" secondAttribute="bottom" id="Mzo-rU-rKD"/>
                             <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="YRE-0a-tQF" secondAttribute="bottom" id="YC4-qq-78J"/>
-                            <constraint firstItem="euZ-6X-554" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="eG0-dM-hvW"/>
-                            <constraint firstItem="YRE-0a-tQF" firstAttribute="top" secondItem="euZ-6X-554" secondAttribute="bottom" id="ktg-cX-fxE"/>
+                            <constraint firstAttribute="trailing" secondItem="z3U-3a-BId" secondAttribute="trailing" id="dzF-UT-DGL"/>
+                            <constraint firstItem="gUC-Oj-XoT" firstAttribute="top" secondItem="z3U-3a-BId" secondAttribute="bottom" id="rZf-sF-lEK"/>
+                            <constraint firstItem="z3U-3a-BId" firstAttribute="leading" secondItem="ktR-kV-yBo" secondAttribute="leading" id="uKq-2W-6Ki"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Capture" id="nhz-1L-PGI">
@@ -233,7 +233,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="cameraView" destination="euZ-6X-554" id="hJY-dp-7tK"/>
+                        <outlet property="cameraView" destination="z3U-3a-BId" id="VzV-n1-umg"/>
                         <outlet property="captureButton" destination="YRE-0a-tQF" id="9eF-yW-ddY"/>
                         <segue destination="cde-Ds-Zhk" kind="custom" identifier="postSegue" customClass="NoAnimationSegue" id="9Xg-tf-xG9"/>
                     </connections>
@@ -253,39 +253,7 @@
                     <view key="view" contentMode="scaleToFill" id="ACt-ih-OPz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fhy-GJ-gjD">
-                                <rect key="frame" x="0.0" y="64" width="320" height="424"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XhN-iL-scX">
-                                <rect key="frame" x="0.0" y="488" width="320" height="80"/>
-                                <color key="backgroundColor" red="0.12156862745098039" green="0.63529411764705879" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="cLz-X9-vQI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <size key="titleShadowOffset" width="0.0" height="2"/>
-                                <state key="normal" title="Juice It!">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="captureDown:" destination="cde-Ds-Zhk" eventType="touchDown" id="Y3w-f8-H75"/>
-                                    <action selector="captureTouchInside:" destination="cde-Ds-Zhk" eventType="touchUpInside" id="65w-Uf-qZK"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fhy-GJ-gjD" secondAttribute="trailing" id="6Ha-nl-r9x"/>
-                            <constraint firstItem="fhy-GJ-gjD" firstAttribute="leading" secondItem="ACt-ih-OPz" secondAttribute="leading" id="9cT-KK-rKf"/>
-                            <constraint firstItem="fhy-GJ-gjD" firstAttribute="top" secondItem="iab-4d-27H" secondAttribute="bottom" id="BSq-SS-Jzc"/>
-                            <constraint firstItem="Aod-xU-woP" firstAttribute="top" secondItem="XhN-iL-scX" secondAttribute="bottom" id="KDv-bY-LdP"/>
-                            <constraint firstItem="XhN-iL-scX" firstAttribute="leading" secondItem="ACt-ih-OPz" secondAttribute="leading" id="Ku8-N0-ZpA"/>
-                            <constraint firstItem="XhN-iL-scX" firstAttribute="top" secondItem="fhy-GJ-gjD" secondAttribute="bottom" id="Z8x-v2-2Z8"/>
-                            <constraint firstAttribute="trailing" secondItem="XhN-iL-scX" secondAttribute="trailing" id="efJ-WF-VVZ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Post" id="06R-6F-8Nb">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="eMZ-SM-Ypz">
@@ -294,12 +262,11 @@
                                 <action selector="canelPost:" destination="cde-Ds-Zhk" id="ggA-80-g3v"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Juice It!" id="Kcb-A0-gHZ">
+                            <color key="tintColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="postButton" destination="XhN-iL-scX" id="y2k-B2-24K"/>
-                        <outlet property="previewImageView" destination="fhy-GJ-gjD" id="tYM-go-dIW"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N1h-O4-VvD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

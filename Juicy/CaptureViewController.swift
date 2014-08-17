@@ -11,8 +11,8 @@ import UIKit
 class CaptureViewController: UIViewController, VLBCameraViewDelegate {
 
     // MARK: IBOutlets
-    @IBOutlet weak var captureButton: UIButton!
     @IBOutlet weak var cameraView: VLBCameraView!
+    @IBOutlet weak var captureButton: UIButton!
     
     // MARK: Instance Variables
     private var capturedImage: UIImage!

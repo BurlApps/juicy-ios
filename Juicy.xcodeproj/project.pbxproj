@@ -40,6 +40,7 @@
 		D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8B1194E723400FABCC0 /* Foundation.framework */; };
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
 		D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostViewController.swift */; };
+		D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56819A097B9006E43F1 /* RBResizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		D3A2A8B1194E723400FABCC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		D3D5B56819A097B9006E43F1 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 				D34AE4F5199238BC00D0D1C8 /* Models */,
 				D3229606194F9C7700488B63 /* Controllers */,
 				D34AE4F21992381500D0D1C8 /* Views */,
+				D3D5B56719A09794006E43F1 /* Utils */,
 				D3A2A861194E60D500FABCC0 /* Supporting Files */,
 			);
 			path = Juicy;
@@ -336,6 +339,14 @@
 				1C23D6F785A54A2AA5E091EF /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3D5B56719A09794006E43F1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D3D5B56819A097B9006E43F1 /* RBResizer.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -500,6 +511,7 @@
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D30A84D41997403F00CBF78F /* CardView.swift in Sources */,
+				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
