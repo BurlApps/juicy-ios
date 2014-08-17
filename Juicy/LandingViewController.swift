@@ -27,14 +27,6 @@ class LandingViewController: UIViewController {
         if PFUser.currentUser() {
             self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }
-        
-        // Setup Login Button
-        self.loginButton.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.loginButton.setTitle("Log in With Facebook", forState: UIControlState.Normal)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,27 +36,36 @@ class LandingViewController: UIViewController {
         self.navigationController.navigationBarHidden = true
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Setup Login Button
+        self.loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        self.loginButton.setTitle("Log in With Facebook", forState: UIControlState.Normal)
+        self.spinner.stopAnimating()
+    }
+    
     @IBAction func loginButtonDown(sender: UIButton) {
         sender.backgroundColor = UIColor(red: 0.14, green: 0.22, blue: 0.36, alpha: 1)
     }
     
     @IBAction func loginButtonReleased(sender: UIButton) {
-        sender.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
-        sender.setTitleColor(UIColor.clearColor(), forState: UIControlState.Normal)
+        self.loginButton.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
+        self.loginButton.setTitleColor(UIColor.clearColor(), forState: UIControlState.Normal)
         self.spinner.startAnimating()
         
         PFFacebookUtils.logInWithPermissions(nil, { (user: PFUser!, error: NSError!) -> Void in
-            self.loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            self.spinner.stopAnimating()
-            
             if user {
                 if user.isNew {
-                    User(user, withRelations: false).setExtraInfo()
+                    User(user, withRelations: false).setExtraInfo({ () -> Void in
+                        self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                    })
+                } else {
+                    self.performSegueWithIdentifier("loggedInSegue", sender: self)
                 }
-                
-                self.performSegueWithIdentifier("loggedInSegue", sender: self)
             } else {
                 self.loginButton.setTitle("Failed To Log In", forState: UIControlState.Normal)
+                println(error)
             }
         })
     }

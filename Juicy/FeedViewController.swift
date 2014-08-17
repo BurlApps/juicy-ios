@@ -53,9 +53,6 @@ class FeedViewController: UIViewController, CardViewDelegate {
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.createButton.frame.size.width, 3))
         buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.05)
         self.createButton.addSubview(buttonBorder)
-        
-        // Setup Cards
-        self.seedCards()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -69,6 +66,11 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.navigationController.navigationBar.translucent = false
         self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor()
         self.navigationController.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+        
+        // Setup Cards
+        if self.cards.isEmpty {
+            self.seedCards()
+        }
     }
     
     // MARK: IBActions
@@ -93,7 +95,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     
     func seedCards() {
         Post.find(self.currentUser, withRelations: false, skip: self.postsCount, callback: { (posts: [Post]) -> Void in
-            if !posts.isEmpty {
+            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 self.posts = posts
                 self.postsCount += posts.count
                 let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))
