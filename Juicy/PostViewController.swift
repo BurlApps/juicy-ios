@@ -2,61 +2,48 @@
 //  PostViewController.swift
 //  Juicy
 //
-//  Created by Brian Vallelunga on 8/15/14.
+//  Created by Brian Vallelunga on 8/16/14.
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
 import UIKit
 
-class PostViewController: UIViewController, VLBCameraViewDelegate {
-
+class PostViewController: UIViewController {
+    
     // MARK: IBOutlets
     @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var cameraView: VLBCameraView!
+    @IBOutlet weak var previewImageView: UIImageView!
+    
+    // MARK: Instance Variables
+    var capturedImage: UIImage!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup Post Button
-        self.postButton.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:1)
+        // Set Preview Image
+        self.previewImageView.image = self.capturedImage
+        self.previewImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
-        // Add Post Button Top Border
+        // Set Post Button Color
+        self.postButton.backgroundColor = UIColor(red:0, green:0.6, blue:1, alpha:1)
+        
+        // Add Border To Post Button
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.postButton.frame.size.width, 3))
         buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.08)
         self.postButton.addSubview(buttonBorder)
     }
     
     // MARK: IBActions
-    @IBAction func cancelPost(sender: UIBarButtonItem) {
+    @IBAction func canelPost(sender: UIBarButtonItem) {
         self.navigationController.popViewControllerAnimated(false)
     }
     
-    @IBAction func postDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.2, green:0.64, blue:0.22, alpha:1)
+    @IBAction func captureDown(sender: UIButton) {
+        self.postButton.backgroundColor = UIColor(red:0.13, green:0.47, blue:0.81, alpha:1)
     }
     
-    @IBAction func postTouchInside(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:1)
-    }
-    
-    @IBAction func toggleCamera(sender: UIBarButtonItem) {
-        self.cameraView.toggleCamera()
-    }
-    
-    // MARK: VLBCameraView Methods
-    func cameraView(cameraView: VLBCameraView!, didCreateCaptureConnection captureConnection: AVCaptureConnection!) {
-    }
-    
-    func cameraView(cameraView: VLBCameraView!, didFinishTakingPicture image: UIImage!, withInfo info: [NSObject : AnyObject]!, meta: [NSObject : AnyObject]!) {
-
-    }
-    
-    func cameraView(cameraView: VLBCameraView!, willRriteToCameraRollWithMetadata metadata: [NSObject : AnyObject]!) {
-
-    }
-    
-    func cameraView(cameraView: VLBCameraView!, didErrorOnTakePicture error: NSError!) {
-    
+    @IBAction func captureTouchInside(sender: UIButton) {
+        self.postButton.backgroundColor = UIColor(red:0, green:0.6, blue:1, alpha:1)
     }
 }

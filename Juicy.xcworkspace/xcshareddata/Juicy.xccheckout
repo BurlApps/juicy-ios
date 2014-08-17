@@ -22,7 +22,7 @@
 		<key>192B03A1AD2D69018EFA1F7A41D8E052113AFEF0</key>
 		<string>..</string>
 		<key>D10D70C3491E9E3FBBDF5694791E06D19AAB706D</key>
-		<string>../VLBCameraView/</string>
+		<string>../VLBCameraView</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:JuicyApp/iOS.git</string>
