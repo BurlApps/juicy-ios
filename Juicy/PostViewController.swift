@@ -41,15 +41,19 @@ class PostViewController: UIViewController, UITextViewDelegate {
         self.textEditor.textColor = UIColor.whiteColor()
         self.textEditor.textAlignment = NSTextAlignment.Center
         self.textEditor.backgroundColor = UIColor.clearColor()
-        self.textEditor.becomeFirstResponder()
         self.textEditor.placeholder = "Tell us what's juicy!"
+        self.textEditor.becomeFirstResponder()
         self.view.insertSubview(self.textEditor, aboveSubview: darkener)
-        
     }
     
     // MARK: IBActions
     @IBAction func canelPost(sender: UIBarButtonItem) {
         self.navigationController.popViewControllerAnimated(false)
+    }
+    
+    // MARK: UITextView Methods
+    func textViewDidChange(textView: UITextView!) {
+        println(textView.text)
     }
     
 }
