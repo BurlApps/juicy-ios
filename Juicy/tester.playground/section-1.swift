@@ -2,3 +2,6 @@
 
 import UIKit
 
+let a = [ "fun": "a", "asdf": "c"]
+
+a.indexForKey(<#key: String#>)

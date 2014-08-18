@@ -264,6 +264,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post It" id="Kcb-A0-gHZ">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createPost:" destination="cde-Ds-Zhk" id="ZIq-pe-enA"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

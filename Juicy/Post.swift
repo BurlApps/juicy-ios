@@ -9,7 +9,6 @@
 class Post: NSObject {
     
     // MARK: Instance Variables
-    var age: Int!
     var likes: Int!
     var karma: Int!
     var content: [AnyObject]!
@@ -37,6 +36,32 @@ class Post: NSObject {
     }
     
     // MARK: Class Methods
+    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage, creator: User) {
+        var post = PFObject(className: "Posts")
+        var imageData = UIImagePNGRepresentation(image)
+        var imageFile = PFFile(name: "image.png", data: imageData)
+        
+        // Set Defaults
+        post["likes"] = 0
+        post["karma"] = 0
+        post["juicy"] = false
+        
+        // Set Content
+        post["content"] = content
+        post["image"] = imageFile
+        post["creator"] = creator.parse
+        
+        // Set About User Relation
+        var aboutUsersRelation = post.relationForKey("aboutUsers")
+        
+        for user in aboutUsers {
+            aboutUsersRelation.addObject(user.parse)
+        }
+        
+        // Save Eventually
+        post.saveInBackground()
+    }
+
     class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
