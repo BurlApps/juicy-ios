@@ -11,6 +11,7 @@ class Post: NSObject {
     // MARK: Instance Variables
     var age: Int!
     var likes: Int!
+    var karma: Int!
     var content: [AnyObject]!
     var image: NSURL!
     var juicy: Bool!
@@ -24,6 +25,7 @@ class Post: NSObject {
         
         self.parse = post
         self.likes = post["likes"] as Int
+        self.karma = post["karma"] as Int
         self.juicy = post["juicy"] as Bool
         self.image = NSURL(string: (self.parse["image"] as PFFile).url)
         self.content = post["content"] as [AnyObject]
@@ -49,6 +51,14 @@ class Post: NSObject {
         //query.whereKey("creator", notEqualTo: exclude.parse)
         //query.whereKey("likedUsers", notEqualTo: exclude.parse)
         //query.whereKey("nopedUsers", notEqualTo: exclude.parse)
+        
+        // TODO: All queries below are part of compound or query
+        // TODO: Query for friends that have liked it
+        // TODO: Query for geo location from where u are
+        // TODO: Query for about my friends
+        // TODO: Query for about me
+        // TODO: Query for hotness calculated by karma (can be negative)
+        // TODO: Query for newest posts
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             if !error && !objects.isEmpty {

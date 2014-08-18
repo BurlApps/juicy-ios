@@ -51,63 +51,42 @@ class User: NSObject {
                     self.parse["birthday"] = dateFormatter.dateFromString(fbUser["birthday"] as String)
                 }
                 
-                self.parse.saveInBackground()
+                self.parse.saveInBackgroundWithBlock({ (succeeded: Bool!, error: NSError!) -> Void in
+                    self.parse.fetch()
+                })
+                
                 callback?()
             } else if error {
                 println(error)
             }
         })
         
-        var friendsRequest = FBRequest.requestForMyFriends()
-        friendsRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            if !error && result != nil {
-                var resultDict = result as NSDictionary
-                var friendRelation = self.parse.relationForKey("friends")
-                var queries: [PFQuery] = []
-                
-                for friend in resultDict["data"] as [FBGraphObject] {
-                    var friendQuery = PFUser.query()
-                    friendQuery.whereKey("name", equalTo: friend["name"])
-                    queries.append(friendQuery)
-                }
-                
-                var friendsQuery = PFQuery.orQueryWithSubqueries(queries)
-                friendsQuery.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in                    
-                    if !error && !objects.isEmpty {
-                        for object in objects as [PFUser] {
-                            friendRelation.addObject(object)
-                        }
-                        
-                        self.parse.saveInBackground()
-                    } else if error {
-                        println(error)
-                    }
-                })
-            } else if error {
-                println(error)
-            }
-        })
+        // Get Facebook Friends
+        PFCloud.callFunctionInBackground("facebookFriends", withParameters: NSDictionary(), block: nil)
     }
     
     func getFriendsList(callback: ((users: [User]) -> Void)?) {
-        var friends: [User] = []
-        var query: PFQuery = (self.parse["friends"] as PFRelation).query()
-        
-        query.cachePolicy = kPFCachePolicyNetworkElseCache
-        query.orderByDescending("createdAt")
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
-            if !error && !objects.isEmpty {
-                for object in objects as [PFUser] {
-                    let friend = User(object, withRelations: false)
-                    friends.append(friend)
+        if self.parse["friends"] != nil {
+            var friends: [User] = []
+            var friendsRelation = self.parse["friends"] as PFRelation
+            var query = friendsRelation.query()
+            
+            query.cachePolicy = kPFCachePolicyNetworkElseCache
+            query.orderByDescending("createdAt")
+            query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
+                if !error && !objects.isEmpty {
+                    for object in objects as [PFUser] {
+                        let friend = User(object, withRelations: false)
+                        friends.append(friend)
+                    }
+                    
+                    self.friendsList = friends
+                    callback?(users: friends)
+                } else if error {
+                    println(error)
                 }
-                
-                self.friendsList = friends
-                callback?(users: friends)
-            } else if error {
-                println(error)
-            }
-        })
+            })
+        }
     }
     
     func getSavedPosts(callback: ((posts: [Post]) -> Void)?) {
