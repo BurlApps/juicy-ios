@@ -30,19 +30,6 @@ class FeedViewController: UIViewController, CardViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create Text Shadow
-        var shadow = NSShadow()
-        shadow.shadowColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
-        shadow.shadowOffset = CGSizeMake(0, 2);
-        
-        // Configure Navigation Bar
-        self.navigationController.navigationBarHidden = false
-        self.navigationController.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
-            NSShadowAttributeName: shadow
-        ]
-        
         // Setup View
         self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
         
@@ -61,11 +48,22 @@ class FeedViewController: UIViewController, CardViewDelegate {
         // Configure Status Bar
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         
+        // Create Text Shadow
+        var shadow = NSShadow()
+        shadow.shadowColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
+        shadow.shadowOffset = CGSizeMake(0, 2);
+        
         // Configure Navigation Bar
+        self.navigationController.navigationBarHidden = false
         self.navigationController.navigationBar.shadowImage = nil
         self.navigationController.navigationBar.translucent = false
         self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor()
         self.navigationController.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
+            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
+            NSShadowAttributeName: shadow
+        ]
         
         // Setup Cards
         if self.cards.isEmpty {

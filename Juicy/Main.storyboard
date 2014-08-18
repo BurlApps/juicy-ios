@@ -262,7 +262,7 @@
                                 <action selector="canelPost:" destination="cde-Ds-Zhk" id="ggA-80-g3v"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="Kcb-A0-gHZ">
+                        <barButtonItem key="rightBarButtonItem" title="Post It" id="Kcb-A0-gHZ">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
