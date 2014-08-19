@@ -17,6 +17,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var currentUser: User = User.current(false)
+    private var contactList: [String]!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -57,6 +58,12 @@ class PostViewController: UIViewController, UITextViewDelegate {
         // Get Friends List
         self.currentUser.getFriendsList(nil)
         
+        // Get Contact List
+        var contacts = Contacts()
+        contacts.getContactNames { (names) -> Void in
+            self.contactList = names
+        }
+        
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"
         self.navigationController.navigationBar.titleTextAttributes = [
@@ -80,60 +87,81 @@ class PostViewController: UIViewController, UITextViewDelegate {
         var friends = self.detectFriendsInMessage(editorText)
         let imageSize = CGSize(width: self.capturedImage.size.width/2, height: self.capturedImage.size.width/2)
         
-        if friends.isEmpty {
-            content.append([
-                "message": editorText,
-                "color": false
-            ])
-        } else {
-            for (index, friend) in enumerate(friends) {
-                var endRange: NSRange;
-                let range = friend["range"] as NSRange
-                let endLocation = range.location + range.length
-                aboutUsers.append(friend["user"] as User)
-                
-                if index == 0 && range.location != 0 {
-                    content.append([
-                        "message": editorText.substringWithRange(_NSRange(location: 0, length: range.location)),
-                        "color": false
-                    ])
-                }
-                
+        if editorText.length != 0 {
+            if friends.isEmpty {
                 content.append([
-                    "message": editorText.substringWithRange(range),
-                    "color": true
+                    "message": editorText,
+                    "color": false
                 ])
-                
-                if index == (friends.count - 1) {
-                    endRange = _NSRange(location: endLocation, length: editorText.length - endLocation)
-                } else {
-                    endRange = _NSRange(location: endLocation, length: (friends[index + 1]["range"] as NSRange).location - endLocation)
-                }
-            
-                if endRange.length > 0 {
+            } else {
+                for (index, friend) in enumerate(friends) {
+                    var endRange: NSRange;
+                    let range = friend["range"] as NSRange
+                    let endLocation = range.location + range.length
+                    
+                    if friend["user"] is User {
+                        aboutUsers.append(friend["user"] as User)
+                    }
+                    
+                    if index == 0 && range.location != 0 {
+                        content.append([
+                            "message": editorText.substringWithRange(_NSRange(location: 0, length: range.location)),
+                            "color": false
+                        ])
+                    }
+                    
                     content.append([
-                        "message": editorText.substringWithRange(endRange),
-                        "color": false
+                        "message": editorText.substringWithRange(range),
+                        "color": true
                     ])
+                    
+                    if index == (friends.count - 1) {
+                        endRange = _NSRange(location: endLocation, length: editorText.length - endLocation)
+                    } else {
+                        endRange = _NSRange(location: endLocation, length: (friends[index + 1]["range"] as NSRange).location - endLocation)
+                    }
+                
+                    if endRange.length > 0 {
+                        content.append([
+                            "message": editorText.substringWithRange(endRange),
+                            "color": false
+                        ])
+                    }
                 }
             }
+            
+            println(content)
+            self.navigationController.popToViewController(self.navigationController.viewControllers[1] as UIViewController, animated: false)
+            Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize), creator: self.currentUser)
         }
-        
-        self.navigationController.popToViewController(self.navigationController.viewControllers[1] as UIViewController, animated: false)
-        Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize), creator: self.currentUser)
     }
     
     // MARK: Instance Methods
     func detectFriendsInMessage(text: String) -> [AnyObject] {
         let lowerText = NSString(string: text.lowercaseString)
         var friends: [AnyObject] = []
+        var ranges = NSMutableArray()
         
+        // Search By Registered Users
         if self.currentUser.friendsList != nil {
             for friend in self.currentUser.friendsList {
                 let range = lowerText.rangeOfString(friend.name.lowercaseString)
-
-                if range.location != Foundation.NSNotFound {
+                
+                if range.location != Foundation.NSNotFound && !ranges.containsObject(range)  {
                     friends.append([ "user": friend, "range": range ])
+                    ranges.addObject(range)
+                }
+            }
+        }
+        
+        // Search By Contact List
+        if !self.contactList.isEmpty {
+            for contact in self.contactList {
+                let range = lowerText.rangeOfString(contact.lowercaseString)
+                
+                if range.location != Foundation.NSNotFound && !ranges.containsObject(range) {
+                    friends.append([ "range": range ])
+                    ranges.addObject(range)
                 }
             }
         }
