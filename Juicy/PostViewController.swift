@@ -130,7 +130,6 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 }
             }
             
-            println(content)
             self.navigationController.popToViewController(self.navigationController.viewControllers[1] as UIViewController, animated: false)
             Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize), creator: self.currentUser)
         }

@@ -20,7 +20,7 @@ class CardView: UIView {
     
     // MARK: Class Enums
     enum Status {
-        case None, Liked, Nope, Shared
+        case None, Liked, Noped, Shared
     }
     
     private enum CardViewLocation {
@@ -53,7 +53,7 @@ class CardView: UIView {
     // MARK: Public Attributes
     var post: Post!
     var delegate: CardViewDelegate!
-    var status: Status!
+    var status: Status = .None
     var locked = true
     
     // MARK: Instance Attributes
@@ -196,7 +196,7 @@ class CardView: UIView {
                 self.choice.image = UIImage(named: "Like")
             } else {
                 newColor = self.defaults.nopeColor
-                self.status = .Nope
+                self.status = .Noped
                 self.choice.image = UIImage(named: "Nope")
             }
             

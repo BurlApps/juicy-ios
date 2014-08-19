@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
+private var saveQueue = NSMutableSet()
+
 class Post: NSObject {
     
     // MARK: Instance Variables
@@ -99,6 +101,39 @@ class Post: NSObject {
     }
     
     // MARK: Instance Methods
+    func like(user: User) {
+        var likedRelation = self.parse.relationForKey("likedUsers")
+        likedRelation.addObject(user.parse)
+        saveQueue.addObject(self)
+        self.batchSave()
+    }
+    
+    func nope(user: User) {
+        var nopedRelation = self.parse.relationForKey("nopedUsers")
+        nopedRelation.addObject(user.parse)
+        saveQueue.addObject(self)
+        self.batchSave()
+    }
+    
+    func share(user: User) {
+        var sharedRelation = self.parse.relationForKey("sharedUsers")
+        sharedRelation.addObject(user.parse)
+        self.like(user)
+    }
+    
+    func batchSave() {
+        if saveQueue.count > 30 {
+            var posts: [PFObject] = []
+            
+            for post in saveQueue {
+                posts.append((post as Post).parse)
+                saveQueue.removeObject(post)
+            }
+            
+            PFObject.saveAllInBackground(posts)
+        }
+    }
+    
     func getImage(callback: (image: UIImage) -> Void) {
         let request = NSURLRequest(URL: self.image)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {

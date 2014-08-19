@@ -149,12 +149,25 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: CardViewDelegate Methods
-    func cardDidLeaveScreen(card: CardView) {        
+    func cardDidLeaveScreen(card: CardView) {
+        // Seed New Cards
         if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
             self.cards.removeAtIndex(0)
             self.seedCards()
+        }
+        
+        // Set Status Of Card
+        switch card.status {
+        case .Liked:
+            card.post.like(self.currentUser)
+        case .Noped:
+            card.post.nope(self.currentUser)
+        case .Shared:
+            card.post.share(self.currentUser)
+        case .None:
+            break
         }
     }
     
