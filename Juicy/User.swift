@@ -57,6 +57,7 @@ class User: NSObject {
                 
                 callback?()
             } else if error {
+                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })
@@ -83,6 +84,7 @@ class User: NSObject {
                     self.friendsList = friends
                     callback?(users: friends)
                 } else if error {
+                    RavenClient.sharedClient().captureMessage(error.description)
                     println(error)
                 }
             })
@@ -105,7 +107,7 @@ class User: NSObject {
                 self.savedPosts = posts
                 callback?(posts: posts)
             } else if error {
-                println(error)
+                RavenClient.sharedClient().captureMessage(error.description)
             }
         })
     }

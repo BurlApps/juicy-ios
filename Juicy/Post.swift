@@ -95,6 +95,7 @@ class Post: NSObject {
                 
                 callback(posts: posts)
             } else if error {
+                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })
@@ -104,6 +105,10 @@ class Post: NSObject {
     func like(user: User) {
         var likedRelation = self.parse.relationForKey("likedUsers")
         likedRelation.addObject(user.parse)
+        
+        self.parse["likes"] = (self.parse["likes"] as Int) + 1
+        self.parse["karma"] = (self.parse["karma"] as Int) + 1
+        
         saveQueue.addObject(self)
         self.batchSave()
     }
@@ -111,6 +116,9 @@ class Post: NSObject {
     func nope(user: User) {
         var nopedRelation = self.parse.relationForKey("nopedUsers")
         nopedRelation.addObject(user.parse)
+        
+        self.parse["karma"] = (self.parse["karma"] as Int) - 1
+        
         saveQueue.addObject(self)
         self.batchSave()
     }
@@ -155,6 +163,9 @@ class Post: NSObject {
                         callback(image: image)
                     })
                 })
+            } else {
+                RavenClient.sharedClient().captureMessage(error.description)
+                println(error)
             }
         })
     }
@@ -181,6 +192,7 @@ class Post: NSObject {
                     users.append(user)
                 }
             } else if error {
+                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })

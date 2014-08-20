@@ -20,16 +20,20 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
 	<string>${FACEBOOK_NAME}</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>ParseApplicationID</key>
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
 	<string>${PARSE_CLIENT_KEY}</string>
+	<key>NewRelicKey</key>
+	<string>${NEW_RELIC_KEY}</string>
+	<key>RavenDsn</key>
+	<string>${RAVEN_DSN}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

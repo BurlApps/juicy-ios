@@ -10,7 +10,6 @@
 		C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C23D6F785A54A2AA5E091EF /* libPods.a */; };
 		D303880419A313CB00C67E44 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880319A313CB00C67E44 /* Contacts.swift */; };
 		D303880719A31D2200C67E44 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880619A31D2200C67E44 /* Array.swift */; };
-		D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3050422194EF0CC00A92CB2 /* CoreData.swift */; };
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
 		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
@@ -20,14 +19,11 @@
 		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
 		D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */; };
 		D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A863194E60D500FABCC0 /* AppDelegate.swift */; };
-		D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */; };
 		D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3A2A868194E60D500FABCC0 /* Images.xcassets */; };
 		D3A2A875194E60D500FABCC0 /* JuicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A2A874194E60D500FABCC0 /* JuicyTests.swift */; };
 		D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3A2A885194E630300FABCC0 /* Main.storyboard */; };
-		D3A2A88E194E65B400FABCC0 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A88D194E65B400FABCC0 /* Parse.framework */; };
 		D3A2A896194E716000FABCC0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A895194E716000FABCC0 /* Social.framework */; };
 		D3A2A898194E717F00FABCC0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A897194E717F00FABCC0 /* Security.framework */; };
-		D3A2A89A194E718A00FABCC0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */; };
 		D3A2A89C194E719D00FABCC0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A89B194E719D00FABCC0 /* QuartzCore.framework */; };
 		D3A2A89E194E71AB00FABCC0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A89D194E71AB00FABCC0 /* MobileCoreServices.framework */; };
 		D3A2A8A0194E71CA00FABCC0 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A89F194E71CA00FABCC0 /* libz.1.1.3.dylib */; };
@@ -43,6 +39,12 @@
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
 		D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostViewController.swift */; };
 		D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56819A097B9006E43F1 /* RBResizer.swift */; };
+		D3D7A2CA19A473BF004AC6FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
+		D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CD19A473EE004AC6FE /* libz.dylib */; };
+		D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */; };
+		D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */; };
+		D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */; };
+		D3D7A2D819A4A676004AC6FE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D7A2D719A4A676004AC6FE /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +104,6 @@
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D303880319A313CB00C67E44 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		D303880619A31D2200C67E44 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		D3050422194EF0CC00A92CB2 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		D3A2A85E194E60D500FABCC0 /* Juicy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Juicy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A2A862194E60D500FABCC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3A2A863194E60D500FABCC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D3A2A866194E60D500FABCC0 /* Juicy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Juicy.xcdatamodel; sourceTree = "<group>"; };
 		D3A2A868194E60D500FABCC0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D3A2A86E194E60D500FABCC0 /* JuicyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JuicyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3A2A873194E60D500FABCC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +143,11 @@
 		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		D3D5B56819A097B9006E43F1 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
+		D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = Frameworks/NewRelicAgent.framework; sourceTree = "<group>"; };
+		D3D7A2C819A473BF004AC6FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
+		D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		D3D7A2CD19A473EE004AC6FE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D3D7A2D719A4A676004AC6FE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +155,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */,
+				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
+				D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */,
+				D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */,
+				D3D7A2CA19A473BF004AC6FE /* Parse.framework in Frameworks */,
 				D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */,
 				D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */,
 				D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */,
@@ -163,10 +173,8 @@
 				D3A2A8A0194E71CA00FABCC0 /* libz.1.1.3.dylib in Frameworks */,
 				D3A2A89E194E71AB00FABCC0 /* MobileCoreServices.framework in Frameworks */,
 				D3A2A89C194E719D00FABCC0 /* QuartzCore.framework in Frameworks */,
-				D3A2A89A194E718A00FABCC0 /* SystemConfiguration.framework in Frameworks */,
 				D3A2A898194E717F00FABCC0 /* Security.framework in Frameworks */,
 				D3A2A896194E716000FABCC0 /* Social.framework in Frameworks */,
-				D3A2A88E194E65B400FABCC0 /* Parse.framework in Frameworks */,
 				C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				D303880619A31D2200C67E44 /* Array.swift */,
+				D3D7A2D719A4A676004AC6FE /* String.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -274,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				D3A2A868194E60D500FABCC0 /* Images.xcassets */,
-				D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */,
 				D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */,
 				D3A2A862194E60D500FABCC0 /* Info.plist */,
 			);
@@ -321,7 +329,6 @@
 			isa = PBXGroup;
 			children = (
 				D3A2A863194E60D500FABCC0 /* AppDelegate.swift */,
-				D3050422194EF0CC00A92CB2 /* CoreData.swift */,
 				D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */,
 			);
 			name = Classes;
@@ -330,6 +337,10 @@
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3D7A2CD19A473EE004AC6FE /* libz.dylib */,
+				D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */,
+				D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */,
+				D3D7A2C819A473BF004AC6FE /* Parse.framework */,
 				D351EF64198F78D100532600 /* FacebookSDK.framework */,
 				D3A2A8B1194E723400FABCC0 /* Foundation.framework */,
 				D3A2A8AF194E722A00FABCC0 /* UIKit.framework */,
@@ -513,9 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3A2A867194E60D500FABCC0 /* Juicy.xcdatamodeld in Sources */,
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
-				D3050423194EF0CC00A92CB2 /* CoreData.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
@@ -525,6 +534,7 @@
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D30A84D41997403F00CBF78F /* CardView.swift in Sources */,
+				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */,
 			);
@@ -675,6 +685,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/Brian/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -725,6 +736,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					/Users/Brian/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -828,19 +840,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D3A2A865194E60D500FABCC0 /* Juicy.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D3A2A866194E60D500FABCC0 /* Juicy.xcdatamodel */,
-			);
-			currentVersion = D3A2A866194E60D500FABCC0 /* Juicy.xcdatamodel */;
-			path = Juicy.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D3A2A856194E60D500FABCC0 /* Project object */;
 }

@@ -11,13 +11,23 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-                            
+    
+    //
     var window: UIWindow?
-    var coreData: CoreData = CoreData()
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary;
+        
+        // Initialize Raven
+        let ravenDsn = infoDictionary["RavenDsn"] as  NSString
+        RavenClient(DSN: "https://\(ravenDsn)")
+        
+        // Raven Global Error Handler
+        RavenClient.sharedClient().setupExceptionHandler()
+        
+        // Initialize NewRelic
+        let newRelicKey = infoDictionary["NewRelicKey"] as  NSString
+        NewRelicAgent.startWithApplicationToken(newRelicKey)
         
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as  NSString
@@ -26,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Initialize Facebook
         PFFacebookUtils.initializeFacebook()
+        
+        // Return 
         return true
     }
     
@@ -54,11 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.coreData.saveContext()
     }
     
     func applicationDidReceiveMemoryWarning(application: UIApplication) {
         PFQuery.clearAllCachedResults()
+        RavenClient.sharedClient().captureMessage("Recieved Memory Warning Error")
     }
 
 }

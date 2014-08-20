@@ -147,8 +147,12 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 let range = lowerText.rangeOfString(friend.name.lowercaseString)
                 
                 if range.location != Foundation.NSNotFound && !ranges.containsObject(range)  {
-                    friends.append([ "user": friend, "range": range ])
-                    ranges.addObject(range)
+                    let length = range.location + range.length
+                    
+                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " ") {
+                        friends.append([ "user": friend, "range": range ])
+                        ranges.addObject(range)
+                    }
                 }
             }
         }
@@ -159,8 +163,12 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 let range = lowerText.rangeOfString(contact.lowercaseString)
                 
                 if range.location != Foundation.NSNotFound && !ranges.containsObject(range) {
-                    friends.append([ "range": range ])
-                    ranges.addObject(range)
+                    let length = range.location + range.length
+                    
+                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " ") {
+                        friends.append([ "range": range ])
+                        ranges.addObject(range)
+                    }
                 }
             }
         }

@@ -66,8 +66,9 @@ class FeedViewController: UIViewController, CardViewDelegate {
         ]
         
         // Setup Cards
-        if self.cards.isEmpty {
+        if self.cards.isEmpty || !self.posts.isEmpty {
             self.seedCards()
+            self.postsCount = 0
         }
     }
     
