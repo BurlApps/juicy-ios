@@ -88,13 +88,13 @@ class Post: NSObject {
         // TODO: Query for newest posts
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if !error && !objects.isEmpty {
+            if error == nil && !objects.isEmpty {
                 for object in objects as [PFObject] {
                     posts.append(Post(object, withRelations: withRelations))
                 }
                 
                 callback(posts: posts)
-            } else if error {
+            } else if error != nil {
                 RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
@@ -106,8 +106,8 @@ class Post: NSObject {
         var likedRelation = self.parse.relationForKey("likedUsers")
         likedRelation.addObject(user.parse)
         
-        self.parse["likes"] = (self.parse["likes"] as Int) + 1
-        self.parse["karma"] = (self.parse["karma"] as Int) + 1
+        self.parse.incrementKey("likes")
+        self.parse.incrementKey("karma")
         
         saveQueue.addObject(self)
         self.batchSave()
@@ -117,7 +117,7 @@ class Post: NSObject {
         var nopedRelation = self.parse.relationForKey("nopedUsers")
         nopedRelation.addObject(user.parse)
         
-        self.parse["karma"] = (self.parse["karma"] as Int) - 1
+        self.parse.incrementKey("karma", byAmount: -1)
         
         saveQueue.addObject(self)
         self.batchSave()
@@ -146,12 +146,11 @@ class Post: NSObject {
         let request = NSURLRequest(URL: self.image)
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
             (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-            if !error {
+            if error == nil {
                 let image = UIImage(data: data)
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                    // Make a trivial (1x1) graphics context,
-                    // and draw the image into it
+                    // Makes a 1x1 graphics context and draws the image into it
                     UIGraphicsBeginImageContext(CGSizeMake(1,1))
                     let context = UIGraphicsGetCurrentContext()
                     CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), image.CGImage)
@@ -186,12 +185,12 @@ class Post: NSObject {
         query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in         
-            if !error && !objects.isEmpty {
+            if error == nil && !objects.isEmpty {
                 for object in objects as [PFUser] {
                     let user = User(object, withRelations: false)
                     users.append(user)
                 }
-            } else if error {
+            } else if error != nil {
                 RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }

@@ -35,7 +35,7 @@ class User: NSObject {
     func setExtraInfo(callback: (() -> Void)?) {
         var meRequest = FBRequest.requestForMe()
         meRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
-            if !error && result != nil {
+            if error == nil && result != nil {
                 let fbUser = result as FBGraphObject
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -56,7 +56,7 @@ class User: NSObject {
                 })
                 
                 callback?()
-            } else if error {
+            } else if error != nil {
                 RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
@@ -75,7 +75,7 @@ class User: NSObject {
             query.cachePolicy = kPFCachePolicyNetworkElseCache
             query.orderByDescending("createdAt")
             query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
-                if !error && !objects.isEmpty {
+                if error == nil && !objects.isEmpty {
                     for object in objects as [PFUser] {
                         let friend = User(object, withRelations: false)
                         friends.append(friend)
@@ -83,7 +83,7 @@ class User: NSObject {
                     
                     self.friendsList = friends
                     callback?(users: friends)
-                } else if error {
+                } else if error != nil {
                     RavenClient.sharedClient().captureMessage(error.description)
                     println(error)
                 }
@@ -98,7 +98,7 @@ class User: NSObject {
         query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
-            if !error && !objects.isEmpty {
+            if error == nil && !objects.isEmpty {
                 for object in objects as [PFObject] {
                     let post = Post(object)
                     posts.append(post)
@@ -106,7 +106,7 @@ class User: NSObject {
                 
                 self.savedPosts = posts
                 callback?(posts: posts)
-            } else if error {
+            } else if error != nil {
                 RavenClient.sharedClient().captureMessage(error.description)
             }
         })

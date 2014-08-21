@@ -24,7 +24,7 @@ class LandingViewController: UIViewController {
         self.loginButton.addSubview(spinner)
         
         // Move to Feed View if Logged In
-        if PFUser.currentUser() {
+        if PFUser.currentUser() != nil {
             self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }
     }
@@ -55,7 +55,7 @@ class LandingViewController: UIViewController {
         self.spinner.startAnimating()
         
         PFFacebookUtils.logInWithPermissions(nil, { (user: PFUser!, error: NSError!) -> Void in
-            if user {
+            if user != nil {
                 if user.isNew {
                     User(user, withRelations: false).setExtraInfo({ () -> Void in
                         self.performSegueWithIdentifier("loggedInSegue", sender: self)
