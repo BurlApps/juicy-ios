@@ -14,6 +14,7 @@
 		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
 		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
+		D34CCDF019A6D11E0056BE50 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */; };
 		D351EF68198F817800532600 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D351EF67198F817800532600 /* LandingViewController.swift */; };
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
 		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
@@ -108,6 +109,7 @@
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF67198F817800532600 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34CCDF019A6D11E0056BE50 /* Crashlytics.framework in Frameworks */,
 				D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */,
 				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
 				D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */,
@@ -337,6 +340,7 @@
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */,
 				D3D7A2CD19A473EE004AC6FE /* libz.dylib */,
 				D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */,
 				D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */,
@@ -384,6 +388,7 @@
 				D3A2A85B194E60D500FABCC0 /* Frameworks */,
 				D3A2A85C194E60D500FABCC0 /* Resources */,
 				0ECC263BA7E04C82848A01B9 /* Copy Pods Resources */,
+				D34CCDEE19A6D0910056BE50 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -516,6 +521,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		D34CCDEE19A6D0910056BE50 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./frameworks/Crashlytics.framework/run 688e4a674f0faffc985c7ea15a46ee164671cc15 90eaa4295144c22f62f9986a9ea4b4a2ca807c7400975fe7be7e196b70242b8c";
 		};
 /* End PBXShellScriptBuildPhase section */
 

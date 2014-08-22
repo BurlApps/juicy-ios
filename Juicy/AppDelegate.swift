@@ -18,12 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary;
         
-        // Initialize Raven
-        let ravenDsn = infoDictionary["RavenDsn"] as  NSString
-        RavenClient(DSN: "https://\(ravenDsn)")
-        
-        // Raven Global Error Handler
-        RavenClient.sharedClient().setupExceptionHandler()
+        // Initialize Crashlytics
+        let crashlyticsKey = infoDictionary["CrashlyticsKey"] as  NSString
+        Crashlytics.startWithAPIKey(crashlyticsKey)
         
         // Initialize NewRelic
         let newRelicKey = infoDictionary["NewRelicKey"] as  NSString
@@ -70,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidReceiveMemoryWarning(application: UIApplication) {
         PFQuery.clearAllCachedResults()
-        RavenClient.sharedClient().captureMessage("Recieved Memory Warning Error")
     }
 
 }

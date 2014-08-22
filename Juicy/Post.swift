@@ -95,7 +95,6 @@ class Post: NSObject {
                 
                 callback(posts: posts)
             } else if error != nil {
-                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })
@@ -163,7 +162,6 @@ class Post: NSObject {
                     })
                 })
             } else {
-                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })
@@ -191,7 +189,6 @@ class Post: NSObject {
                     users.append(user)
                 }
             } else if error != nil {
-                RavenClient.sharedClient().captureMessage(error.description)
                 println(error)
             }
         })

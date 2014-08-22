@@ -37,6 +37,7 @@ class CardView: UIView {
         let delay: NSTimeInterval = 0
         let regualColor = UIColor(red:1, green:1, blue:1, alpha:0.4)
         let juicyColor = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.8)
+        let shareColor = UIColor(red:0.38, green:0.69, blue:0.86, alpha: 0.4).CGColor
         let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.4).CGColor
         let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.4).CGColor
         let personColor = UIColor(red:0.31, green:0.95, blue:1, alpha:1)
@@ -184,20 +185,36 @@ class CardView: UIView {
             
             gesture.view.transform = CGAffineTransformMakeRotation(self.degreeToRadian(rotation));
             
-            let delta = self.startPointInSuperview.x - newLocation.x;
+            let deltaX = self.startPointInSuperview.x - newLocation.x;
+            let deltaY = self.startPointInSuperview.y - newLocation.y;
+            let delta  = abs(deltaX) > abs(deltaY) ? deltaX : deltaY
             var percentage = abs(delta/self.neededSwipeDistance)
             percentage = (percentage > 1 ? 1 : percentage)
             var newColor: CGColor!
             var newColorBorder = self.darkenerBorder.colorWithAlphaComponent((1 - percentage)).CGColor
         
-            if delta < 0 {
-                newColor = self.defaults.likeColor
-                self.status = .Liked
-                self.choice.image = UIImage(named: "Like")
+            if delta == deltaX {
+                if delta < 0 {
+                    newColor = self.defaults.likeColor
+                    self.status = .Liked
+                    self.choice.image = UIImage(named: "Like")
+                } else {
+                    newColor = self.defaults.nopeColor
+                    self.status = .Noped
+                    self.choice.image = UIImage(named: "Nope")
+                }
             } else {
-                newColor = self.defaults.nopeColor
-                self.status = .Noped
-                self.choice.image = UIImage(named: "Nope")
+                println(delta)
+                
+                if delta < 0 {
+                    newColor = self.defaults.shareColor
+                    self.status = .Shared
+                    self.choice.image = UIImage(named: "Share")
+                } else {
+                    newColor = self.darkenerColor.CGColor
+                    self.status = .None
+                    self.choice.image = UIImage()
+                }
             }
             
             self.content.alpha = pow((1 - percentage), 4)
@@ -216,10 +233,12 @@ class CardView: UIView {
                 gesture.view.layer.position.y + (velocity.y * slideFactor));
             
             // Calculate final change in x-position that was made
-            let swipeDistance: Int = Int(self.startPointInSuperview.x - newLocation.x)
+            let swipeDistanceX: Int = Int(self.startPointInSuperview.x - newLocation.x)
+            let swipeDistanceY: Int = Int(self.startPointInSuperview.y - newLocation.y)
+            let swipeDistance: Int = abs(swipeDistanceX) > abs(swipeDistanceY) ? swipeDistanceX : swipeDistanceY
             let absSwipeDistance: CGFloat = CGFloat(labs(swipeDistance))
             
-            if self.locked || absSwipeDistance < self.neededSwipeDistance {
+            if self.locked || absSwipeDistance < self.neededSwipeDistance && !(swipeDistance == swipeDistanceY && swipeDistance < 0) {
                 self.delegate?.cardWillReturnToCenter?(self)
                 self.returnCardViewToStartPointAnimated(true)
             } else {

@@ -32,8 +32,8 @@
 	<string>${PARSE_CLIENT_KEY}</string>
 	<key>NewRelicKey</key>
 	<string>${NEW_RELIC_KEY}</string>
-	<key>RavenDsn</key>
-	<string>${RAVEN_DSN}</string>
+	<key>CrashlyticsKey</key>
+	<string>${CRASHLYTICS_KEY}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
