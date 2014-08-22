@@ -37,9 +37,9 @@ class CardView: UIView {
         let delay: NSTimeInterval = 0
         let regualColor = UIColor(red:1, green:1, blue:1, alpha:0.4)
         let juicyColor = UIColor(red:0.99, green:0.4, blue:0.13, alpha:0.8)
-        let shareColor = UIColor(red:0.38, green:0.69, blue:0.86, alpha: 0.4).CGColor
-        let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.4).CGColor
-        let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.4).CGColor
+        let shareColor = UIColor(red:0.34, green:0.9, blue:0.99, alpha: 0.8).CGColor
+        let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.8).CGColor
+        let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.8).CGColor
         let personColor = UIColor(red:0.31, green:0.95, blue:1, alpha:1)
     }
     
@@ -204,8 +204,6 @@ class CardView: UIView {
                     self.choice.image = UIImage(named: "Nope")
                 }
             } else {
-                println(delta)
-                
                 if delta < 0 {
                     newColor = self.defaults.shareColor
                     self.status = .Shared
@@ -238,7 +236,7 @@ class CardView: UIView {
             let swipeDistance: Int = abs(swipeDistanceX) > abs(swipeDistanceY) ? swipeDistanceX : swipeDistanceY
             let absSwipeDistance: CGFloat = CGFloat(labs(swipeDistance))
             
-            if self.locked || absSwipeDistance < self.neededSwipeDistance && !(swipeDistance == swipeDistanceY && swipeDistance < 0) {
+            if self.locked || absSwipeDistance < self.neededSwipeDistance || (swipeDistance == swipeDistanceY && swipeDistance > 0) {
                 self.delegate?.cardWillReturnToCenter?(self)
                 self.returnCardViewToStartPointAnimated(true)
             } else {

@@ -57,8 +57,12 @@ class Contacts {
             
             for record:ABRecordRef in contactList {
                 var contactPerson: ABRecordRef = record
-                var contactName: String = ABRecordCopyCompositeName(contactPerson).takeRetainedValue() as NSString
-                contacts.append(contactName)
+                var contactName = ABRecordCopyCompositeName(contactPerson)
+                
+                if contactName != nil {
+                    // TODO: find why ios crashes or wait til fixed
+                    //contacts.append(contactName.takeRetainedValue() as NSString)
+                }
             }
             
             callback(names: contacts)
