@@ -245,18 +245,26 @@ class CardView: UIView {
                 // Animate off screen
                 UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                     var  offscreenX: CGFloat!
+                    var  offscreenY: CGFloat!
                     let superviewOrigin = self.superview?.frame.origin
                     let superviewOriginX = superviewOrigin?.x
+                    let superviewOriginY = superviewOrigin?.y
                     let superviewSize = self.superview?.frame.size
                     let superViewWidth = superviewSize?.width
+                    let superViewHeight = superviewSize?.height
                     
-                    if swipeDistance > 0 {
-                        offscreenX = -superviewOriginX! - self.bounds.size.width
+                    if swipeDistance == swipeDistanceX {
+                        if swipeDistance > 0 {
+                            offscreenX = -superviewOriginX! - self.bounds.size.width
+                        } else {
+                            offscreenX = superViewWidth! + self.bounds.size.width
+                        }
+                        
+                        gesture.view.layer.position = CGPointMake(offscreenX, gesture.view.layer.position.y)
                     } else {
-                        offscreenX = superViewWidth! + self.bounds.size.width
+                        offscreenY = superViewHeight! + self.bounds.size.height
+                        gesture.view.layer.position = CGPointMake(gesture.view.layer.position.x, offscreenY)
                     }
-                    
-                    gesture.view.layer.position = CGPointMake(offscreenX, gesture.view.layer.position.y)
                 }, completion: { _ in
                     self.removeFromSuperview()
                     self.delegate?.cardDidLeaveScreen?(self)
