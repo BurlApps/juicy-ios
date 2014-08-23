@@ -187,7 +187,7 @@ class CardView: UIView {
             
             let deltaX = self.startPointInSuperview.x - newLocation.x;
             let deltaY = self.startPointInSuperview.y - newLocation.y;
-            let delta  = abs(deltaX) > abs(deltaY) ? deltaX : deltaY
+            var delta  = abs(deltaX) > abs(deltaY) ? deltaX : deltaY
             var percentage = abs(delta/self.neededSwipeDistance)
             percentage = (percentage > 1 ? 1 : percentage)
             var newColor: CGColor!
@@ -209,6 +209,8 @@ class CardView: UIView {
                     self.status = .Shared
                     self.choice.image = UIImage(named: "Share")
                 } else {
+                    delta = 0
+                    percentage = 0
                     newColor = self.darkenerColor.CGColor
                     self.status = .None
                     self.choice.image = UIImage()

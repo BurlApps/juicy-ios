@@ -64,13 +64,11 @@ class Post: NSObject {
         post.saveInBackground()
     }
 
-    class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
+    class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, callback: (posts: [Post]) -> Void) {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
         
         query.limit = limit
-        query.skip = skip
-        
         query.cachePolicy = kPFCachePolicyNetworkElseCache
         query.orderByDescending("createdAt")
         
@@ -126,6 +124,10 @@ class Post: NSObject {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
         self.like(user)
+    }
+    
+    func share(contacts: NSArray) {
+        println(contacts)
     }
     
     func batchSave() {

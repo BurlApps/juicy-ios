@@ -23,8 +23,8 @@ class FeedViewController: UIViewController, CardViewDelegate {
     private let defaults = Defaults()
     private var currentUser = User.current(false)
     private var posts: [Post]!
-    private var postsCount = 0
     private var cards: [CardView]! = []
+    private var sharePost: Post!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -68,7 +68,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
         // Setup Cards
         if self.cards.isEmpty || !self.posts.isEmpty {
             self.seedCards()
-            self.postsCount = 0
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if segue.identifier == "shareSegue" {
+            let viewController:ShareViewController = segue.destinationViewController as ShareViewController
+            viewController.aboutPost = self.sharePost
         }
     }
     
@@ -93,10 +99,9 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func seedCards() {
-        Post.find(self.currentUser, withRelations: false, skip: self.postsCount, callback: { (posts: [Post]) -> Void in
+        Post.find(self.currentUser, withRelations: false, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 self.posts = posts
-                self.postsCount += posts.count
                 let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))
                 
                 for index in 0...max {
@@ -166,6 +171,8 @@ class FeedViewController: UIViewController, CardViewDelegate {
         case .Noped:
             card.post.nope(self.currentUser)
         case .Shared:
+            self.sharePost = card.post
+            self.performSegueWithIdentifier("shareSegue", sender: self)
             card.post.share(self.currentUser)
         case .None:
             break

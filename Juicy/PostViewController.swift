@@ -17,7 +17,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var currentUser: User = User.current(false)
-    private var contactList: [String]!
+    private var contacts: [String] = []
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -60,8 +60,10 @@ class PostViewController: UIViewController, UITextViewDelegate {
         
         // Get Contact List
         var contacts = Contacts()
-        contacts.getContactNames { (names) -> Void in
-            self.contactList = names
+        contacts.getContacts { (contacts) -> Void in
+            for contact in contacts {
+                self.contacts.append(contact.name)
+            }
         }
         
         // Configure Navigation Bar
@@ -149,7 +151,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 if range.location != Foundation.NSNotFound && !ranges.containsObject(range)  {
                     let length = range.location + range.length
                     
-                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " ") {
+                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " " ||  text[length] == ".") {
                         friends.append([ "user": friend, "range": range ])
                         ranges.addObject(range)
                     }
@@ -158,14 +160,14 @@ class PostViewController: UIViewController, UITextViewDelegate {
         }
         
         // Search By Contact List
-        if !self.contactList.isEmpty {
-            for contact in self.contactList {
+        if !self.contacts.isEmpty {
+            for contact in self.contacts {
                 let range = lowerText.rangeOfString(contact.lowercaseString)
                 
                 if range.location != Foundation.NSNotFound && !ranges.containsObject(range) {
                     let length = range.location + range.length
                     
-                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " ") {
+                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " " || text[length] == ".") {
                         friends.append([ "range": range ])
                         ranges.addObject(range)
                     }

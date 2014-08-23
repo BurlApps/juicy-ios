@@ -8,3 +8,5 @@
 #import <Parse/Parse.h>
 #import <VLBCameraView/VLBCameraView.h>
 #import <CHTTextView/CHTTextView.h>
+#import <THContactPicker/THContactPickerView.h>
+#import <iPhoneContacts/AddressBook.h>

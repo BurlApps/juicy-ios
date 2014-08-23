@@ -10,7 +10,19 @@ import AddressBook
 
 class Contacts {
     
-    // MARK: Instance Variables
+    // MARK: Class Structs
+    struct Phone {
+        var name: String!
+        var phone: String!
+    }
+    
+    struct Contact {
+        var name: String!
+        var email: String!
+        var phones: [Phone] = []
+    }
+    
+    // MARK: Private Instance Variables
     private var addressBook: ABAddressBookRef!
     private enum Access {
         case Granted, Denied
@@ -30,42 +42,63 @@ class Contacts {
     }
     
     private func authorizeUser(callback: (status: Access) -> Void) {
-        if (ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.NotDetermined) {
+        if ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.NotDetermined {
             var errorRef: Unmanaged<CFError>? = nil
             addressBook = extractABAddressBookRef(ABAddressBookCreateWithOptions(nil, &errorRef))
             ABAddressBookRequestAccessWithCompletion(addressBook, { success, error in
-                if success {
-                    callback(status: Access.Granted)
+                if error == nil {
+                    if success {
+                        callback(status: Access.Granted)
+                    } else {
+                        callback(status: Access.Denied)
+                        println(error)
+                    }
                 } else {
-                    callback(status: Access.Denied)
                     println(error)
                 }
             })
-        } else if (ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Denied || ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Restricted) {
-            callback(status: Access.Denied)
-        } else if (ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Authorized) {
+        } else if ABAddressBookGetAuthorizationStatus() == ABAuthorizationStatus.Authorized {
             callback(status: Access.Granted)
+        } else {
+            callback(status: Access.Denied)
         }
     }
-
-    func getContactNames(callback: (names: [String]!) -> Void) {
-        self.authorizeUser { (status) -> Void in
-            var contacts: [String] = []
-            var errorRef: Unmanaged<CFError>?
-            self.addressBook = self.extractABAddressBookRef(ABAddressBookCreateWithOptions(nil, &errorRef))
-            var contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue()
-            
-            for record:ABRecordRef in contactList {
-                var contactPerson: ABRecordRef = record
-                var contactName = ABRecordCopyCompositeName(contactPerson)
-                
-                if contactName != nil {
-                    // TODO: find why ios crashes or wait til fixed
-                    //contacts.append(contactName.takeRetainedValue() as NSString)
-                }
-            }
-            
-            callback(names: contacts)
-        }
+    
+// TODO: Uncomment After New Beta Release. takeRetainedValue() crashes now
+//    func getContactNames(callback: (names: [String]!) -> Void) {
+//        self.authorizeUser { (status) -> Void in
+//            if status == Access.Granted {
+//                var contacts: [String] = []
+//                var errorRef: Unmanaged<CFError>?
+//                self.addressBook = self.extractABAddressBookRef(ABAddressBookCreateWithOptions(nil, &errorRef))
+//                var contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue()
+//                
+//                for record:ABRecordRef in contactList {
+//                    var contactName = ABRecordCopyCompositeName(record)
+//                    
+//                    if contactName != nil {
+//                        contacts.append(contactName.takeRetainedValue() as NSString)
+//                    }
+//                }
+//                
+//                callback(names: contacts)
+//            } else {
+//                println("no access")
+//            }
+//        }
+//    }
+    
+    
+    // MARK: Fake Methods Until iOS Fixes Bug
+    func getContacts(callback: (contacts: Array<Contact>) -> Void) {
+        let phone: Phone = Phone(name: "mobile", phone: "3108492533")
+        
+        callback(contacts: [
+            Contact(name: "Brian", email: nil, phones: [phone]),
+            Contact(name: "Brian Vallelunga", email: nil, phones: [phone]),
+            Contact(name: "Bob", email: nil, phones: [phone]),
+            Contact(name: "Mark Adams", email: nil, phones: [phone]),
+            Contact(name: "Gorge", email: nil, phones: [phone])
+        ])
     }
 }
