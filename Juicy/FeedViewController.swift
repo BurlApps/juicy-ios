@@ -22,7 +22,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     // MARK: Instance Variables
     private let defaults = Defaults()
     private var currentUser = User.current(false)
-    private var posts: [Post]!
+    private var posts: [Post] = []
     private var cards: [CardView!] = []
     private var sharePost: Post!
     
@@ -99,7 +99,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func seedCards() {
-        Post.find(self.currentUser, withRelations: false, callback: { (posts: [Post]) -> Void in
+        Post.find(self.currentUser, withRelations: false, skip: self.posts.count, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 self.posts = posts
                 let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))

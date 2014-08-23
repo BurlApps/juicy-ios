@@ -47,6 +47,7 @@ class Post: NSObject {
         post["likes"] = 0
         post["karma"] = 0
         post["juicy"] = false
+        post["show"] = true
         
         // Set Content
         post["content"] = content
@@ -64,28 +65,43 @@ class Post: NSObject {
         post.saveInBackground()
     }
 
-    class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, callback: (posts: [Post]) -> Void) {
+    class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
         Post.batchSave(true, { (success, error) -> Void in
             if success == true && error == nil {
                 var posts: [Post] = []
-                var query = PFQuery(className: "Posts")
+                var queries: [PFQuery] = []
                 
-                query.limit = limit
-                query.cachePolicy = kPFCachePolicyNetworkElseCache
-                query.orderByDescending("createdAt")
-                
-                // TODO: Uncomment when posting works
-                //query.whereKey("creator", notEqualTo: exclude.parse)
-                //query.whereKey("likedUsers", notEqualTo: exclude.parse)
-                //query.whereKey("nopedUsers", notEqualTo: exclude.parse)
-                
-                // TODO: All queries below are part of compound or query
-                // TODO: Query for friends that have liked it
+                // TODO: All queries below are part of compound "or query"
+                // TODO: Query for friends that have liked it (done)
                 // TODO: Query for geo location from where u are
-                // TODO: Query for about my friends
-                // TODO: Query for about me
-                // TODO: Query for hotness calculated by karma (can be negative)
-                // TODO: Query for newest posts
+                // TODO: Query for about my friends (done)
+                // TODO: Query for about me (done)
+                // TODO: Query for hotness calculated by karma (done)
+                // TODO: Query for newest posts (done)
+                
+                // About Me Query
+                var aboutMeQuery = PFQuery(className: "Posts")
+                aboutMeQuery.whereKey("aboutUsers", equalTo: current.parse)
+                queries.append(aboutMeQuery)
+                
+                // About My Friends Query
+                var aboutFriendsQuery = PFQuery(className: "Posts")
+                let friendRelation = current.parse["friends"] as PFRelation
+                aboutFriendsQuery.whereKey("aboutUsers", matchesQuery: friendRelation.query())
+                queries.append(aboutFriendsQuery)
+
+                // Base "Or Query"
+                var query = PFQuery.orQueryWithSubqueries(queries)
+                query.limit = limit
+                query.skip = skip
+                query.cachePolicy = kPFCachePolicyNetworkElseCache
+                
+                // TODO: uncomment in production
+                //query.whereKey("creator", notEqualTo: current.parse)
+                query.whereKey("likedUsers", notEqualTo: current.parse)
+                query.whereKey("nopedUsers", notEqualTo: current.parse)
+                query.whereKey("show", equalTo: true)
+                query.orderByDescending("createdAt")
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil && !objects.isEmpty {

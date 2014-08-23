@@ -66,7 +66,7 @@ class User: NSObject {
     }
     
     func getFriendsList(callback: ((users: [User]) -> Void)?) {
-        if self.parse["friends"] != nil {
+        if self.friendsList == nil {
             var friends: [User] = []
             var friendsRelation = self.parse["friends"] as PFRelation
             var query = friendsRelation.query()
@@ -86,6 +86,8 @@ class User: NSObject {
                     println(error)
                 }
             })
+        } else {
+            callback?(users: self.friendsList)
         }
     }
     
