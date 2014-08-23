@@ -34,7 +34,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
         
         // Setup Create Button
-        self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
+        self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.8)
         
         // Add Create Button Top Border
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.createButton.frame.size.width, 3))
@@ -85,11 +85,11 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     @IBAction func createPostDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:1)
+        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:0.8)
     }
     
     @IBAction func createPost(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:1)
+        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.8)
     }
     
     // MARK: Instance Methods

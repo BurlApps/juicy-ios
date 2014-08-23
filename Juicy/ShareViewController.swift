@@ -139,6 +139,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
 
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
         cell.textLabel.attributedText = self.titleForRowAtIndexPath(indexPath)
+        cell.textLabel.numberOfLines = 2
     }
 
     func newFilteringPredicateWithText(text: String) -> NSPredicate {
@@ -148,10 +149,17 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     func titleForRowAtIndexPath(indexPath: NSIndexPath) -> NSAttributedString {
         let contact = self.getFilteredContacts()[indexPath.row] as NSDictionary
         let name = contact["name"] as String
-        var contactName = NSMutableAttributedString(string: "\(name)  ")
-        var contactGroup = NSMutableAttributedString(string: contact["group"] as String)
+        let group = contact["group"] as String
+        let phone = contact["phone"] as String
+        var contactName = NSMutableAttributedString(string: "\(name)\n")
+        var contactGroup = NSMutableAttributedString(string: "\(group)  \(phone)")
+        
+        contactName.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor(), range: NSMakeRange(0, contactName.length))
+        contactName.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue", size: 16), range: NSMakeRange(0, contactName.length))
         
         contactGroup.addAttribute(NSForegroundColorAttributeName, value: UIColor.grayColor(), range: NSMakeRange(0, contactGroup.length))
+        contactGroup.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 16), range: NSMakeRange(0, group.utf16Count))
+        
         contactName.appendAttributedString(contactGroup)
         
         return contactName

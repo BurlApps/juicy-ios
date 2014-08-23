@@ -91,7 +91,7 @@ class Contacts {
     
     // MARK: Fake Methods Until iOS Fixes Bug
     func getContacts(callback: (contacts: Array<Contact>) -> Void) {
-        let phone: Phone = Phone(name: "mobile", phone: "3108492533")
+        let phone: Phone = Phone(name: "mobile", phone: "310-849-2533")
         
         callback(contacts: [
             Contact(name: "Brian", email: nil, phones: [phone]),

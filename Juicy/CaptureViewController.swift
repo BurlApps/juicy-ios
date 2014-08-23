@@ -25,7 +25,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
         self.cameraView.delegate = self
         
         // Setup Post Button
-        self.captureButton.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:1)
+        self.captureButton.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.8)
         
         // Add Post Button Top Border
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.captureButton.frame.size.width, 3))
@@ -61,11 +61,11 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
     }
     
     @IBAction func captureDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.2, green:0.64, blue:0.22, alpha:1)
+        sender.backgroundColor = UIColor(red:0.2, green:0.64, blue:0.22, alpha:0.8)
     }
     
     @IBAction func captureTouchInside(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:1)
+        sender.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.8)
         self.cameraView.takePicture()
     }
     
