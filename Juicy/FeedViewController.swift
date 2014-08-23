@@ -23,7 +23,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     private let defaults = Defaults()
     private var currentUser = User.current(false)
     private var posts: [Post]!
-    private var cards: [CardView]! = []
+    private var cards: [CardView!] = []
     private var sharePost: Post!
     
     // MARK: UIViewController Overrides
@@ -66,7 +66,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         ]
         
         // Setup Cards
-        if self.cards.isEmpty || !self.posts.isEmpty {
+        if self.cards.isEmpty || self.posts.isEmpty {
             self.seedCards()
         }
     }
@@ -160,6 +160,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         if !self.posts.isEmpty {
             self.initCard(true, seeding: false)
         } else {
+            self.cards[0] = nil
             self.cards.removeAtIndex(0)
             self.seedCards()
         }

@@ -163,6 +163,10 @@ class CardView: UIView {
         self.addGestureRecognizer(self.panGesture)
     }
     
+    private func removeGestures() {
+        self.removeGestureRecognizer(self.panGesture)
+    }
+    
     // MARK: Gesture Handlers
     @IBAction func panHandle(gesture: UIPanGestureRecognizer) {
         let newLocation = gesture.locationInView(self.superview)
@@ -268,6 +272,7 @@ class CardView: UIView {
                         gesture.view.layer.position = CGPointMake(gesture.view.layer.position.x, offscreenY)
                     }
                 }, completion: { _ in
+                    self.removeGestures()
                     self.removeFromSuperview()
                     self.delegate?.cardDidLeaveScreen?(self)
                 })

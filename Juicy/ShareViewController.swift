@@ -198,11 +198,11 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         if self.privateSelectedContacts.containsObject(contact) {
             cell.accessoryType = UITableViewCellAccessoryType.None
             self.privateSelectedContacts.removeObject(contact)
-            self.contactPicker.removeContact(contactName)
+            self.contactPicker.removeContact(contact)
         } else {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.privateSelectedContacts.addObject(contact)
-            self.contactPicker.addContact(contactName, withName: contactName)
+            self.contactPicker.addContact(contact, withName: contactName)
         }
         
         self.filteredContacts = self.contacts

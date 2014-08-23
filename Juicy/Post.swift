@@ -65,37 +65,68 @@ class Post: NSObject {
     }
 
     class func find(exclude: User, withRelations: Bool = true, limit: Int = 15, callback: (posts: [Post]) -> Void) {
-        var posts: [Post] = []
-        var query = PFQuery(className: "Posts")
-        
-        query.limit = limit
-        query.cachePolicy = kPFCachePolicyNetworkElseCache
-        query.orderByDescending("createdAt")
-        
-        // TODO: Uncomment when posting works
-        //query.whereKey("creator", notEqualTo: exclude.parse)
-        //query.whereKey("likedUsers", notEqualTo: exclude.parse)
-        //query.whereKey("nopedUsers", notEqualTo: exclude.parse)
-        
-        // TODO: All queries below are part of compound or query
-        // TODO: Query for friends that have liked it
-        // TODO: Query for geo location from where u are
-        // TODO: Query for about my friends
-        // TODO: Query for about me
-        // TODO: Query for hotness calculated by karma (can be negative)
-        // TODO: Query for newest posts
-        
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil && !objects.isEmpty {
-                for object in objects as [PFObject] {
-                    posts.append(Post(object, withRelations: withRelations))
-                }
+        Post.batchSave(true, { (success, error) -> Void in
+            if success == true && error == nil {
+                var posts: [Post] = []
+                var query = PFQuery(className: "Posts")
                 
-                callback(posts: posts)
-            } else if error != nil {
+                query.limit = limit
+                query.cachePolicy = kPFCachePolicyNetworkElseCache
+                query.orderByDescending("createdAt")
+                
+                // TODO: Uncomment when posting works
+                //query.whereKey("creator", notEqualTo: exclude.parse)
+                //query.whereKey("likedUsers", notEqualTo: exclude.parse)
+                //query.whereKey("nopedUsers", notEqualTo: exclude.parse)
+                
+                // TODO: All queries below are part of compound or query
+                // TODO: Query for friends that have liked it
+                // TODO: Query for geo location from where u are
+                // TODO: Query for about my friends
+                // TODO: Query for about me
+                // TODO: Query for hotness calculated by karma (can be negative)
+                // TODO: Query for newest posts
+                
+                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                    if error == nil && !objects.isEmpty {
+                        for object in objects as [PFObject] {
+                            posts.append(Post(object, withRelations: withRelations))
+                        }
+                        
+                        callback(posts: posts)
+                    } else if error != nil {
+                        println(error)
+                    }
+                })
+            } else {
                 println(error)
             }
         })
+    }
+    
+    class func batchSave(force: Bool = false) {
+        Post.batchSave(force, nil)
+    }
+    
+    class func batchSave(force: Bool, callback: ((success: Bool, error: NSError!) -> Void)!) {
+        if saveQueue.count != 0 {
+            if force || saveQueue.count > 30 {
+                var posts: [PFObject] = []
+                
+                for post in saveQueue {
+                    posts.append((post as Post).parse)
+                    saveQueue.removeObject(post)
+                }
+                
+                if callback != nil {
+                    PFObject.saveAllInBackground(posts, callback)
+                } else {
+                    PFObject.saveAllInBackground(posts)
+                }
+            }
+        } else {
+            callback(success: true, error: nil)
+        }
     }
     
     // MARK: Instance Methods
@@ -107,7 +138,7 @@ class Post: NSObject {
         self.parse.incrementKey("karma")
         
         saveQueue.addObject(self)
-        self.batchSave()
+        Post.batchSave()
     }
     
     func nope(user: User) {
@@ -117,7 +148,7 @@ class Post: NSObject {
         self.parse.incrementKey("karma", byAmount: -1)
         
         saveQueue.addObject(self)
-        self.batchSave()
+        Post.batchSave()
     }
     
     func share(user: User) {
@@ -128,19 +159,6 @@ class Post: NSObject {
     
     func share(contacts: NSArray) {
         println(contacts)
-    }
-    
-    func batchSave() {
-        if saveQueue.count > 30 {
-            var posts: [PFObject] = []
-            
-            for post in saveQueue {
-                posts.append((post as Post).parse)
-                saveQueue.removeObject(post)
-            }
-            
-            PFObject.saveAllInBackground(posts)
-        }
     }
     
     func getImage(callback: (image: UIImage) -> Void) {
