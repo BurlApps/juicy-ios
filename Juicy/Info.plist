@@ -34,6 +34,10 @@
 	<string>${NEW_RELIC_KEY}</string>
 	<key>CrashlyticsKey</key>
 	<string>${CRASHLYTICS_KEY}</string>
+	<key>TwilioSID</key>
+	<string>${TWILIO_SID}</string>
+	<key>TwilioToken</key>
+	<string>${TWILIO_TOKEN}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

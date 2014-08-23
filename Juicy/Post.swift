@@ -101,7 +101,7 @@ class Post: NSObject {
                 query.whereKey("likedUsers", notEqualTo: current.parse)
                 query.whereKey("nopedUsers", notEqualTo: current.parse)
                 query.whereKey("show", equalTo: true)
-                query.orderByDescending("createdAt")
+                query.orderByAscending("createdAt")
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil && !objects.isEmpty {
@@ -146,12 +146,12 @@ class Post: NSObject {
     }
     
     // MARK: Instance Methods
-    func like(user: User) {
+    func like(user: User, amount: Int = 1) {
         var likedRelation = self.parse.relationForKey("likedUsers")
         likedRelation.addObject(user.parse)
         
         self.parse.incrementKey("likes")
-        self.parse.incrementKey("karma")
+        self.parse.incrementKey("karma", byAmount: amount)
         
         saveQueue.addObject(self)
         Post.batchSave()
@@ -170,7 +170,7 @@ class Post: NSObject {
     func share(user: User) {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
-        self.like(user)
+        self.like(user, amount: 2)
     }
     
     func share(contacts: NSArray) {
