@@ -2,6 +2,6 @@
 
 import UIKit
 
-let a = [ "fun": "a", "asdf": "c"]
+var a = [ "fun": "a", "asdf": "c"]
 
-a.indexForKey(<#key: String#>)
+a.removeAll(keepCapacity: true)

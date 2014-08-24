@@ -168,7 +168,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     func didChangeSelectedItems() {
     
     }
-    
+
     // MARK: UITableView Delegate and Datasource functions
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         return 1

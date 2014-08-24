@@ -174,7 +174,32 @@ class Post: NSObject {
     }
     
     func share(contacts: NSArray) {
-        println(contacts)
+        self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
+            if success && error == nil {
+                // Remove From Batch Save
+                saveQueue.removeObject(self.parse)
+                
+                // Get Info Dictionary
+                let infoDictionary = NSBundle.mainBundle().infoDictionary;
+                
+                // Call ShareSms on Parse
+                PFCloud.callFunctionInBackground("shareSms", withParameters: [
+                    "post": self.parse.objectId,
+                    "contacts": contacts,
+                    "twilio": [
+                        "sid": infoDictionary["TwilioSID"] as  NSString,
+                        "token": infoDictionary["TwilioToken"] as  NSString,
+                        "phone": infoDictionary["TwilioPhone"] as  NSString
+                    ]
+                ], block: { (success, error) in
+                    if error != nil {
+                        println(error)
+                    }
+                })
+            } else {
+                println(error)
+            }
+        }
     }
     
     func getImage(callback: (image: UIImage) -> Void) {

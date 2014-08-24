@@ -91,14 +91,15 @@ class Contacts {
     
     // MARK: Fake Methods Until iOS Fixes Bug
     func getContacts(callback: (contacts: Array<Contact>) -> Void) {
-        let phone: Phone = Phone(name: "mobile", phone: "310-849-2533")
+        let defaultPhone: Phone = Phone(name: "mobile", phone: "310-849-2533")
+        let MarkPhone: Phone = Phone(name: "mobile", phone: "708-824-8463")
         
         callback(contacts: [
-            Contact(name: "Brian", email: nil, phones: [phone]),
-            Contact(name: "Brian Vallelunga", email: nil, phones: [phone]),
-            Contact(name: "Bob", email: nil, phones: [phone]),
-            Contact(name: "Mark Adams", email: nil, phones: [phone]),
-            Contact(name: "Gorge", email: nil, phones: [phone])
+            Contact(name: "Brian", email: nil, phones: [defaultPhone]),
+            Contact(name: "Brian Vallelunga", email: nil, phones: [defaultPhone]),
+            Contact(name: "Bob", email: nil, phones: [defaultPhone]),
+            Contact(name: "Mark Adams", email: nil, phones: [MarkPhone]),
+            Contact(name: "Gorge", email: nil, phones: [defaultPhone])
         ])
     }
 }

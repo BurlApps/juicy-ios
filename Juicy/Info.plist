@@ -38,6 +38,8 @@
 	<string>${TWILIO_SID}</string>
 	<key>TwilioToken</key>
 	<string>${TWILIO_TOKEN}</string>
+	<key>TwilioPhone</key>
+	<string>${TWILIO_PHONE}</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
