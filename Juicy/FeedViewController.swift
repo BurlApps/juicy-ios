@@ -99,7 +99,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     func seedCards() {
-        Post.find(self.currentUser, withRelations: false, skip: self.posts.count, callback: { (posts: [Post]) -> Void in
+        Post.find(self.currentUser, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 self.posts = posts
                 let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))

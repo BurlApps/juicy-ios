@@ -18,14 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         let infoDictionary = NSBundle.mainBundle().infoDictionary;
         
-        // Initialize Crashlytics
-        let crashlyticsKey = infoDictionary["CrashlyticsKey"] as  NSString
-        Crashlytics.startWithAPIKey(crashlyticsKey)
-        
-        // Initialize NewRelic
-        let newRelicKey = infoDictionary["NewRelicKey"] as  NSString
-        NewRelicAgent.startWithApplicationToken(newRelicKey)
-        
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as  NSString
         let parseClientKey = infoDictionary["ParseClientKey"] as  NSString
@@ -33,6 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Initialize Facebook
         PFFacebookUtils.initializeFacebook()
+        
+        // Initialize NewRelic
+        let newRelicKey = infoDictionary["NewRelicKey"] as  NSString
+        NewRelicAgent.startWithApplicationToken(newRelicKey)
+
+        // Initialize HockeyApp
+        let hockeyAppKey = infoDictionary["HockeyAppKey"] as  NSString
+        BITHockeyManager.sharedHockeyManager().configureWithIdentifier(hockeyAppKey)
+        BITHockeyManager.sharedHockeyManager().startManager()
+        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
+        BITHockeyManager.sharedHockeyManager().testIdentifier()
         
         // Return 
         return true
