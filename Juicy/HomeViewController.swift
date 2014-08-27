@@ -8,21 +8,9 @@
 
 class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     
-    // MARK: Default Settings
-    private struct Page {
-        var image: String!
-        var title: String!
-    }
-    
     // MARK: Instance Variables
     private var pageViewController: UIPageViewController!
-    private var pages: [Page] = [
-        Page(image: "HomePage1", title: "Page 1"),
-        Page(image: "HomePage2", title: "Page 2"),
-        Page(image: "HomePage3", title: "Page 3"),
-        Page(image: "HomePage4", title: "Page 4"),
-        Page(image: "HomePage5", title: "Page 5")
-    ]
+    private let pages = 5
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     // MARK: Instance IBoutlets
@@ -43,7 +31,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         // Create Page View Controller
         self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageViewController.view.backgroundColor = UIColor.clearColor()
-        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 120)
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 110)
         self.pageViewController.dataSource = self
         self.pageViewController.setViewControllers([self.viewControllerAtIndex(0)], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
         
@@ -52,7 +40,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         self.pageViewController.didMoveToParentViewController(self)
         
         // Setup Button Background
-        self.loginButton.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 0.95)
+        self.loginButton.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
         
         // Add Spinner to Connect Button
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
@@ -76,16 +64,12 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     
     // MARK: Instance Methods
     func viewControllerAtIndex(index: Int) -> PageContentViewController! {
-        if self.pages.isEmpty || index >= self.pages.count {
+        if self.pages == 0 || index >= self.pages {
             return nil
         }
         
         // Create PageViewController
-        var pageContentViewController = self.storyboard.instantiateViewControllerWithIdentifier("PageContentViewController") as PageContentViewController
-        pageContentViewController.imageFile = self.pages[index].image
-        pageContentViewController.titleText = self.pages[index].title
-        pageContentViewController.pageIndex = index
-        return pageContentViewController
+        return PageContentViewController(frame: self.view.frame, index: index)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -98,15 +82,15 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     @IBAction func loginButtonDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red: 0.14, green: 0.22, blue: 0.36, alpha: 0.95)
+        sender.backgroundColor = UIColor(red: 0.14, green: 0.22, blue: 0.36, alpha: 1)
     }
     
     @IBAction func loginButtonExit(sender: UIButton) {
-        sender.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 0.95)
+        sender.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
     }
     
     @IBAction func loginButtonReleased(sender: UIButton) {
-        sender.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 0.95)
+        sender.backgroundColor = UIColor(red: 0.25, green: 0.37, blue: 0.58, alpha: 1)
         sender.setTitleColor(UIColor.clearColor(), forState: UIControlState.Normal)
         self.spinner.startAnimating()
         
@@ -140,7 +124,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController!, viewControllerAfterViewController viewController: UIViewController!) -> UIViewController! {
         var index = (viewController as PageContentViewController).pageIndex
         
-        if index == NSNotFound || (index + 1) == self.pages.count {
+        if index == NSNotFound || (index + 1) == self.pages {
             return nil
         }
         
@@ -148,7 +132,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController!) -> Int {
-        return self.pages.count
+        return self.pages
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {

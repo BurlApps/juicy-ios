@@ -36,7 +36,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !self.cameraView.session.running {
+        if self.cameraView.session != nil && !self.cameraView.session.running {
             self.cameraView.awakeFromNib()
         }
         

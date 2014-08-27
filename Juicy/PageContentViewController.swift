@@ -10,25 +10,20 @@ class PageContentViewController: UIViewController {
     
     // Instance Variables
     var pageIndex: Int!
-    var titleText: String!
-    var imageFile: String!
-    
-    // IBOutlets Variables
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // UIViewController Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    convenience init(frame: CGRect, index: Int) {
+        self.init()
+        
+        self.view.frame = frame
+        self.pageIndex = index
         
         self.view.backgroundColor = UIColor.clearColor()
         
-        self.backgroundImageView.frame = self.view.frame
-        self.backgroundImageView.clipsToBounds = true
-        self.backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
-        self.backgroundImageView.image = UIImage(named: self.imageFile)
-        
-        self.textLabel.text = self.titleText
-        self.textLabel.frame = CGRectMake(25, 40, self.view.frame.width - 50, 50)
+        var backgroundImageView = UIImageView(frame: self.view.frame)
+        backgroundImageView.clipsToBounds = true
+        backgroundImageView.contentMode = UIViewContentMode.Top
+        backgroundImageView.image = UIImage(named: "HomePage\(index + 1)")
+        self.view.addSubview(backgroundImageView)
     }
 }
