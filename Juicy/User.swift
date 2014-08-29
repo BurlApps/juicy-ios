@@ -12,7 +12,7 @@ class User: NSObject {
     var username: String!
     var name: String!
     var displayName: String!
-    var savedPosts: [Post]!
+    var sharedPosts: [Post]!
     var friendsList: [User]!
     var registered: Bool!
     var terms: Bool!
@@ -30,7 +30,7 @@ class User: NSObject {
         self.registered = user["registered"] as? Bool
         
         if withRelations {
-            self.getSavedPosts(nil)
+            self.getSharedPosts(nil)
             self.getFriendsList(nil)
         }
     }
@@ -102,21 +102,20 @@ class User: NSObject {
         }
     }
     
-    func getSavedPosts(callback: ((posts: [Post]) -> Void)?) {
+    func getSharedPosts(callback: ((posts: [Post]) -> Void)?) {
         var posts: [Post] = []
-        var query: PFQuery = (self.parse["savedPosts"] as PFRelation).query()
+        var query = PFQuery(className: "Posts")
         
-        query.cachePolicy = kPFCachePolicyNetworkElseCache
+        query.whereKey("sharedUsers", equalTo: self.parse)
         query.orderByDescending("createdAt")
-        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
+        
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil && !objects.isEmpty {
                 for object in objects as [PFObject] {
-                    let post = Post(object)
-                    posts.append(post)
+                    posts.append(Post(object, withRelations: false))
                 }
                 
-                self.savedPosts = posts
-                callback?(posts: posts)
+                callback!(posts: posts)
             } else if error != nil {
                 println(error)
             }

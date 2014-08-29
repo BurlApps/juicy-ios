@@ -101,7 +101,7 @@ class Post: NSObject {
                 query.whereKey("likedUsers", notEqualTo: current.parse)
                 query.whereKey("nopedUsers", notEqualTo: current.parse)
                 query.whereKey("show", equalTo: true)
-                query.orderByAscending("createdAt")
+                query.orderByDescending("createdAt")
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
                     if error == nil && !objects.isEmpty {

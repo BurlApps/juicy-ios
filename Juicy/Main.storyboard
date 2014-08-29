@@ -204,7 +204,7 @@
             </objects>
             <point key="canvasLocation" x="136" y="19"/>
         </scene>
-        <!--Select Contacts-->
+        <!--Share The Drop-->
         <scene sceneID="O3T-kF-Nvs">
             <objects>
                 <viewController storyboardIdentifier="ShareViewController" id="3Jy-W0-pcp" customClass="ShareViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -217,7 +217,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select Contacts" id="59M-Kg-lJx">
+                    <navigationItem key="navigationItem" title="Share The Drop" id="59M-Kg-lJx">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="bdF-FR-TDy">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -305,7 +305,7 @@
             </objects>
             <point key="canvasLocation" x="632" y="19"/>
         </scene>
-        <!--Saved Droplets-->
+        <!--Shared Drops-->
         <scene sceneID="1pL-Rh-c08">
             <objects>
                 <tableViewController storyboardIdentifier="SavedTableViewController" id="jRR-G4-tle" customClass="SavedTableViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -314,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="214" id="U4e-y6-BV6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="U4e-y6-BV6">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U4e-y6-BV6" id="UWJ-kk-GG2">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -326,9 +326,12 @@
                             <outlet property="delegate" destination="jRR-G4-tle" id="yLl-6Y-ySX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Saved Droplets" id="Zv0-YF-sRg">
+                    <navigationItem key="navigationItem" title="Shared Drops" id="Zv0-YF-sRg">
                         <barButtonItem key="leftBarButtonItem" title="Item" systemItem="stop" id="7KS-vJ-OCC">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="shareExit:" destination="jRR-G4-tle" id="q8j-ZR-thQ"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

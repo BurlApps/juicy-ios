@@ -242,13 +242,13 @@ class FeedViewController: UIViewController, CardViewDelegate {
             
             switch card.status {
             case .Liked:
-                title = "Like Post"
+                title = "Like the Drop"
                 color = self.defaults.createButtonLike
             case .Noped:
-                title = "Nope Post"
+                title = "Nope the Drop"
                 color = self.defaults.createButtonNope
             case .Shared:
-                title = "Share Post"
+                title = "Share the Drop"
                 color = self.defaults.createButtonShare
             case .None:
                 title = "What's Juicy?"

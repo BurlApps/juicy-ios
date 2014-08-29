@@ -12,7 +12,7 @@ class TermsViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     // MARK: Instance Variables
-    var currentUser = User.current()
+    private var currentUser = User.current()
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
