@@ -60,11 +60,13 @@ class CardView: UIView {
     // MARK: Instance Attributes
     private let defaults = Defaults()
     private var neededSwipeDistance: CGFloat!
+    private var hideContent: Bool!
     private var isOffScreen: Bool!
     private var rotationAngle: CGFloat!
     private var startPointInSuperview: CGPoint!
     
     // MARK: Instance Gestures
+    private var tapGesture: UITapGestureRecognizer!
     private var panGesture: UIPanGestureRecognizer!
     
     // MARK: Convenience Init Method
@@ -152,6 +154,7 @@ class CardView: UIView {
     }
     
     private func setupAttributes() {
+        self.hideContent = false
         self.isOffScreen = false
         self.neededSwipeDistance = self.defaults.swipeDistance;
         self.userInteractionEnabled = true;
@@ -159,15 +162,29 @@ class CardView: UIView {
     }
     
     private func setupGestures() {
+        self.tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapHandle:"))
+        self.addGestureRecognizer(self.tapGesture)
+        
         self.panGesture = UIPanGestureRecognizer(target: self, action: Selector("panHandle:"))
         self.addGestureRecognizer(self.panGesture)
     }
     
     private func removeGestures() {
+        self.removeGestureRecognizer(self.tapGesture)
         self.removeGestureRecognizer(self.panGesture)
     }
     
     // MARK: Gesture Handlers
+    @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
+        if self.locked == false {
+            self.hideContent = !self.hideContent
+            
+            UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                self.content.alpha = 1 - self.content.alpha
+            }, completion: nil)
+        }
+    }
+    
     @IBAction func panHandle(gesture: UIPanGestureRecognizer) {
         let newLocation = gesture.locationInView(self.superview)
         
@@ -221,7 +238,10 @@ class CardView: UIView {
                 }
             }
             
-            self.content.alpha = pow((1 - percentage), 4)
+            if self.hideContent == false {
+                self.content.alpha = pow((1 - percentage), 4)
+            }
+            
             self.choice.alpha = (percentage * 0.8)
             self.darkener.backgroundColor = self.mixColors(self.darkenerColor.CGColor, colorTwo: newColor, delta: percentage)
             self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder.CGColor, colorTwo: newColorBorder, delta: percentage).CGColor
@@ -298,6 +318,8 @@ class CardView: UIView {
             self.choice.alpha = 0
             self.content.alpha = 1
         }
+        
+        self.hideContent = false
     }
     
     // MARK: Helper Methods

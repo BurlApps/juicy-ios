@@ -136,8 +136,9 @@ class FeedViewController: UIViewController, CardViewDelegate {
         } else {
             self.view.insertSubview(card, belowSubview: self.cards.last!)
         }
-
+        
         self.cards.append(card)
+        self.cards.first?.locked = false
         return card
     }
     
@@ -210,8 +211,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
         }, completion: nil)
         
         // Reset Create Button
-        self.createButton.backgroundColor = self.defaults.createButton
-        self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
+        if card == self.cards.first {
+            self.createButton.backgroundColor = self.defaults.createButton
+            self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
+        }
     }
     
     func cardMovingAroundScreen(card: CardView, delta: CGFloat) {
