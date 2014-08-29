@@ -185,7 +185,6 @@ class FeedViewController: UIViewController, CardViewDelegate {
         case .Shared:
             self.sharePost = card.post
             self.performSegueWithIdentifier("shareSegue", sender: self)
-            card.post.share(self.currentUser)
         case .None:
             break
         }

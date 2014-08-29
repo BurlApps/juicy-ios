@@ -85,7 +85,7 @@ class User: NSObject {
             query.cachePolicy = kPFCachePolicyNetworkElseCache
             query.orderByDescending("createdAt")
             query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) in
-                if error == nil && !objects.isEmpty {
+                if error == nil {
                     for object in objects as [PFUser] {
                         let friend = User(object, withRelations: false)
                         friends.append(friend)
@@ -110,7 +110,7 @@ class User: NSObject {
         query.orderByDescending("createdAt")
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil && !objects.isEmpty {
+            if error == nil {
                 for object in objects as [PFObject] {
                     posts.append(Post(object, withRelations: false))
                 }

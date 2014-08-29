@@ -10,6 +10,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     
     // MARK: Instance Variables
     var aboutPost: Post!
+    private var currentUser: User = User.current()
     private var contactPicker: THContactPickerView!
     private var tableView: UITableView!
     private var contacts: NSArray!
@@ -100,7 +101,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     
     @IBAction func shareSend(sender: UIBarButtonItem) {
         self.navigationController.popViewControllerAnimated(false)
-        self.aboutPost.share(self.privateSelectedContacts)
+        self.aboutPost.share(self.currentUser, contacts: self.privateSelectedContacts)
     }
     
     // MARK: Instance Methods

@@ -30,10 +30,19 @@ class SavedTableViewController: UITableViewController {
         // Configure Table
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
         
+        // Self Loading Title
+        self.title = "Loading..."
+        
         // Get Shared Posts
         self.currentUser.getSharedPosts { (posts) -> Void in
-            self.sharedPosts = posts
-            self.tableView.reloadData()
+            if !posts.isEmpty {
+                self.sharedPosts = posts
+                self.tableView.reloadData()
+                self.title = "Shared Drops"
+            } else {
+                self.title = "No Shared Drops"
+                
+            }
         }
     }
     

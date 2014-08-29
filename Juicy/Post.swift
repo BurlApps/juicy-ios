@@ -104,7 +104,7 @@ class Post: NSObject {
                 query.orderByDescending("createdAt")
                 
                 query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-                    if error == nil && !objects.isEmpty {
+                    if error == nil {
                         for object in objects as [PFObject] {
                             posts.append(Post(object, withRelations: withRelations))
                         }
@@ -167,13 +167,11 @@ class Post: NSObject {
         Post.batchSave()
     }
     
-    func share(user: User) {
+    func share(user: User, contacts: NSArray) {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
         self.like(user, amount: 2)
-    }
-    
-    func share(contacts: NSArray) {
+        
         self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
             if success && error == nil {
                 // Remove From Batch Save
