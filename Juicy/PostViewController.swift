@@ -16,7 +16,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
     var capturedImage: UIImage!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
-    private var currentUser: User = User.current(false)
+    private var currentUser: User = User.current()
     private var contacts: [String] = []
     
     // MARK: UIViewController Overrides

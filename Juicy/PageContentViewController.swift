@@ -11,7 +11,7 @@ class PageContentViewController: UIViewController {
     // Instance Variables
     var pageIndex: Int!
     
-    // UIViewController Overrides
+    // Convience Constructor
     convenience init(frame: CGRect, index: Int) {
         self.init()
         

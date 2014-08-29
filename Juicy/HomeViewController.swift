@@ -22,7 +22,11 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
-            self.performSegueWithIdentifier("loggedInSegue", sender: self)
+            if User.current().terms == true {
+                self.performSegueWithIdentifier("loggedInSegue", sender: self)
+            } else {
+                self.performSegueWithIdentifier("termsSegue", sender: self)
+            }
         }
         
         // Configure Status Bar
@@ -62,16 +66,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         pageControl.backgroundColor = UIColor.clearColor()
     }
     
-    // MARK: Instance Methods
-    func viewControllerAtIndex(index: Int) -> PageContentViewController! {
-        if self.pages == 0 || index >= self.pages {
-            return nil
-        }
-        
-        // Create PageViewController
-        return PageContentViewController(frame: self.view.frame, index: index)
-    }
-    
     override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -81,6 +75,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         self.spinner.stopAnimating()
     }
     
+    // MARK: IBAction Methods
     @IBAction func loginButtonDown(sender: UIButton) {
         sender.backgroundColor = UIColor(red: 0.14, green: 0.22, blue: 0.36, alpha: 1)
     }
@@ -96,18 +91,34 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         
         PFFacebookUtils.logInWithPermissions(nil, { (user: PFUser!, error: NSError!) -> Void in
             if user != nil {
+                var tempUser = User(user)
+                
                 if user.isNew {
-                    User(user, withRelations: false).setExtraInfo({ () -> Void in
-                        self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                    tempUser.setExtraInfo({ () -> Void in
+                        self.performSegueWithIdentifier("termsSegue", sender: self)
                     })
                 } else {
-                    self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                    if tempUser.terms == true {
+                        self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                    } else {
+                        self.performSegueWithIdentifier("termsSegue", sender: self)
+                    }
                 }
             } else {
                 self.loginButton.setTitle("Failed To Log In", forState: UIControlState.Normal)
                 println(error)
             }
         })
+    }
+    
+    // MARK: Instance Methods
+    func viewControllerAtIndex(index: Int) -> PageContentViewController! {
+        if self.pages == 0 || index >= self.pages {
+            return nil
+        }
+        
+        // Create PageViewController
+        return PageContentViewController(frame: self.view.frame, index: index)
     }
     
     // MARK: Page View Controller Data Source

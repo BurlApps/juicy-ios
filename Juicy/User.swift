@@ -14,16 +14,20 @@ class User: NSObject {
     var displayName: String!
     var savedPosts: [Post]!
     var friendsList: [User]!
+    var registered: Bool!
+    var terms: Bool!
     var parse: PFUser!
     
     // MARK: Convenience Methods
-    convenience init(_ user: PFUser, withRelations: Bool) {
+    convenience init(_ user: PFUser, withRelations: Bool = false) {
         self.init()
         
         self.parse = user
         self.username = user["username"] as? String
         self.displayName = user["displayName"] as? String
         self.name = user["name"] as? String
+        self.terms = user["terms"] as? Bool
+        self.registered = user["registered"] as? Bool
         
         if withRelations {
             self.getSavedPosts(nil)
@@ -32,6 +36,11 @@ class User: NSObject {
     }
     
     // MARK: Instance Methods
+    func acceptedTerms() {
+        self.parse["terms"] = true
+        self.parse.saveInBackground()
+    }
+    
     func setExtraInfo(callback: (() -> Void)?) {
         var meRequest = FBRequest.requestForMe()
         meRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
@@ -41,6 +50,7 @@ class User: NSObject {
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 
                 self.parse["admin"] = false
+                self.parse["terms"] = false
                 self.parse["registered"] = true
                 self.parse["email"] = fbUser["email"] as String
                 self.parse["name"] = fbUser["name"] as String
@@ -114,7 +124,11 @@ class User: NSObject {
     }
     
     // MARK: Class Methods
-    class func current(withRelations: Bool) -> User {
-        return User(PFUser.currentUser(), withRelations: withRelations)
+    class func current(relations: Bool = false) -> User {
+        return User(PFUser.currentUser(), withRelations: relations)
+    }
+    
+    class func logout() {
+        PFUser.logOut()
     }
 }

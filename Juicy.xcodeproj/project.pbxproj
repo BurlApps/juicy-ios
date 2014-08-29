@@ -13,6 +13,7 @@
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
 		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
+		D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */; };
 		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
 		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
@@ -39,6 +40,7 @@
 		D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */; };
 		D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AF194E722A00FABCC0 /* UIKit.framework */; };
 		D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8B1194E723400FABCC0 /* Foundation.framework */; };
+		D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BC19B0304E0057DA1F /* TermsViewController.swift */; };
 		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
@@ -112,6 +114,7 @@
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTableViewController.swift; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 		D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D3A2A8AF194E722A00FABCC0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3A2A8B1194E723400FABCC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D3A752BC19B0304E0057DA1F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -226,11 +230,13 @@
 			isa = PBXGroup;
 			children = (
 				D31CDB9119AD94490037AD99 /* HomeViewController.swift */,
-				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
+				D3A752BC19B0304E0057DA1F /* TermsViewController.swift */,
 				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
+				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
 				D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */,
 				D3D5B56519A0406F006E43F1 /* PostViewController.swift */,
 				D37683F319A70EF700F416B4 /* ShareViewController.swift */,
+				D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */,
+				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
@@ -584,6 +591,7 @@
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
 				D30A84D41997403F00CBF78F /* CardView.swift in Sources */,
 				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
+				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */,
 				D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */,

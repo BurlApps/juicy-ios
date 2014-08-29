@@ -17,11 +17,16 @@ class FeedViewController: UIViewController, CardViewDelegate {
         let rotation: Double = 6
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
+        let createButton: UIColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.95)
+        let createButtonDown: UIColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:0.95)
+        let createButtonShare: UIColor = UIColor(red:0.27, green:0.64, blue:0.85, alpha: 0.95)
+        let createButtonLike: UIColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.95)
+        let createButtonNope: UIColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.95)
     }
     
     // MARK: Instance Variables
     private let defaults = Defaults()
-    private var currentUser = User.current(false)
+    private var currentUser = User.current()
     private var posts: [Post] = []
     private var cards: [CardView!] = []
     private var sharePost: Post!
@@ -34,7 +39,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
         
         // Setup Create Button
-        self.createButton.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.95)
+        self.createButton.backgroundColor = self.defaults.createButton
         
         // Add Create Button Top Border
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.createButton.frame.size.width, 3))
@@ -80,21 +85,21 @@ class FeedViewController: UIViewController, CardViewDelegate {
     
     // MARK: IBActions
     @IBAction func logoutUser(sender: UIBarButtonItem) {
-        PFUser.logOut()
+        User.logout()
         self.navigationController.popToRootViewControllerAnimated(false)
     }
     
     @IBAction func createPostDown(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:0.95)
+        sender.backgroundColor = self.defaults.createButtonDown
     }
     
     
-    @IBAction func createPostEdit(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.95)
+    @IBAction func createPostExit(sender: UIButton) {
+        sender.backgroundColor = self.defaults.createButton
     }
     
     @IBAction func createPost(sender: UIButton) {
-        sender.backgroundColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.95)
+        sender.backgroundColor = self.defaults.createButton
     }
     
     // MARK: Instance Methods
@@ -183,6 +188,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
         case .None:
             break
         }
+        
+        // Reset Create Button
+        self.createButton.backgroundColor = self.defaults.createButton
+        self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
     }
     
     func cardWillReturnToCenter(card: CardView) {
@@ -199,6 +208,10 @@ class FeedViewController: UIViewController, CardViewDelegate {
                 self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
             }
         }, completion: nil)
+        
+        // Reset Create Button
+        self.createButton.backgroundColor = self.defaults.createButton
+        self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
     }
     
     func cardMovingAroundScreen(card: CardView, delta: CGFloat) {
@@ -217,6 +230,30 @@ class FeedViewController: UIViewController, CardViewDelegate {
             let secondTransform = self.degreeToRadian(self.defaults.rotation)
             let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
             self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
+        }
+        
+        // Set State For Button
+        if card == self.cards.first {
+            var title: String!
+            var color: UIColor!
+            
+            switch card.status {
+            case .Liked:
+                title = "Like Post"
+                color = self.defaults.createButtonLike
+            case .Noped:
+                title = "Nope Post"
+                color = self.defaults.createButtonNope
+            case .Shared:
+                title = "Share Post"
+                color = self.defaults.createButtonShare
+            case .None:
+                title = "What's Juicy?"
+                color = self.defaults.createButton
+            }
+            
+            self.createButton.backgroundColor = color
+            self.createButton.setTitle(title, forState: UIControlState.Normal)
         }
     }
 }

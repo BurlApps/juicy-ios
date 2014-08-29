@@ -78,6 +78,12 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
+        
+        // Configure Navigation Bar
+        self.navigationController.navigationBar.titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.darkGrayColor(),
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
+        ]
     }
     
     override func viewWillDisappear(animated: Bool) {
