@@ -12,6 +12,8 @@ class SavedTableViewController: UITableViewController {
     private var cellIdentifier = "cell"
     private var currentUser: User = User.current()
     private var sharedPosts: [Post] = []
+    private let duration: NSTimeInterval = 0.2
+    private let delay: NSTimeInterval = 0
     
     // MARK: UITableViewController Overrides
     override func viewDidLoad() {
@@ -28,7 +30,7 @@ class SavedTableViewController: UITableViewController {
         ]
         
         // Configure Table
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         // Self Loading Title
         self.title = "Loading..."
@@ -72,8 +74,14 @@ class SavedTableViewController: UITableViewController {
             cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier)
         }
         
+        cell.backgroundImageView.alpha = 0
+        cell.backgroundImageView.image = UIImage()
+        
         post.getImage({ (image) -> Void in
-            cell.backgroundImageView.image = image
+            UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                cell.backgroundImageView.alpha = 1
+                cell.backgroundImageView.image = image
+            }, completion: nil)
         })
         
         // Coloring Content With Names

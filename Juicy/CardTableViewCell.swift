@@ -37,5 +37,9 @@ class CardTableViewCell: UITableViewCell {
         self.content.numberOfLines = 6
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.insertSubview(self.content, aboveSubview: darkener)
+        
+        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 3))
+        buttonBorder.backgroundColor = UIColor(white: 1, alpha: 0.15)
+        self.insertSubview(buttonBorder, aboveSubview: self.content)
     }
 }

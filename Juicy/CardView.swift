@@ -181,6 +181,7 @@ class CardView: UIView {
             
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.content.alpha = 1 - self.content.alpha
+                self.darkener.alpha = 1 - self.darkener.alpha
             }, completion: nil)
         }
     }
@@ -240,6 +241,10 @@ class CardView: UIView {
             
             if self.hideContent == false {
                 self.content.alpha = pow((1 - percentage), 4)
+            } else {
+                UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.darkener.alpha = 1
+                }, completion: nil)
             }
             
             self.choice.alpha = (percentage * 0.8)

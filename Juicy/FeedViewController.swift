@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class FeedViewController: UIViewController, CardViewDelegate {
+class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDelegate {
     
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
@@ -84,9 +84,14 @@ class FeedViewController: UIViewController, CardViewDelegate {
     }
     
     // MARK: IBActions
-    @IBAction func logoutUser(sender: UIBarButtonItem) {
-        User.logout()
-        self.navigationController.popToRootViewControllerAnimated(false)
+    @IBAction func settingsButton(sender: UIBarButtonItem) {
+
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Add Phone Number", "Logout")
+        actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
+        actionSheet.showInView(self.view)
+        
+//        User.logout()
+//        self.navigationController.popToRootViewControllerAnimated(false)
     }
     
     @IBAction func createPostDown(sender: UIButton) {
@@ -100,6 +105,21 @@ class FeedViewController: UIViewController, CardViewDelegate {
     
     @IBAction func createPost(sender: UIButton) {
         sender.backgroundColor = self.defaults.createButton
+    }
+    
+    // MARK: UIActionSheetDelegate Methods
+    func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+        switch buttonIndex {
+        case 1:
+            println("My Posts")
+        case 2:
+            println("Phone Number")
+        case 3:
+            User.logout()
+            self.navigationController.popToRootViewControllerAnimated(false)
+        default:
+            break
+        }
     }
     
     // MARK: Instance Methods
@@ -191,7 +211,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         
         // Reset Create Button
         self.createButton.backgroundColor = self.defaults.createButton
-        self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
+        self.createButton.setTitle("POST", forState: UIControlState.Normal)
     }
     
     func cardWillReturnToCenter(card: CardView) {
@@ -212,7 +232,7 @@ class FeedViewController: UIViewController, CardViewDelegate {
         // Reset Create Button
         if card == self.cards.first {
             self.createButton.backgroundColor = self.defaults.createButton
-            self.createButton.setTitle("What's Juicy?", forState: UIControlState.Normal)
+            self.createButton.setTitle("POST", forState: UIControlState.Normal)
         }
     }
     
@@ -241,16 +261,16 @@ class FeedViewController: UIViewController, CardViewDelegate {
             
             switch card.status {
             case .Liked:
-                title = "Like the Drop"
+                title = "LIKE"
                 color = self.defaults.createButtonLike
             case .Noped:
-                title = "Nope the Drop"
+                title = "NOPE"
                 color = self.defaults.createButtonNope
             case .Shared:
-                title = "Share the Drop"
+                title = "SHARE"
                 color = self.defaults.createButtonShare
             case .None:
-                title = "What's Juicy?"
+                title = "POST"
                 color = self.defaults.createButton
             }
             

@@ -161,7 +161,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="2"/>
-                                <state key="normal" title="What's Juicy?">
+                                <state key="normal" title="POST">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
                                 </state>
@@ -184,7 +184,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Item" image="SettingsCog" style="plain" id="ZSz-nZ-Te5">
                             <color key="tintColor" red="0.36096722146739135" green="0.36096722146739135" blue="0.36096722146739135" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="logoutUser:" destination="aOS-dg-wo6" id="tKf-UX-JvN"/>
+                                <action selector="settingsButton:" destination="aOS-dg-wo6" id="avM-HQ-dPl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Bookmarks" style="plain" id="cbK-7j-QhS">
@@ -204,7 +204,7 @@
             </objects>
             <point key="canvasLocation" x="136" y="19"/>
         </scene>
-        <!--Share The Drop-->
+        <!--Share The Post-->
         <scene sceneID="O3T-kF-Nvs">
             <objects>
                 <viewController storyboardIdentifier="ShareViewController" id="3Jy-W0-pcp" customClass="ShareViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -217,14 +217,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Share The Drop" id="59M-Kg-lJx">
+                    <navigationItem key="navigationItem" title="Share The Post" id="59M-Kg-lJx">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="bdF-FR-TDy">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeShare:" destination="3Jy-W0-pcp" id="O6h-mV-JLs"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="les-Wr-0jb">
+                        <barButtonItem key="rightBarButtonItem" title="SEND" id="les-Wr-0jb">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="shareSend:" destination="3Jy-W0-pcp" id="ieQ-eR-8ct"/>
@@ -262,7 +262,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="titleShadowOffset" width="0.0" height="2"/>
-                                <state key="normal" title="Capture">
+                                <state key="normal" title="CAPTURE">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
                                 </state>
@@ -305,7 +305,7 @@
             </objects>
             <point key="canvasLocation" x="632" y="19"/>
         </scene>
-        <!--Shared Drops-->
+        <!--Shared Posts-->
         <scene sceneID="1pL-Rh-c08">
             <objects>
                 <tableViewController storyboardIdentifier="SavedTableViewController" id="jRR-G4-tle" customClass="SavedTableViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -326,7 +326,7 @@
                             <outlet property="delegate" destination="jRR-G4-tle" id="yLl-6Y-ySX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Shared Drops" id="Zv0-YF-sRg">
+                    <navigationItem key="navigationItem" title="Shared Posts" id="Zv0-YF-sRg">
                         <barButtonItem key="leftBarButtonItem" title="Item" systemItem="stop" id="7KS-vJ-OCC">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -338,7 +338,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZ9-fZ-V7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="727"/>
+            <point key="canvasLocation" x="632" y="736"/>
         </scene>
         <!--Post-->
         <scene sceneID="WwM-01-KLA">
@@ -360,7 +360,7 @@
                                 <action selector="canelPost:" destination="cde-Ds-Zhk" id="ggA-80-g3v"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Post It" id="Kcb-A0-gHZ">
+                        <barButtonItem key="rightBarButtonItem" title="POST" id="Kcb-A0-gHZ">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="createPost:" destination="cde-Ds-Zhk" id="ZIq-pe-enA"/>

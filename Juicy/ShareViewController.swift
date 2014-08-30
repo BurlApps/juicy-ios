@@ -100,8 +100,10 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     }
     
     @IBAction func shareSend(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
-        self.aboutPost.share(self.currentUser, contacts: self.privateSelectedContacts)
+        if self.privateSelectedContacts.count != 0 {
+            self.navigationController.popViewControllerAnimated(false)
+            self.aboutPost.share(self.currentUser, contacts: self.privateSelectedContacts)
+        }
     }
     
     // MARK: Instance Methods
