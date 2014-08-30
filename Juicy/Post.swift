@@ -97,7 +97,7 @@ class Post: NSObject {
                 query.cachePolicy = kPFCachePolicyNetworkElseCache
                 
                 // TODO: uncomment in production
-                //query.whereKey("creator", notEqualTo: current.parse)
+                query.whereKey("creator", notEqualTo: current.parse)
                 query.whereKey("likedUsers", notEqualTo: current.parse)
                 query.whereKey("nopedUsers", notEqualTo: current.parse)
                 query.whereKey("show", equalTo: true)
