@@ -40,9 +40,9 @@ class SavedTableViewController: UITableViewController {
             if !posts.isEmpty {
                 self.sharedPosts = posts
                 self.tableView.reloadData()
-                self.title = "Shared Drops"
+                self.title = "Shared Posts"
             } else {
-                self.title = "No Shared Drops"
+                self.title = "No Shared Posts"
                 
             }
         }
