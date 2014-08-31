@@ -89,9 +89,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Add Phone Number", "Logout")
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
         actionSheet.showInView(self.view)
-        
-//        User.logout()
-//        self.navigationController.popToRootViewControllerAnimated(false)
     }
     
     @IBAction func createPostDown(sender: UIButton) {

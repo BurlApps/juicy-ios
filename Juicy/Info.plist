@@ -18,22 +18,45 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb${FACEBOOK_ID}</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.vallelungabrian.Juicy</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>juicy</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>FacebookAppID</key>
 	<string>${FACEBOOK_ID}</string>
 	<key>FacebookDisplayName</key>
 	<string>${FACEBOOK_NAME}</string>
+	<key>HockeyAppKey</key>
+	<string>${HOCKEY_APP_KEY}</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NewRelicKey</key>
+	<string>${NEW_RELIC_KEY}</string>
 	<key>ParseApplicationID</key>
 	<string>${PARSE_APPLICATION_ID}</string>
 	<key>ParseClientKey</key>
 	<string>${PARSE_CLIENT_KEY}</string>
-	<key>NewRelicKey</key>
-	<string>${NEW_RELIC_KEY}</string>
-	<key>HockeyAppKey</key>
-	<string>${HOCKEY_APP_KEY}</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Balcony Angels.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -46,25 +69,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb${FACEBOOK_ID}</string>
-			</array>
-		</dict>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Balcony Angels.ttf</string>
-	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

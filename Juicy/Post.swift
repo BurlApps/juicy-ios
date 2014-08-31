@@ -43,12 +43,6 @@ class Post: NSObject {
         var imageData = UIImagePNGRepresentation(image)
         var imageFile = PFFile(name: "image.png", data: imageData)
         
-        // Set Defaults
-        post["likes"] = 0
-        post["karma"] = 0
-        post["juicy"] = false
-        post["show"] = true
-        
         // Set Content
         post["content"] = content
         post["image"] = imageFile
@@ -68,43 +62,13 @@ class Post: NSObject {
     class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
         Post.batchSave(true, { (success, error) -> Void in
             if success == true && error == nil {
-                var posts: [Post] = []
-                var queries: [PFQuery] = []
-                
-                // TODO: All queries below are part of compound "or query"
-                // TODO: Query for friends that have liked it (done)
-                // TODO: Query for geo location from where u are
-                // TODO: Query for about my friends (done)
-                // TODO: Query for about me (done)
-                // TODO: Query for hotness calculated by karma (done)
-                // TODO: Query for newest posts (done)
-                
-                // About Me Query
-                var aboutMeQuery = PFQuery(className: "Posts")
-                aboutMeQuery.whereKey("aboutUsers", equalTo: current.parse)
-                queries.append(aboutMeQuery)
-                
-                // About My Friends Query
-                var aboutFriendsQuery = PFQuery(className: "Posts")
-                let friendRelation = current.parse["friends"] as PFRelation
-                aboutFriendsQuery.whereKey("aboutUsers", matchesQuery: friendRelation.query())
-                queries.append(aboutFriendsQuery)
-
-                // Base "Or Query"
-                var query = PFQuery.orQueryWithSubqueries(queries)
-                query.limit = limit
-                query.skip = skip
-                query.cachePolicy = kPFCachePolicyNetworkElseCache
-                
-                // TODO: uncomment in production
-                query.whereKey("creator", notEqualTo: current.parse)
-                query.whereKey("likedUsers", notEqualTo: current.parse)
-                query.whereKey("nopedUsers", notEqualTo: current.parse)
-                query.whereKey("show", equalTo: true)
-                query.orderByDescending("createdAt")
-                
-                query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+                PFCloud.callFunctionInBackground("feed", withParameters: [
+                    "limit": limit,
+                    "skip": skip
+                ], block:{ (objects: AnyObject!, error: NSError!) -> Void in
                     if error == nil {
+                        var posts: [Post] = []
+                        
                         for object in objects as [PFObject] {
                             posts.append(Post(object, withRelations: withRelations))
                         }
@@ -113,6 +77,8 @@ class Post: NSObject {
                     } else if error != nil {
                         println(error)
                     }
+                    
+                    return ()
                 })
             } else {
                 println(error)

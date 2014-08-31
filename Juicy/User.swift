@@ -49,12 +49,8 @@ class User: NSObject {
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 
-                self.parse["admin"] = false
-                self.parse["terms"] = false
-                self.parse["registered"] = true
                 self.parse["email"] = fbUser["email"] as String
                 self.parse["name"] = fbUser["name"] as String
-                self.parse["displayName"] = fbUser["name"] as String
                 self.parse["firstName"] = fbUser["first_name"] as String
                 self.parse["gender"] = fbUser["gender"] as String
                 
