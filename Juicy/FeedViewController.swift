@@ -155,7 +155,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         }
         
         self.cards.append(card)
-        self.cards.first?.locked = false
+        self.cards.first?.activate()
         return card
     }
     

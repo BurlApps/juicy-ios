@@ -327,6 +327,23 @@ class CardView: UIView {
         self.hideContent = false
     }
     
+    func activate() {
+        self.locked = false
+        
+        if self.post.juicy == true {
+            self.shakeCard()
+        }
+    }
+    
+    func shakeCard() {
+        var animation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        animation.autoreverses = true
+        animation.repeatCount = 2
+        animation.duration = 0.07
+        animation.values = [self.degreeToRadian(4), self.degreeToRadian(-4)]
+        self.layer.addAnimation(animation, forKey: "transform.rotation.z")
+    }
+    
     // MARK: Helper Methods
     private func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
         var newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x, view.bounds.size.height * anchorPoint.y)
