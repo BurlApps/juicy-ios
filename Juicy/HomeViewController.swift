@@ -11,6 +11,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     // MARK: Instance Variables
     private var pageViewController: UIPageViewController!
     private let pages = 5
+    private let startPage = 1
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     
     // MARK: Instance IBoutlets
@@ -37,7 +38,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         self.pageViewController.view.backgroundColor = UIColor.clearColor()
         self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 110)
         self.pageViewController.dataSource = self
-        self.pageViewController.setViewControllers([self.viewControllerAtIndex(0)], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
         
         self.addChildViewController(self.pageViewController)
         self.view.addSubview(self.pageViewController.view)
@@ -64,6 +64,12 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.darkGrayColor()
         pageControl.backgroundColor = UIColor.clearColor()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.pageViewController.setViewControllers([self.viewControllerAtIndex(self.startPage)], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -147,6 +153,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController!) -> Int {
-        return 0
+        return self.startPage
     }
 }
