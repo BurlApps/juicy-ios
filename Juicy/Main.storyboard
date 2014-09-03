@@ -181,7 +181,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Juicy" id="nc2-eB-Ahb">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="SettingsCog" style="plain" id="ZSz-nZ-Te5">
+                        <barButtonItem key="leftBarButtonItem" image="SettingsCog" id="ZSz-nZ-Te5">
                             <color key="tintColor" red="0.36096722146739135" green="0.36096722146739135" blue="0.36096722146739135" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsButton:" destination="aOS-dg-wo6" id="avM-HQ-dPl"/>
@@ -314,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="250" id="U4e-y6-BV6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="250" id="U4e-y6-BV6">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U4e-y6-BV6" id="UWJ-kk-GG2">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -327,7 +327,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Shared Posts" id="Zv0-YF-sRg">
-                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="stop" id="7KS-vJ-OCC">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="7KS-vJ-OCC">
                             <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="shareExit:" destination="jRR-G4-tle" id="q8j-ZR-thQ"/>

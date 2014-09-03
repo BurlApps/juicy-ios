@@ -168,6 +168,7 @@
 		D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D3D7A2CD19A473EE004AC6FE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3D7A2D719A4A676004AC6FE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D3F6A44919B6C9E600F9764B /* Juicy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Juicy.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +346,7 @@
 		D3A2A882194E61C400FABCC0 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				D3F6A44919B6C9E600F9764B /* Juicy.entitlements */,
 				D3636E1D19AAC300007402EC /* HockeySDK.xcconfig */,
 				0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */,
 				D3A2A883194E61D600FABCC0 /* Debug.xcconfig */,
@@ -472,15 +474,23 @@
 				TargetAttributes = {
 					D3A2A85D194E60D500FABCC0 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = R5K2X99B7E;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.DataProtection = {
 								enabled = 0;
 							};
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
 							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.SafariKeychain = {
 								enabled = 0;
 							};
 						};
@@ -741,6 +751,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -753,6 +764,7 @@
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AVFoundation,
@@ -778,10 +790,11 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F2A8C248-7A3D-46A5-8BA4-9B2D1A4EE310";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7s armv7 arm64";
 			};
 			name = Debug;
@@ -793,6 +806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -805,6 +819,7 @@
 				INFOPLIST_FILE = Juicy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					AVFoundation,
@@ -830,7 +845,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F2A8C248-7A3D-46A5-8BA4-9B2D1A4EE310";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

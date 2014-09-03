@@ -184,8 +184,13 @@ class Post: NSObject {
         })
     }
     
-    func getCreator()-> User {
-        var creator: PFUser = self.parse["creator"] as PFUser
+    func getCreator()-> User? {
+        var creator: PFUser! = self.parse["creator"] as PFUser
+        
+        if creator == nil {
+            return nil
+        }
+            
         creator.fetch()
         
         let creatorUser: User = User(creator, withRelations: false)

@@ -46,6 +46,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, withSession:PFFacebookUtils.session())
     }
     
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation["user"] = PFUser.currentUser()
+        currentInstallation.addUniqueObject("termsChanged", forKey: "channels")
+        currentInstallation.addUniqueObject("juicyPost", forKey: "channels")
+        currentInstallation.addUniqueObject("juicyUser", forKey: "channels")
+        currentInstallation.addUniqueObject("sharedPost", forKey: "channels")
+        currentInstallation.saveInBackground()
+    }
+    
     func applicationDidBecomeActive(application: UIApplication) {
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
     }

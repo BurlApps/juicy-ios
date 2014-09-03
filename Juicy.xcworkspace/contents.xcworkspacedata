@@ -8,6 +8,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:VLBCameraView/VLBCameraView.xcodeproj">
+      location = "group:Libs/VLBCameraView/VLBCameraView.xcodeproj">
    </FileRef>
 </Workspace>
