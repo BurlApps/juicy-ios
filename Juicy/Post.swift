@@ -136,7 +136,7 @@ class Post: NSObject {
     func share(user: User, contacts: NSArray) {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
-        self.like(user, amount: 2)
+        self.like(user, amount: contacts.count + 1)
         
         self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
             if success && error == nil {

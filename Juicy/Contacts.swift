@@ -7,6 +7,7 @@
 //
 
 import AddressBook
+import Foundation
 
 class Contacts {
     
@@ -18,10 +19,9 @@ class Contacts {
     
     struct Contact {
         var name: String!
-        var email: String!
         var phones: [Phone] = []
     }
-    
+
     // MARK: Private Instance Variables
     private var addressBook: ABAddressBookRef!
     private enum Access {
@@ -64,42 +64,67 @@ class Contacts {
         }
     }
     
-// TODO: Uncomment After New Beta Release. takeRetainedValue() crashes now
-//    func getContactNames(callback: (names: [String]!) -> Void) {
-//        self.authorizeUser { (status) -> Void in
-//            if status == Access.Granted {
-//                var contacts: [String] = []
-//                var errorRef: Unmanaged<CFError>?
-//                self.addressBook = self.extractABAddressBookRef(ABAddressBookCreateWithOptions(nil, &errorRef))
-//                var contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue()
-//                
-//                for record:ABRecordRef in contactList {
-//                    var contactName = ABRecordCopyCompositeName(record)
-//                    
-//                    if contactName != nil {
-//                        contacts.append(contactName.takeRetainedValue() as NSString)
-//                    }
-//                }
-//                
-//                callback(names: contacts)
-//            } else {
-//                println("no access")
-//            }
-//        }
-//    }
+    // TODO: Uncomment After New Beta Release. takeRetainedValue() crashes now
+    func getContacts(callback: (contacts: Array<Contact>) -> Void) {
+        self.authorizeUser { (status) -> Void in
+            if status == Access.Granted {
+                var contacts: [Contact] = []
+                var tempContacts: Dictionary<String, Int> = [:]
+                var errorRef: Unmanaged<CFError>?
+                self.addressBook = self.extractABAddressBookRef(ABAddressBookCreateWithOptions(nil, &errorRef))
+                var contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(self.addressBook).takeRetainedValue()
+                
+                for record:ABRecordRef in contactList {
+                    let contactName = ABRecordCopyCompositeName(record)
+                    let phones: ABMultiValueRef = ABRecordCopyValue(record, kABPersonPhoneProperty).takeRetainedValue()
+                    var phoneList: [Phone] = []
+                    
+                    if contactName != nil {
+                        var name: NSString = contactName.takeRetainedValue() as NSString
+                        
+                        if name.length != 0 {
+                            for index: CFIndex in 0...ABMultiValueGetCount(phones) {
+                                let phoneNumber = ABMultiValueCopyValueAtIndex(phones, index).takeRetainedValue() as NSString
+                                let locLabel = ABMultiValueCopyLabelAtIndex(phones, index).takeRetainedValue() as NSString
+                                let phoneLabel = ABAddressBookCopyLocalizedLabel(locLabel).takeRetainedValue() as NSString
+                                
+                                if phoneNumber.length != 0 && phoneLabel.length != 0 {
+                                    phoneList.append(Phone(name: phoneLabel, phone: phoneNumber))
+                                }
+                            }
+                            
+                            if !phoneList.isEmpty {
+                                let contact = Contact(name: name, phones: phoneList)
+                                
+                                if tempContacts[name as String] != phoneList.count {
+                                    contacts.append(Contact(name: name, phones: phoneList))
+                                    tempContacts[name] = phoneList.count
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                contacts.sort({ $0.name < $1.name })
+                callback(contacts: contacts)
+            } else {
+                println("no access")
+            }
+        }
+    }
     
     
     // MARK: Fake Methods Until iOS Fixes Bug
-    func getContacts(callback: (contacts: Array<Contact>) -> Void) {
-        let defaultPhone: Phone = Phone(name: "mobile", phone: "310-849-2533")
-        let MarkPhone: Phone = Phone(name: "mobile", phone: "708-824-8463")
-        
-        callback(contacts: [
-            Contact(name: "Brian", email: nil, phones: [defaultPhone]),
-            Contact(name: "Brian Vallelunga", email: nil, phones: [defaultPhone]),
-            Contact(name: "Bob", email: nil, phones: [defaultPhone]),
-            Contact(name: "Mark Adams", email: nil, phones: [MarkPhone]),
-            Contact(name: "Gorge", email: nil, phones: [defaultPhone])
-        ])
-    }
+//    func getContacts(callback: (contacts: Array<Contact>) -> Void) {
+//        let defaultPhone: Phone = Phone(name: "mobile", phone: "310-849-2533")
+//        let MarkPhone: Phone = Phone(name: "mobile", phone: "708-824-8463")
+//        
+//        callback(contacts: [
+//            Contact(name: "Brian", email: nil, phones: [defaultPhone]),
+//            Contact(name: "Brian Vallelunga", email: nil, phones: [defaultPhone]),
+//            Contact(name: "Bob", email: nil, phones: [defaultPhone]),
+//            Contact(name: "Mark Adams", email: nil, phones: [MarkPhone]),
+//            Contact(name: "Gorge", email: nil, phones: [defaultPhone])
+//        ])
+//    }
 }

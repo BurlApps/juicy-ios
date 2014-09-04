@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BITHockeyManager.sharedHockeyManager().startManager()
         BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
         BITHockeyManager.sharedHockeyManager().testIdentifier()
-        
+
         // Return 
         return true
     }
@@ -46,15 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, withSession:PFFacebookUtils.session())
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        var currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.setDeviceTokenFromData(deviceToken)
-        currentInstallation["user"] = PFUser.currentUser()
-        currentInstallation.addUniqueObject("termsChanged", forKey: "channels")
-        currentInstallation.addUniqueObject("juicyPost", forKey: "channels")
-        currentInstallation.addUniqueObject("juicyUser", forKey: "channels")
-        currentInstallation.addUniqueObject("sharedPost", forKey: "channels")
-        currentInstallation.saveInBackground()
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {        
+        var installation = PFInstallation.currentInstallation()
+        installation["user"] = PFUser.currentUser()
+        installation.setDeviceTokenFromData(deviceToken)
+        installation.addUniqueObject("termsChanged", forKey: "channels")
+        installation.addUniqueObject("juicyPost", forKey: "channels")
+        installation.addUniqueObject("juicyUser", forKey: "channels")
+        installation.addUniqueObject("sharedPost", forKey: "channels")
+        installation.saveInBackground()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

@@ -13,7 +13,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     private var currentUser: User = User.current()
     private var contactPicker: THContactPickerView!
     private var tableView: UITableView!
-    private var contacts: NSArray!
+    private var contacts: NSArray = []
     private var filteredContacts: NSArray = []
     private var privateSelectedContacts: NSMutableArray = []
     private let kPickerViewHeight: CGFloat = 100.0
@@ -30,21 +30,25 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         
         // TODO: Change to real contacts
         var contacts = Contacts()
-        contacts.getContacts { (contacts) -> Void in
-            var contactList = NSMutableArray()
-            
-            for contact in contacts {
-                for phone in contact.phones {
-                    var contactDict = NSMutableDictionary()
-                    contactDict.setObject(contact.name, forKey: "name")
-                    contactDict.setObject(phone.name, forKey: "group")
-                    contactDict.setObject(phone.phone, forKey: "phone")
-                    contactList.addObject(contactDict)
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            contacts.getContacts { (contacts) -> Void in
+                var contactList = NSMutableArray()
+                
+                for contact in contacts {
+                    for phone in contact.phones {
+                        var contactDict = NSMutableDictionary()
+                        contactDict.setObject(contact.name, forKey: "name")
+                        contactDict.setObject(phone.name, forKey: "group")
+                        contactDict.setObject(phone.phone, forKey: "phone")
+                        contactList.addObject(contactDict)
+                    }
                 }
+                
+                self.contacts = contactList as NSArray
+                self.tableView.reloadData()
             }
-            
-            self.contacts = contactList as NSArray
-        }
+        })
         
         // Initialize and add Contact Picker View
         self.contactPicker = THContactPickerView(frame: CGRectMake(0, 0, self.view.frame.width, self.kPickerViewHeight))
