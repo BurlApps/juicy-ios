@@ -58,5 +58,27 @@ class CardTableViewCell: UITableViewCell {
             self.darkener.alpha = 1 - self.darkener.alpha
         }, completion: nil)
     }
-
+    
+    
+    // MARK: Instance Methods
+    func setContent(content: [AnyObject]) {
+        var contentAttr = NSMutableAttributedString()
+        
+        for block in content {
+            let message: String? = block["message"] as String!
+            
+            if message != nil {
+                var blockAttrString = NSMutableAttributedString(string: message!)
+                
+                if block["color"] as Bool {
+                    blockAttrString.addAttribute(NSForegroundColorAttributeName,
+                        value: CardView.Defaults().personColor, range: NSMakeRange(0, blockAttrString.length))
+                }
+                
+                contentAttr.appendAttributedString(blockAttrString)
+            }
+        }
+        
+        self.content.attributedText = contentAttr
+    }
 }

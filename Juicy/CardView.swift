@@ -28,7 +28,7 @@ class CardView: UIView {
     }
     
     // MARK: Default Settings
-    private struct Defaults {
+    struct Defaults {
         let swipeDistance: CGFloat = 120
         let border: CGFloat = 4
         let radius: CGFloat = 4
@@ -140,14 +140,18 @@ class CardView: UIView {
         var content = NSMutableAttributedString()
         
         for block in self.post.content {
-            var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
+            let message: String? = block["message"] as String!
             
-            if block["color"] as Bool {
-                blockAttrString.addAttribute(NSForegroundColorAttributeName,
-                    value: self.defaults.personColor, range: NSMakeRange(0, blockAttrString.length))
+            if message != nil {
+                var blockAttrString = NSMutableAttributedString(string: message!)
+                
+                if block["color"] as Bool {
+                    blockAttrString.addAttribute(NSForegroundColorAttributeName,
+                        value: self.defaults.personColor, range: NSMakeRange(0, blockAttrString.length))
+                }
+                
+                content.appendAttributedString(blockAttrString)
             }
-            
-            content.appendAttributedString(blockAttrString)
         }
         
         self.content.attributedText = content

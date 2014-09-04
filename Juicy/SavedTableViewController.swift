@@ -76,6 +76,7 @@ class SavedTableViewController: UITableViewController {
         
         cell.backgroundImageView.alpha = 0
         cell.backgroundImageView.image = UIImage()
+        cell.setContent(post.content as [AnyObject])
         
         post.getImage({ (image) -> Void in
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
@@ -83,23 +84,7 @@ class SavedTableViewController: UITableViewController {
                 cell.backgroundImageView.image = image
             }, completion: nil)
         })
-        
-        // Coloring Content With Names
-        var contentAttr = NSMutableAttributedString()
-        
-        for block in post.content {
-            var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
-            
-            if block["color"] as Bool {
-                blockAttrString.addAttribute(NSForegroundColorAttributeName,
-                    value: UIColor(red:0.31, green:0.95, blue:1, alpha:1), range: NSMakeRange(0, blockAttrString.length))
-            }
-            
-            contentAttr.appendAttributedString(blockAttrString)
-        }
-        
-        cell.content.attributedText = contentAttr
-        
+
         return cell
     }
 }
