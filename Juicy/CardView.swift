@@ -301,9 +301,10 @@ class CardView: UIView {
                         gesture.view.layer.position = CGPointMake(gesture.view.layer.position.x, offscreenY)
                     }
                 }, completion: { _ in
+                    self.delegate?.cardDidLeaveScreen?(self)
+                    self.delegate = nil
                     self.removeGestures()
                     self.removeFromSuperview()
-                    self.delegate?.cardDidLeaveScreen?(self)
                 })
             }
         }

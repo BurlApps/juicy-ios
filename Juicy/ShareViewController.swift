@@ -256,8 +256,11 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         
         let index = self.contacts.indexOfObject(contact)
         var cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
-        cell.accessoryType = UITableViewCellAccessoryType.None
-        self.didChangeSelectedItems()
+        
+        if cell != nil {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            self.didChangeSelectedItems()
+        }
     }
     
     // MARK: NSNotificationCenter

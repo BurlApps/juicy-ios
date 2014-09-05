@@ -27,7 +27,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     // MARK: Instance Variables
     private let defaults = Defaults()
     private var currentUser = User.current()
-    private var posts: [Post] = []
+    private var posts: [Post!] = []
     private var cards: [CardView!] = []
     private var sharePost: Post!
     
@@ -142,16 +142,18 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         if self.posts.isEmpty {
             return nil
         } else if !seeding {
+            self.cards[0] = nil
             self.cards.removeAtIndex(0)
         }
         
-        var card = self.createCard(self.posts[0], transform: transform)
+        weak var card = self.createCard(self.posts[0], transform: transform)
+        self.posts[0] = nil
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
-            self.view.addSubview(card)
+            self.view.addSubview(card!)
         } else {
-            self.view.insertSubview(card, belowSubview: self.cards.last!)
+            self.view.insertSubview(card!, belowSubview: self.cards.last!)
         }
         
         self.cards.append(card)
@@ -205,6 +207,10 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case .None:
             break
         }
+        
+        // Clear Card
+        card.post = nil
+        card.delegate = nil
         
         // Reset Create Button
         self.createButton.backgroundColor = self.defaults.createButton

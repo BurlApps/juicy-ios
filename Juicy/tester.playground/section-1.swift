@@ -4,6 +4,8 @@ import UIKit
 
 var a = [ "fun": "a", "asdf": "c"]
 
-a.removeAll(keepCapacity: true)
+var b = a
 
-([a:1] == [a:1])
+b.removeAll(keepCapacity: false)
+
+b

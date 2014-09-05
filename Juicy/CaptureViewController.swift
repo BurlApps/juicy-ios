@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaptureViewController: UIViewController, VLBCameraViewDelegate {
+class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: IBOutlets
     @IBOutlet weak var cameraView: VLBCameraView!
@@ -16,6 +16,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
     
     // MARK: Instance Variables
     private var capturedImage: UIImage!
+    private var imagePicker: UIImagePickerController!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -31,6 +32,14 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.captureButton.frame.size.width, 3))
         buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.08)
         self.captureButton.addSubview(buttonBorder)
+        
+        // Setup Image Picker
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            self.imagePicker = UIImagePickerController()
+            self.imagePicker.delegate = self
+            self.imagePicker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+            self.presentViewController(imagePicker, animated: false, completion: nil)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,6 +84,21 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate {
     
     @IBAction func toggleCamera(sender: UIBarButtonItem) {
         self.cameraView.toggleCamera()
+    }
+    
+    // MARK: ImagePicker Methods
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {        
+        self.dismissViewControllerAnimated(false, completion: { () -> Void in
+            self.capturedImage = image;
+            self.performSegueWithIdentifier("postSegue", sender: self)
+        })
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
+        self.dismissViewControllerAnimated(false, completion: { () -> Void in
+            self.navigationController.popViewControllerAnimated(false)
+            return ()
+        })
     }
     
     // MARK: VLBCameraView Methods
