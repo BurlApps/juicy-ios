@@ -146,14 +146,14 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             self.cards.removeAtIndex(0)
         }
         
-        weak var card = self.createCard(self.posts[0], transform: transform)
+        var card = self.createCard(self.posts[0], transform: transform)
         self.posts[0] = nil
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
-            self.view.addSubview(card!)
+            self.view.addSubview(card)
         } else {
-            self.view.insertSubview(card!, belowSubview: self.cards.last!)
+            self.view.insertSubview(card, belowSubview: self.cards.last!)
         }
         
         self.cards.append(card)
@@ -207,10 +207,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case .None:
             break
         }
-        
-        // Clear Card
-        card.post = nil
-        card.delegate = nil
         
         // Reset Create Button
         self.createButton.backgroundColor = self.defaults.createButton
