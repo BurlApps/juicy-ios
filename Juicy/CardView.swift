@@ -50,6 +50,8 @@ class CardView: UIView {
     private var darkenerColor: UIColor!
     private var darkenerBorder: UIColor!
     private var content: UILabel!
+    private var originalFrame: CGRect!
+    private var originalAnchor: CGPoint!
     
     // MARK: Public Attributes
     var post: Post!
@@ -62,19 +64,30 @@ class CardView: UIView {
     private var neededSwipeDistance: CGFloat!
     private var hideContent: Bool!
     private var isOffScreen: Bool!
-    private var rotationAngle: CGFloat!
     private var startPointInSuperview: CGPoint!
     
     // MARK: Instance Gestures
     private var tapGesture: UITapGestureRecognizer!
     private var panGesture: UIPanGestureRecognizer!
     
+    // MARK: Class Method
+    class func tempCards(number: Int, frame: CGRect) -> [CardView] {
+        var cards: [CardView] = []
+        
+        for index in 1...number {
+            cards.append(CardView(frame: frame, post: nil, transform: 0))
+        }
+        
+        return cards
+    }
+    
     // MARK: Convenience Init Method
-    convenience init(frame: CGRect, post: Post, transform: CGFloat) {
+    convenience init(frame: CGRect, post: Post!, transform: CGFloat) {
         self.init(frame: frame)
         
         // Instance Variables
         self.post = post
+        self.originalFrame = self.frame
         self.transform = CGAffineTransformMakeRotation(transform)
         
         // Setup Methods
@@ -98,9 +111,11 @@ class CardView: UIView {
         self.addSubview(self.background)
         
         // Load Background Image
-        self.post.getImage({ (image) -> Void in
-            self.background.image = image
-        })
+        if self.post != nil {
+            self.post.getImage({ (image) -> Void in
+                self.background.image = image
+            })
+        }
         
         // Add Darkener
         self.darkener = UIView(frame: self.bounds)
@@ -108,7 +123,7 @@ class CardView: UIView {
         self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
-        if self.post.juicy as Bool {
+        if self.post != nil && self.post.juicy as Bool {
             self.darkenerBorder = self.defaults.juicyColor
             self.darkener.layer.borderWidth += 1
         } else {
@@ -137,13 +152,11 @@ class CardView: UIView {
         self.insertSubview(self.content, aboveSubview: self.choice)
         
         // Coloring Content With Names
-        var content = NSMutableAttributedString()
-        
-        for block in self.post.content {
-            let message: String? = block["message"] as String!
+        if self.post != nil {
+            var content = NSMutableAttributedString()
             
-            if message != nil {
-                var blockAttrString = NSMutableAttributedString(string: message!)
+            for block in self.post.content {
+                var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
                 
                 if block["color"] as Bool {
                     blockAttrString.addAttribute(NSForegroundColorAttributeName,
@@ -152,17 +165,17 @@ class CardView: UIView {
                 
                 content.appendAttributedString(blockAttrString)
             }
+            
+            self.content.attributedText = content
         }
-        
-        self.content.attributedText = content
     }
     
     private func setupAttributes() {
+        self.setTranslatesAutoresizingMaskIntoConstraints(true)
         self.hideContent = false
         self.isOffScreen = false
-        self.neededSwipeDistance = self.defaults.swipeDistance;
-        self.userInteractionEnabled = true;
-        self.rotationAngle = self.defaults.rotation
+        self.neededSwipeDistance = self.defaults.swipeDistance
+        self.userInteractionEnabled = true
     }
     
     private func setupGestures() {
@@ -171,11 +184,6 @@ class CardView: UIView {
         
         self.panGesture = UIPanGestureRecognizer(target: self, action: Selector("panHandle:"))
         self.addGestureRecognizer(self.panGesture)
-    }
-    
-    private func removeGestures() {
-        self.removeGestureRecognizer(self.tapGesture)
-        self.removeGestureRecognizer(self.panGesture)
     }
     
     // MARK: Gesture Handlers
@@ -196,14 +204,15 @@ class CardView: UIView {
         if gesture.state == UIGestureRecognizerState.Began {
             self.startPointInSuperview = newLocation;
             let anchor = gesture.locationInView(gesture.view)
+            self.originalAnchor = self.layer.anchorPoint
             self.setAnchorPoint(CGPointMake(anchor.x/gesture.view.bounds.size.width, anchor.y/gesture.view.bounds.size.height), view: gesture.view)
         } else if gesture.state == UIGestureRecognizerState.Changed {
             // Move the card
             gesture.view.layer.position = newLocation
             
             // Calculate rotation
-            var rotation = self.rotationAngle * (-newLocation.x/self.startPointInSuperview.x+1)
-            rotation = (rotation > 0 ? min(rotation, self.rotationAngle) : max(rotation, -self.rotationAngle));
+            var rotation = self.defaults.rotation * (-newLocation.x/self.startPointInSuperview.x+1)
+            rotation = (rotation > 0 ? min(rotation, self.defaults.rotation) : max(rotation, -self.defaults.rotation));
             
             if gesture.view.layer.anchorPoint.y < 0.5 {
                 rotation = -rotation;
@@ -279,8 +288,8 @@ class CardView: UIView {
                 
                 // Animate off screen
                 UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                    var  offscreenX: CGFloat!
-                    var  offscreenY: CGFloat!
+                    var offscreenX: CGFloat!
+                    var offscreenY: CGFloat!
                     let superviewOrigin = self.superview?.frame.origin
                     let superviewOriginX = superviewOrigin?.x
                     let superviewOriginY = superviewOrigin?.y
@@ -302,8 +311,7 @@ class CardView: UIView {
                     }
                 }, completion: { _ in
                     self.delegate?.cardDidLeaveScreen?(self)
-                    self.delegate = nil
-                    self.removeGestures()
+                    self.returnCardViewToStartPointAnimated(false)
                     self.removeFromSuperview()
                 })
             }
@@ -319,6 +327,8 @@ class CardView: UIView {
                 self.darkener.layer.borderColor = self.darkenerBorder.CGColor
                 self.choice.alpha = 0
                 self.content.alpha = 1
+                self.frame = self.originalFrame
+                self.layer.anchorPoint = self.originalAnchor
             }, completion: { _ in self.delegate?.cardDidReturnToCenter?(self); return () })
         } else {
             self.transform = CGAffineTransformIdentity
@@ -327,9 +337,57 @@ class CardView: UIView {
             self.darkener.layer.borderColor = self.darkenerBorder.CGColor
             self.choice.alpha = 0
             self.content.alpha = 1
+            self.frame = self.originalFrame
+            self.layer.anchorPoint = self.originalAnchor
         }
         
         self.hideContent = false
+    }
+    
+    func regenerate(frame: CGRect, post: Post, transform: CGFloat) -> CardView {
+        // Instance Variables
+        self.post = post
+        self.frame = frame
+        self.transform = CGAffineTransformRotate(self.transform, transform);
+        println(self.frame)
+        
+        // Configure Attributes
+        self.setupAttributes()
+        self.darkener.backgroundColor = self.darkenerColor
+        self.darkener.layer.borderColor = self.darkenerBorder.CGColor
+        self.choice.alpha = 0
+        self.content.alpha = 1
+        
+        // Set Background
+        self.post.getImage({ (image) -> Void in
+            self.background.image = image
+        })
+        
+        // Set Darkener Border
+        if self.post.juicy as Bool {
+            self.darkenerBorder = self.defaults.juicyColor
+            self.darkener.layer.borderWidth += 1
+        } else {
+            self.darkenerBorder = self.defaults.regualColor
+        }
+        
+        // Coloring Content With Names
+        var content = NSMutableAttributedString()
+        
+        for block in self.post.content {
+            var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
+            
+            if block["color"] as Bool {
+                blockAttrString.addAttribute(NSForegroundColorAttributeName,
+                    value: self.defaults.personColor, range: NSMakeRange(0, blockAttrString.length))
+            }
+            
+            content.appendAttributedString(blockAttrString)
+        }
+        
+        self.content.attributedText = content
+        
+        return self
     }
     
     func activate() {

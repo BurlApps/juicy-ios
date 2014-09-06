@@ -14,6 +14,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     // MARK: Default Settings
     private struct Defaults {
         let cardsShown: Int = 4
+        let cardsTemp: Int = 6
         let rotation: Double = 6
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
@@ -27,8 +28,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     // MARK: Instance Variables
     private let defaults = Defaults()
     private var currentUser = User.current()
-    private var posts: [Post!] = []
-    private var cards: [CardView!] = []
+    private var posts: [Post] = []
+    private var cards: [CardView] = []
+    private var tempCards: [CardView] = []
     private var sharePost: Post!
     
     // MARK: UIViewController Overrides
@@ -45,6 +47,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         var buttonBorder = UIView(frame: CGRectMake(0, 0, self.createButton.frame.size.width, 3))
         buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.05)
         self.createButton.addSubview(buttonBorder)
+        
+        // Seed Temp Cards
+        self.tempCards = CardView.tempCards(self.defaults.cardsTemp, frame: self.cardFrame())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -128,26 +133,55 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     func seedCards() {
         Post.find(self.currentUser, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
+                var max: Int!
                 self.posts = posts
-                let max = (posts.count < 4 ? posts.count : (self.defaults.cardsShown - 1))
                 
-                for index in 0...max {
-                    self.initCard(index != 0, seeding: true)
+                if posts.count < 4 {
+                    max = posts.count
+                } else {
+                    max = self.defaults.cardsShown - self.cards.count - 1
+                }
+                
+                if max > 0 {
+                    for index in 0...max {
+                        self.initCard(index != 0)
+                    }
                 }
             }
         })
     }
     
-    func initCard(transform: Bool, seeding: Bool) -> CardView! {
-        if self.posts.isEmpty {
-            return nil
-        } else if !seeding {
-            self.cards[0] = nil
-            self.cards.removeAtIndex(0)
+    func cardFrame() -> CGRect {
+        var frame = UIScreen.mainScreen().bounds
+        let navFrame = self.navigationController.navigationBar.frame
+        
+        frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
+        frame.size.height -= navFrame.origin.y + navFrame.size.height + self.createButton.layer.frame.height + 120
+        frame.origin.x = self.view.center.x - (frame.size.width/2)
+        frame.origin.y += navFrame.size.height - navFrame.origin.y
+        
+        if frame.size.height < frame.size.width {
+            frame.origin.x += (frame.size.width - frame.size.height - 30)/2
+            frame.size.width = frame.size.height + 30
         }
         
-        var card = self.createCard(self.posts[0], transform: transform)
-        self.posts[0] = nil
+        return CGRectMake(19.5,24.0,281.0,304.0)
+    }
+    
+    func initCard(transform: Bool) -> CardView! {
+        var card: CardView!
+        
+        if self.posts.isEmpty {
+            return nil
+        }
+        
+        if self.tempCards.isEmpty {
+            card = self.createCard(self.posts[0], transform: transform, oldCard: nil)
+        } else {
+            card = self.createCard(self.posts[0], transform: transform, oldCard: self.tempCards.first)
+            self.tempCards.removeAtIndex(0)
+        }
+
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
@@ -161,15 +195,10 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         return card
     }
     
-    func createCard(post: Post, transform: Bool) -> CardView {
+    func createCard(post: Post, transform: Bool, oldCard: CardView!) -> CardView {
+        var card: CardView!
         var rotation: CGFloat = 0
-        var frame = UIScreen.mainScreen().bounds
-        let navFrame = self.navigationController.navigationBar.frame
-        
-        frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
-        frame.size.height -= navFrame.origin.y + navFrame.size.height + self.createButton.layer.frame.height + 120
-        frame.origin.x = self.view.center.x - (frame.size.width/2)
-        frame.origin.y += navFrame.size.height - navFrame.origin.y
+        var frame = self.cardFrame()
         
         if transform {
             if self.cards.count == 1 {
@@ -179,19 +208,26 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             }
         }
         
-        var card = CardView(frame: frame, post: post, transform: rotation)
+        if oldCard == nil {
+            card = CardView(frame: frame, post: post, transform: rotation)
+        } else {
+            card = oldCard.regenerate(frame, post: post, transform: rotation)
+        }
+
         card.delegate = self
         return card
     }
     
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
+        // Add To Temps
+        self.tempCards.append(card)
+        self.cards.removeAtIndex(0)
+        
         // Seed New Cards
         if !self.posts.isEmpty {
-            self.initCard(true, seeding: false)
+            self.initCard(true)
         } else {
-            self.cards[0] = nil
-            self.cards.removeAtIndex(0)
             self.seedCards()
         }
         
