@@ -13,6 +13,9 @@
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
 		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
+		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
+		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
+		D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */; };
 		D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */; };
 		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
 		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
@@ -47,7 +50,6 @@
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
 		D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostViewController.swift */; };
 		D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56819A097B9006E43F1 /* RBResizer.swift */; };
-		D3D7A2CA19A473BF004AC6FE /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CD19A473EE004AC6FE /* libz.dylib */; };
 		D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */; };
 		D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */; };
@@ -115,6 +117,8 @@
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D320165419BFC18F00497FE2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTableViewController.swift; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -176,6 +180,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */,
+				D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */,
+				D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */,
 				D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */,
 				D3636E1819AAC11A007402EC /* HockeySDK.framework in Frameworks */,
 				D3636E1519AAC0C6007402EC /* CoreText.framework in Frameworks */,
@@ -183,7 +190,6 @@
 				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
 				D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */,
 				D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */,
-				D3D7A2CA19A473BF004AC6FE /* Parse.framework in Frameworks */,
 				D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */,
 				D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */,
 				D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */,
@@ -376,6 +382,8 @@
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D320165419BFC18F00497FE2 /* Bolts.framework */,
+				D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */,
 				D3636E1919AAC290007402EC /* HockeySDKResources.bundle */,
 				D3636E1A19AAC290007402EC /* HockeySDK.xcconfig */,
 				D3636E1719AAC11A007402EC /* HockeySDK.framework */,
@@ -474,6 +482,7 @@
 				TargetAttributes = {
 					D3A2A85D194E60D500FABCC0 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = R5K2X99B7E;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -754,7 +763,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -764,7 +773,7 @@
 					"$(PROJECT_DIR)/Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -792,7 +801,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51ede3b1-8620-4547-9111-856477f3e192";
+				PROVISIONING_PROFILE = "0eb9a94b-fe03-4c02-9e59-ee1e66626bb8";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -809,7 +818,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -819,7 +828,7 @@
 					"$(PROJECT_DIR)/Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Juicy/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -847,7 +856,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51ede3b1-8620-4547-9111-856477f3e192";
+				PROVISIONING_PROFILE = "0eb9a94b-fe03-4c02-9e59-ee1e66626bb8";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

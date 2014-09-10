@@ -27,12 +27,12 @@ class TermsViewController: UIViewController {
        super.viewWillAppear(animated)
         
         // Configure Navigation Bar
-        self.navigationController.navigationBarHidden = false
-        self.navigationController.navigationBar.shadowImage = nil
-        self.navigationController.navigationBar.translucent = false
-        self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor()
-        self.navigationController.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.darkGrayColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
@@ -40,7 +40,7 @@ class TermsViewController: UIViewController {
     
     // MARK: IBActions
     @IBAction func termsCancel(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(false)
         User.logout()
     }
     

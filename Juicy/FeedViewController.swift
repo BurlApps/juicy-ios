@@ -64,12 +64,12 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         shadow.shadowOffset = CGSizeMake(0, 2);
         
         // Configure Navigation Bar
-        self.navigationController.navigationBarHidden = false
-        self.navigationController.navigationBar.shadowImage = nil
-        self.navigationController.navigationBar.translucent = false
-        self.navigationController.navigationBar.backgroundColor = UIColor.whiteColor()
-        self.navigationController.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
             NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
             NSShadowAttributeName: shadow
@@ -81,7 +81,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "shareSegue" {
             let viewController:ShareViewController = segue.destinationViewController as ShareViewController
             viewController.aboutPost = self.sharePost
@@ -118,7 +118,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             println("Phone Number")
         case 3:
             User.logout()
-            self.navigationController.popToRootViewControllerAnimated(false)
+            self.navigationController?.popToRootViewControllerAnimated(false)
         default:
             break
         }
@@ -153,19 +153,22 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     func cardFrame() -> CGRect {
         var frame = UIScreen.mainScreen().bounds
-        let navFrame = self.navigationController.navigationBar.frame
         
-        frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
-        frame.size.height -= navFrame.origin.y + navFrame.size.height + self.createButton.layer.frame.height + 120
-        frame.origin.x = self.view.center.x - (frame.size.width/2)
-        frame.origin.y += navFrame.size.height - navFrame.origin.y
-        
-        if frame.size.height < frame.size.width {
-            frame.origin.x += (frame.size.width - frame.size.height - 30)/2
-            frame.size.width = frame.size.height + 30
+        if let navController = self.navigationController {
+            let navFrame = navController.navigationBar.frame
+            
+            frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
+            frame.size.height -= navFrame.origin.y + navFrame.height + self.createButton.layer.frame.height + 120
+            frame.origin.x = self.view.center.x - (frame.size.width/2)
+            frame.origin.y += navFrame.size.height - navFrame.origin.y
+            
+            if frame.size.height < frame.size.width {
+                frame.origin.x += (frame.size.width - frame.size.height - 30)/2
+                frame.size.width = frame.size.height + 30
+            }
         }
         
-        return CGRectMake(19.5,24.0,281.0,304.0)
+        return frame
     }
     
     func initCard(transform: Bool) -> CardView! {

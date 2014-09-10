@@ -85,7 +85,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.darkGrayColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
@@ -100,12 +100,12 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     // MARK: IBActions
     
     @IBAction func closeShare(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     @IBAction func shareSend(sender: UIBarButtonItem) {
         if self.privateSelectedContacts.count != 0 {
-            self.navigationController.popViewControllerAnimated(false)
+            self.navigationController?.popViewControllerAnimated(false)
             self.aboutPost.share(self.currentUser, contacts: self.privateSelectedContacts)
         }
     }
@@ -151,8 +151,8 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     }
 
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        cell.textLabel.attributedText = self.titleForRowAtIndexPath(indexPath)
-        cell.textLabel.numberOfLines = 2
+        cell.textLabel?.attributedText = self.titleForRowAtIndexPath(indexPath)
+        cell.textLabel?.numberOfLines = 2
     }
 
     func newFilteringPredicateWithText(text: String) -> NSPredicate {
@@ -183,15 +183,15 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     }
 
     // MARK: UITableView Delegate and Datasource functions
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.getFilteredContacts().count
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.THContactPickerContactCellReuseID) as? UITableViewCell
         
         if cell == nil {
@@ -208,8 +208,8 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         
         return cell
     }
- 
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         var cell = tableView.cellForRowAtIndexPath(indexPath)
@@ -217,11 +217,11 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         let contactName = contact["name"] as String
         
         if self.privateSelectedContacts.containsObject(contact) {
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell?.accessoryType = UITableViewCellAccessoryType.None
             self.privateSelectedContacts.removeObject(contact)
             self.contactPicker.removeContact(contact)
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
             self.privateSelectedContacts.addObject(contact)
             self.contactPicker.addContact(contact, withName: contactName)
         }
@@ -258,7 +258,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         var cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
         
         if cell != nil {
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell?.accessoryType = UITableViewCellAccessoryType.None
             self.didChangeSelectedItems()
         }
     }

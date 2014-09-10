@@ -27,7 +27,7 @@ class CardTableViewCell: UITableViewCell {
         
         self.backgroundImageView = UIImageView()
         self.backgroundView = self.backgroundImageView
-        self.backgroundView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
         self.darkener = UIView(frame: self.frame)
         self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)

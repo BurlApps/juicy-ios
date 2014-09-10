@@ -37,7 +37,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
         if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             self.imagePicker = UIImagePickerController()
             self.imagePicker.delegate = self
-            self.imagePicker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+            self.imagePicker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)!
             self.presentViewController(imagePicker, animated: false, completion: nil)
         }
     }
@@ -53,20 +53,20 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         // Configure Navigation Bar
-        self.navigationController.navigationBar.translucent = true
-        self.navigationController.navigationBar.backgroundColor = UIColor.clearColor()
-        self.navigationController.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         let viewController:PostViewController = segue.destinationViewController as PostViewController
         viewController.capturedImage = self.capturedImage
     }
     
     // MARK: IBActions
     @IBAction func cancelCapture(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     @IBAction func captureDown(sender: UIButton) {
@@ -96,7 +96,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
         self.dismissViewControllerAnimated(false, completion: { () -> Void in
-            self.navigationController.popViewControllerAnimated(false)
+            self.navigationController?.popViewControllerAnimated(false)
             return ()
         })
     }

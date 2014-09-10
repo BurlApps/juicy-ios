@@ -57,7 +57,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         super.viewWillAppear(animated)
         
         // Setup Navigation Bar
-        self.navigationController.navigationBarHidden = true
+        self.navigationController?.navigationBarHidden = true
         
         // Override point for customization after application launch.
         var pageControl = UIPageControl.appearance()
@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     // MARK: Page View Controller Data Source
-    func pageViewController(pageViewController: UIPageViewController!, viewControllerBeforeViewController viewController: UIViewController!) -> UIViewController! {
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as PageContentViewController).pageIndex
         
         if index == 0 || index == NSNotFound {
@@ -138,7 +138,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         return self.viewControllerAtIndex(index - 1)
     }
     
-    func pageViewController(pageViewController: UIPageViewController!, viewControllerAfterViewController viewController: UIViewController!) -> UIViewController! {
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as PageContentViewController).pageIndex
         
         if index == NSNotFound || (index + 1) == self.pages {

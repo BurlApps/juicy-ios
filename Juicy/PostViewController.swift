@@ -68,18 +68,18 @@ class PostViewController: UIViewController, UITextViewDelegate {
         
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 22)
         ]
-        self.navigationItem.rightBarButtonItem.setTitleTextAttributes([
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
             NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)
         ], forState: UIControlState.Normal)
     }
     
     // MARK: IBActions
     @IBAction func canelPost(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     @IBAction func createPost(sender: UIBarButtonItem) {
@@ -132,7 +132,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 }
             }
             
-            self.navigationController.popToViewController(self.navigationController.viewControllers[1] as UIViewController, animated: false)
+            self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
             Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize), creator: self.currentUser)
         }
     }
@@ -203,7 +203,7 @@ class PostViewController: UIViewController, UITextViewDelegate {
         
         textView.attributedText = mutalableText
         self.navigationItem.title = "\(mutalableText.length)/75"
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: textColor,
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 22)
         ]

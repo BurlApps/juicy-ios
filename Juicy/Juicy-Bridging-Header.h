@@ -5,6 +5,7 @@
 #import <HockeySDK/HockeySDK.h>
 #import <NewRelicAgent/NewRelic.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <Parse/Parse.h>
 #import <VLBCameraView/VLBCameraView.h>
 #import <CHTTextView/CHTTextView.h>

@@ -24,7 +24,7 @@ class SavedTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Configure Navigation Bar
-        self.navigationController.navigationBar.titleTextAttributes = [
+        self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.darkGrayColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
@@ -50,23 +50,23 @@ class SavedTableViewController: UITableViewController {
     
     // MARK: IBAction Methods
     @IBAction func shareExit(sender: UIBarButtonItem) {
-        self.navigationController.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     // UITableViewController Methods
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.sharedPosts.count
     }
     
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 250
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> CardTableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var post = self.sharedPosts[indexPath.row]
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
