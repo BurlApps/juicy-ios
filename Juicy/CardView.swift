@@ -51,6 +51,7 @@ class CardView: UIView {
     private var darkenerBorder: UIColor!
     private var content: UILabel!
     private var originalFrame: CGRect!
+    private var originalBounds: CGRect!
     private var originalAnchor: CGPoint!
     private var originalPosition: CGPoint!
     
@@ -91,9 +92,11 @@ class CardView: UIView {
         self.transform = CGAffineTransformMakeRotation(transform)
         
         // Setup Methods
-        self.setupViews()
-        self.setupAttributes()
-        self.setupGestures()
+        if self.post != nil {
+            self.setupViews()
+            self.setupAttributes()
+            self.setupGestures()
+        }
     }
     
     // MARK: CardView Methods
@@ -105,6 +108,9 @@ class CardView: UIView {
         self.layer.rasterizationScale = UIScreen.mainScreen().scale
         self.clipsToBounds = true
         
+        println(self.frame)
+        println(self.bounds)
+        
         // Add Background SubView
         if self.background == nil {
             self.background = UIImageView(frame: self.bounds)
@@ -114,11 +120,9 @@ class CardView: UIView {
         self.addSubview(self.background)
         
         // Load Background Image
-        if self.post != nil {
-            self.post.getImage({ (image) -> Void in
-                self.background.image = image
-            })
-        }
+        self.post.getImage({ (image) -> Void in
+            self.background.image = image
+        })
         
         // Add Darkener
         if self.darkener == nil {
@@ -129,7 +133,7 @@ class CardView: UIView {
         self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
-        if self.post != nil && self.post.juicy as Bool {
+        if self.post.juicy as Bool {
             self.darkenerBorder = self.defaults.juicyColor
             self.darkener.layer.borderWidth += 1
         } else {
@@ -164,11 +168,11 @@ class CardView: UIView {
         self.insertSubview(self.content, aboveSubview: self.choice)
         
         // Coloring Content With Names
-        if self.post != nil {
-            var content = NSMutableAttributedString()
-            
-            for block in self.post.content {
-                var blockAttrString = NSMutableAttributedString(string: block["message"] as String)
+        var content = NSMutableAttributedString()
+        
+        for block in self.post.content {
+            if let message = block["message"] as? String {
+                var blockAttrString = NSMutableAttributedString(string: message)
                 
                 if block["color"] as Bool {
                     blockAttrString.addAttribute(NSForegroundColorAttributeName,
@@ -177,13 +181,14 @@ class CardView: UIView {
                 
                 content.appendAttributedString(blockAttrString)
             }
-            
-            self.content.attributedText = content
         }
+        
+        self.content.attributedText = content
     }
     
     private func setupAttributes() {
         self.setTranslatesAutoresizingMaskIntoConstraints(true)
+        self.locked = true
         self.hideContent = false
         self.isOffScreen = false
         self.neededSwipeDistance = self.defaults.swipeDistance
@@ -223,6 +228,7 @@ class CardView: UIView {
                 self.startPointInSuperview = newLocation;
                 self.originalAnchor = self.layer.anchorPoint
                 self.originalFrame = self.frame
+                self.originalBounds = self.bounds
                 self.originalPosition = self.layer.position
                 
                 let anchor = gesture.locationInView(gesture.view)
@@ -333,13 +339,15 @@ class CardView: UIView {
                     }, completion: { _ in
                         self.delegate?.cardDidLeaveScreen?(self)
                         self.removeGestures()
+                        self.removeFromSuperview()
                         self.returnCardViewToStartPointAnimated(false)
+                        
                         self.frame = self.originalFrame
+                        self.bounds = self.originalBounds
                         self.layer.anchorPoint = self.originalAnchor
                         self.layer.position = self.originalPosition
                         self.background.image = UIImage()
                         self.content.text = ""
-                        self.removeFromSuperview()
                     })
                 }
             }
@@ -370,18 +378,17 @@ class CardView: UIView {
     
     func regenerate(frame: CGRect, post: Post, transform: CGFloat) -> CardView {
         // Instance Variables
-        self.locked = true
         self.post = post
         self.frame = frame
         self.transform = CGAffineTransformRotate(self.transform, transform);
         
         // Setup Methods
-        self.setupViews()
-        self.setupAttributes()
-        self.setupGestures()
-        
-        
-        
+        if self.post != nil {
+            self.setupViews()
+            self.setupAttributes()
+            self.setupGestures()
+        }
+
         return self
     }
     
