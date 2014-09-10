@@ -180,10 +180,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */,
 				D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */,
 				D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */,
 				D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */,
-				D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */,
 				D3636E1819AAC11A007402EC /* HockeySDK.framework in Frameworks */,
 				D3636E1519AAC0C6007402EC /* CoreText.framework in Frameworks */,
 				D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */,

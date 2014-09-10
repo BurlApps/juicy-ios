@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>81856DEB-EC4D-4B4D-B68E-A0DBA254F573</string>
+	<string>28F5ABC9-402F-41D1-9A08-9466C821E40C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Juicy</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -22,7 +22,7 @@
 		<key>192B03A1AD2D69018EFA1F7A41D8E052113AFEF0</key>
 		<string>..</string>
 		<key>D10D70C3491E9E3FBBDF5694791E06D19AAB706D</key>
-		<string>../VLBCameraView</string>
+		<string>../Libs/VLBCameraView/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:JuicyApp/iOS.git</string>
