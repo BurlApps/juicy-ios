@@ -6,18 +6,16 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-import UIKit
-import Foundation
-import QuartzCore
-
-class PostViewController: UIViewController, UITextViewDelegate {
+class PostViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
+    private var cityLocation: String!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var currentUser: User = User.current()
     private var contacts: [String] = []
+    private var locationManager: CLLocationManager!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -52,9 +50,20 @@ class PostViewController: UIViewController, UITextViewDelegate {
         self.textEditor.layer.shadowRadius = 0
         self.textEditor.becomeFirstResponder()
         self.view.insertSubview(self.textEditor, aboveSubview: darkener)
+        
+        // Create Location Manager
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Get Current Location
+        self.locationManager.startUpdatingLocation()
+        
         // Get Friends List
         self.currentUser.getFriendsList(nil)
         
@@ -65,7 +74,9 @@ class PostViewController: UIViewController, UITextViewDelegate {
                 self.contacts.append(contact.name)
             }
         }
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -133,7 +144,8 @@ class PostViewController: UIViewController, UITextViewDelegate {
             }
             
             self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
-            Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize), creator: self.currentUser)
+            Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
+                        creator: self.currentUser, location: self.cityLocation)
         }
     }
     
@@ -176,6 +188,30 @@ class PostViewController: UIViewController, UITextViewDelegate {
         }
         
         return friends
+    }
+    
+    // MARK: CoreLocation Methods
+    // This delegate is called when the app successfully finds your current location
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        self.locationManager.stopUpdatingLocation()
+        
+        var geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(locations.last as CLLocation, completionHandler: { (placeMarks: [AnyObject]!, error: NSError!) -> Void in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                if !placeMarks.isEmpty {
+                    var placeMark = placeMarks[0] as CLPlacemark
+                    self.cityLocation = placeMark.locality
+                }
+            })
+        })
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFinishDeferredUpdatesWithError error: NSError!) {
+        println(error)
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println(error)
     }
     
     // MARK: UITextView Methods

@@ -45,6 +45,7 @@
 		D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8B1194E723400FABCC0 /* Foundation.framework */; };
 		D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BC19B0304E0057DA1F /* TermsViewController.swift */; };
 		D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */; };
+		D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEFC4C19C23ED90070D3D4 /* Int.swift */; };
 		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
@@ -163,6 +164,7 @@
 		D3A2A8B1194E723400FABCC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D3A752BC19B0304E0057DA1F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		D3BEFC4C19C23ED90070D3D4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				D303880619A31D2200C67E44 /* Array.swift */,
 				D3D7A2D719A4A676004AC6FE /* String.swift */,
+				D3BEFC4C19C23ED90070D3D4 /* Int.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
+				D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */,
 				D30A84D41997403F00CBF78F /* CardView.swift in Sources */,
 				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
 				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,

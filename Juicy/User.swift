@@ -41,7 +41,7 @@ class User: NSObject {
         self.parse.saveInBackground()
     }
     
-    func setExtraInfo(callback: (() -> Void)?) {
+    func setExtraInfo(callback: (() -> Void)!) {
         var meRequest = FBRequest.requestForMe()
         meRequest.startWithCompletionHandler({ (connection: FBRequestConnection!, result: AnyObject!, error: NSError!) -> Void in
             if error == nil && result != nil {
@@ -72,7 +72,7 @@ class User: NSObject {
         PFCloud.callFunctionInBackground("facebookFriends", withParameters: NSDictionary(), block: nil)
     }
     
-    func getFriendsList(callback: ((users: [User]) -> Void)?) {
+    func getFriendsList(callback: ((users: [User]) -> Void)!) {
         if self.friendsList == nil {
             var friends: [User] = []
             var friendsRelation = self.parse["friends"] as PFRelation
@@ -98,7 +98,7 @@ class User: NSObject {
         }
     }
     
-    func getSharedPosts(callback: ((posts: [Post]) -> Void)?) {
+    func getSharedPosts(callback: ((posts: [Post]) -> Void)!) {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
         

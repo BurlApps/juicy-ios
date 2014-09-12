@@ -10,6 +10,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var sharesLabel: UILabel!
     
     // MARK: Default Settings
     private struct Defaults {
@@ -50,6 +53,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         
         // Seed Temp Cards
         self.tempCards = CardView.tempCards(self.defaults.cardsTemp, frame: self.cardFrame())
+        
+        // Set Card Info
+        self.resetCardInfo()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -147,6 +153,8 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
                         self.initCard(index != 0)
                     }
                 }
+            } else {
+                self.resetCardInfo()
             }
         })
     }
@@ -160,7 +168,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             frame.size.width -= (CGFloat(self.defaults.rotation) * 4) + 15
             frame.size.height -= navFrame.origin.y + navFrame.height + self.createButton.layer.frame.height + 120
             frame.origin.x = self.view.center.x - (frame.size.width/2)
-            frame.origin.y += navFrame.size.height - navFrame.origin.y
+            frame.origin.y += navFrame.size.height - navFrame.origin.y + 15
             
             if frame.size.height < frame.size.width {
                 frame.origin.x += (frame.size.width - frame.size.height - 30)/2
@@ -183,6 +191,15 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         } else {
             card = self.createCard(self.posts[0], transform: transform, oldCard: self.tempCards.first)
             self.tempCards.removeAtIndex(0)
+        }
+        
+        self.likesLabel.text = self.posts[0].likes.abbreviate()
+        self.sharesLabel.text = self.posts[0].shares.abbreviate()
+        
+        if self.posts[0].location != nil {
+            self.locationLabel.text = self.posts[0].location
+        } else {
+            self.locationLabel.text = "Anonymous"
         }
 
         self.posts.removeAtIndex(0)
@@ -221,6 +238,12 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         return card
     }
     
+    func resetCardInfo() {
+        self.likesLabel.text = "....."
+        self.sharesLabel.text = "....."
+        self.locationLabel.text = "...................."
+    }
+    
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
         // Add To Temps
@@ -231,6 +254,10 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         if !self.posts.isEmpty {
             self.initCard(true)
         } else {
+            if self.cards.isEmpty {
+               self.resetCardInfo()
+            }
+            
             self.seedCards()
         }
         
@@ -253,22 +280,22 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     }
     
     func cardWillReturnToCenter(card: CardView) {
-        UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            // 2nd Card
-            if self.cards.count > 1 {
-                let firstRotation = self.degreeToRadian(self.defaults.rotation)/2
-                self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
-            }
-
-            // 3rd Card
-            if self.cards.count > 2 {
-                let secondRotation = self.degreeToRadian(self.defaults.rotation)
-                self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
-            }
-        }, completion: nil)
-        
         // Reset Create Button
         if card == self.cards.first {
+            UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                // 2nd Card
+                if self.cards.count > 1 {
+                    let firstRotation = self.degreeToRadian(self.defaults.rotation)/2
+                    self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
+                }
+
+                // 3rd Card
+                if self.cards.count > 2 {
+                    let secondRotation = self.degreeToRadian(self.defaults.rotation)
+                    self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
+                }
+            }, completion: nil)
+        
             self.createButton.backgroundColor = self.defaults.createButton
             self.createButton.setTitle("POST", forState: UIControlState.Normal)
         }
@@ -278,22 +305,22 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         // Unlock First Card
         self.cards.first?.locked = false
         
-        // 2nd Card -> 1st Card
-        if self.cards.count > 1 {
-            let firstTransform = self.degreeToRadian(self.defaults.rotation)/2
-            let firstRotation = firstTransform + (firstTransform * -1 * abs(delta))
-            self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
-        }
-        
-        // 3rd Card -> 2nd Card
-        if self.cards.count > 2 {
-            let secondTransform = self.degreeToRadian(self.defaults.rotation)
-            let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
-            self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
-        }
-        
         // Set State For Button
         if card == self.cards.first {
+            // 2nd Card -> 1st Card
+            if self.cards.count > 1 {
+                let firstTransform = self.degreeToRadian(self.defaults.rotation)/2
+                let firstRotation = firstTransform + (firstTransform * -1 * abs(delta))
+                self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
+            }
+            
+            // 3rd Card -> 2nd Card
+            if self.cards.count > 2 {
+                let secondTransform = self.degreeToRadian(self.defaults.rotation)
+                let secondRotation = secondTransform + (secondTransform * -1 * abs(delta))/2
+                self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)
+            }
+        
             var title: String!
             var color: UIColor!
             

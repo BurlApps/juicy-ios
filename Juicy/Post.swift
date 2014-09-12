@@ -12,7 +12,9 @@ class Post: NSObject {
     
     // MARK: Instance Variables
     var likes: Int!
+    var shares: Int!
     var karma: Int!
+    var location: String!
     var content: [AnyObject]!
     var image: NSURL!
     var juicy: Bool!
@@ -26,7 +28,9 @@ class Post: NSObject {
         
         self.parse = post
         self.likes = post["likes"] as Int
+        self.shares = post["shares"] as Int
         self.karma = post["karma"] as Int
+        self.location = post["location"] as? String
         self.juicy = post["juicy"] as Bool
         self.image = NSURL(string: (self.parse["image"] as PFFile).url)
         self.content = post["content"] as [AnyObject]
@@ -38,7 +42,7 @@ class Post: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage, creator: User) {
+    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage, creator: User, location: String) {
         var post = PFObject(className: "Posts")
         var imageData = UIImagePNGRepresentation(image)
         var imageFile = PFFile(name: "image.png", data: imageData)
@@ -46,6 +50,7 @@ class Post: NSObject {
         // Set Content
         post["content"] = content
         post["image"] = imageFile
+        post["location"] = location
         post["creator"] = creator.parse
         
         // Set About User Relation
@@ -136,6 +141,7 @@ class Post: NSObject {
     func share(user: User, contacts: NSArray) {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
+        self.parse.incrementKey("shares", byAmount: contacts.count + 1)
         self.like(user, amount: contacts.count + 1)
         
         self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in
@@ -184,7 +190,7 @@ class Post: NSObject {
         })
     }
     
-    func getCreator()-> User? {
+    func getCreator()-> User! {
         var creator: PFUser! = self.parse["creator"] as PFUser
         
         if creator == nil {
