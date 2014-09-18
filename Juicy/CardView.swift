@@ -50,10 +50,6 @@ class CardView: UIView {
     private var darkenerColor: UIColor!
     private var darkenerBorder: UIColor!
     private var content: UILabel!
-    private var originalFrame: CGRect!
-    private var originalBounds: CGRect!
-    private var originalAnchor: CGPoint!
-    private var originalPosition: CGPoint!
     
     // MARK: Public Attributes
     var post: Post!
@@ -71,17 +67,6 @@ class CardView: UIView {
     // MARK: Instance Gestures
     private var tapGesture: UITapGestureRecognizer!
     private var panGesture: UIPanGestureRecognizer!
-    
-    // MARK: Class Method
-    class func tempCards(number: Int, frame: CGRect) -> [CardView] {
-        var cards: [CardView] = []
-        
-        for index in 1...number {
-            cards.append(CardView(frame: frame, post: nil, transform: 0))
-        }
-        
-        return cards
-    }
     
     // MARK: Convenience Init Method
     convenience init(frame: CGRect, post: Post!, transform: CGFloat) {
@@ -107,10 +92,7 @@ class CardView: UIView {
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.mainScreen().scale
         self.clipsToBounds = true
-        
-        println(self.frame)
-        println(self.bounds)
-        
+
         // Add Background SubView
         if self.background == nil {
             self.background = UIImageView(frame: self.bounds)
@@ -226,10 +208,6 @@ class CardView: UIView {
         if var view = gesture.view {
             if gesture.state == UIGestureRecognizerState.Began {
                 self.startPointInSuperview = newLocation;
-                self.originalAnchor = self.layer.anchorPoint
-                self.originalFrame = self.frame
-                self.originalBounds = self.bounds
-                self.originalPosition = self.layer.position
                 
                 let anchor = gesture.locationInView(gesture.view)
                 self.setAnchorPoint(CGPointMake(anchor.x/view.bounds.size.width, anchor.y/view.bounds.size.height), view: view)
@@ -341,13 +319,6 @@ class CardView: UIView {
                         self.removeGestures()
                         self.removeFromSuperview()
                         self.returnCardViewToStartPointAnimated(false)
-                        
-                        self.frame = self.originalFrame
-                        self.bounds = self.originalBounds
-                        self.layer.anchorPoint = self.originalAnchor
-                        self.layer.position = self.originalPosition
-                        self.background.image = UIImage()
-                        self.content.text = ""
                     })
                 }
             }
@@ -374,22 +345,6 @@ class CardView: UIView {
         }
         
         self.hideContent = false
-    }
-    
-    func regenerate(frame: CGRect, post: Post, transform: CGFloat) -> CardView {
-        // Instance Variables
-        self.post = post
-        self.frame = frame
-        self.transform = CGAffineTransformRotate(self.transform, transform);
-        
-        // Setup Methods
-        if self.post != nil {
-            self.setupViews()
-            self.setupAttributes()
-            self.setupGestures()
-        }
-
-        return self
     }
     
     func activate() {

@@ -48,6 +48,7 @@
 		D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEFC4C19C23ED90070D3D4 /* Int.swift */; };
 		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
+		D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */; };
 		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
 		D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostViewController.swift */; };
 		D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56819A097B9006E43F1 /* RBResizer.swift */; };
@@ -166,6 +167,7 @@
 		D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		D3BEFC4C19C23ED90070D3D4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
+		D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewController.swift; sourceTree = "<group>"; };
 		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		D3D5B56819A097B9006E43F1 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				D3D5B56519A0406F006E43F1 /* PostViewController.swift */,
 				D37683F319A70EF700F416B4 /* ShareViewController.swift */,
 				D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */,
+				D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */,
 				D303880419A313CB00C67E44 /* Contacts.swift in Sources */,
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
+				D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
 				D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */,

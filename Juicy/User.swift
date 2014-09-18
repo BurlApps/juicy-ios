@@ -49,6 +49,7 @@ class User: NSObject {
                 var dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yyyy"
                 
+                self.parse["registered"] = true
                 self.parse["email"] = fbUser["email"] as String
                 self.parse["name"] = fbUser["name"] as String
                 self.parse["firstName"] = fbUser["first_name"] as String
@@ -96,6 +97,26 @@ class User: NSObject {
         } else {
             callback?(users: self.friendsList)
         }
+    }
+    
+    func getMyPosts(callback: ((posts: [Post]) -> Void)!) {
+        var posts: [Post] = []
+        var query = PFQuery(className: "Posts")
+        
+        query.whereKey("creator", equalTo: self.parse)
+        query.orderByDescending("createdAt")
+        
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                for object in objects as [PFObject] {
+                    posts.append(Post(object, withRelations: false))
+                }
+                
+                callback!(posts: posts)
+            } else if error != nil {
+                println(error)
+            }
+        })
     }
     
     func getSharedPosts(callback: ((posts: [Post]) -> Void)!) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bjd-ge-VgJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bjd-ge-VgJ">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -59,7 +59,7 @@
                                     <action selector="loginButtonReleased:" destination="fYb-eI-6Px" eventType="touchUpInside" id="gkh-Yg-kPA"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" alpha="0.059999998658895493" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="D5d-O3-yge">
+                            <imageView userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="D5d-O3-yge">
                                 <rect key="frame" x="0.0" y="238" width="320" height="330"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="330" id="rju-wf-HVD"/>
@@ -119,13 +119,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Terms of Service" id="dJ6-w0-0uF">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Lg1-o2-IAz">
-                            <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="termsCancel:" destination="B1l-W2-7qH" id="MtB-U1-I7q"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Accept" id="H0t-MH-kbP">
-                            <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="termsAccepts:" destination="B1l-W2-7qH" id="MA9-lx-Zbm"/>
                             </connections>
@@ -155,7 +155,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3c-Sk-5pn">
                                 <rect key="frame" x="0.0" y="488" width="320" height="80"/>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.31372549019607843" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.27058823529411763" green="0.61960784313725492" blue="0.70196078431372544" alpha="0.95000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="lc8-Xw-y7p"/>
                                 </constraints>
@@ -188,7 +188,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...................." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKY-iZ-6oa">
-                                <rect key="frame" x="41" y="443.5" width="115" height="20.5"/>
+                                <rect key="frame" x="41" y="443" width="115" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="115" id="Qgb-dl-d9Z"/>
                                 </constraints>
@@ -197,7 +197,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="....." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKE-EN-zxC">
-                                <rect key="frame" x="194" y="443.5" width="36" height="20.5"/>
+                                <rect key="frame" x="194" y="443" width="36" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="5lK-eW-ZSs"/>
                                 </constraints>
@@ -206,7 +206,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="....." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UU8-a2-Phs">
-                                <rect key="frame" x="268" y="443.5" width="36" height="20.5"/>
+                                <rect key="frame" x="268" y="443" width="36" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="i0w-Jn-qQc"/>
                                 </constraints>
@@ -221,6 +221,12 @@
                                     <constraint firstAttribute="height" constant="22" id="Rk0-U0-ksp"/>
                                 </constraints>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LandingBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dNx-jh-Iyg">
+                                <rect key="frame" x="0.0" y="238" width="320" height="330"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="330" id="Hgp-Ko-oog"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -228,6 +234,7 @@
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="top" secondItem="EKE-EN-zxC" secondAttribute="bottom" constant="24" id="31T-b5-6iO"/>
                             <constraint firstAttribute="trailing" secondItem="X3c-Sk-5pn" secondAttribute="trailing" id="8vN-SP-ecd"/>
                             <constraint firstItem="WKY-iZ-6oa" firstAttribute="leading" secondItem="Dvf-fV-ewW" secondAttribute="trailing" constant="5" id="Nit-hE-EyW"/>
+                            <constraint firstItem="8yt-cL-a36" firstAttribute="top" secondItem="dNx-jh-Iyg" secondAttribute="bottom" id="Ryu-Sx-hwD"/>
                             <constraint firstItem="EKE-EN-zxC" firstAttribute="leading" secondItem="paP-bo-1Ll" secondAttribute="trailing" constant="8" id="SUz-jS-AW3"/>
                             <constraint firstItem="4j2-Yx-yPp" firstAttribute="leading" secondItem="EKE-EN-zxC" secondAttribute="trailing" constant="10" id="UYi-yJ-ZPQ"/>
                             <constraint firstItem="UU8-a2-Phs" firstAttribute="trailing" secondItem="InI-33-sHO" secondAttribute="trailingMargin" id="V6l-ir-rRk"/>
@@ -235,23 +242,25 @@
                             <constraint firstItem="Dvf-fV-ewW" firstAttribute="leading" secondItem="InI-33-sHO" secondAttribute="leadingMargin" id="YWK-yj-3Mj"/>
                             <constraint firstItem="8yt-cL-a36" firstAttribute="top" secondItem="X3c-Sk-5pn" secondAttribute="bottom" id="aCh-GX-dYf"/>
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="top" secondItem="4j2-Yx-yPp" secondAttribute="bottom" constant="25" id="cG4-DN-MVy"/>
+                            <constraint firstAttribute="trailing" secondItem="dNx-jh-Iyg" secondAttribute="trailing" id="gKr-my-IAm"/>
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="top" secondItem="UU8-a2-Phs" secondAttribute="bottom" constant="24" id="h1V-7x-McB"/>
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="leading" secondItem="InI-33-sHO" secondAttribute="leading" id="vJY-Mf-oIB"/>
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="top" secondItem="Dvf-fV-ewW" secondAttribute="bottom" constant="25" id="wM1-Ut-VDe"/>
+                            <constraint firstItem="dNx-jh-Iyg" firstAttribute="leading" secondItem="InI-33-sHO" secondAttribute="leading" id="wSA-Ft-tNM"/>
                             <constraint firstItem="X3c-Sk-5pn" firstAttribute="top" secondItem="paP-bo-1Ll" secondAttribute="bottom" constant="24" id="x9c-fI-Ccx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Juicy" id="nc2-eB-Ahb">
                         <barButtonItem key="leftBarButtonItem" image="SettingsCog" id="ZSz-nZ-Te5">
-                            <color key="tintColor" red="0.36096722146739135" green="0.36096722146739135" blue="0.36096722146739135" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsButton:" destination="aOS-dg-wo6" id="avM-HQ-dPl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Bookmarks" id="cbK-7j-QhS">
-                            <color key="tintColor" red="0.5725490196078431" green="0.5725490196078431" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="jRR-G4-tle" kind="custom" identifier="savedSegue" customClass="NoAnimationSegue" id="fnf-P7-FQa"/>
+                                <segue destination="jRR-G4-tle" kind="custom" identifier="sharedPostsSegue" customClass="NoAnimationSegue" id="fnf-P7-FQa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -262,13 +271,14 @@
                         <outlet property="locationLabel" destination="WKY-iZ-6oa" id="Nz3-3L-lez"/>
                         <outlet property="sharesLabel" destination="EKE-EN-zxC" id="8nZ-ov-xrg"/>
                         <segue destination="3Jy-W0-pcp" kind="custom" identifier="shareSegue" customClass="NoAnimationSegue" id="SEl-IA-b7t"/>
+                        <segue destination="p2g-gV-KDw" kind="custom" identifier="myPostsSeque" customClass="NoAnimationSegue" id="VRb-tF-Jkz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8v-WI-gHc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136" y="19"/>
         </scene>
-        <!--Share The Post-->
+        <!--Share Anonmously-->
         <scene sceneID="O3T-kF-Nvs">
             <objects>
                 <viewController storyboardIdentifier="ShareViewController" id="3Jy-W0-pcp" customClass="ShareViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -281,15 +291,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Share The Post" id="59M-Kg-lJx">
+                    <navigationItem key="navigationItem" title="Share Anonmously" id="59M-Kg-lJx">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="bdF-FR-TDy">
-                            <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeShare:" destination="3Jy-W0-pcp" id="O6h-mV-JLs"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="SEND" id="les-Wr-0jb">
-                            <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="shareSend:" destination="3Jy-W0-pcp" id="ieQ-eR-8ct"/>
                             </connections>
@@ -378,7 +388,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="250" id="U4e-y6-BV6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="280" id="U4e-y6-BV6">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U4e-y6-BV6" id="UWJ-kk-GG2">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -392,7 +402,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Shared Posts" id="Zv0-YF-sRg">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="7KS-vJ-OCC">
-                            <color key="tintColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="shareExit:" destination="jRR-G4-tle" id="q8j-ZR-thQ"/>
                             </connections>
@@ -402,7 +412,42 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZ9-fZ-V7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="736"/>
+            <point key="canvasLocation" x="632" y="783"/>
+        </scene>
+        <!--My Posts-->
+        <scene sceneID="Uzf-BF-9K6">
+            <objects>
+                <tableViewController storyboardIdentifier="MyPostsTableViewController" title="My Posts" id="p2g-gV-KDw" customClass="MyPostsTableViewController" customModule="Juicy" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hSH-0j-9sj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="280" id="5jr-h2-t37">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5jr-h2-t37" id="ald-Rp-oxW">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p2g-gV-KDw" id="ZDV-dv-mzf"/>
+                            <outlet property="delegate" destination="p2g-gV-KDw" id="bYx-C5-fym"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Posts" id="mgW-J9-L3v">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Wvh-yH-4xW">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="shareExit:" destination="p2g-gV-KDw" id="ynd-vu-Wn2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2WK-uY-lQR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="783"/>
         </scene>
         <!--Post-->
         <scene sceneID="WwM-01-KLA">
@@ -452,6 +497,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="i1s-Zz-21h"/>
+        <segue reference="nxv-eo-ijJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -86,7 +86,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.darkGrayColor(),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
     }

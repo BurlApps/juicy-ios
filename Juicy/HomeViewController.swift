@@ -30,9 +30,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
             }
         }
         
-        // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
-        
         // Create Page View Controller
         self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageViewController.view.backgroundColor = UIColor.clearColor()
@@ -55,6 +52,9 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
         
         // Setup Navigation Bar
         self.navigationController?.navigationBarHidden = true

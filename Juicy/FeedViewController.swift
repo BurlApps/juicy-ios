@@ -17,12 +17,11 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     // MARK: Default Settings
     private struct Defaults {
         let cardsShown: Int = 4
-        let cardsTemp: Int = 6
         let rotation: Double = 6
         let duration: NSTimeInterval = 0.2
         let delay: NSTimeInterval = 0
-        let createButton: UIColor = UIColor(red:0.96, green:0.31, blue:0.16, alpha:0.95)
-        let createButtonDown: UIColor = UIColor(red:0.85, green:0.27, blue:0.14, alpha:0.95)
+        let createButton: UIColor = UIColor(red:0.27, green:0.62, blue:0.7, alpha:0.95)
+        let createButtonDown: UIColor = UIColor(red:0.15, green:0.53, blue:0.62, alpha:0.95)
         let createButtonShare: UIColor = UIColor(red:0.27, green:0.64, blue:0.85, alpha: 0.95)
         let createButtonLike: UIColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.95)
         let createButtonNope: UIColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.95)
@@ -33,7 +32,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var currentUser = User.current()
     private var posts: [Post] = []
     private var cards: [CardView] = []
-    private var tempCards: [CardView] = []
     private var sharePost: Post!
     
     // MARK: UIViewController Overrides
@@ -51,32 +49,29 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         buttonBorder.backgroundColor = UIColor(white: 0, alpha: 0.05)
         self.createButton.addSubview(buttonBorder)
         
-        // Seed Temp Cards
-        self.tempCards = CardView.tempCards(self.defaults.cardsTemp, frame: self.cardFrame())
-        
         // Set Card Info
         self.resetCardInfo()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         // Create Text Shadow
         var shadow = NSShadow()
-        shadow.shadowColor = UIColor(red:0.94, green:0.94, blue:0.94, alpha:1)
+        shadow.shadowColor = UIColor(red:0, green:0, blue:0, alpha:0.1)
         shadow.shadowOffset = CGSizeMake(0, 2);
         
         // Configure Navigation Bar
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor(red:0.96, green:0.33, blue:0.24, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor(red:0.96, green:0.33, blue:0.24, alpha:1),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
             NSShadowAttributeName: shadow
         ]
@@ -119,7 +114,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
         switch buttonIndex {
         case 1:
-            println("My Posts")
+            self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 2:
             println("Phone Number")
         case 3:
@@ -134,29 +129,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     func degreeToRadian(degree: Double) -> CGFloat {
         let result = degree * M_PI / 180
         return CGFloat(Float(result))
-    }
-    
-    func seedCards() {
-        Post.find(self.currentUser, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
-            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
-                var max: Int!
-                self.posts = posts
-                
-                if posts.count < 4 {
-                    max = posts.count
-                } else {
-                    max = self.defaults.cardsShown - self.cards.count - 1
-                }
-                
-                if max > 0 {
-                    for index in 0...max {
-                        self.initCard(index != 0)
-                    }
-                }
-            } else {
-                self.resetCardInfo()
-            }
-        })
     }
     
     func cardFrame() -> CGRect {
@@ -179,29 +151,36 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         return frame
     }
     
-    func initCard(transform: Bool) -> CardView! {
-        var card: CardView!
+    func seedCards() {
+        if self.cards.isEmpty {
+            self.resetCardInfo()
+        }
         
-        if self.posts.isEmpty {
+        Post.find(self.currentUser, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
+            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
+                var max: Int!
+                self.posts = posts
+                
+                if posts.count < 4 {
+                    max = posts.count
+                } else {
+                    max = self.defaults.cardsShown - 1
+                }
+                
+                for index in 0...max {
+                    self.initCard(!self.cards.isEmpty)
+                }
+            }
+        })
+    }
+    
+    func initCard(transform: Bool) -> CardView! {
+        if self.posts.isEmpty || self.cards.count >= self.defaults.cardsShown {
             return nil
         }
-        
-        if self.tempCards.isEmpty {
-            card = self.createCard(self.posts[0], transform: transform, oldCard: nil)
-        } else {
-            card = self.createCard(self.posts[0], transform: transform, oldCard: self.tempCards.first)
-            self.tempCards.removeAtIndex(0)
-        }
-        
-        self.likesLabel.text = self.posts[0].likes.abbreviate()
-        self.sharesLabel.text = self.posts[0].shares.abbreviate()
-        
-        if self.posts[0].location != nil {
-            self.locationLabel.text = self.posts[0].location
-        } else {
-            self.locationLabel.text = "Anonymous"
-        }
 
+        var post = self.posts[0]
+        var card = self.createCard(post, transform: transform)
         self.posts.removeAtIndex(0)
         
         if self.cards.isEmpty {
@@ -211,11 +190,12 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         }
         
         self.cards.append(card)
-        self.cards.first?.activate()
+        self.cardInfo()
+        self.cards[0].activate()
         return card
     }
     
-    func createCard(post: Post, transform: Bool, oldCard: CardView!) -> CardView {
+    func createCard(post: Post, transform: Bool) -> CardView {
         var card: CardView!
         var rotation: CGFloat = 0
         var frame = self.cardFrame()
@@ -228,14 +208,21 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             }
         }
         
-        if oldCard == nil {
-            card = CardView(frame: frame, post: post, transform: rotation)
-        } else {
-            card = oldCard.regenerate(frame, post: post, transform: rotation)
-        }
-
+        card = CardView(frame: frame, post: post, transform: rotation)
         card.delegate = self
         return card
+    }
+    
+    func cardInfo() {
+        var post = self.cards[0].post
+        self.likesLabel.text = post.likes.abbreviate()
+        self.sharesLabel.text = post.shares.abbreviate()
+        
+        if post.location != nil {
+            self.locationLabel.text = post.location
+        } else {
+            self.locationLabel.text = "Anonymous"
+        }
     }
     
     func resetCardInfo() {
@@ -246,19 +233,13 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
-        // Add To Temps
-        self.tempCards.append(card)
         self.cards.removeAtIndex(0)
         
         // Seed New Cards
-        if !self.posts.isEmpty {
-            self.initCard(true)
-        } else {
-            if self.cards.isEmpty {
-               self.resetCardInfo()
-            }
-            
+        if self.posts.isEmpty {
             self.seedCards()
+        } else {
+            self.initCard(true)
         }
         
         // Set Status Of Card

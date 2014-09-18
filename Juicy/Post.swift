@@ -190,6 +190,7 @@ class Post: NSObject {
         })
     }
     
+    // MARK: Extra Utilities For Future
     func getCreator()-> User! {
         var creator: PFUser! = self.parse["creator"] as PFUser
         

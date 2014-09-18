@@ -18,10 +18,10 @@ class CardTableViewCell: UITableViewCell {
     private let delay: NSTimeInterval = 0
     
     // Convience Constructor
-    convenience init(reuseIdentifier: String!) {
+    convenience init(reuseIdentifier: String!, useBorder: Bool, height: CGFloat) {
         self.init(style: UITableViewCellStyle.Default, reuseIdentifier: reuseIdentifier)
         
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, 250)
+        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, height)
         self.clipsToBounds = true
         self.selectionStyle = UITableViewCellSelectionStyle.None
         
@@ -43,9 +43,11 @@ class CardTableViewCell: UITableViewCell {
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.insertSubview(self.content, aboveSubview: darkener)
         
-        var buttonBorder = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 3))
-        buttonBorder.backgroundColor = UIColor(white: 1, alpha: 0.15)
-        self.insertSubview(buttonBorder, aboveSubview: self.content)
+        if useBorder {
+            var border = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 3))
+            border.backgroundColor = UIColor(white: 1, alpha: 0.15)
+            self.insertSubview(border, aboveSubview: self.content)
+        }
 
         var tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapHandle:"))
         self.addGestureRecognizer(tapGesture)

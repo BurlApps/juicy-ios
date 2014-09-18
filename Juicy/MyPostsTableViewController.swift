@@ -1,18 +1,20 @@
 //
-//  SavedTableViewController.swift
+//  MyPostsTableViewController.swift
 //  Juicy
 //
-//  Created by Brian Vallelunga on 8/28/14.
+//  Created by Brian Vallelunga on 9/17/14.
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class SavedTableViewController: UITableViewController {
-    
+import UIKit
+
+class MyPostsTableViewController: UITableViewController {
+
     // MARK: Instance Variables
     private var cellIdentifier = "cell"
     private var cellHeight: CGFloat!
     private var currentUser: User = User.current()
-    private var sharedPosts: [Post] = []
+    private var myPosts: [Post] = []
     private let duration: NSTimeInterval = 0.2
     private let delay: NSTimeInterval = 0
     
@@ -40,13 +42,13 @@ class SavedTableViewController: UITableViewController {
         self.title = "Loading..."
         
         // Get Shared Posts
-        self.currentUser.getSharedPosts { (posts) -> Void in
+        self.currentUser.getMyPosts { (posts) -> Void in
             if !posts.isEmpty {
-                self.sharedPosts = posts
+                self.myPosts = posts
                 self.tableView.reloadData()
-                self.title = "Shared Posts"
+                self.title = "My Posts"
             } else {
-                self.title = "No Shared Posts"
+                self.title = "No Posts Found"
                 
             }
         }
@@ -63,7 +65,7 @@ class SavedTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sharedPosts.count
+        return self.myPosts.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -71,11 +73,11 @@ class SavedTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var post = self.sharedPosts[indexPath.row]
+        var post = self.myPosts[indexPath.row]
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
         if cell == nil {
-            let useBorder: Bool = (post != self.sharedPosts.first)
+            let useBorder: Bool = (post != self.myPosts.first)
             cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, useBorder: useBorder, height: self.cellHeight)
         }
         
@@ -87,9 +89,10 @@ class SavedTableViewController: UITableViewController {
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 cell.backgroundImageView.alpha = 1
                 cell.backgroundImageView.image = image
-            }, completion: nil)
+                }, completion: nil)
         })
-
+        
         return cell
     }
+
 }
