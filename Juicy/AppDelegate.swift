@@ -24,6 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let parseClientKey = infoDictionary["ParseClientKey"] as  NSString
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
+        // Register for Push Notitications, if running iOS 8
+        if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
+            let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+            let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        
+        // Register for Push Notifications before iOS 8
+        } else {
+            let notificationTypes = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
+            application.registerForRemoteNotificationTypes(notificationTypes)
+        }
+        
         //Initialize Facebook
         PFFacebookUtils.initializeFacebook()
         
@@ -59,6 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(application: UIApplication) {
         FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        PFPush.handlePush(userInfo)
     }
 
     func applicationWillResignActive(application: UIApplication) {
