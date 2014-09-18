@@ -49,9 +49,6 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
             self.cameraView.awakeFromNib()
         }
         
-        // Configure Status Bar
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
-        
         // Configure Navigation Bar
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()

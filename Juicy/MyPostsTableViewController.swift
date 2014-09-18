@@ -32,6 +32,10 @@ class MyPostsTableViewController: UITableViewController {
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
         
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: Selector("reloadMyPosts"), forControlEvents: UIControlEvents.ValueChanged)
+
         // Configure Table
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -42,15 +46,21 @@ class MyPostsTableViewController: UITableViewController {
         self.title = "Loading..."
         
         // Get Shared Posts
+        self.reloadMyPosts()
+    }
+    
+    // MARK: Instance Methods
+    func reloadMyPosts() {
         self.currentUser.getMyPosts { (posts) -> Void in
             if !posts.isEmpty {
-                self.myPosts = posts
-                self.tableView.reloadData()
                 self.title = "My Posts"
             } else {
                 self.title = "No Posts Found"
-                
             }
+            
+            self.myPosts = posts
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -77,20 +87,11 @@ class MyPostsTableViewController: UITableViewController {
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
         if cell == nil {
-            let useBorder: Bool = (post != self.myPosts.first)
-            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, useBorder: useBorder, height: self.cellHeight)
+            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, height: self.cellHeight)
         }
         
-        cell.backgroundImageView.alpha = 0
-        cell.backgroundImageView.image = UIImage()
-        cell.setContent(post.content as [AnyObject])
-        
-        post.getImage({ (image) -> Void in
-            UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                cell.backgroundImageView.alpha = 1
-                cell.backgroundImageView.image = image
-                }, completion: nil)
-        })
+        cell.setSeparator(post != self.myPosts.first)
+        cell.setContent(post)
         
         return cell
     }

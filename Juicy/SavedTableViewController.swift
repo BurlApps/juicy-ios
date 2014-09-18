@@ -30,6 +30,10 @@ class SavedTableViewController: UITableViewController {
             NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
         ]
         
+        // Add Refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: Selector("reloadSharedPosts"), forControlEvents: UIControlEvents.ValueChanged)
+        
         // Configure Table
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -40,15 +44,21 @@ class SavedTableViewController: UITableViewController {
         self.title = "Loading..."
         
         // Get Shared Posts
+        self.reloadSharedPosts()
+    }
+    
+    // MARK: Instance Methods
+    func reloadSharedPosts() {
         self.currentUser.getSharedPosts { (posts) -> Void in
             if !posts.isEmpty {
-                self.sharedPosts = posts
-                self.tableView.reloadData()
                 self.title = "Shared Posts"
             } else {
                 self.title = "No Shared Posts"
-                
             }
+            
+            self.sharedPosts = posts
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
     
@@ -75,20 +85,11 @@ class SavedTableViewController: UITableViewController {
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
         if cell == nil {
-            let useBorder: Bool = (post != self.sharedPosts.first)
-            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, useBorder: useBorder, height: self.cellHeight)
+            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, height: self.cellHeight)
         }
         
-        cell.backgroundImageView.alpha = 0
-        cell.backgroundImageView.image = UIImage()
-        cell.setContent(post.content as [AnyObject])
-        
-        post.getImage({ (image) -> Void in
-            UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                cell.backgroundImageView.alpha = 1
-                cell.backgroundImageView.image = image
-            }, completion: nil)
-        })
+        cell.setSeparator(post != self.sharedPosts.first)
+        cell.setContent(post)
 
         return cell
     }
