@@ -85,7 +85,7 @@ class SavedTableViewController: UITableViewController {
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
         if cell == nil {
-            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, height: self.cellHeight)
+            cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, width: self.view.frame.width, height: self.cellHeight)
         }
         
         cell.setSeparator(post != self.sharedPosts.first)

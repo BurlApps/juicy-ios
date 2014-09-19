@@ -37,6 +37,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes(notificationTypes)
         }
         
+        // Track an app open here if we launch with a push, unless
+        // "content_available" was used to trigger a background push (introduced
+        // in iOS 7). In that case, we skip tracking here to avoid double
+        // counting the app-open.
+        if application.applicationState != UIApplicationState.Background {
+            let preBackgroundPush = !application.respondsToSelector(Selector("backgroundRefreshStatus"))
+            let oldPushHandlerOnly = !self.respondsToSelector(Selector("application:didReceiveRemoteNotification:fetchCompletionHandler:"))
+            let noPushPayload = (launchOptions?.objectForKey(UIApplicationLaunchOptionsRemoteNotificationKey) == nil)
+            
+            if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
+                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+            }
+        }
+        
         //Initialize Facebook
         PFFacebookUtils.initializeFacebook()
         
@@ -76,6 +90,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         PFPush.handlePush(userInfo)
+        
+        if application.applicationState == UIApplicationState.Inactive {
+            // The application was just brought from the background to the foreground,
+            // so we consider the app as having been "opened by a push notification."
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if application.applicationState == UIApplicationState.Inactive {
+            // The application was just brought from the background to the foreground,
+            // so we consider the app as having been "opened by a push notification."
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -1,5 +1,8 @@
+workspace 'Juicy.xcworkspace'
+
 pod 'Facebook-iOS-SDK', '~> 3.15'
 pod 'CHTTextView', '~> 0.1'
+pod 'AMSlideMenu', '~> 1.5'
 
-pod 'VLBCameraView', :git => 'https://github.com/bvallelunga/VLBCameraView.git'
+pod 'VLBCameraView', :git => 'https://github.com/JuicyApp/VLBCameraView.git'
 pod 'THContactPicker', :git => 'https://github.com/JuicyApp/THContactPicker.git'

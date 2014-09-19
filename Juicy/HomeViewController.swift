@@ -45,8 +45,8 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         
         // Add Spinner to Connect Button
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        self.spinner.frame = CGRectMake(0.0, 0.0, 40.0, 40.0)
-        self.spinner.center = CGPointMake(self.loginButton.frame.size.width/2.0, self.loginButton.frame.size.height/2)
+        self.spinner.frame = CGRectMake(0, 0, 40, 40)
+        self.spinner.center = CGPointMake(self.view.frame.width/2, self.loginButton.frame.height/2)
         self.loginButton.addSubview(spinner)
     }
     
@@ -98,6 +98,9 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         PFFacebookUtils.logInWithPermissions(nil, { (user: PFUser!, error: NSError!) -> Void in
             if user != nil {
                 var tempUser = User(user)
+                var installation = PFInstallation.currentInstallation()
+                installation["user"] = user
+                installation.saveInBackground()
                 
                 if user.isNew {
                     tempUser.setExtraInfo({ () -> Void in

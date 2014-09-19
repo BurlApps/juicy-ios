@@ -26,17 +26,17 @@ class CardTableViewCell: UITableViewCell {
     private let delay: NSTimeInterval = 0
     
     // MARK: Convience Constructor
-    convenience init(reuseIdentifier: String!, height: CGFloat) {
+    convenience init(reuseIdentifier: String!, width: CGFloat, height: CGFloat) {
         self.init(style: UITableViewCellStyle.Default, reuseIdentifier: reuseIdentifier)
         
         // Configure Cell
-        self.frame = CGRectMake(0, self.frame.origin.y, self.frame.size.width, height)
+        self.frame = CGRectMake(0, self.frame.origin.y, width, height)
         self.clipsToBounds = true
         self.selectionStyle = UITableViewCellSelectionStyle.None
         self.backgroundColor = UIColor.blackColor()
         
         // Create Background Image
-        self.backgroundImageView = UIImageView()
+        self.backgroundImageView = UIImageView(frame: self.frame)
         self.backgroundView = self.backgroundImageView
         self.backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
@@ -46,7 +46,7 @@ class CardTableViewCell: UITableViewCell {
         self.addSubview(self.darkener)
         
         // Create Content Label
-        self.content = UILabel(frame: CGRectMake(10, 10, self.frame.size.width - 20, self.frame.size.height - 20))
+        self.content = UILabel(frame: CGRectMake(10, 10, self.frame.width - 20, self.frame.height - 20))
         self.content.textAlignment = NSTextAlignment.Center
         self.content.textColor = UIColor.whiteColor()
         self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
