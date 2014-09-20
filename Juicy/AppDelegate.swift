@@ -75,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {        
         var installation = PFInstallation.currentInstallation()
-        installation["user"] = PFUser.currentUser()
         installation.setDeviceTokenFromData(deviceToken)
         installation.addUniqueObject("termsChanged", forKey: "channels")
         installation.addUniqueObject("juicyPost", forKey: "channels")

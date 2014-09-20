@@ -11,10 +11,11 @@ import UIKit
 class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: IBOutlets
-    @IBOutlet weak var cameraView: VLBCameraView!
+    //@IBOutlet weak var cameraView: VLBCameraView!
     @IBOutlet weak var captureButton: UIButton!
     
     // MARK: Instance Variables
+    private var cameraView: VLBCameraView!
     private var capturedImage: UIImage!
     private var imagePicker: UIImagePickerController!
     
@@ -22,8 +23,16 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure Background
+        self.view.backgroundColor = UIColor.blackColor()
+        
         // VLBCameraView Set Delegate
-        self.cameraView.delegate = self
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.cameraView = VLBCameraView(frame: self.view.frame)
+            self.cameraView.delegate = self
+            self.cameraView.awakeFromNib()
+            self.view.insertSubview(self.cameraView, atIndex: 0)
+        })
         
         // Setup Post Button
         self.captureButton.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.75)
@@ -45,7 +54,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if self.cameraView.session != nil && !self.cameraView.session.running {
+        if self.cameraView != nil && !self.cameraView.session.running {
             self.cameraView.awakeFromNib()
         }
         
@@ -76,7 +85,10 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
     
     @IBAction func captureTouchInside(sender: UIButton) {
         sender.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.75)
-        self.cameraView.takePicture()
+        
+        if self.cameraView.session != nil && self.cameraView.session.running {
+            self.cameraView.takePicture()
+        }
     }
     
     @IBAction func toggleCamera(sender: UIBarButtonItem) {

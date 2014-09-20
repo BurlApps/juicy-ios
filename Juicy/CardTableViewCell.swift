@@ -154,14 +154,13 @@ class CardTableViewCell: UITableViewCell {
             self.location.text = "Anonymous"
         }
         
-        var contentAttr = NSMutableAttributedString()
-        
         if post.juicy as Bool {
             self.darkener.backgroundColor = UIColor(red:0.94, green:0.14, blue:0.04, alpha:0.5)
         } else {
             self.darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
         }
         
+        var contentAttr = NSMutableAttributedString()
         for block in post.content as [AnyObject] {
             let message: String? = block["message"] as String!
             

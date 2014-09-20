@@ -17,6 +17,11 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
     private var contacts: [String] = []
     private var locationManager: CLLocationManager!
     
+    struct Friend {
+        var user: User!
+        var range: NSRange!
+    }
+    
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,11 +114,11 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             } else {
                 for (index, friend) in enumerate(friends) {
                     var endRange: NSRange;
-                    let range = friend["range"] as NSRange
+                    let range = friend.range
                     let endLocation = range.location + range.length
                     
-                    if friend["user"] is User {
-                        aboutUsers.append(friend["user"] as User)
+                    if friend.user != nil {
+                        aboutUsers.append(friend.user)
                     }
                     
                     if index == 0 && range.location != 0 {
@@ -131,7 +136,7 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
                     if index == (friends.count - 1) {
                         endRange = _NSRange(location: endLocation, length: editorText.length - endLocation)
                     } else {
-                        endRange = _NSRange(location: endLocation, length: (friends[index + 1]["range"] as NSRange).location - endLocation)
+                        endRange = _NSRange(location: endLocation, length: friends[index + 1].range.location - endLocation)
                     }
                 
                     if endRange.length > 0 {
@@ -150,9 +155,34 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
     }
     
     // MARK: Instance Methods
-    func detectFriendsInMessage(text: String) -> [AnyObject] {
+    func isFriend(range: NSRange, ranges: NSMutableArray, text: String, oldLength: Int) -> Bool {
+        let letters = NSCharacterSet.letterCharacterSet()
+        let digits = NSCharacterSet.decimalDigitCharacterSet()
+        
+        if range.location != Foundation.NSNotFound {
+            for tempRange in ranges {
+                let newRange = tempRange as NSRange
+                
+                if range.location == newRange.location {
+                    return false
+                }
+            }
+            
+            let length = range.location + range.length
+            let unicodeScalars = text.unicodeScalars
+            let lastChar = unicodeScalars[unicodeScalars.endIndex].value
+            
+            return !ranges.containsObject(range) &&
+                   (range.location == 0 || text[range.location - 1] == " ") &&
+                   (length == oldLength || (!letters.longCharacterIsMember(lastChar) && !digits.longCharacterIsMember(lastChar)))
+        } else {
+            return false
+        }
+    }
+    
+    func detectFriendsInMessage(text: String) -> [Friend] {
         let lowerText = NSString(string: text.lowercaseString)
-        var friends: [AnyObject] = []
+        var friends: [Friend] = []
         var ranges = NSMutableArray()
         
         // Search By Registered Users
@@ -160,13 +190,9 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             for friend in self.currentUser.friendsList {
                 let range = lowerText.rangeOfString(friend.name.lowercaseString)
                 
-                if range.location != Foundation.NSNotFound && !ranges.containsObject(range)  {
-                    let length = range.location + range.length
-                    
-                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " " ||  text[length] == ".") {
-                        friends.append([ "user": friend, "range": range ])
-                        ranges.addObject(range)
-                    }
+                if self.isFriend(range, ranges: ranges, text: text, oldLength: lowerText.length)  {
+                    friends.append(Friend(user: friend, range: range))
+                    ranges.addObject(range)
                 }
             }
         }
@@ -176,17 +202,14 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
             for contact in self.contacts {
                 let range = lowerText.rangeOfString(contact.lowercaseString)
                 
-                if range.location != Foundation.NSNotFound && !ranges.containsObject(range) {
-                    let length = range.location + range.length
-                    
-                    if (range.location == 0 || text[range.location - 1] == " ") && (length == lowerText.length || text[length] == " " || text[length] == ".") {
-                        friends.append([ "range": range ])
-                        ranges.addObject(range)
-                    }
+                if self.isFriend(range, ranges: ranges, text: text, oldLength: lowerText.length)  {
+                    friends.append(Friend(user: nil, range: range))
+                    ranges.addObject(range)
                 }
             }
         }
         
+        friends.sort({ $0.range.location < $1.range.location })
         return friends
     }
     
@@ -227,8 +250,7 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
         mutalableText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, mutalableText.length))
         
         for friend in friends {
-            let range = friend["range"] as NSRange
-            mutalableText.addAttribute(NSForegroundColorAttributeName, value: UIColor(red:0.31, green:0.95, blue:1, alpha:1), range: range)
+            mutalableText.addAttribute(NSForegroundColorAttributeName, value: UIColor(red:0.31, green:0.95, blue:1, alpha:1), range: friend.range)
         }
         
         if mutalableText.length >= 65 {
