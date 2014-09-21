@@ -33,7 +33,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         // Create Page View Controller
         self.pageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
         self.pageViewController.view.backgroundColor = UIColor.clearColor()
-        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 110)
+        self.pageViewController.view.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - 130)
         self.pageViewController.dataSource = self
         
         self.addChildViewController(self.pageViewController)

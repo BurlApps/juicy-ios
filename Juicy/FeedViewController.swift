@@ -92,7 +92,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     // MARK: IBActions
     @IBAction func settingsButton(sender: UIBarButtonItem) {
 
-        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Add Phone Number", "Logout")
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Logout")
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
         actionSheet.showInView(self.view)
     }
@@ -116,8 +116,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case 1:
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 2:
-            println("Phone Number")
-        case 3:
             User.logout()
             self.navigationController?.popToRootViewControllerAnimated(false)
         default:

@@ -17,7 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary;
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // Configure Settings Panel
+        userDefaults.setValue(infoDictionary["CFBundleShortVersionString"], forKey: "VersionNumber")
+        userDefaults.synchronize()
         
         //Initialize Parse
         let parseApplicationID = infoDictionary["ParseApplicationID"] as  NSString

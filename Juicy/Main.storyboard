@@ -111,10 +111,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="b1a-fg-6Uz" firstAttribute="top" secondItem="YbJ-Lr-55Q" secondAttribute="bottom" id="51b-JN-vmY"/>
-                            <constraint firstItem="HLJ-Kq-ItM" firstAttribute="top" secondItem="b1a-fg-6Uz" secondAttribute="bottom" id="72d-gP-VBL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="b1a-fg-6Uz" secondAttribute="trailing" constant="-16" id="Kqn-DS-Rw7"/>
-                            <constraint firstItem="b1a-fg-6Uz" firstAttribute="leading" secondItem="o6K-e7-dR9" secondAttribute="leadingMargin" constant="-16" id="xIW-ed-BdQ"/>
+                            <constraint firstItem="b1a-fg-6Uz" firstAttribute="top" secondItem="YbJ-Lr-55Q" secondAttribute="bottom" id="7se-1e-60u"/>
+                            <constraint firstItem="b1a-fg-6Uz" firstAttribute="leading" secondItem="o6K-e7-dR9" secondAttribute="leading" id="KZX-qv-tBB"/>
+                            <constraint firstItem="HLJ-Kq-ItM" firstAttribute="top" secondItem="b1a-fg-6Uz" secondAttribute="bottom" id="cYy-mR-QVJ"/>
+                            <constraint firstAttribute="trailing" secondItem="b1a-fg-6Uz" secondAttribute="trailing" id="h5e-5S-abn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Terms of Service" id="dJ6-w0-0uF">
@@ -492,6 +492,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="nxv-eo-ijJ"/>
+        <segue reference="i1s-Zz-21h"/>
     </inferredMetricsTieBreakers>
 </document>

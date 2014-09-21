@@ -23,6 +23,7 @@
 		D3636E1519AAC0C6007402EC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3636E1419AAC0C6007402EC /* CoreText.framework */; };
 		D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A897194E717F00FABCC0 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		D3636E1819AAC11A007402EC /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3636E1719AAC11A007402EC /* HockeySDK.framework */; };
+		D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D366B14D19CF6B79002C7F59 /* Settings.bundle */; };
 		D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37683F319A70EF700F416B4 /* ShareViewController.swift */; };
 		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
 		D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */; };
@@ -43,6 +44,7 @@
 		D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */; };
 		D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8AF194E722A00FABCC0 /* UIKit.framework */; };
 		D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A8B1194E723400FABCC0 /* Foundation.framework */; };
+		D3A2CE3819CE5B110009842B /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */; };
 		D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BC19B0304E0057DA1F /* TermsViewController.swift */; };
 		D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */; };
 		D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEFC4C19C23ED90070D3D4 /* Int.swift */; };
@@ -133,6 +135,7 @@
 		D3636E1A19AAC290007402EC /* HockeySDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = HockeySDK.xcconfig; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDK.xcconfig"; sourceTree = "<group>"; };
 		D3636E1D19AAC300007402EC /* HockeySDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = HockeySDK.xcconfig; path = "../Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDK.xcconfig"; sourceTree = "<group>"; };
 		D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HockeySDKResources.bundle; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle"; sourceTree = "<group>"; };
+		D366B14D19CF6B79002C7F59 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D37683F319A70EF700F416B4 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		D381C98A19908E7900AA65F6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 		D3A2A8AD194E722000FABCC0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D3A2A8AF194E722A00FABCC0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3A2A8B1194E723400FABCC0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D3A2CE3619CE5AF20009842B /* UIImageViewAligned.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIImageViewAligned.h; sourceTree = "<group>"; };
+		D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAligned.m; sourceTree = "<group>"; };
 		D3A752BC19B0304E0057DA1F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		D3BEFC4C19C23ED90070D3D4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -286,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */,
+				D366B14D19CF6B79002C7F59 /* Settings.bundle */,
 			);
 			name = Bundles;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 		D3A2A860194E60D500FABCC0 /* Juicy */ = {
 			isa = PBXGroup;
 			children = (
+				D3A2CE3519CE5ADF0009842B /* Objective-C */,
 				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
 				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
 				D3A2A88B194E63BE00FABCC0 /* Classes */,
@@ -419,6 +426,15 @@
 				1C23D6F785A54A2AA5E091EF /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3A2CE3519CE5ADF0009842B /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				D3A2CE3619CE5AF20009842B /* UIImageViewAligned.h */,
+				D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */,
+			);
+			name = "Objective-C";
 			sourceTree = "<group>";
 		};
 		D3D5B56719A09794006E43F1 /* Utils */ = {
@@ -541,6 +557,7 @@
 			files = (
 				D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */,
 				D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */,
+				D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */,
 				D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */,
 				D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */,
 			);
@@ -619,6 +636,7 @@
 				D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
+				D3A2CE3819CE5B110009842B /* UIImageViewAligned.m in Sources */,
 				D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */,
 				D30A84D41997403F00CBF78F /* CardView.swift in Sources */,
 				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
@@ -809,7 +827,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "420194ae-6eba-47b2-b4af-ae705dae12f5";
+				PROVISIONING_PROFILE = "dd4c52aa-363c-469b-99d0-724d8f476304";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -864,7 +882,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "420194ae-6eba-47b2-b4af-ae705dae12f5";
+				PROVISIONING_PROFILE = "dd4c52aa-363c-469b-99d0-724d8f476304";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

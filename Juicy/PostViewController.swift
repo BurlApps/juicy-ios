@@ -28,8 +28,8 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
         
         // Set Preview Image
         self.previewImageView = UIImageView(frame: self.view.frame)
-        self.previewImageView.image = RBResizeImage(self.capturedImage, self.view.frame.size)
         self.previewImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        self.previewImageView.image = RBResizeImage(self.capturedImage, self.view.frame.size)
         self.view.addSubview(self.previewImageView)
         
         // Add Darkener

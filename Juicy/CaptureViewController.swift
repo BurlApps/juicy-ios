@@ -87,7 +87,10 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
         sender.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.75)
         
         if self.cameraView.session != nil && self.cameraView.session.running {
-            self.cameraView.takePicture()
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.cameraView.takePicture()
+            })
         }
     }
     
