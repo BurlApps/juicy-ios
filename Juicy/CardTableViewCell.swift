@@ -9,6 +9,7 @@
 class CardTableViewCell: UITableViewCell {
     
     // MARK: Instance Variables
+    private var post: Post!
     private var backgroundImageView: UIImageView!
     private var separator: UIView!
     private var content: UILabel!
@@ -18,6 +19,7 @@ class CardTableViewCell: UITableViewCell {
     private var locationImageView: UIImageView!
     private var sharesImageView: UIImageView!
     private var likesImageView: UIImageView!
+    private var containerView: UIView!
     
     
     // MARK: Private Instance Variables
@@ -40,10 +42,19 @@ class CardTableViewCell: UITableViewCell {
         self.backgroundView = self.backgroundImageView
         self.backgroundImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
+        // Create Separator
+        self.separator = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 3))
+        self.separator.backgroundColor = UIColor(white: 1, alpha: 0.15)
+        self.addSubview(self.separator)
+        
         // Create Darkener
         self.darkener = UIView(frame: self.frame)
         self.darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.addSubview(self.darkener)
+        
+        // Create Container View
+        self.containerView = UIView(frame: self.frame)
+        self.insertSubview(self.containerView, aboveSubview: self.darkener)
         
         // Create Content Label
         self.content = UILabel(frame: CGRectMake(10, 10, self.frame.width - 20, self.frame.height - 20))
@@ -54,12 +65,7 @@ class CardTableViewCell: UITableViewCell {
         self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
         self.content.numberOfLines = 6
         self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        self.darkener.addSubview(self.content)
-        
-        // Create Separator
-        self.separator = UIView(frame: CGRectMake(0, 0, self.frame.size.width, 3))
-        self.separator.backgroundColor = UIColor(white: 1, alpha: 0.15)
-        self.insertSubview(self.separator, aboveSubview: self.content)
+        self.containerView.addSubview(self.content)
         
         // Y Value For Frame
         var imageY = self.frame.height - 35
@@ -68,7 +74,7 @@ class CardTableViewCell: UITableViewCell {
         // Create Location Text
         var locationImage =  UIImage(named: "Location").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.locationImageView = UIImageView(image: locationImage)
-        self.darkener.addSubview(locationImageView)
+        self.containerView.addSubview(locationImageView)
         
         self.locationImageView.tintColor = UIColor.whiteColor()
         self.locationImageView.frame = CGRectMake(10, imageY, 20, 20)
@@ -84,7 +90,7 @@ class CardTableViewCell: UITableViewCell {
         self.location.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
         self.location.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.location.shadowOffset = CGSize(width: 0, height: 2)
-        self.darkener.addSubview(self.location)
+        self.containerView.addSubview(self.location)
         
         // Create Like Text
         self.likes = UILabel(frame: CGRectMake(self.frame.width - 46, labelY, 36, 20))
@@ -93,11 +99,11 @@ class CardTableViewCell: UITableViewCell {
         self.likes.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
         self.likes.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.likes.shadowOffset = CGSize(width: 0, height: 2)
-        self.darkener.addSubview(self.likes)
+        self.containerView.addSubview(self.likes)
         
         var likesImage =  UIImage(named: "Heart").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.likesImageView = UIImageView(image: likesImage)
-        self.darkener.addSubview(likesImageView)
+        self.containerView.addSubview(likesImageView)
         
         self.likesImageView.tintColor = UIColor.whiteColor()
         self.likesImageView.frame = CGRectMake(self.frame.width - 74, imageY, 20, 20)
@@ -114,11 +120,11 @@ class CardTableViewCell: UITableViewCell {
         self.shares.font = UIFont(name: "HelveticaNeue-Bold", size: 17)
         self.shares.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.shares.shadowOffset = CGSize(width: 0, height: 2)
-        self.darkener.addSubview(self.shares)
+        self.containerView.addSubview(self.shares)
         
         var sharesImage =  UIImage(named: "Shared").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.sharesImageView = UIImageView(image: sharesImage)
-        self.darkener.addSubview(sharesImageView)
+        self.containerView.addSubview(sharesImageView)
         
         self.sharesImageView.tintColor = UIColor.whiteColor()
         self.sharesImageView.frame = CGRectMake(self.frame.width - 146, imageY, 20, 20)
@@ -134,9 +140,12 @@ class CardTableViewCell: UITableViewCell {
     
     // MARK: Gesture Handlers
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
-        UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            self.darkener.alpha = 1 - self.darkener.alpha
-        }, completion: nil)
+        if self.post.image != nil {
+            UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                self.darkener.alpha = 1 - self.darkener.alpha
+                self.containerView.alpha = 1 - self.containerView.alpha
+            }, completion: nil)
+        }
     }
     
     // MARK: Instance Methods
@@ -145,6 +154,7 @@ class CardTableViewCell: UITableViewCell {
     }
     
     func setContent(post: Post) {
+        self.post = post
         self.shares.text = post.shares.abbreviate()
         self.likes.text = post.likes.abbreviate()
         
@@ -176,15 +186,27 @@ class CardTableViewCell: UITableViewCell {
             }
         }
         
+        // Add Background Color
+        if post.background != nil {
+            self.backgroundColor = self.post.background
+        }
+        
         self.content.attributedText = contentAttr
         self.backgroundImageView.alpha = 0
         self.backgroundImageView.image = UIImage()
         
-        post.getImage({ (image) -> Void in
+        if post.image != nil {
+            post.getImage({ (image) -> Void in
+                UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.backgroundImageView.alpha = 1
+                    self.backgroundImageView.image = image
+                    self.darkener.alpha = 1
+                }, completion: nil)
+            })
+        } else {
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.backgroundImageView.alpha = 1
-                self.backgroundImageView.image = image
+                self.darkener.alpha = 0
             }, completion: nil)
-        })
+        }
     }
 }

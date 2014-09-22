@@ -94,25 +94,20 @@ class CardView: UIView {
         self.clipsToBounds = true
 
         // Add Background SubView
-        if self.background == nil {
-            self.background = UIImageView(frame: self.bounds)
-        }
-        
+        self.background = UIImageView(frame: self.bounds)
         self.background.contentMode = UIViewContentMode.ScaleAspectFill
         self.addSubview(self.background)
         
         // Load Background Image
-        self.post.getImage({ (image) -> Void in
-            self.background.image = image
-        })
-        
-        // Add Darkener
-        if self.darkener == nil {
-            self.darkener = UIView(frame: self.bounds)
+        if self.post.image != nil {
+            self.post.getImage({ (image) -> Void in
+                self.background.image = image
+            })
         }
         
+        // Add Darkener
+        self.darkener = UIView(frame: self.bounds)
         self.darkener.layer.borderWidth = self.defaults.border
-        self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
         if self.post.juicy as Bool {
@@ -122,24 +117,26 @@ class CardView: UIView {
             self.darkenerBorder = self.defaults.regualColor
         }
         
+        // Add Background Color
+        if self.post.background != nil {
+            self.darkener.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = self.post.background
+        } else {
+            self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
+        }
+        
         self.darkenerColor = self.darkener.backgroundColor
         self.darkener.layer.borderColor = self.darkenerBorder.CGColor
 
         // Add Choice Image
-        if self.choice == nil {
-            self.choice = UIImageView(frame: CGRectMake(75, 75, self.bounds.width - 150, self.bounds.height - 150))
-        }
-        
+        self.choice = UIImageView(frame: CGRectMake(75, 75, self.bounds.width - 150, self.bounds.height - 150))
         self.choice.alpha = 0
         self.choice.contentMode = UIViewContentMode.ScaleAspectFill;
         self.insertSubview(self.choice, aboveSubview: self.darkener)
         
         
         // Add Content
-        if self.content == nil {
-            self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
-        }
-        
+        self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
         self.content.textAlignment = NSTextAlignment.Center
         self.content.textColor = UIColor.whiteColor()
         self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
@@ -192,7 +189,7 @@ class CardView: UIView {
     
     // MARK: Gesture Handlers
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
-        if self.locked == false {
+        if self.locked == false && self.post.image != nil {
             self.hideContent = !self.hideContent
             
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in

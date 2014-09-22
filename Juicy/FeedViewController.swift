@@ -72,7 +72,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 32),
+            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 36),
             NSShadowAttributeName: shadow
         ]
         
@@ -108,6 +108,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     @IBAction func createPost(sender: UIButton) {
         sender.backgroundColor = self.defaults.createButton
+        self.performSegueWithIdentifier("captureSequeA", sender: self)
     }
     
     // MARK: UIActionSheetDelegate Methods

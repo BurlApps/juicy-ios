@@ -12,6 +12,7 @@ class User: NSObject {
     var username: String!
     var name: String!
     var displayName: String!
+    var abTester: String!
     var sharedPosts: [Post]!
     var friendsList: [User]!
     var registered: Bool!
@@ -25,6 +26,7 @@ class User: NSObject {
         self.parse = user
         self.username = user["username"] as? String
         self.displayName = user["displayName"] as? String
+        self.abTester = user["abTester"] as? String
         self.name = user["name"] as? String
         self.terms = user["terms"] as? Bool
         self.registered = user["registered"] as? Bool

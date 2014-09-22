@@ -20,6 +20,7 @@ class Post: NSObject {
     var juicy: Bool!
     var creator: User!
     var aboutUsers: [User]!
+    var background: UIColor!
     var parse: PFObject!
     
     // MARK: Convenience Methods
@@ -32,8 +33,19 @@ class Post: NSObject {
         self.karma = post["karma"] as Int
         self.location = post["location"] as? String
         self.juicy = post["juicy"] as Bool
-        self.image = NSURL(string: (self.parse["image"] as PFFile).url)
         self.content = post["content"] as [AnyObject]
+        
+        if let image = post["image"] as? PFFile {
+            self.image = NSURL(string: image.url)
+        }
+        
+        if let background = post["background"] as? [CGFloat] {
+            let red = background[0]/255
+            let green = background[1]/255
+            let blue = background[2]/255
+            
+            self.background = UIColor(red: red, green: green, blue: blue, alpha: 1)
+        }
         
         if withRelations {
             self.getCreator()
