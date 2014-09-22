@@ -108,7 +108,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     @IBAction func createPost(sender: UIButton) {
         sender.backgroundColor = self.defaults.createButton
-        self.performSegueWithIdentifier("captureSequeA", sender: self)
+        self.performSegueWithIdentifier("captureSegue\(self.currentUser.abTester)", sender: self)
     }
     
     // MARK: UIActionSheetDelegate Methods

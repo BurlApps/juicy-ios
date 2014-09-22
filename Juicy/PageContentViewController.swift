@@ -20,15 +20,10 @@ class PageContentViewController: UIViewController {
         self.view.backgroundColor = UIColor.clearColor()
         
         var image = UIImage(named: "HomePage\(index + 1)")
-//        var backgroundImageView = UIImageView(frame: self.view.frame)
-//        backgroundImageView.clipsToBounds = true
-//        backgroundImageView.contentMode = UIViewContentMode.Top
-//        backgroundImageView.image = image//self.scaleToWidth(image, width: self.view.frame.width)
-//        self.view.addSubview(backgroundImageView)
-        
         var imageView = UIImageViewAligned(frame: self.view.frame)
         imageView.image = image
         imageView.alignTop = true
+        imageView.clipsToBounds = true
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.view.addSubview(imageView)
     }
