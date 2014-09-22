@@ -191,6 +191,7 @@ class CardTableViewCell: UITableViewCell {
             self.backgroundColor = self.post.background
         }
         
+        self.containerView.alpha = 1
         self.content.attributedText = contentAttr
         self.backgroundImageView.alpha = 0
         self.backgroundImageView.image = UIImage()
