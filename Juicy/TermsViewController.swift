@@ -13,7 +13,7 @@ class TermsViewController: UIViewController {
     
     // MARK: Instance Variables
     private var url: NSURL!
-    private var currentUser = User.current()
+    private var user = User.current()
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -47,12 +47,12 @@ class TermsViewController: UIViewController {
     // MARK: IBActions
     @IBAction func termsCancel(sender: UIBarButtonItem) {
         self.navigationController?.popViewControllerAnimated(false)
-        User.logout()
+        self.user.logout()
     }
     
     @IBAction func termsAccepts(sender: UIBarButtonItem) {
         if self.url != nil {
-            self.currentUser.acceptedTerms()
+            self.user.acceptedTerms()
             self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }
     }

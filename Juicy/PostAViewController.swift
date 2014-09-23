@@ -13,7 +13,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
     private var cityLocation: String!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
-    private var currentUser: User = User.current()
+    private var user: User = User.current()
     private var contacts: [String] = []
     private var locationManager: CLLocationManager!
     
@@ -74,7 +74,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         self.locationManager.startUpdatingLocation()
         
         // Get Friends List
-        self.currentUser.getFriendsList(nil)
+        self.user.getFriendsList(nil)
         
         // Get Contact List
         var contacts = Contacts()
@@ -154,7 +154,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
             
             self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
             Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
-                        creator: self.currentUser, location: self.cityLocation)
+                        creator: self.user, location: self.cityLocation)
         }
     }
     
@@ -190,8 +190,8 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         var ranges = NSMutableArray()
         
         // Search By Registered Users
-        if self.currentUser.friendsList != nil {
-            for friend in self.currentUser.friendsList {
+        if self.user.friendsList != nil {
+            for friend in self.user.friendsList {
                 let range = lowerText.rangeOfString(friend.name.lowercaseString)
                 
                 if self.isFriend(range, ranges: ranges, text: text, oldLength: lowerText.length)  {

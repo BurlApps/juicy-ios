@@ -255,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				D31CDB9119AD94490037AD99 /* HomeViewController.swift */,
-				D3A752BC19B0304E0057DA1F /* TermsViewController.swift */,
+				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -264,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
-				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
 			);
 			name = "Content Feed";
 			sourceTree = "<group>";
@@ -304,10 +303,19 @@
 			name = "Post Lists";
 			sourceTree = "<group>";
 		};
+		D311A02319D1571C000E7956 /* Terms of Service */ = {
+			isa = PBXGroup;
+			children = (
+				D3A752BC19B0304E0057DA1F /* TermsViewController.swift */,
+			);
+			name = "Terms of Service";
+			sourceTree = "<group>";
+		};
 		D3229606194F9C7700488B63 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D311A01D19D155A7000E7956 /* Home */,
+				D311A02319D1571C000E7956 /* Terms of Service */,
 				D311A01E19D155BA000E7956 /* Content Feed */,
 				D311A01F19D155C8000E7956 /* Create Post A */,
 				D311A02019D155D1000E7956 /* Create Post B */,
@@ -381,7 +389,7 @@
 				D3A2CE3519CE5ADF0009842B /* Objective-C */,
 				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
 				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
-				D3A2A88B194E63BE00FABCC0 /* Classes */,
+				D3A2A88B194E63BE00FABCC0 /* Core */,
 				D34AE4F5199238BC00D0D1C8 /* Models */,
 				D3229606194F9C7700488B63 /* Controllers */,
 				D34AE4F21992381500D0D1C8 /* Views */,
@@ -440,13 +448,13 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		D3A2A88B194E63BE00FABCC0 /* Classes */ = {
+		D3A2A88B194E63BE00FABCC0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				D3A2A863194E60D500FABCC0 /* AppDelegate.swift */,
 				D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */,
 			);
-			name = Classes;
+			name = Core;
 			sourceTree = "<group>";
 		};
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {

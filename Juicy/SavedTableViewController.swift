@@ -11,7 +11,7 @@ class SavedTableViewController: UITableViewController {
     // MARK: Instance Variables
     private var cellIdentifier = "cell"
     private var cellHeight: CGFloat!
-    private var currentUser: User = User.current()
+    private var user: User = User.current()
     private var sharedPosts: [Post] = []
     private let duration: NSTimeInterval = 0.2
     private let delay: NSTimeInterval = 0
@@ -49,7 +49,7 @@ class SavedTableViewController: UITableViewController {
     
     // MARK: Instance Methods
     func reloadSharedPosts() {
-        self.currentUser.getSharedPosts { (posts) -> Void in
+        self.user.getSharedPosts { (posts) -> Void in
             if !posts.isEmpty {
                 self.title = "Shared Posts"
             } else {

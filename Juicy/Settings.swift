@@ -9,10 +9,8 @@
 class Settings: NSObject {
     
     // MARK: Instance Variables
-    var version: String!
     var host: String!
     var abDefault: String!
-    var abTesters: [String]!
     var abTesting: Bool!
     var backgrounds: [String: [CGFloat]]!
     var parse: PFConfig!
@@ -21,10 +19,8 @@ class Settings: NSObject {
     convenience init(_ settings: PFConfig) {
         self.init()
         
-        self.version = settings["version"] as String
         self.host = settings["host"] as String
         self.abDefault = settings["abDefault"] as String
-        self.abTesters = settings["abTesters"] as [String]
         self.abTesting = settings["abTesting"] as Bool
         self.backgrounds = settings["backgrounds"] as [String: [CGFloat]]
         self.parse = settings
@@ -38,6 +34,15 @@ class Settings: NSObject {
             } else if var config = PFConfig.currentConfig() {
                 callback(settings: Settings(config))
             }
+        }
+    }
+    
+    // MARK: Instance Methods
+    func tester(user: User) -> String {
+        if self.abTesting == true {
+            return user.abTester
+        } else {
+            return self.abDefault
         }
     }
 }

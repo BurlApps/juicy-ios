@@ -29,7 +29,8 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: Instance Variables
     private let defaults = Defaults()
-    private var currentUser = User.current()
+    private var settings: Settings!
+    private var user = User.current()
     private var posts: [Post] = []
     private var cards: [CardView] = []
     private var sharePost: Post!
@@ -51,6 +52,11 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         
         // Set Card Info
         self.resetCardInfo()
+        
+        // Get Settings
+        Settings.current { (settings) -> Void in
+            self.settings = settings
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -91,7 +97,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: IBActions
     @IBAction func settingsButton(sender: UIBarButtonItem) {
-
         var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Logout")
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
         actionSheet.showInView(self.view)
@@ -107,8 +112,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     }
     
     @IBAction func createPost(sender: UIButton) {
+        var abTester = self.settings.tester(self.user)
         sender.backgroundColor = self.defaults.createButton
-        self.performSegueWithIdentifier("captureSegue\(self.currentUser.abTester)", sender: self)
+        self.performSegueWithIdentifier("captureSegue\(abTester)", sender: self)
     }
     
     // MARK: UIActionSheetDelegate Methods
@@ -117,7 +123,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case 1:
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 2:
-            User.logout()
+            self.user.logout()
             self.navigationController?.popToRootViewControllerAnimated(false)
         default:
             break
@@ -155,7 +161,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             self.resetCardInfo()
         }
         
-        Post.find(self.currentUser, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
+        Post.find(self.user, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 var max: Int!
                 self.posts = posts
@@ -244,9 +250,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         // Set Status Of Card
         switch card.status {
         case .Liked:
-            card.post.like(self.currentUser)
+            card.post.like(self.user)
         case .Noped:
-            card.post.nope(self.currentUser)
+            card.post.nope(self.user)
         case .Shared:
             self.sharePost = card.post
             self.performSegueWithIdentifier("shareSegue", sender: self)

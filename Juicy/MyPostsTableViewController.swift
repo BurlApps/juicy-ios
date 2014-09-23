@@ -13,7 +13,7 @@ class MyPostsTableViewController: UITableViewController {
     // MARK: Instance Variables
     private var cellIdentifier = "cell"
     private var cellHeight: CGFloat!
-    private var currentUser: User = User.current()
+    private var user: User = User.current()
     private var myPosts: [Post] = []
     private let duration: NSTimeInterval = 0.2
     private let delay: NSTimeInterval = 0
@@ -51,7 +51,7 @@ class MyPostsTableViewController: UITableViewController {
     
     // MARK: Instance Methods
     func reloadMyPosts() {
-        self.currentUser.getMyPosts { (posts) -> Void in
+        self.user.getMyPosts { (posts) -> Void in
             if !posts.isEmpty {
                 self.title = "My Posts"
             } else {

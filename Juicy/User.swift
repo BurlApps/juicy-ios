@@ -37,7 +37,16 @@ class User: NSObject {
         }
     }
     
+    // MARK: Class Methods
+    class func current(relations: Bool = false) -> User {
+        return User(PFUser.currentUser(), withRelations: relations)
+    }
+    
     // MARK: Instance Methods
+    func logout() {
+        PFUser.logOut()
+    }
+    
     func acceptedTerms() {
         self.parse["terms"] = true
         self.parse.saveInBackground()
@@ -139,14 +148,5 @@ class User: NSObject {
                 println(error)
             }
         })
-    }
-    
-    // MARK: Class Methods
-    class func current(relations: Bool = false) -> User {
-        return User(PFUser.currentUser(), withRelations: relations)
-    }
-    
-    class func logout() {
-        PFUser.logOut()
     }
 }
