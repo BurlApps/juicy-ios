@@ -12,6 +12,7 @@ class TermsViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     // MARK: Instance Variables
+    private var url: NSURL!
     private var currentUser = User.current()
     
     // MARK: UIViewController Overrides
@@ -19,8 +20,10 @@ class TermsViewController: UIViewController {
         super.viewDidLoad()
         
         // Seturl WebView Url
-        let url = NSURL(string: "http://getjuicyapp.com/terms")
-        self.webView.loadRequest(NSURLRequest(URL: url))
+        Settings.current { (settings) -> Void in
+            self.url = NSURL(string: "http://\(settings.host)/terms")
+            self.webView.loadRequest(NSURLRequest(URL: self.url))
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -48,7 +51,9 @@ class TermsViewController: UIViewController {
     }
     
     @IBAction func termsAccepts(sender: UIBarButtonItem) {
-        self.currentUser.acceptedTerms()
-        self.performSegueWithIdentifier("loggedInSegue", sender: self)
+        if self.url != nil {
+            self.currentUser.acceptedTerms()
+            self.performSegueWithIdentifier("loggedInSegue", sender: self)
+        }
     }
 }

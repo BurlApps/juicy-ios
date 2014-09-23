@@ -114,7 +114,9 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
                     }
                 }
             } else {
-                self.loginButton.setTitle("Failed To Log In", forState: UIControlState.Normal)
+                sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+                sender.setTitle("Failed To Log In", forState: UIControlState.Normal)
+                self.spinner.stopAnimating()
                 println(error)
             }
         })
