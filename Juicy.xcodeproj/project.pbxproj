@@ -12,6 +12,8 @@
 		D303880719A31D2200C67E44 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880619A31D2200C67E44 /* Array.swift */; };
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
 		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
+		D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01919D1553B000E7956 /* CaptureBViewController.swift */; };
+		D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01B19D1559F000E7956 /* PostBViewController.swift */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
 		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
@@ -52,8 +54,8 @@
 		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
 		D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */; };
-		D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */; };
-		D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostViewController.swift */; };
+		D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureAViewController.swift */; };
+		D3D5B56619A0406F006E43F1 /* PostAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56519A0406F006E43F1 /* PostAViewController.swift */; };
 		D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B56819A097B9006E43F1 /* RBResizer.swift */; };
 		D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CD19A473EE004AC6FE /* libz.dylib */; };
 		D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */; };
@@ -121,6 +123,8 @@
 		D303880619A31D2200C67E44 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
+		D311A01919D1553B000E7956 /* CaptureBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureBViewController.swift; sourceTree = "<group>"; };
+		D311A01B19D1559F000E7956 /* PostBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBViewController.swift; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D320165419BFC18F00497FE2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -175,8 +179,8 @@
 		D3BEFC4C19C23ED90070D3D4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewController.swift; sourceTree = "<group>"; };
-		D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
-		D3D5B56519A0406F006E43F1 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		D3D5B563199F29D1006E43F1 /* CaptureAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureAViewController.swift; sourceTree = "<group>"; };
+		D3D5B56519A0406F006E43F1 /* PostAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAViewController.swift; sourceTree = "<group>"; };
 		D3D5B56819A097B9006E43F1 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 		D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NewRelicAgent.framework; path = Frameworks/NewRelicAgent.framework; sourceTree = "<group>"; };
 		D3D7A2C819A473BF004AC6FE /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = Frameworks/Parse.framework; sourceTree = "<group>"; };
@@ -247,18 +251,68 @@
 			name = Playgrounds;
 			sourceTree = "<group>";
 		};
-		D3229606194F9C7700488B63 /* Controllers */ = {
+		D311A01D19D155A7000E7956 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				D31CDB9119AD94490037AD99 /* HomeViewController.swift */,
 				D3A752BC19B0304E0057DA1F /* TermsViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		D311A01E19D155BA000E7956 /* Content Feed */ = {
+			isa = PBXGroup;
+			children = (
 				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
 				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
-				D3D5B563199F29D1006E43F1 /* CaptureViewController.swift */,
-				D3D5B56519A0406F006E43F1 /* PostViewController.swift */,
+			);
+			name = "Content Feed";
+			sourceTree = "<group>";
+		};
+		D311A01F19D155C8000E7956 /* Create Post A */ = {
+			isa = PBXGroup;
+			children = (
+				D3D5B563199F29D1006E43F1 /* CaptureAViewController.swift */,
+				D3D5B56519A0406F006E43F1 /* PostAViewController.swift */,
+			);
+			name = "Create Post A";
+			sourceTree = "<group>";
+		};
+		D311A02019D155D1000E7956 /* Create Post B */ = {
+			isa = PBXGroup;
+			children = (
+				D311A01919D1553B000E7956 /* CaptureBViewController.swift */,
+				D311A01B19D1559F000E7956 /* PostBViewController.swift */,
+			);
+			name = "Create Post B";
+			sourceTree = "<group>";
+		};
+		D311A02119D155F9000E7956 /* SMS Share */ = {
+			isa = PBXGroup;
+			children = (
 				D37683F319A70EF700F416B4 /* ShareViewController.swift */,
+			);
+			name = "SMS Share";
+			sourceTree = "<group>";
+		};
+		D311A02219D155FF000E7956 /* Post Lists */ = {
+			isa = PBXGroup;
+			children = (
 				D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */,
 				D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */,
+			);
+			name = "Post Lists";
+			sourceTree = "<group>";
+		};
+		D3229606194F9C7700488B63 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D311A01D19D155A7000E7956 /* Home */,
+				D311A01E19D155BA000E7956 /* Content Feed */,
+				D311A01F19D155C8000E7956 /* Create Post A */,
+				D311A02019D155D1000E7956 /* Create Post B */,
+				D311A02119D155F9000E7956 /* SMS Share */,
+				D311A02219D155FF000E7956 /* Post Lists */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -628,7 +682,7 @@
 			files = (
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
-				D3D5B564199F29D1006E43F1 /* CaptureViewController.swift in Sources */,
+				D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */,
 				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
@@ -637,6 +691,7 @@
 				D303880419A313CB00C67E44 /* Contacts.swift in Sources */,
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
 				D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */,
+				D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
 				D3A2CE3819CE5B110009842B /* UIImageViewAligned.m in Sources */,
@@ -645,7 +700,8 @@
 				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
 				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
-				D3D5B56619A0406F006E43F1 /* PostViewController.swift in Sources */,
+				D3D5B56619A0406F006E43F1 /* PostAViewController.swift in Sources */,
+				D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */,
 				D389C5E319D0FCD300BC13E2 /* Settings.swift in Sources */,
 				D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */,
 			);
@@ -831,7 +887,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd4c52aa-363c-469b-99d0-724d8f476304";
+				PROVISIONING_PROFILE = "bbcdd99f-25e3-4dc4-84bf-b15c2d4dc8ef";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -886,7 +942,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dd4c52aa-363c-469b-99d0-724d8f476304";
+				PROVISIONING_PROFILE = "bbcdd99f-25e3-4dc4-84bf-b15c2d4dc8ef";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: IBOutlets
     //@IBOutlet weak var cameraView: VLBCameraView!
@@ -66,7 +66,7 @@ class CaptureViewController: UIViewController, VLBCameraViewDelegate, UIImagePic
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let viewController:PostViewController = segue.destinationViewController as PostViewController
+        let viewController:PostAViewController = segue.destinationViewController as PostAViewController
         viewController.capturedImage = self.capturedImage
     }
     

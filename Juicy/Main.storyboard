@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bjd-ge-VgJ">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -312,10 +311,10 @@
             </objects>
             <point key="canvasLocation" x="632" y="-625"/>
         </scene>
-        <!--Capture View Controller-->
+        <!--CaptureA View Controller-->
         <scene sceneID="4Tk-pt-GdP">
             <objects>
-                <viewController storyboardIdentifier="CaptureViewController" id="HgQ-e5-gqO" customClass="CaptureViewController" customModule="Juicy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CaptureViewController" id="HgQ-e5-gqO" customClass="CaptureAViewController" customModule="Juicy" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xG6-Oz-Hjl"/>
                         <viewControllerLayoutGuide type="bottom" id="Gpr-sd-68z"/>
@@ -466,7 +465,7 @@
         <!--Post-->
         <scene sceneID="WwM-01-KLA">
             <objects>
-                <viewController storyboardIdentifier="PostViewController" title="Post" id="cde-Ds-Zhk" customClass="PostViewController" customModule="Juicy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostViewController" title="Post" id="cde-Ds-Zhk" customClass="PostAViewController" customModule="Juicy" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="chs-Qb-pnk"/>
                         <viewControllerLayoutGuide type="bottom" id="Haa-MV-Op4"/>

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class PostViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
+class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
@@ -61,6 +61,10 @@ class PostViewController: UIViewController, UITextViewDelegate, CLLocationManage
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         self.locationManager.requestWhenInUseAuthorization()
+        
+        if (self.locationManager.respondsToSelector(Selector(":requestWhenInUseAuthorization"))) {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
