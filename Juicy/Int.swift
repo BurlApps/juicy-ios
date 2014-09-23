@@ -13,14 +13,14 @@ extension Int {
         var num: Float = Float(self)
         var numString: NSString!
         
-        if num >= 100000000 {
-            num = num / 100000000
+        if num >= 10e7 {
+            num = num / 10e7
             numString =  NSString(format: "%.0fB", num)
-        } else if num >= 100000 {
-            num = num / 100000
+        } else if num >= 10e4 {
+            num = num / 10e4
             numString =  NSString(format: "%.0fM", num)
-        } else if num >= 1000 {
-            num = num / 1000
+        } else if num >= 10e2 {
+            num = num / 10e2
             numString =  NSString(format: "%.0fK", num)
         } else {
             numString =  NSString(format: "%.0f", num)
