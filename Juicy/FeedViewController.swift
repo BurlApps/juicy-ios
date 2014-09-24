@@ -100,7 +100,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: IBActions
     @IBAction func settingsButton(sender: UIBarButtonItem) {
-        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Shared Posts", "Logout")
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Shared Posts", "Logout", "Cancel")
+        actionSheet.destructiveButtonIndex = 2
+        actionSheet.cancelButtonIndex = 3
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
         actionSheet.showInView(self.view)
     }
@@ -122,12 +124,14 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: UIActionSheetDelegate Methods
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
+        println(buttonIndex)
+        
         switch buttonIndex {
-        case 1:
+        case 0:
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
-        case 2:
+        case 1:
             self.performSegueWithIdentifier("sharedPostsSegue", sender: self)
-        case 3:
+        case 2:
             self.user.logout()
             self.navigationController?.popToRootViewControllerAnimated(false)
             

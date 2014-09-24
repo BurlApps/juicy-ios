@@ -114,7 +114,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         if self.privateSelectedContacts.count != 0 {
             // Track Event
             PFAnalytics.trackEvent("Share Controller: Sent", dimensions: [
-                "contacts": self.privateSelectedContacts.count
+                "contacts": self.privateSelectedContacts.count.description
             ])
             
             // Send to Contacts

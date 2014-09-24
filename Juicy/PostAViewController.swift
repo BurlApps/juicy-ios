@@ -63,7 +63,6 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        self.locationManager.requestWhenInUseAuthorization()
         
         if (self.locationManager.respondsToSelector(Selector(":requestWhenInUseAuthorization"))) {
             self.locationManager.requestWhenInUseAuthorization()
@@ -165,9 +164,9 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
             
             // Track Event
             PFAnalytics.trackEvent("Post A Controller: Post Created", dimensions: [
-                "people": friends.count,
-                "users": aboutUsers.count,
-                "location": (self.cityLocation != nil)
+                "people": friends.count.description,
+                "users": aboutUsers.count.description,
+                "location": (self.cityLocation != nil).description
             ])
         }
     }
@@ -239,9 +238,11 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         var geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locations.last as CLLocation, completionHandler: { (placeMarks: [AnyObject]!, error: NSError!) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if !placeMarks.isEmpty {
+                if placeMarks != nil && !placeMarks.isEmpty {
                     var placeMark = placeMarks[0] as CLPlacemark
                     self.cityLocation = placeMark.locality
+                } else if error != nil {
+                    println(error)
                 }
             })
         })
