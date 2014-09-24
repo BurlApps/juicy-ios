@@ -23,6 +23,9 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Share Controller: Viewed")
+        
         // Additional Setup
         if self.respondsToSelector(Selector("edgesForExtendedLayout")) {
             self.edgesForExtendedLayout = UIRectEdge.Bottom|UIRectEdge.Left|UIRectEdge.Right
@@ -100,11 +103,21 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     // MARK: IBActions
     
     @IBAction func closeShare(sender: UIBarButtonItem) {
+        // Track Event
+        PFAnalytics.trackEvent("Share Controller: Canceled")
+        
+        // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
     }
     
     @IBAction func shareSend(sender: UIBarButtonItem) {
         if self.privateSelectedContacts.count != 0 {
+            // Track Event
+            PFAnalytics.trackEvent("Share Controller: Sent", dimensions: [
+                "contacts": self.privateSelectedContacts.count
+            ])
+            
+            // Send to Contacts
             self.navigationController?.popViewControllerAnimated(false)
             self.aboutPost.share(self.user, contacts: self.privateSelectedContacts)
         }

@@ -21,7 +21,6 @@ class CardTableViewCell: UITableViewCell {
     private var likesImageView: UIImageView!
     private var containerView: UIView!
     
-    
     // MARK: Private Instance Variables
     private var darkener: UIView!
     private let duration: NSTimeInterval = 0.2
@@ -30,6 +29,9 @@ class CardTableViewCell: UITableViewCell {
     // MARK: Convience Constructor
     convenience init(reuseIdentifier: String!, width: CGFloat, height: CGFloat) {
         self.init(style: UITableViewCellStyle.Default, reuseIdentifier: reuseIdentifier)
+        
+        // Track Event
+        PFAnalytics.trackEvent("Card Table View: Created")
         
         // Configure Cell
         self.frame = CGRectMake(0, self.frame.origin.y, width, height)
@@ -141,6 +143,10 @@ class CardTableViewCell: UITableViewCell {
     // MARK: Gesture Handlers
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
         if self.post.image != nil {
+            // Track Event
+            PFAnalytics.trackEvent("Card Table View: Tab Gesture")
+            
+            // Toggle Content
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.darkener.alpha = 1 - self.darkener.alpha
                 self.containerView.alpha = 1 - self.containerView.alpha
@@ -165,9 +171,9 @@ class CardTableViewCell: UITableViewCell {
         }
         
         if post.juicy as Bool {
-            self.darkener.backgroundColor = UIColor(red:0.94, green:0.14, blue:0.04, alpha:0.5)
+            self.likesImageView.tintColor = UIColor(red:0.96, green:0.33, blue:0.24, alpha:1)
         } else {
-            self.darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            self.likesImageView.tintColor = UIColor.whiteColor()
         }
         
         var contentAttr = NSMutableAttributedString()
@@ -189,6 +195,8 @@ class CardTableViewCell: UITableViewCell {
         // Add Background Color
         if post.background != nil {
             self.backgroundColor = self.post.background
+        } else {
+            self.backgroundColor = UIColor.blackColor()
         }
         
         self.containerView.alpha = 1

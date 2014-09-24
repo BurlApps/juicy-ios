@@ -12,7 +12,8 @@ class CaptureBViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Track Event
+        PFAnalytics.trackEvent("Capture B Controller: Viewed")
     }
 }

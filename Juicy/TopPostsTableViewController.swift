@@ -1,18 +1,19 @@
 //
-//  SavedTableViewController.swift
+//  TopTenTableViewController.swift
 //  Juicy
 //
-//  Created by Brian Vallelunga on 8/28/14.
+//  Created by Brian Vallelunga on 9/24/14.
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class SavedTableViewController: UITableViewController {
-    
+import UIKit
+
+class TopPostsTableViewController: UITableViewController {
+
     // MARK: Instance Variables
     private var cellIdentifier = "cell"
     private var cellHeight: CGFloat!
-    private var user: User = User.current()
-    private var sharedPosts: [Post] = []
+    private var myPosts: [Post] = []
     private let duration: NSTimeInterval = 0.2
     private let delay: NSTimeInterval = 0
     
@@ -25,7 +26,7 @@ class SavedTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Track Event
-        PFAnalytics.trackEvent("Saved Posts Controller: Viewed")
+        PFAnalytics.trackEvent("Top Posts Controller: Viewed")
         
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -35,7 +36,7 @@ class SavedTableViewController: UITableViewController {
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: Selector("reloadSharedPosts"), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: Selector("reloadMyPosts"), forControlEvents: UIControlEvents.ValueChanged)
         
         // Configure Table
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -47,24 +48,24 @@ class SavedTableViewController: UITableViewController {
         self.title = "Loading..."
         
         // Get Shared Posts
-        self.reloadSharedPosts()
+        self.reloadMyPosts()
     }
     
     // MARK: Instance Methods
-    func reloadSharedPosts() {
-        self.user.getSharedPosts { (posts) -> Void in
+    func reloadMyPosts() {
+        Post.topPosts(limit: 10) { (posts) -> Void in
             if !posts.isEmpty {
-                self.title = "Shared Posts"
+                self.title = "Juiciest Posts"
             } else {
-                self.title = "No Shared Posts"
+                self.title = "No Posts Found"
             }
             
-            self.sharedPosts = posts
+            self.myPosts = posts
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
             
             // Track Event
-            PFAnalytics.trackEvent("Saved Posts Controller: Reloaded Posts", dimensions: [
+            PFAnalytics.trackEvent("Top Posts Controller: Reloaded Posts", dimensions: [
                 "posts": posts.count.description
             ])
         }
@@ -81,7 +82,7 @@ class SavedTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.sharedPosts.count
+        return self.myPosts.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -89,16 +90,16 @@ class SavedTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var post = self.sharedPosts[indexPath.row]
+        var post = self.myPosts[indexPath.row]
         var cell: CardTableViewCell! = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier) as? CardTableViewCell
         
         if cell == nil {
             cell = CardTableViewCell(reuseIdentifier: self.cellIdentifier, width: self.view.frame.width, height: self.cellHeight)
         }
         
-        cell.setSeparator(post != self.sharedPosts.first)
+        cell.setSeparator(post != self.myPosts.first)
         cell.setContent(post)
-
+        
         return cell
     }
 }

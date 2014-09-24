@@ -26,6 +26,9 @@ class MyPostsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Track Event
+        PFAnalytics.trackEvent("My Posts Controller: Viewed")
+        
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.whiteColor(),
@@ -61,6 +64,11 @@ class MyPostsTableViewController: UITableViewController {
             self.myPosts = posts
             self.tableView.reloadData()
             self.refreshControl?.endRefreshing()
+            
+            // Track Event
+            PFAnalytics.trackEvent("My Posts Controller: Reloaded Posts", dimensions: [
+                "posts": posts.count.description
+            ])
         }
     }
     
@@ -95,5 +103,4 @@ class MyPostsTableViewController: UITableViewController {
         
         return cell
     }
-
 }

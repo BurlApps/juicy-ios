@@ -103,6 +103,29 @@ class Post: NSObject {
         })
     }
     
+    class func topPosts(limit: Int = 10, callback: (posts: [Post]) -> Void) {
+        var postQuery = PFQuery(className: "Posts")
+        
+        postQuery.limit = limit
+        postQuery.orderByDescending("karma")
+        
+        postQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                var posts: [Post] = []
+                
+                for object in objects as [PFObject] {
+                    posts.append(Post(object, withRelations: false))
+                }
+                
+                callback(posts: posts)
+            } else if error != nil {
+                println(error)
+            }
+            
+            return ()
+        }
+    }
+    
     class func batchSave(force: Bool = false) {
         Post.batchSave(force, nil)
     }
@@ -154,6 +177,7 @@ class Post: NSObject {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
         self.parse.incrementKey("shares", byAmount: contacts.count + 1)
+        self.parse.incrementKey("karma", byAmount: contacts.count + 1)
         self.like(user, amount: contacts.count + 1)
         
         self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in

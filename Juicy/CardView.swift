@@ -72,6 +72,9 @@ class CardView: UIView {
     convenience init(frame: CGRect, post: Post!, transform: CGFloat) {
         self.init(frame: frame)
         
+        // Track Event
+        PFAnalytics.trackEvent("Card View: Created")
+        
         // Instance Variables
         self.post = post
         self.transform = CGAffineTransformMakeRotation(transform)
@@ -190,8 +193,11 @@ class CardView: UIView {
     // MARK: Gesture Handlers
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
         if self.locked == false && self.post.image != nil {
-            self.hideContent = !self.hideContent
+            // Track Event
+            PFAnalytics.trackEvent("Card View: Tab Gesture")
             
+            // Toggle Content
+            self.hideContent = !self.hideContent
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                 self.content.alpha = 1 - self.content.alpha
                 self.darkener.alpha = 1 - self.darkener.alpha

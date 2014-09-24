@@ -19,6 +19,9 @@ class TermsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Terms Controller: Viewed")
+        
         // Seturl WebView Url
         Settings.current { (settings) -> Void in
             self.url = NSURL(string: "http://\(settings.host)/terms")
@@ -46,12 +49,21 @@ class TermsViewController: UIViewController {
     
     // MARK: IBActions
     @IBAction func termsCancel(sender: UIBarButtonItem) {
+        // Track Event
+        PFAnalytics.trackEvent("User: Logout")
+        PFAnalytics.trackEvent("Terms Controller: Canceled")
+        
+        // Logout User
         self.navigationController?.popViewControllerAnimated(false)
         self.user.logout()
     }
     
     @IBAction func termsAccepts(sender: UIBarButtonItem) {
         if self.url != nil {
+            // Track Event
+            PFAnalytics.trackEvent("Terms Controller: Accepted Terms")
+            
+            // Accept Terms and Go To Feed
             self.user.acceptedTerms()
             self.performSegueWithIdentifier("loggedInSegue", sender: self)
         }

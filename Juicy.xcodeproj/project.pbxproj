@@ -50,6 +50,7 @@
 		D3A2CE3819CE5B110009842B /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */; };
 		D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BC19B0304E0057DA1F /* TermsViewController.swift */; };
 		D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */; };
+		D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B10B1F19D2ABD50013BC8D /* TopPostsTableViewController.swift */; };
 		D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEFC4C19C23ED90070D3D4 /* Int.swift */; };
 		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
@@ -176,6 +177,7 @@
 		D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAligned.m; sourceTree = "<group>"; };
 		D3A752BC19B0304E0057DA1F /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		D3B10B1F19D2ABD50013BC8D /* TopPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopPostsTableViewController.swift; sourceTree = "<group>"; };
 		D3BEFC4C19C23ED90070D3D4 /* Int.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageContentViewController.swift; sourceTree = "<group>"; };
 		D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewController.swift; sourceTree = "<group>"; };
@@ -294,13 +296,14 @@
 			name = "SMS Share";
 			sourceTree = "<group>";
 		};
-		D311A02219D155FF000E7956 /* Post Lists */ = {
+		D311A02219D155FF000E7956 /* Posts Lists */ = {
 			isa = PBXGroup;
 			children = (
 				D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */,
 				D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */,
+				D3B10B1F19D2ABD50013BC8D /* TopPostsTableViewController.swift */,
 			);
-			name = "Post Lists";
+			name = "Posts Lists";
 			sourceTree = "<group>";
 		};
 		D311A02319D1571C000E7956 /* Terms of Service */ = {
@@ -320,7 +323,7 @@
 				D311A01F19D155C8000E7956 /* Create Post A */,
 				D311A02019D155D1000E7956 /* Create Post B */,
 				D311A02119D155F9000E7956 /* SMS Share */,
-				D311A02219D155FF000E7956 /* Post Lists */,
+				D311A02219D155FF000E7956 /* Posts Lists */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */,
+				D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */,
 				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,

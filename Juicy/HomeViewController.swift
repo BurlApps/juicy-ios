@@ -21,6 +21,9 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Home Controller: Viewed")
+        
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
             if User.current().terms == true {
@@ -103,10 +106,18 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
                 installation.saveInBackground()
                 
                 if user.isNew {
+                    // Track Event
+                    PFAnalytics.trackEvent("User: Created")
+                    
+                    // Setup User Account
                     tempUser.setExtraInfo({ () -> Void in
                         self.performSegueWithIdentifier("termsSegue", sender: self)
                     })
                 } else {
+                    // Track Event
+                    PFAnalytics.trackEvent("User: Logged In")
+                    
+                    // Go to Terms or Feed
                     if tempUser.terms == true {
                         self.performSegueWithIdentifier("loggedInSegue", sender: self)
                     } else {

@@ -26,6 +26,9 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Post A Controller: Viewed")
+        
         // Set Preview Image
         self.previewImageView = UIImageView(frame: self.view.frame)
         self.previewImageView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -99,6 +102,10 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
     
     // MARK: IBActions
     @IBAction func canelPost(sender: UIBarButtonItem) {
+        // Track Event
+        PFAnalytics.trackEvent("Post A Controller: Canceled")
+        
+        // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
     }
     
@@ -155,6 +162,13 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
             self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
             Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
                         creator: self.user, location: self.cityLocation)
+            
+            // Track Event
+            PFAnalytics.trackEvent("Post A Controller: Post Created", dimensions: [
+                "people": friends.count,
+                "users": aboutUsers.count,
+                "location": (self.cityLocation != nil)
+            ])
         }
     }
     

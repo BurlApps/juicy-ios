@@ -39,6 +39,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Feed Controller: Viewed")
+        
         // Setup View
         self.view.backgroundColor = UIColor(red: 0.99, green: 0.99, blue: 1, alpha: 1)
         
@@ -97,7 +100,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: IBActions
     @IBAction func settingsButton(sender: UIBarButtonItem) {
-        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Logout")
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Shared Posts", "Logout")
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
         actionSheet.showInView(self.view)
     }
@@ -123,8 +126,14 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case 1:
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 2:
+            self.performSegueWithIdentifier("sharedPostsSegue", sender: self)
+        case 3:
             self.user.logout()
             self.navigationController?.popToRootViewControllerAnimated(false)
+            
+            // Track Event
+            PFAnalytics.trackEvent("User: Logout")
+            PFAnalytics.trackEvent("Camera A Controller: Logout")
         default:
             break
         }
@@ -250,12 +259,24 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         // Set Status Of Card
         switch card.status {
         case .Liked:
+            // User Like Post
             card.post.like(self.user)
+            
+            // Track Event
+            PFAnalytics.trackEvent("Feed Controller: Card Liked")
         case .Noped:
+            // User Nope Post
             card.post.nope(self.user)
+            
+            // Track Event
+            PFAnalytics.trackEvent("Feed Controller: Card Noped")
         case .Shared:
+            // User Share Post
             self.sharePost = card.post
             self.performSegueWithIdentifier("shareSegue", sender: self)
+            
+            // Track Event
+            PFAnalytics.trackEvent("Feed Controller: Card Shared")
         case .None:
             break
         }

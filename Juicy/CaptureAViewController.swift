@@ -23,6 +23,9 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Track Event
+        PFAnalytics.trackEvent("Camera A Controller: Viewed")
+        
         // Configure Background
         self.view.backgroundColor = UIColor.blackColor()
         
@@ -72,6 +75,10 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
     
     // MARK: IBActions
     @IBAction func cancelCapture(sender: UIBarButtonItem) {
+        // Track Event
+        PFAnalytics.trackEvent("Capture A Controller: Canceled")
+        
+        // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
     }
     
@@ -90,6 +97,9 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.cameraView.takePicture()
+                
+                // Track Event
+                PFAnalytics.trackEvent("Camera A Controller: Picture Taken")
             })
         }
     }
