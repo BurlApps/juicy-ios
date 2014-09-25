@@ -21,13 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         // Configure Settings Panel
-        userDefaults.setValue(infoDictionary["CFBundleShortVersionString"], forKey: "VersionNumber")
+        let version = infoDictionary["CFBundleShortVersionString"] as NSString
+        userDefaults.setValue(version, forKey: "VersionNumber")
         userDefaults.synchronize()
         
+        // Initialize BugSnag
+        let bugSnagKey = infoDictionary["BugSnagKey"] as NSString
+        Bugsnag.startBugsnagWithApiKey(bugSnagKey)
+        
+        // Initialize NewRelic
+        let newRelicKey = infoDictionary["NewRelicKey"] as NSString
+        NewRelicAgent.startWithApplicationToken(newRelicKey)
+        
         //Initialize Parse
-        let parseApplicationID = infoDictionary["ParseApplicationID"] as  NSString
+        let parseApplicationID = infoDictionary["ParseApplicationID"] as NSString
         let parseClientKey = infoDictionary["ParseClientKey"] as  NSString
         Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
+        
+        //Initialize Facebook
+        PFFacebookUtils.initializeFacebook()
         
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
@@ -55,20 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        
-        //Initialize Facebook
-        PFFacebookUtils.initializeFacebook()
-        
-        // Initialize NewRelic
-        let newRelicKey = infoDictionary["NewRelicKey"] as  NSString
-        NewRelicAgent.startWithApplicationToken(newRelicKey)
-
-        // Initialize HockeyApp
-        let hockeyAppKey = infoDictionary["HockeyAppKey"] as  NSString
-        BITHockeyManager.sharedHockeyManager().configureWithIdentifier(hockeyAppKey)
-        BITHockeyManager.sharedHockeyManager().startManager()
-        BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
-        BITHockeyManager.sharedHockeyManager().testIdentifier()
 
         // Return 
         return true
@@ -79,12 +77,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let version = infoDictionary["CFBundleShortVersionString"] as NSString
+        let build = infoDictionary[kCFBundleVersionKey] as NSString
         var installation = PFInstallation.currentInstallation()
+        
         installation.setDeviceTokenFromData(deviceToken)
         installation.addUniqueObject("termsChanged", forKey: "channels")
         installation.addUniqueObject("juicyPost", forKey: "channels")
         installation.addUniqueObject("juicyUser", forKey: "channels")
         installation.addUniqueObject("sharedPost", forKey: "channels")
+        installation.setObject("\(version) - \(build)", forKey: "appVersionBuild")
         installation.saveInBackground()
     }
     

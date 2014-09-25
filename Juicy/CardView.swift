@@ -137,7 +137,6 @@ class CardView: UIView {
         self.choice.contentMode = UIViewContentMode.ScaleAspectFill;
         self.insertSubview(self.choice, aboveSubview: self.darkener)
         
-        
         // Add Content
         self.content = UILabel(frame: CGRectMake(10, 10, self.bounds.width - 20, self.bounds.height - 20))
         self.content.textAlignment = NSTextAlignment.Center
@@ -145,8 +144,8 @@ class CardView: UIView {
         self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.content.shadowOffset = CGSize(width: 0, height: 2)
         self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
-        self.content.numberOfLines = 6
-        self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.content.numberOfLines = 0
+        self.content.adjustsFontSizeToFitWidth = true
         self.insertSubview(self.content, aboveSubview: self.choice)
         
         // Coloring Content With Names

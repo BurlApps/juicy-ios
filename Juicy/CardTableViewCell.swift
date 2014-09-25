@@ -59,14 +59,14 @@ class CardTableViewCell: UITableViewCell {
         self.insertSubview(self.containerView, aboveSubview: self.darkener)
         
         // Create Content Label
-        self.content = UILabel(frame: CGRectMake(10, 10, self.frame.width - 20, self.frame.height - 20))
+        self.content = UILabel(frame: CGRectMake(10, 10, self.frame.width - 20, self.frame.height - 50))
         self.content.textAlignment = NSTextAlignment.Center
         self.content.textColor = UIColor.whiteColor()
         self.content.shadowColor = UIColor(white: 0, alpha: 0.2)
         self.content.shadowOffset = CGSize(width: 0, height: 2)
         self.content.font = UIFont(name: "HelveticaNeue-Bold", size: 22)
-        self.content.numberOfLines = 6
-        self.content.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.content.numberOfLines = 0
+        self.content.adjustsFontSizeToFitWidth = true
         self.containerView.addSubview(self.content)
         
         // Y Value For Frame

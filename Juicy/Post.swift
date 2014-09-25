@@ -60,6 +60,7 @@ class Post: NSObject {
         var imageFile = PFFile(name: "image.png", data: imageData)
         
         // Set Content
+        post["show"] = true
         post["content"] = content
         post["image"] = imageFile
         post["location"] = location

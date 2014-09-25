@@ -24,7 +24,6 @@
 		D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D351EF6C198F870B00532600 /* Balcony Angels.ttf */; };
 		D3636E1519AAC0C6007402EC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3636E1419AAC0C6007402EC /* CoreText.framework */; };
 		D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A2A897194E717F00FABCC0 /* Security.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		D3636E1819AAC11A007402EC /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3636E1719AAC11A007402EC /* HockeySDK.framework */; };
 		D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D366B14D19CF6B79002C7F59 /* Settings.bundle */; };
 		D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37683F319A70EF700F416B4 /* ShareViewController.swift */; };
 		D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C98A19908E7900AA65F6 /* FeedViewController.swift */; };
@@ -52,7 +51,6 @@
 		D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */; };
 		D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B10B1F19D2ABD50013BC8D /* TopPostsTableViewController.swift */; };
 		D3BEFC4D19C23ED90070D3D4 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEFC4C19C23ED90070D3D4 /* Int.swift */; };
-		D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */; };
 		D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */; };
 		D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */; };
 		D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5B563199F29D1006E43F1 /* CaptureAViewController.swift */; };
@@ -132,15 +130,10 @@
 		D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTableViewController.swift; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
 		D351EF64198F78D100532600 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D351EF6C198F870B00532600 /* Balcony Angels.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Balcony Angels.ttf"; sourceTree = "<group>"; };
 		D3636E1419AAC0C6007402EC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D3636E1719AAC11A007402EC /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
-		D3636E1919AAC290007402EC /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HockeySDKResources.bundle; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle"; sourceTree = "<group>"; };
-		D3636E1A19AAC290007402EC /* HockeySDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = HockeySDK.xcconfig; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDK.xcconfig"; sourceTree = "<group>"; };
-		D3636E1D19AAC300007402EC /* HockeySDK.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = HockeySDK.xcconfig; path = "../Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDK.xcconfig"; sourceTree = "<group>"; };
-		D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = HockeySDKResources.bundle; path = "Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework/Versions/A/Resources/HockeySDKResources.bundle"; sourceTree = "<group>"; };
 		D366B14D19CF6B79002C7F59 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D37683F319A70EF700F416B4 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		D381C98A19908E7900AA65F6 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +149,6 @@
 		D3A2A883194E61D600FABCC0 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		D3A2A884194E61DF00FABCC0 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		D3A2A885194E630300FABCC0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		D3A2A88D194E65B400FABCC0 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Juicy-Bridging-Header.h"; sourceTree = "<group>"; };
 		D3A2A895194E716000FABCC0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D3A2A897194E717F00FABCC0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -201,7 +193,6 @@
 				D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */,
 				D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */,
 				D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */,
-				D3636E1819AAC11A007402EC /* HockeySDK.framework in Frameworks */,
 				D3636E1519AAC0C6007402EC /* CoreText.framework in Frameworks */,
 				D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */,
 				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
@@ -358,7 +349,6 @@
 		D3636E2119AAC339007402EC /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
-				D3636E1F19AAC316007402EC /* HockeySDKResources.bundle */,
 				D366B14D19CF6B79002C7F59 /* Settings.bundle */,
 			);
 			name = Bundles;
@@ -434,7 +424,6 @@
 			isa = PBXGroup;
 			children = (
 				D3F6A44919B6C9E600F9764B /* Juicy.entitlements */,
-				D3636E1D19AAC300007402EC /* HockeySDK.xcconfig */,
 				0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */,
 				D3A2A883194E61D600FABCC0 /* Debug.xcconfig */,
 				D3A2A884194E61DF00FABCC0 /* Release.xcconfig */,
@@ -465,11 +454,8 @@
 			children = (
 				D320165419BFC18F00497FE2 /* Bolts.framework */,
 				D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */,
-				D3636E1919AAC290007402EC /* HockeySDKResources.bundle */,
-				D3636E1A19AAC290007402EC /* HockeySDK.xcconfig */,
 				D3636E1719AAC11A007402EC /* HockeySDK.framework */,
 				D3636E1419AAC0C6007402EC /* CoreText.framework */,
-				D34CCDEF19A6D11E0056BE50 /* Crashlytics.framework */,
 				D3D7A2CD19A473EE004AC6FE /* libz.dylib */,
 				D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */,
 				D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */,
@@ -490,7 +476,6 @@
 				D3A2A899194E718A00FABCC0 /* SystemConfiguration.framework */,
 				D3A2A897194E717F00FABCC0 /* Security.framework */,
 				D3A2A895194E716000FABCC0 /* Social.framework */,
-				D3A2A88D194E65B400FABCC0 /* Parse.framework */,
 				1C23D6F785A54A2AA5E091EF /* libPods.a */,
 			);
 			name = Frameworks;
@@ -527,6 +512,7 @@
 				D3A2A85C194E60D500FABCC0 /* Resources */,
 				0ECC263BA7E04C82848A01B9 /* Copy Pods Resources */,
 				D3636E1319AABFF4007402EC /* ShellScript */,
+				5FC2E475FC834571AD84E836 /* Upload Bugsnag dSYM */,
 			);
 			buildRules = (
 			);
@@ -623,7 +609,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CFDF7719AD998A008F95B8 /* HockeySDKResources.bundle in Resources */,
 				D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */,
 				D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */,
 				D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */,
@@ -654,6 +639,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FC2E475FC834571AD84E836 /* Upload Bugsnag dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Bugsnag dSYM";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "\nif ENV[\"DEBUG_INFORMATION_FORMAT\"] != \"dwarf-with-dsym\" or ENV[\"PLATFORM_NAME\"] == \"iphonesimulator\"\n  exit\nend\n\nfork do\n  Process.setsid\n  STDIN.reopen(\"/dev/null\")\n  STDOUT.reopen(\"/dev/null\", \"a\")\n  STDERR.reopen(\"/dev/null\", \"a\")\n\n  require 'shellwords'\n\n  Dir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/#{ENV[\"DWARF_DSYM_FILE_NAME\"]}/Contents/Resources/DWARF/*\"].each do |dsym|\n    system(\"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} https://upload.bugsnag.com/\")\n  end\nend\n";
 			showEnvVarsInLog = 0;
 		};
 		9FEB4713CC4C4CCAB2F90C3D /* Check Pods Manifest.lock */ = {
@@ -1007,7 +1007,7 @@
 				D3A2A877194E60D500FABCC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D3A2A878194E60D500FABCC0 /* Build configuration list for PBXNativeTarget "Juicy" */ = {
 			isa = XCConfigurationList;
@@ -1016,7 +1016,7 @@
 				D3A2A87A194E60D600FABCC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		D3A2A87B194E60D600FABCC0 /* Build configuration list for PBXNativeTarget "JuicyTests" */ = {
 			isa = XCConfigurationList;
@@ -1025,7 +1025,7 @@
 				D3A2A87D194E60D600FABCC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
