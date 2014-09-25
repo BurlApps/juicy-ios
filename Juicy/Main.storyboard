@@ -174,6 +174,7 @@
                             </button>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="4j2-Yx-yPp">
                                 <rect key="frame" x="240" y="443" width="20" height="20"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Cld-2K-1PA"/>
                                     <constraint firstAttribute="width" constant="20" id="elh-o2-A6S"/>
@@ -181,6 +182,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Location" translatesAutoresizingMaskIntoConstraints="NO" id="Dvf-fV-ewW">
                                 <rect key="frame" x="16" y="443" width="20" height="20"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="DyA-Jc-u1A"/>
                                     <constraint firstAttribute="height" constant="20" id="al4-Ku-ESw"/>
@@ -213,8 +215,9 @@
                                 <color key="textColor" red="0.36096722149999999" green="0.36096722149999999" blue="0.36096722149999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shared" translatesAutoresizingMaskIntoConstraints="NO" id="paP-bo-1Ll">
+                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Shared" translatesAutoresizingMaskIntoConstraints="NO" id="paP-bo-1Ll">
                                 <rect key="frame" x="164" y="442" width="22" height="22"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="LC2-im-kWd"/>
                                     <constraint firstAttribute="height" constant="22" id="Rk0-U0-ksp"/>
@@ -391,7 +394,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <segue destination="wfj-v6-b0a" kind="custom" customClass="NoAnimationSegue" id="7ai-el-EsE"/>
+                        <segue destination="wfj-v6-b0a" kind="custom" identifier="captureSegue" customClass="NoAnimationSegue" id="7ai-el-EsE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eby-bH-lLB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -461,7 +464,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="280" id="NIn-jl-dPg">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="280" id="NIn-jl-dPg">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NIn-jl-dPg" id="WIf-3D-Hpm">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -572,6 +575,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="i1s-Zz-21h"/>
+        <segue reference="nxv-eo-ijJ"/>
     </inferredMetricsTieBreakers>
 </document>

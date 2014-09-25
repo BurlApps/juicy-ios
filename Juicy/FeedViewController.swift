@@ -124,8 +124,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: UIActionSheetDelegate Methods
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
-        println(buttonIndex)
-        
         switch buttonIndex {
         case 0:
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
