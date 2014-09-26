@@ -95,7 +95,7 @@ class Post: NSObject {
         }
         
         // Save Eventually
-        post.saveEventually()
+        post.saveInBackground()
     }
 
     class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {

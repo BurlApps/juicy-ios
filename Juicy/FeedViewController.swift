@@ -88,6 +88,15 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         // Setup Cards
         if self.cards.isEmpty || self.posts.isEmpty {
             self.seedCards()
+        } else if !self.cards.isEmpty {
+            for card in self.cards {
+                // Card has moved
+                if card.startPointInSuperview != nil {
+                    card.returnCardViewToStartPointAnimated(false)
+                }
+            }
+            
+            self.cardWillReturnToCenter(self.cards[0])
         }
     }
     
@@ -300,7 +309,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
                     self.cards[1].transform = CGAffineTransformMakeRotation(firstRotation)
                 }
 
-                // 3rd Card
+                // More Cards
                 if self.cards.count > 2 {
                     let secondRotation = self.degreeToRadian(self.defaults.rotation)
                     self.cards[2].transform = CGAffineTransformMakeRotation(secondRotation)

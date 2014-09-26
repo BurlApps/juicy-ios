@@ -43,12 +43,10 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         Track.event("Post B Controller: Viewed")
         
         // Set Toolbar
+        self.toolbar.alpha = 0
         self.toolbar.setShadowImage(UIImage(), forToolbarPosition: UIBarPosition.Any)
         self.toolbar.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
         self.toolbar.backgroundColor = UIColor.clearColor()
-        
-        // Hide Camera Until Ready
-        self.cameraButton.tintColor = UIColor.clearColor()
         
         // Set Preview Image
         self.previewImageView = UIImageView(frame: self.view.frame)
@@ -128,7 +126,6 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         
         // Activate Keyboard
         self.textEditor.becomeFirstResponder()
-        self.keyboardDidHide()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -140,6 +137,7 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         // Register for keyboard notifications
         var notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"
@@ -162,6 +160,7 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         // Unregister for keyboard notifications
         var notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.removeObserver(self, name:UIKeyboardDidShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name:UIKeyboardDidHideNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -181,11 +180,13 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         var actionSheet: UIActionSheet!
         
         if self.capturedImage == nil {
-            actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Take Photo", "Camera Library", "Cancel")
+            actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil,
+                destructiveButtonTitle: nil, otherButtonTitles: "Take Photo", "Camera Library", "Cancel")
             
             actionSheet.cancelButtonIndex = 2
         } else {
-            actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "Clear Photo", "Take Photo", "Camera Library", "Cancel")
+            actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil,
+                destructiveButtonTitle: nil, otherButtonTitles: "Clear Photo", "Take Photo", "Camera Library", "Cancel")
             
             actionSheet.destructiveButtonIndex = 0
             actionSheet.cancelButtonIndex = 3
@@ -297,9 +298,9 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         case 2:
             var imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(UIImagePickerControllerSourceType.PhotoLibrary)!
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.mediaTypes = ["public.image"]
             self.presentViewController(imagePicker, animated: false, completion: nil)
-            
         default:
             break
         }
@@ -313,15 +314,18 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         let toolbarY = self.view.frame.size.height - rect.size.height - height - 10
         
         UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+            self.toolbar.alpha = 1
             self.toolbar.frame = CGRectMake(0, toolbarY, self.view.frame.width, height)
-            self.cameraButton.tintColor = UIColor.whiteColor()
         }, completion: nil)
     }
     
     func keyboardDidHide() {
+        let height = self.toolbar.frame.height
+        let toolbarY = self.view.frame.height - height
+        
         UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-            self.toolbar.frame = CGRectMake(0, 0, self.view.frame.width, self.toolbar.frame.height)
-            self.cameraButton.tintColor = UIColor.whiteColor()
+            self.toolbar.alpha = 1
+            self.toolbar.frame = CGRectMake(0, toolbarY, self.view.frame.width, height)
         }, completion: nil)
     }
     

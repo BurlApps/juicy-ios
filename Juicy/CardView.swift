@@ -29,7 +29,7 @@ class CardView: UIView {
     
     // MARK: Default Settings
     struct Defaults {
-        let swipeDistance: CGFloat = 120
+        let swipeDistance: CGFloat = 80
         let border: CGFloat = 4
         let radius: CGFloat = 4
         let rotation: CGFloat = 10
@@ -56,13 +56,13 @@ class CardView: UIView {
     var delegate: CardViewDelegate!
     var status: Status = .None
     var locked = true
+    var startPointInSuperview: CGPoint!
     
     // MARK: Instance Attributes
     private let defaults = Defaults()
     private var neededSwipeDistance: CGFloat!
     private var hideContent: Bool!
     private var isOffScreen: Bool!
-    private var startPointInSuperview: CGPoint!
     
     // MARK: Instance Gestures
     private var tapGesture: UITapGestureRecognizer!
