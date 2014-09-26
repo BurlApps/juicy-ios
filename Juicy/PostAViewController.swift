@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
+class PostAViewController: UIViewController, UITextViewDelegate, LocationDelegate {
     
     // MARK: Instance Variables
     var capturedImage: UIImage!
@@ -14,8 +14,8 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
     private var user: User = User.current()
-    private var contacts: [String] = []
-    private var locationManager: CLLocationManager!
+    private var location: Location!
+    private var friends: Friends!
     
     struct Friend {
         var user: User!
@@ -27,7 +27,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         super.viewDidLoad()
         
         // Track Event
-        PFAnalytics.trackEvent("Post A Controller: Viewed")
+        Track.event("Post A Controller: Viewed")
         
         // Set Preview Image
         self.previewImageView = UIImageView(frame: self.view.frame)
@@ -60,34 +60,36 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         self.view.insertSubview(self.textEditor, aboveSubview: darkener)
         
         // Create Location Manager
-        self.locationManager = CLLocationManager()
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        self.location = Location()
+        self.location.delegate = self
         
-        if (self.locationManager.respondsToSelector(Selector(":requestWhenInUseAuthorization"))) {
-            self.locationManager.requestWhenInUseAuthorization()
-        }
+        // Create Friends Manager
+        self.friends = Friends()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         // Get Current Location
-        self.locationManager.startUpdatingLocation()
+        self.location.startUpdating()
         
         // Get Friends List
-        self.user.getFriendsList(nil)
+        self.user.getFriendsList { (users) -> Void in
+            self.friends.friends = users
+        }
         
         // Get Contact List
         var contacts = Contacts()
         contacts.getContacts { (contacts) -> Void in
             for contact in contacts {
-                self.contacts.append(contact.name)
+                self.friends.contacts.append(contact.name)
             }
         }
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -99,161 +101,45 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
         ], forState: UIControlState.Normal)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Stop Getting Current Location
+        self.location.stopUpdating()
+    }
+    
     // MARK: IBActions
     @IBAction func canelPost(sender: UIBarButtonItem) {
         // Track Event
-        PFAnalytics.trackEvent("Post A Controller: Canceled")
+        Track.event("Post A Controller: Canceled")
         
         // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
     }
     
     @IBAction func createPost(sender: UIBarButtonItem) {
-        var content: [Dictionary<String, AnyObject>] = []
-        var aboutUsers: [User] = []
         let editorText: NSString = self.textEditor.text
-        var friends = self.detectFriendsInMessage(editorText)
         let imageSize = CGSize(width: self.capturedImage.size.width/2, height: self.capturedImage.size.width/2)
         
         if editorText.length != 0 {
-            if friends.isEmpty {
-                content.append([
-                    "message": editorText,
-                    "color": false
-                ])
-            } else {
-                for (index, friend) in enumerate(friends) {
-                    var endRange: NSRange;
-                    let range = friend.range
-                    let endLocation = range.location + range.length
-                    
-                    if friend.user != nil {
-                        aboutUsers.append(friend.user)
-                    }
-                    
-                    if index == 0 && range.location != 0 {
-                        content.append([
-                            "message": editorText.substringWithRange(_NSRange(location: 0, length: range.location)),
-                            "color": false
-                        ])
-                    }
-                    
-                    content.append([
-                        "message": editorText.substringWithRange(range),
-                        "color": true
-                    ])
-                    
-                    if index == (friends.count - 1) {
-                        endRange = _NSRange(location: endLocation, length: editorText.length - endLocation)
-                    } else {
-                        endRange = _NSRange(location: endLocation, length: friends[index + 1].range.location - endLocation)
-                    }
-                
-                    if endRange.length > 0 {
-                        content.append([
-                            "message": editorText.substringWithRange(endRange),
-                            "color": false
-                        ])
-                    }
-                }
-            }
+            let response = self.friends.friendsMessage(editorText)
             
             self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
-            Post.create(content, aboutUsers: aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
-                        creator: self.user, location: self.cityLocation)
+            Post.create(response.content, aboutUsers: response.aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
+                background: nil, creator: self.user, location: self.cityLocation)
             
             // Track Event
-            PFAnalytics.trackEvent("Post A Controller: Post Created", dimensions: [
-                "people": friends.count.description,
-                "users": aboutUsers.count.description,
+            Track.event("Post A Controller: Post Created", data: [
+                "people": response.friends.count.description,
+                "users": response.aboutUsers.count.description,
                 "location": (self.cityLocation != nil).description
             ])
         }
     }
     
-    // MARK: Instance Methods
-    func isFriend(range: NSRange, ranges: NSMutableArray, text: String, oldLength: Int) -> Bool {
-        let letters = NSCharacterSet.letterCharacterSet()
-        let digits = NSCharacterSet.decimalDigitCharacterSet()
-        
-        if range.location != Foundation.NSNotFound {
-            for tempRange in ranges {
-                let newRange = tempRange as NSRange
-                
-                if range.location == newRange.location {
-                    return false
-                }
-            }
-            
-            let length = range.location + range.length
-            let unicodeScalars = text.unicodeScalars
-            let lastChar = unicodeScalars[unicodeScalars.endIndex].value
-            
-            return !ranges.containsObject(range) &&
-                   (range.location == 0 || text[range.location - 1] == " ") &&
-                   (length == oldLength || (!letters.longCharacterIsMember(lastChar) && !digits.longCharacterIsMember(lastChar)))
-        } else {
-            return false
-        }
-    }
-    
-    func detectFriendsInMessage(text: String) -> [Friend] {
-        let lowerText = NSString(string: text.lowercaseString)
-        var friends: [Friend] = []
-        var ranges = NSMutableArray()
-        
-        // Search By Registered Users
-        if self.user.friendsList != nil {
-            for friend in self.user.friendsList {
-                let range = lowerText.rangeOfString(friend.name.lowercaseString)
-                
-                if self.isFriend(range, ranges: ranges, text: text, oldLength: lowerText.length)  {
-                    friends.append(Friend(user: friend, range: range))
-                    ranges.addObject(range)
-                }
-            }
-        }
-        
-        // Search By Contact List
-        if !self.contacts.isEmpty {
-            for contact in self.contacts {
-                let range = lowerText.rangeOfString(contact.lowercaseString)
-                
-                if self.isFriend(range, ranges: ranges, text: text, oldLength: lowerText.length)  {
-                    friends.append(Friend(user: nil, range: range))
-                    ranges.addObject(range)
-                }
-            }
-        }
-        
-        friends.sort({ $0.range.location < $1.range.location })
-        return friends
-    }
-    
-    // MARK: CoreLocation Methods
-    // This delegate is called when the app successfully finds your current location
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        self.locationManager.stopUpdatingLocation()
-        
-        var geoCoder = CLGeocoder()
-        geoCoder.reverseGeocodeLocation(locations.last as CLLocation, completionHandler: { (placeMarks: [AnyObject]!, error: NSError!) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if placeMarks != nil && !placeMarks.isEmpty {
-                    var placeMark = placeMarks[0] as CLPlacemark
-                    self.cityLocation = placeMark.locality
-                } else if error != nil {
-                    println(error)
-                }
-            })
-        })
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFinishDeferredUpdatesWithError error: NSError!) {
-        println(error)
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
+    // MARK: LocationDelegate Methods
+    func locationFound(location: CLPlacemark) {
+        self.cityLocation = location.locality
     }
     
     // MARK: UITextView Methods
@@ -264,7 +150,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, CLLocationManag
     func textViewDidChange(textView: UITextView!) {
         var textColor = UIColor.whiteColor()
         var mutalableText = NSMutableAttributedString(attributedString: textView.attributedText)
-        let friends = self.detectFriendsInMessage(textView.text)
+        let friends = self.friends.friendsInMessage(textView.text)
         
         mutalableText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, mutalableText.length))
         

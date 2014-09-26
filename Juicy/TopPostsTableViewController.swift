@@ -26,7 +26,7 @@ class TopPostsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Track Event
-        PFAnalytics.trackEvent("Top Posts Controller: Viewed")
+        Track.event("Top Posts Controller: Viewed")
         
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -65,7 +65,7 @@ class TopPostsTableViewController: UITableViewController {
             self.refreshControl?.endRefreshing()
             
             // Track Event
-            PFAnalytics.trackEvent("Top Posts Controller: Reloaded Posts", dimensions: [
+            Track.event("Top Posts Controller: Reloaded Posts", data: [
                 "posts": posts.count.description
             ])
         }
@@ -98,7 +98,7 @@ class TopPostsTableViewController: UITableViewController {
         }
         
         cell.setSeparator(post != self.myPosts.first)
-        cell.setContent(post)
+        cell.setContent(post, standing: indexPath.row + 1)
         
         return cell
     }

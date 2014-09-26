@@ -25,7 +25,7 @@ class SavedTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Track Event
-        PFAnalytics.trackEvent("Saved Posts Controller: Viewed")
+        Track.event("Saved Posts Controller: Viewed")
         
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -64,7 +64,7 @@ class SavedTableViewController: UITableViewController {
             self.refreshControl?.endRefreshing()
             
             // Track Event
-            PFAnalytics.trackEvent("Saved Posts Controller: Reloaded Posts", dimensions: [
+            Track.event("Saved Posts Controller: Reloaded Posts", data: [
                 "posts": posts.count.description
             ])
         }
@@ -97,7 +97,7 @@ class SavedTableViewController: UITableViewController {
         }
         
         cell.setSeparator(post != self.sharedPosts.first)
-        cell.setContent(post)
+        cell.setContent(post, standing: nil)
 
         return cell
     }

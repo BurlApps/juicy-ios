@@ -67,6 +67,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
+        
+        // Download Config
+        Settings.update(nil)
 
         // Return 
         return true

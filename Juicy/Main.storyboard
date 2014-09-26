@@ -390,10 +390,42 @@
                     <view key="view" contentMode="scaleToFill" id="mKA-zj-SO3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ihK-Em-azR">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="camera" id="pHR-d3-tnU">
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="takePicture:" destination="Tdg-qQ-iL5" id="jAx-2c-ShT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="rmx-MN-hd7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="spJ-nH-GSg">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="canelPost:" destination="Tdg-qQ-iL5" id="vWT-XU-xXb"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="POST" id="fcD-a8-W81">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="createPost:" destination="Tdg-qQ-iL5" id="xD1-ib-T9M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cameraButton" destination="pHR-d3-tnU" id="clc-jv-OsX"/>
+                        <outlet property="toolbar" destination="ihK-Em-azR" id="5Pt-9f-mMI"/>
                         <segue destination="wfj-v6-b0a" kind="custom" identifier="captureSegue" customClass="NoAnimationSegue" id="7ai-el-EsE"/>
                     </connections>
                 </viewController>
@@ -412,9 +444,52 @@
                     <view key="view" contentMode="scaleToFill" id="yeE-kB-pat">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCn-KZ-4nC">
+                                <rect key="frame" x="0.0" y="488" width="320" height="80"/>
+                                <color key="backgroundColor" red="0.23921568630000001" green="0.77647058820000003" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="aSY-s7-h89"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <size key="titleShadowOffset" width="0.0" height="2"/>
+                                <state key="normal" title="CAPTURE">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.089999999999999997" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="captureDown:" destination="wfj-v6-b0a" eventType="touchDown" id="J4G-97-bOp"/>
+                                    <action selector="captureExit:" destination="wfj-v6-b0a" eventType="touchDragExit" id="0nD-Zs-2ad"/>
+                                    <action selector="captureTouchInside:" destination="wfj-v6-b0a" eventType="touchUpInside" id="L3i-n3-7hv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iCn-KZ-4nC" secondAttribute="trailing" id="Nc2-Ti-QUf"/>
+                            <constraint firstItem="wGq-nG-SAx" firstAttribute="top" secondItem="iCn-KZ-4nC" secondAttribute="bottom" id="Pcv-VK-ug6"/>
+                            <constraint firstItem="iCn-KZ-4nC" firstAttribute="leading" secondItem="yeE-kB-pat" secondAttribute="leading" id="aIv-sD-Fwt"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4cp-g0-EC7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="j5Y-2c-wNE">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelCapture:" destination="wfj-v6-b0a" id="kNo-S3-ENp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="ntu-6p-7Bd">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="toggleCamera:" destination="wfj-v6-b0a" id="KFw-cO-vRZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="captureButton" destination="iCn-KZ-4nC" id="TdW-la-TRA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sKg-P6-KDI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

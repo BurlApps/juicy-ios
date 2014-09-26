@@ -27,7 +27,7 @@ class MyPostsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Track Event
-        PFAnalytics.trackEvent("My Posts Controller: Viewed")
+        Track.event("My Posts Controller: Viewed")
         
         // Configure Navigation Bar
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -66,7 +66,7 @@ class MyPostsTableViewController: UITableViewController {
             self.refreshControl?.endRefreshing()
             
             // Track Event
-            PFAnalytics.trackEvent("My Posts Controller: Reloaded Posts", dimensions: [
+            Track.event("My Posts Controller: Reloaded Posts", data: [
                 "posts": posts.count.description
             ])
         }
@@ -99,7 +99,7 @@ class MyPostsTableViewController: UITableViewController {
         }
         
         cell.setSeparator(post != self.myPosts.first)
-        cell.setContent(post)
+        cell.setContent(post, standing: nil)
         
         return cell
     }

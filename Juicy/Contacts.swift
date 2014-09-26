@@ -7,7 +7,6 @@
 //
 
 import AddressBook
-import Foundation
 
 class Contacts {
     

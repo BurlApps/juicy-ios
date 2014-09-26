@@ -11,7 +11,6 @@ import UIKit
 class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // MARK: IBOutlets
-    //@IBOutlet weak var cameraView: VLBCameraView!
     @IBOutlet weak var captureButton: UIButton!
     
     // MARK: Instance Variables
@@ -24,7 +23,7 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
         super.viewDidLoad()
         
         // Track Event
-        PFAnalytics.trackEvent("Camera A Controller: Viewed")
+        Track.event("Camera A Controller: Viewed")
         
         // Configure Background
         self.view.backgroundColor = UIColor.blackColor()
@@ -34,7 +33,7 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
             self.cameraView = VLBCameraView(frame: self.view.frame)
             self.cameraView.delegate = self
             self.cameraView.awakeFromNib()
-            self.view.insertSubview(self.cameraView, atIndex: 0)
+            self.view.insertSubview(self.cameraView, belowSubview: self.captureButton)
         })
         
         // Setup Post Button
@@ -69,14 +68,14 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        let viewController:PostAViewController = segue.destinationViewController as PostAViewController
+        let viewController = segue.destinationViewController as PostAViewController
         viewController.capturedImage = self.capturedImage
     }
     
     // MARK: IBActions
     @IBAction func cancelCapture(sender: UIBarButtonItem) {
         // Track Event
-        PFAnalytics.trackEvent("Capture A Controller: Canceled")
+        Track.event("Capture A Controller: Canceled")
         
         // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
@@ -99,7 +98,7 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
                 self.cameraView.takePicture()
                 
                 // Track Event
-                PFAnalytics.trackEvent("Camera A Controller: Picture Taken")
+                Track.event("Camera A Controller: Picture Taken")
             })
         }
     }
@@ -111,7 +110,7 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
     // MARK: ImagePicker Methods
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {        
         self.dismissViewControllerAnimated(false, completion: { () -> Void in
-            self.capturedImage = image;
+            self.capturedImage = image
             self.performSegueWithIdentifier("postSegue", sender: self)
         })
     }
@@ -125,7 +124,7 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
     
     // MARK: VLBCameraView Methods
     func cameraView(cameraView: VLBCameraView!, didFinishTakingPicture image: UIImage!, withInfo info: [NSObject : AnyObject]!, meta: [NSObject : AnyObject]!) {
-        self.capturedImage = image;
+        self.capturedImage = image
         self.performSegueWithIdentifier("postSegue", sender: self)
     }
     

@@ -20,8 +20,6 @@ class CardTableViewCell: UITableViewCell {
     private var sharesImageView: UIImageView!
     private var likesImageView: UIImageView!
     private var containerView: UIView!
-    
-    // MARK: Private Instance Variables
     private var darkener: UIView!
     private let duration: NSTimeInterval = 0.2
     private let delay: NSTimeInterval = 0
@@ -31,7 +29,7 @@ class CardTableViewCell: UITableViewCell {
         self.init(style: UITableViewCellStyle.Default, reuseIdentifier: reuseIdentifier)
         
         // Track Event
-        PFAnalytics.trackEvent("Card Table View: Created")
+        Track.event("Card Table View: Created")
         
         // Configure Cell
         self.frame = CGRectMake(0, self.frame.origin.y, width, height)
@@ -144,7 +142,7 @@ class CardTableViewCell: UITableViewCell {
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
         if self.post.image != nil {
             // Track Event
-            PFAnalytics.trackEvent("Card Table View: Tab Gesture")
+            Track.event("Card Table View: Tab Gesture")
             
             // Toggle Content
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
@@ -159,7 +157,7 @@ class CardTableViewCell: UITableViewCell {
         self.separator.hidden = !show
     }
     
-    func setContent(post: Post) {
+    func setContent(post: Post, standing: Int!) {
         self.post = post
         self.shares.text = post.shares.abbreviate()
         self.likes.text = post.likes.abbreviate()
@@ -177,6 +175,14 @@ class CardTableViewCell: UITableViewCell {
         }
         
         var contentAttr = NSMutableAttributedString()
+        
+        if standing != nil {
+            var standingAttrString = NSMutableAttributedString(string: "#\(standing)\n")
+            standingAttrString.addAttribute(NSFontAttributeName,
+                value: UIFont(name: "HelveticaNeue-Bold", size: 36), range: NSMakeRange(0, standingAttrString.length))
+            contentAttr.appendAttributedString(standingAttrString)
+        }
+        
         for block in post.content as [AnyObject] {
             let message: String? = block["message"] as String!
             
@@ -202,20 +208,15 @@ class CardTableViewCell: UITableViewCell {
         self.containerView.alpha = 1
         self.content.attributedText = contentAttr
         self.backgroundImageView.alpha = 0
-        self.backgroundImageView.image = UIImage()
+        self.backgroundImageView.image = nil
         
         if post.image != nil {
             post.getImage({ (image) -> Void in
                 UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
                     self.backgroundImageView.alpha = 1
                     self.backgroundImageView.image = image
-                    self.darkener.alpha = 1
                 }, completion: nil)
             })
-        } else {
-            UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.darkener.alpha = 0
-            }, completion: nil)
         }
     }
 }

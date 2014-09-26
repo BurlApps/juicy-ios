@@ -16,12 +16,15 @@ class Post: NSObject {
     var karma: Int!
     var location: String!
     var content: [AnyObject]!
-    var image: NSURL!
     var juicy: Bool!
     var creator: User!
     var aboutUsers: [User]!
     var background: UIColor!
     var parse: PFObject!
+    
+    // MARK: Private Instance Variables
+    var image: NSURL!
+    var cachedImage: UIImage!
     
     // MARK: Convenience Methods
     convenience init(_ post: PFObject, withRelations: Bool = false) {
@@ -54,16 +57,34 @@ class Post: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage, creator: User, location: String) {
+    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage!, background: UIColor!, creator: User, location: String!) {
         var post = PFObject(className: "Posts")
-        var imageData = UIImagePNGRepresentation(image)
-        var imageFile = PFFile(name: "image.png", data: imageData)
         
-        // Set Content
+        // Set Optional Content
+        if background != nil {
+            var colorComp = CGColorGetComponents(background.CGColor)
+            
+            post["background"] = [
+                Int(colorComp[0] * 255),
+                Int(colorComp[1] * 255),
+                Int(colorComp[2] * 255)
+            ]
+        }
+        
+        if image != nil {
+            var imageData = UIImagePNGRepresentation(image)
+            var imageFile = PFFile(name: "image.png", data: imageData)
+            
+            post["image"] = imageFile
+        }
+        
+        if location != nil {
+            post["location"] = location
+        }
+        
+        // Set Core Content
         post["show"] = true
         post["content"] = content
-        post["image"] = imageFile
-        post["location"] = location
         post["creator"] = creator.parse
         
         // Set About User Relation
@@ -74,7 +95,7 @@ class Post: NSObject {
         }
         
         // Save Eventually
-        post.saveInBackground()
+        post.saveEventually()
     }
 
     class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
@@ -202,29 +223,33 @@ class Post: NSObject {
     }
     
     func getImage(callback: (image: UIImage) -> Void) {
-        let request = NSURLRequest(URL: self.image)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
-            (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-            if error == nil {
-                let image = UIImage(data: data)
-                
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                    // Makes a 1x1 graphics context and draws the image into it
-                    UIGraphicsBeginImageContext(CGSizeMake(1,1))
-                    let context = UIGraphicsGetCurrentContext()
-                    CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), image.CGImage)
-                    UIGraphicsEndImageContext()
+        if self.cachedImage == nil {
+            let request = NSURLRequest(URL: self.image)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {
+                (response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    self.cachedImage = UIImage(data: data)
                     
-                    // Now the image will have been loaded and decoded
-                    // and is ready to rock for the main thread
-                    dispatch_async(dispatch_get_main_queue(), {
-                        callback(image: image)
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                        // Makes a 1x1 graphics context and draws the image into it
+                        UIGraphicsBeginImageContext(CGSizeMake(1,1))
+                        let context = UIGraphicsGetCurrentContext()
+                        CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), self.cachedImage.CGImage)
+                        UIGraphicsEndImageContext()
+                        
+                        // Now the image will have been loaded and decoded
+                        // and is ready to rock for the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            callback(image: self.cachedImage)
+                        })
                     })
-                })
-            } else {
-                println(error)
-            }
-        })
+                } else {
+                    println(error)
+                }
+            })
+        } else {
+            callback(image: self.cachedImage)
+        }
     }
     
     // MARK: Extra Utilities For Future

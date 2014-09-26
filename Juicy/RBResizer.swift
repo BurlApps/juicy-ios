@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 rarebit. All rights reserved.
 //
 
-import UIKit
-
 func RBSquareImageTo(image: UIImage, size: CGSize) -> UIImage {
     return RBResizeImage(RBSquareImage(image), size)
 }

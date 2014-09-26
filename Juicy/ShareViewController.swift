@@ -24,7 +24,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         super.viewDidLoad()
         
         // Track Event
-        PFAnalytics.trackEvent("Share Controller: Viewed")
+        Track.event("Share Controller: Viewed")
         
         // Additional Setup
         if self.respondsToSelector(Selector("edgesForExtendedLayout")) {
@@ -84,7 +84,6 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         
         // Register for keyboard notifications
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
@@ -104,7 +103,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     
     @IBAction func closeShare(sender: UIBarButtonItem) {
         // Track Event
-        PFAnalytics.trackEvent("Share Controller: Canceled")
+        Track.event("Share Controller: Canceled")
         
         // Pop to Parent View Controller
         self.navigationController?.popViewControllerAnimated(false)
@@ -113,7 +112,7 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     @IBAction func shareSend(sender: UIBarButtonItem) {
         if self.privateSelectedContacts.count != 0 {
             // Track Event
-            PFAnalytics.trackEvent("Share Controller: Sent", dimensions: [
+            Track.event("Share Controller: Sent", data: [
                 "contacts": self.privateSelectedContacts.count.description
             ])
             

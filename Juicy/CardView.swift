@@ -73,7 +73,7 @@ class CardView: UIView {
         self.init(frame: frame)
         
         // Track Event
-        PFAnalytics.trackEvent("Card View: Created")
+        Track.event("Card View: Created")
         
         // Instance Variables
         self.post = post
@@ -110,6 +110,7 @@ class CardView: UIView {
         
         // Add Darkener
         self.darkener = UIView(frame: self.bounds)
+        self.darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.darkener.layer.borderWidth = self.defaults.border
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
@@ -122,10 +123,7 @@ class CardView: UIView {
         
         // Add Background Color
         if self.post.background != nil {
-            self.darkener.backgroundColor = UIColor.clearColor()
             self.backgroundColor = self.post.background
-        } else {
-            self.darkener.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha:0.5)
         }
         
         self.darkenerColor = self.darkener.backgroundColor
@@ -193,7 +191,7 @@ class CardView: UIView {
     @IBAction func tapHandle(gesture: UIPanGestureRecognizer) {
         if self.locked == false && self.post.image != nil {
             // Track Event
-            PFAnalytics.trackEvent("Card View: Tab Gesture")
+            Track.event("Card View: Tab Gesture")
             
             // Toggle Content
             self.hideContent = !self.hideContent

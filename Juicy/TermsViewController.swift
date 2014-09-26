@@ -20,10 +20,10 @@ class TermsViewController: UIViewController {
         super.viewDidLoad()
         
         // Track Event
-        PFAnalytics.trackEvent("Terms Controller: Viewed")
+        Track.event("Terms Controller: Viewed")
         
         // Seturl WebView Url
-        Settings.current { (settings) -> Void in
+        Settings.sharedInstance { (settings) -> Void in
             self.url = NSURL(string: "http://\(settings.host)/terms")
             self.webView.loadRequest(NSURLRequest(URL: self.url))
         }
@@ -50,8 +50,8 @@ class TermsViewController: UIViewController {
     // MARK: IBActions
     @IBAction func termsCancel(sender: UIBarButtonItem) {
         // Track Event
-        PFAnalytics.trackEvent("User: Logout")
-        PFAnalytics.trackEvent("Terms Controller: Canceled")
+        Track.event("User: Logout")
+        Track.event("Terms Controller: Canceled")
         
         // Logout User
         self.navigationController?.popViewControllerAnimated(false)
@@ -61,7 +61,7 @@ class TermsViewController: UIViewController {
     @IBAction func termsAccepts(sender: UIBarButtonItem) {
         if self.url != nil {
             // Track Event
-            PFAnalytics.trackEvent("Terms Controller: Accepted Terms")
+            Track.event("Terms Controller: Accepted Terms")
             
             // Accept Terms and Go To Feed
             self.user.acceptedTerms()

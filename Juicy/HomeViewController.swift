@@ -22,7 +22,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         super.viewDidLoad()
         
         // Track Event
-        PFAnalytics.trackEvent("Home Controller: Viewed")
+        Track.event("Home Controller: Viewed")
         
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
@@ -107,7 +107,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
                 
                 if user.isNew {
                     // Track Event
-                    PFAnalytics.trackEvent("User: Created")
+                    Track.event("User: Created")
                     
                     // Setup User Account
                     tempUser.setExtraInfo({ () -> Void in
@@ -115,7 +115,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
                     })
                 } else {
                     // Track Event
-                    PFAnalytics.trackEvent("User: Logged In")
+                    Track.event("User: Logged In")
                     
                     // Go to Terms or Feed
                     if tempUser.terms == true {

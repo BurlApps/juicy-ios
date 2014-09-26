@@ -18,6 +18,9 @@
 		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
 		D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */; };
+		D337883819D4CE130047BA84 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883719D4CE130047BA84 /* Location.swift */; };
+		D337883A19D4D4A60047BA84 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883919D4D4A60047BA84 /* Friends.swift */; };
+		D337883C19D54E590047BA84 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883B19D54E590047BA84 /* Track.swift */; };
 		D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */; };
 		D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F6199238D300D0D1C8 /* Post.swift */; };
 		D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34AE4F819923E3A00D0D1C8 /* User.swift */; };
@@ -127,6 +130,9 @@
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D320165419BFC18F00497FE2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		D337883719D4CE130047BA84 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D337883919D4D4A60047BA84 /* Friends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		D337883B19D54E590047BA84 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		D343DAAA19AF3A55006D098B /* SavedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTableViewController.swift; sourceTree = "<group>"; };
 		D34AE4F6199238D300D0D1C8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D34AE4F819923E3A00D0D1C8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -334,6 +340,7 @@
 				D34AE4F819923E3A00D0D1C8 /* User.swift */,
 				D34AE4F6199238D300D0D1C8 /* Post.swift */,
 				D389C5E219D0FCD300BC13E2 /* Settings.swift */,
+				D337883B19D54E590047BA84 /* Track.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -495,6 +502,8 @@
 			children = (
 				D3D5B56819A097B9006E43F1 /* RBResizer.swift */,
 				D303880319A313CB00C67E44 /* Contacts.swift */,
+				D337883719D4CE130047BA84 /* Location.swift */,
+				D337883919D4D4A60047BA84 /* Friends.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -697,6 +706,7 @@
 				D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */,
 				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
+				D337883819D4CE130047BA84 /* Location.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
 				D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */,
@@ -712,10 +722,12 @@
 				D3D7A2D819A4A676004AC6FE /* String.swift in Sources */,
 				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
+				D337883A19D4D4A60047BA84 /* Friends.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostAViewController.swift in Sources */,
 				D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */,
 				D389C5E319D0FCD300BC13E2 /* Settings.swift in Sources */,
 				D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */,
+				D337883C19D54E590047BA84 /* Track.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
