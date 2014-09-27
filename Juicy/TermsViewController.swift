@@ -13,7 +13,7 @@ class TermsViewController: UIViewController {
     
     // MARK: Instance Variables
     private var url: NSURL!
-    private var user = User.current()
+    private var user: User!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {

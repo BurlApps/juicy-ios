@@ -251,7 +251,7 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
                 background = self.backgrounds[self.background]
             }
             
-            self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
+            self.navigationController?.popViewControllerAnimated(false)
             Post.create(response.content, aboutUsers: response.aboutUsers,
                 image: imageResized, background: background, creator: self.user, location: self.cityLocation)
             

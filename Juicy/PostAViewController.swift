@@ -123,8 +123,10 @@ class PostAViewController: UIViewController, UITextViewDelegate, LocationDelegat
         
         if editorText.length != 0 {
             let response = self.friends.friendsMessage(editorText)
+            let count = self.navigationController?.viewControllers.count
+            let toController = self.navigationController?.viewControllers[count! - 3] as UIViewController
             
-            self.navigationController?.popToViewController(self.navigationController?.viewControllers[1] as UIViewController, animated: false)
+            self.navigationController?.popToViewController(toController, animated: false)
             Post.create(response.content, aboutUsers: response.aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
                 background: nil, creator: self.user, location: self.cityLocation)
             
