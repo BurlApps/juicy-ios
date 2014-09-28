@@ -28,13 +28,22 @@ class CaptureAViewController: UIViewController, VLBCameraViewDelegate, UIImagePi
         // Configure Background
         self.view.backgroundColor = UIColor.blackColor()
         
-        // VLBCameraView Set Delegate
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.cameraView = VLBCameraView(frame: self.view.frame)
-            self.cameraView.delegate = self
-            self.cameraView.awakeFromNib()
-            self.view.insertSubview(self.cameraView, belowSubview: self.captureButton)
-        })
+        // Check if Camera is Available
+        let access = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        
+        if access == AVAuthorizationStatus.Authorized || access == AVAuthorizationStatus.NotDetermined {
+            // VLBCameraView Set Delegate
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.cameraView = VLBCameraView(frame: self.view.frame)
+                self.cameraView.delegate = self
+                self.cameraView.awakeFromNib()
+                self.view.insertSubview(self.cameraView, belowSubview: self.captureButton)
+            })
+        } else {
+            UIAlertView(title: "Enable Camera Access",
+                message: "Please enable camera access by going to the settings panel.", delegate: nil, cancelButtonTitle: "Dismiss").show()
+            self.navigationController?.popViewControllerAnimated(false)
+        }
         
         // Setup Post Button
         self.captureButton.backgroundColor = UIColor(red:0.24, green:0.78, blue:0.29, alpha:0.75)

@@ -10,7 +10,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
     
     // MARK: Instance Variables
     private var pageViewController: UIPageViewController!
-    private let pages = 5
+    private let pages = 6
     private let startPage = 1
     var spinner: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     

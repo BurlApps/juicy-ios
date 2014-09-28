@@ -292,8 +292,14 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
             self.updateStyle()
         
         case 1:
-            self.sourceType = .Camera
-            self.performSegueWithIdentifier("captureSegue", sender: self)
+            let access = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+            
+            if access == AVAuthorizationStatus.Authorized || access == AVAuthorizationStatus.NotDetermined {
+                self.sourceType = .Camera
+                self.performSegueWithIdentifier("captureSegue", sender: self)
+            } else {
+                UIAlertView(title: "Enable Camera Access", message: "Please enable camera access by going to the settings panel.", delegate: nil, cancelButtonTitle: "Dismiss").show()
+            }
        
         case 2:
             var imagePicker = UIImagePickerController()
