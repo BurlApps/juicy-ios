@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
+private var queueSize = 5
 private var saveQueue = NSMutableSet()
 
 class Post: NSObject {
@@ -154,7 +155,7 @@ class Post: NSObject {
     
     class func batchSave(force: Bool, callback: ((success: Bool, error: NSError!) -> Void)!) {
         if saveQueue.count != 0 {
-            if force || saveQueue.count > 30 {
+            if force || saveQueue.count > queueSize {
                 var posts: [PFObject] = []
                 
                 for post in saveQueue {
@@ -167,6 +168,8 @@ class Post: NSObject {
                 } else {
                     PFObject.saveAllInBackground(posts)
                 }
+                
+                println(posts.count)
             }
         } else {
             callback(success: true, error: nil)
@@ -199,7 +202,6 @@ class Post: NSObject {
         var sharedRelation = self.parse.relationForKey("sharedUsers")
         sharedRelation.addObject(user.parse)
         self.parse.incrementKey("shares", byAmount: contacts.count + 1)
-        self.parse.incrementKey("karma", byAmount: contacts.count + 1)
         self.like(user, amount: contacts.count + 1)
         
         self.parse.saveInBackgroundWithBlock { (success: Bool, error: NSError!) -> Void in

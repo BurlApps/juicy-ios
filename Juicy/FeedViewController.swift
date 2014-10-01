@@ -34,6 +34,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var posts: [Post] = []
     private var cards: [CardView] = []
     private var sharePost: Post!
+    private var downloading: Bool = false
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -183,22 +184,27 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             self.resetCardInfo()
         }
         
-        Post.find(self.user, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
-            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
-                var max: Int!
-                self.posts = posts
+        if self.downloading == false {
+            self.downloading = true
+            Post.find(self.user, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
+                self.downloading = false
                 
-                if posts.count < 4 {
-                    max = posts.count
-                } else {
-                    max = self.defaults.cardsShown - 1
+                if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
+                    var max: Int!
+                    self.posts = posts
+                    
+                    if posts.count < 4 {
+                        max = posts.count
+                    } else {
+                        max = self.defaults.cardsShown - 1
+                    }
+                    
+                    for index in 0...max {
+                        self.initCard(!self.cards.isEmpty)
+                    }
                 }
-                
-                for index in 0...max {
-                    self.initCard(!self.cards.isEmpty)
-                }
-            }
-        })
+            })
+        }
     }
     
     func initCard(transform: Bool) -> CardView! {
