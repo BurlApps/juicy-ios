@@ -29,8 +29,8 @@ class OboardingViewController: UIViewController, CardViewDelegate {
     private var user = User.current()
     private var state: Int = 0
     private var states: [State] = [
-        State(status: .Liked, color: UIColor(red:0, green:0.59, blue:0.53, alpha: 1), header: "Swipe Left", subheader: "to LIKE the post"),
-        State(status: .Noped, color: UIColor(red:0.91, green:0.31, blue:0.25, alpha: 1), header: "Swipe Right", subheader: "to NOPE the post"),
+        State(status: .Liked, color: UIColor(red:0, green:0.59, blue:0.53, alpha: 1), header: "Swipe Right", subheader: "to LIKE the post"),
+        State(status: .Noped, color: UIColor(red:0.91, green:0.31, blue:0.25, alpha: 1), header: "Swipe Left", subheader: "to NOPE the post"),
         State(status: .Shared, color: UIColor(red:0.01, green:0.61, blue:0.9, alpha: 1), header: "Swipe Down", subheader: "to SHARE the post")
     ]
     

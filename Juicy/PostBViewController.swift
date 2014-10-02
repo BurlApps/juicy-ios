@@ -137,7 +137,7 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         // Register for keyboard notifications
         var notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: Selector("keyboardDidShow:"), name:UIKeyboardDidShowNotification, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("keyboardDidHide"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
         self.navigationItem.title = "0/75"

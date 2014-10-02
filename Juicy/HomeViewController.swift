@@ -24,6 +24,8 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         // Track Event
         Track.event("Home Controller: Viewed")
         
+        PFUser.logOut()
+        
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
             if User.current().terms == true {
