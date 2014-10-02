@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
             if User.current().terms == true {
-                self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                self.performSegueWithIdentifier("onboardSegue", sender: self)
             } else {
                 self.performSegueWithIdentifier("termsSegue", sender: self)
             }
@@ -119,7 +119,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
                     
                     // Go to Terms or Feed
                     if tempUser.terms == true {
-                        self.performSegueWithIdentifier("loggedInSegue", sender: self)
+                        self.performSegueWithIdentifier("onboardSegue", sender: self)
                     } else {
                         self.performSegueWithIdentifier("termsSegue", sender: self)
                     }

@@ -13,7 +13,7 @@ class TermsViewController: UIViewController {
     
     // MARK: Instance Variables
     private var url: NSURL!
-    private var user: User!
+    private var user = User.current()
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -65,7 +65,7 @@ class TermsViewController: UIViewController {
             
             // Accept Terms and Go To Feed
             self.user.acceptedTerms()
-            self.performSegueWithIdentifier("loggedInSegue", sender: self)
+            self.performSegueWithIdentifier("onboardSegue", sender: self)
         }
     }
 }

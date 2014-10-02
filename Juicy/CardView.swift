@@ -268,7 +268,7 @@ class CardView: UIView {
                 self.choice.alpha = (percentage * 0.8)
                 self.darkener.backgroundColor = self.mixColors(self.darkenerColor.CGColor, colorTwo: newColor, delta: percentage)
                 self.darkener.layer.borderColor = self.mixColors(self.darkenerBorder.CGColor, colorTwo: newColorBorder, delta: percentage).CGColor
-                self.delegate?.cardMovingAroundScreen!(self, delta: percentage)
+                self.delegate?.cardMovingAroundScreen?(self, delta: percentage)
             } else if  gesture.state == UIGestureRecognizerState.Ended {
                 var cardViewLocation = self.getCardViewLocationInSuperView(newLocation)
                 

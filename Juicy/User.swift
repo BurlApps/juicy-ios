@@ -17,6 +17,7 @@ class User: NSObject {
     var friendsList: [User]!
     var registered: Bool!
     var terms: Bool!
+    var onboarded: Bool!
     var parse: PFUser!
     
     // MARK: Convenience Methods
@@ -30,6 +31,7 @@ class User: NSObject {
         self.name = user["name"] as? String
         self.terms = user["terms"] as? Bool
         self.registered = user["registered"] as? Bool
+        self.onboarded = user["onboarded"] as? Bool
         
         if withRelations {
             self.getSharedPosts(nil)
@@ -49,6 +51,11 @@ class User: NSObject {
     
     func acceptedTerms() {
         self.parse["terms"] = true
+        self.parse.saveInBackground()
+    }
+    
+    func didOnboarding() {
+        self.parse["onboarded"] = true
         self.parse.saveInBackground()
     }
     

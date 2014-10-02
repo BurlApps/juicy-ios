@@ -64,6 +64,7 @@
 		D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */; };
 		D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C719A473BF004AC6FE /* NewRelicAgent.framework */; };
 		D3D7A2D819A4A676004AC6FE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D7A2D719A4A676004AC6FE /* String.swift */; };
+		D3DD728119DCB68800C9BA80 /* OboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DD728019DCB68800C9BA80 /* OboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		D3D7A2CB19A473D0004AC6FE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D3D7A2CD19A473EE004AC6FE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		D3D7A2D719A4A676004AC6FE /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D3DD728019DCB68800C9BA80 /* OboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OboardingViewController.swift; sourceTree = "<group>"; };
 		D3F6A44919B6C9E600F9764B /* Juicy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Juicy.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -316,6 +318,7 @@
 			children = (
 				D311A01D19D155A7000E7956 /* Home */,
 				D311A02319D1571C000E7956 /* Terms of Service */,
+				D3DD727F19DCAF6000C9BA80 /* Onboarding */,
 				D311A01E19D155BA000E7956 /* Content Feed */,
 				D311A01F19D155C8000E7956 /* Create Post A */,
 				D311A02019D155D1000E7956 /* Create Post B */,
@@ -388,9 +391,9 @@
 			children = (
 				D3A2CE3519CE5ADF0009842B /* Objective-C */,
 				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
-				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
 				D3A2A88B194E63BE00FABCC0 /* Core */,
 				D34AE4F5199238BC00D0D1C8 /* Models */,
+				D3A2A88A194E63AF00FABCC0 /* Storyboards */,
 				D3229606194F9C7700488B63 /* Controllers */,
 				D34AE4F21992381500D0D1C8 /* Views */,
 				D3D5B56719A09794006E43F1 /* Utils */,
@@ -506,6 +509,14 @@
 				D337883919D4D4A60047BA84 /* Friends.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		D3DD727F19DCAF6000C9BA80 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D3DD728019DCB68800C9BA80 /* OboardingViewController.swift */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -709,6 +720,7 @@
 				D337883819D4CE130047BA84 /* Location.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
+				D3DD728119DCB68800C9BA80 /* OboardingViewController.swift in Sources */,
 				D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */,
 				D303880419A313CB00C67E44 /* Contacts.swift in Sources */,
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
