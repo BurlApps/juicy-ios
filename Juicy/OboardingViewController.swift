@@ -64,6 +64,9 @@ class OboardingViewController: UIViewController, CardViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Configure Status Bar
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: false)
+        
         // Configure Navigation Bar
         self.navigationController?.navigationBarHidden = true
     }

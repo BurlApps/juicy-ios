@@ -168,8 +168,6 @@ class Post: NSObject {
                 } else {
                     PFObject.saveAllInBackground(posts)
                 }
-                
-                println(posts.count)
             }
         } else {
             callback(success: true, error: nil)
