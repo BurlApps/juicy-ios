@@ -170,7 +170,7 @@ class Post: NSObject {
                 }
             }
         } else {
-            callback(success: true, error: nil)
+            callback?(success: true, error: nil)
         }
     }
     

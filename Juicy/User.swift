@@ -44,6 +44,12 @@ class User: NSObject {
         return User(PFUser.currentUser(), withRelations: relations)
     }
     
+    class func logout() {
+        if PFUser.currentUser() != nil {
+            PFUser.logOut()
+        }
+    }
+    
     // MARK: Instance Methods
     func logout() {
         PFUser.logOut()

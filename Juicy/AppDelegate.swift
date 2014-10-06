@@ -20,11 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let infoDictionary = NSBundle.mainBundle().infoDictionary
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        // Configure Settings Panel
-        let version = infoDictionary["CFBundleShortVersionString"] as NSString
-        userDefaults.setValue(version, forKey: "VersionNumber")
-        userDefaults.synchronize()
-        
         // Initialize BugSnag
         let bugSnagKey = infoDictionary["BugSnagKey"] as NSString
         Bugsnag.startBugsnagWithApiKey(bugSnagKey)
@@ -68,8 +63,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // Download Config
+        // Update Settings
         Settings.update(nil)
+        
+        // Configure Settings Panel
+        let version = infoDictionary["CFBundleShortVersionString"] as NSString
+        let build = infoDictionary[kCFBundleVersionKey] as NSString
+        let versionBuild = "\(version) (\(build))" as NSString
+        let previousVersionBuild = userDefaults.objectForKey("VersionNumber") as? NSString
+        
+        if versionBuild != previousVersionBuild {
+            User.logout()
+        }
+        
+        userDefaults.setValue(versionBuild, forKey: "VersionNumber")
+        userDefaults.synchronize()
 
         // Return 
         return true
@@ -99,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var installation = PFInstallation.currentInstallation()
         installation.badge = 0
-        installation.saveEventually()
+        installation.saveInBackground()
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
@@ -132,18 +140,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        Post.batchSave(force: true)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+            Post.batchSave(force: true)
+        })
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        PFQuery.clearAllCachedResults()
-        Post.batchSave(force: true)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+            Post.batchSave(force: true)
+        })
     }
     
     func applicationDidReceiveMemoryWarning(application: UIApplication) {
-        PFQuery.clearAllCachedResults()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+            PFQuery.clearAllCachedResults()
+        })
     }
 }
 
