@@ -24,8 +24,6 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         // Track Event
         Track.event("Home Controller: Viewed")
         
-        PFUser.logOut()
-        
         // Move to Feed View if Logged In
         if PFUser.currentUser() != nil {
             if User.current().terms == true {
@@ -52,6 +50,7 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         self.spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         self.spinner.frame = CGRectMake(0, 0, 40, 40)
         self.spinner.center = CGPointMake(self.view.frame.width/2, self.loginButton.frame.height/2)
+        self.spinner.tintColor = UIColor.whiteColor()
         self.loginButton.addSubview(spinner)
     }
     
