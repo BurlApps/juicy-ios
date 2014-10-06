@@ -35,6 +35,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var cards: [CardView] = []
     private var sharePost: Post!
     private var downloading: Bool = false
+    private var usedPosts: [String] = []
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -213,8 +214,15 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         }
 
         var post = self.posts[0]
-        var card = self.createCard(post, transform: transform)
         self.posts.removeAtIndex(0)
+        
+        if self.usedPosts.contains(post.id) == false {
+            self.usedPosts.append(post.id)
+        } else {
+            return self.initCard(transform)
+        }
+        
+        var card = self.createCard(post, transform: transform)
         
         if self.cards.isEmpty {
             self.view.addSubview(card)

@@ -12,6 +12,7 @@ private var saveQueue = NSMutableSet()
 class Post: NSObject {
     
     // MARK: Instance Variables
+    var id: String!
     var likes: Int!
     var shares: Int!
     var karma: Int!
@@ -32,6 +33,7 @@ class Post: NSObject {
         self.init()
         
         self.parse = post
+        self.id = post.objectId
         self.likes = post["likes"] as Int
         self.shares = post["shares"] as Int
         self.karma = post["karma"] as Int
