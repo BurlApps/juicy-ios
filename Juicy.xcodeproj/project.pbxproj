@@ -11,13 +11,13 @@
 		D303880419A313CB00C67E44 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880319A313CB00C67E44 /* Contacts.swift */; };
 		D303880719A31D2200C67E44 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880619A31D2200C67E44 /* Array.swift */; };
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
-		D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01919D1553B000E7956 /* CaptureBViewController.swift */; };
 		D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01B19D1559F000E7956 /* PostBViewController.swift */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
 		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
 		D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */; };
+		D326DB5319ECDC5E00EAB0DA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D351EF64198F78D100532600 /* FacebookSDK.framework */; };
 		D337883819D4CE130047BA84 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883719D4CE130047BA84 /* Location.swift */; };
 		D337883A19D4D4A60047BA84 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883919D4D4A60047BA84 /* Friends.swift */; };
 		D337883C19D54E590047BA84 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = D337883B19D54E590047BA84 /* Track.swift */; };
@@ -197,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D326DB5319ECDC5E00EAB0DA /* FacebookSDK.framework in Frameworks */,
 				D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */,
 				D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */,
 				D320165719BFC18F00497FE2 /* ParseFacebookUtils.framework in Frameworks */,
@@ -206,7 +207,6 @@
 				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
 				D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */,
 				D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */,
-				D30A84DB19975D2600CBF78F /* FacebookSDK.framework in Frameworks */,
 				D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */,
 				D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */,
 				D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */,

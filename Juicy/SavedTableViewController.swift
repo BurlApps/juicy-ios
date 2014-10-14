@@ -71,7 +71,7 @@ class SavedTableViewController: UITableViewController {
     }
     
     // MARK: IBAction Methods
-    @IBAction func shareExit(sender: UIBarButtonItem) {
+    @IBAction func backButton(sender: UIBarButtonItem) {
         self.navigationController?.popViewControllerAnimated(false)
     }
     

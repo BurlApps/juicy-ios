@@ -22,6 +22,7 @@ class Post: NSObject {
     var creator: User!
     var aboutUsers: [User]!
     var background: UIColor!
+    var darkenerAlpha: CGFloat = 1
     var parse: PFObject!
     
     // MARK: Private Instance Variables
@@ -53,6 +54,10 @@ class Post: NSObject {
             self.background = UIColor(red: red, green: green, blue: blue, alpha: 1)
         }
         
+        if let darkenerAlpha = post["darkenerAlpha"] as? CGFloat {
+            self.darkenerAlpha = darkenerAlpha
+        }
+        
         if withRelations {
             self.getCreator()
             self.getAboutUsers()
@@ -60,7 +65,7 @@ class Post: NSObject {
     }
     
     // MARK: Class Methods
-    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage!, background: UIColor!, creator: User, location: String!) {
+    class func create(content: [AnyObject], aboutUsers: [User], image: UIImage!, background: UIColor!, darkenerAlpha: CGFloat, creator: User, location: String!) {
         var post = PFObject(className: "Posts")
         
         // Set Optional Content
@@ -84,6 +89,8 @@ class Post: NSObject {
         if location != nil {
             post["location"] = location
         }
+        
+        post["darkenerAlpha"] = darkenerAlpha
         
         // Set Core Content
         post["show"] = true
@@ -131,6 +138,7 @@ class Post: NSObject {
     class func topPosts(limit: Int = 10, callback: (posts: [Post]) -> Void) {
         var postQuery = PFQuery(className: "Posts")
         
+        postQuery.whereKey("show", equalTo: true)
         postQuery.limit = limit
         postQuery.orderByDescending("karma")
         
@@ -222,6 +230,25 @@ class Post: NSObject {
                 println(error)
             }
         }
+    }
+    
+    func flag(user: User) {
+        var query = PFQuery(className: "ConfessionsQueue")
+        
+        query.whereKey("post", equalTo: self.parse)
+        query.getFirstObjectInBackgroundWithBlock { (queue: PFObject!, error: NSError!) -> Void in
+            if queue != nil && error == nil {
+                queue["show"] = false
+                queue["spam"] = true
+                queue["spammer"] = user.parse
+                queue.saveInBackground()
+            } else {
+                println(error)
+            }
+        }
+        
+        self.parse["show"] = false
+        self.parse.saveInBackground()
     }
     
     func getImage(callback: (image: UIImage) -> Void) {

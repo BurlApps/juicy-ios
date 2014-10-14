@@ -146,8 +146,8 @@ class CardTableViewCell: UITableViewCell {
             
             // Toggle Content
             UIView.animateWithDuration(self.duration, delay: self.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.darkener.alpha = 1 - self.darkener.alpha
-                self.containerView.alpha = 1 - self.containerView.alpha
+                self.darkener.alpha = self.post.darkenerAlpha - self.darkener.alpha
+                self.containerView.alpha = self.post.darkenerAlpha - self.containerView.alpha
             }, completion: nil)
         }
     }
@@ -209,6 +209,7 @@ class CardTableViewCell: UITableViewCell {
         self.content.attributedText = contentAttr
         self.backgroundImageView.alpha = 0
         self.backgroundImageView.image = nil
+        self.darkener.alpha = self.post.darkenerAlpha
         
         if post.image != nil {
             post.getImage({ (image) -> Void in

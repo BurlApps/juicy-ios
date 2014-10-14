@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bjd-ge-VgJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Bjd-ge-VgJ">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -414,7 +414,7 @@
                                 <action selector="cancelCapture:" destination="HgQ-e5-gqO" id="ahe-M9-lTD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="Kgg-hv-B56">
+                        <barButtonItem key="rightBarButtonItem" image="CameraRotate" id="Kgg-hv-B56">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="toggleCamera:" destination="HgQ-e5-gqO" id="Vtp-BK-QJR"/>
@@ -531,7 +531,7 @@
                                 <action selector="cancelCapture:" destination="wfj-v6-b0a" id="kNo-S3-ENp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="ntu-6p-7Bd">
+                        <barButtonItem key="rightBarButtonItem" image="CameraRotate" id="ntu-6p-7Bd">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="toggleCamera:" destination="wfj-v6-b0a" id="KFw-cO-vRZ"/>
@@ -572,7 +572,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="7KS-vJ-OCC">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="shareExit:" destination="jRR-G4-tle" id="q8j-ZR-thQ"/>
+                                <action selector="backButton:" destination="jRR-G4-tle" id="UhV-SS-o2k"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -608,7 +608,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="0dG-mA-oXX">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="shareExit:" destination="SS1-t8-GAs" id="8t5-UB-b5K"/>
+                                <action selector="backButton:" destination="SS1-t8-GAs" id="RKd-Ia-SEA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -644,7 +644,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Wvh-yH-4xW">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="shareExit:" destination="p2g-gV-KDw" id="ynd-vu-Wn2"/>
+                                <action selector="backButton:" destination="p2g-gV-KDw" id="cHB-0f-Tp6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -689,6 +689,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="CameraRotate" width="70" height="46"/>
         <image name="Heart" width="300" height="300"/>
         <image name="LandingBackground" width="1920" height="1200"/>
         <image name="Leaderboard" width="50" height="50"/>

@@ -127,6 +127,7 @@ class User: NSObject {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
         
+        query.whereKey("show", equalTo: true)
         query.whereKey("creator", equalTo: self.parse)
         query.orderByDescending("createdAt")
         
@@ -147,6 +148,7 @@ class User: NSObject {
         var posts: [Post] = []
         var query = PFQuery(className: "Posts")
         
+        query.whereKey("show", equalTo: true)
         query.whereKey("sharedUsers", equalTo: self.parse)
         query.orderByDescending("createdAt")
         

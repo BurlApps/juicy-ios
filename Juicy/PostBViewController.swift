@@ -21,6 +21,7 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
     
     // MARK: Private Instance Variables
     private var darkener: UIView!
+    private var darkenerAlpha: CGFloat = 1
     private var cityLocation: String!
     private var textEditor: CHTTextView!
     private var previewImageView: UIImageView!
@@ -103,6 +104,16 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         var rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("rightSwipe:"))
         rightSwipe.direction = UISwipeGestureRecognizerDirection.Right
         self.view.addGestureRecognizer(rightSwipe)
+        
+        // Right Swipe Gesture
+        var upSwipe = UISwipeGestureRecognizer(target: self, action: Selector("upSwipe:"))
+        upSwipe.direction = UISwipeGestureRecognizerDirection.Up
+        self.view.addGestureRecognizer(upSwipe)
+        
+        // Right Swipe Gesture
+        var downSwipe = UISwipeGestureRecognizer(target: self, action: Selector("downSwipe:"))
+        downSwipe.direction = UISwipeGestureRecognizerDirection.Down
+        self.view.addGestureRecognizer(downSwipe)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -228,6 +239,34 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         }
     }
     
+    @IBAction func upSwipe(gesture: UISwipeGestureRecognizer) {
+        // Track Event
+        Track.event("Post B Controller: Darkener Swipe")
+        
+        // Change Background
+        self.darkenerAlpha = self.darkenerAlpha - 0.2
+        
+        if self.darkenerAlpha < 0 {
+            self.darkenerAlpha = 0
+        }
+        
+        self.updateStyle()
+    }
+    
+    @IBAction func downSwipe(gesture: UISwipeGestureRecognizer) {
+        // Track Event
+        Track.event("Post B Controller: Darkener Swipe")
+        
+        // Change Background
+        self.darkenerAlpha = self.darkenerAlpha + 0.2
+        
+        if self.darkenerAlpha > 1 {
+            self.darkenerAlpha = 1
+        }
+        
+        self.updateStyle()
+    }
+    
     @IBAction func canelPost(sender: UIBarButtonItem) {
         // Track Event
         Track.event("Post B Controller: Canceled")
@@ -253,7 +292,8 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
             
             self.navigationController?.popViewControllerAnimated(false)
             Post.create(response.content, aboutUsers: response.aboutUsers,
-                image: imageResized, background: background, creator: self.user, location: self.cityLocation)
+                image: imageResized, background: background, darkenerAlpha: self.darkenerAlpha,
+                creator: self.user, location: self.cityLocation)
             
             // Track Event
             Track.event("Post B Controller: Post Created", data: [
@@ -275,6 +315,8 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
                 self.previewImageView.alpha = 0
                 self.previewImageView.image = nil
             }
+            
+            self.darkener.alpha = self.darkenerAlpha
         }, completion: nil)
     }
     

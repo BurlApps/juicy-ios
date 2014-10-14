@@ -20,7 +20,7 @@ class CardView: UIView {
     
     // MARK: Class Enums
     enum Status {
-        case None, Liked, Noped, Shared
+        case None, Liked, Noped, Shared, Flagged
     }
     
     private enum CardViewLocation {
@@ -40,6 +40,7 @@ class CardView: UIView {
         let shareColor = UIColor(red:0.34, green:0.9, blue:0.99, alpha: 0.8).CGColor
         let likeColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.8).CGColor
         let nopeColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.8).CGColor
+        let flagColor = UIColor(red:0.59, green:0.05, blue:0.04, alpha: 0.8).CGColor
         let personColor = UIColor(red:0.31, green:0.95, blue:1, alpha:1)
     }
     
@@ -112,6 +113,7 @@ class CardView: UIView {
         self.darkener = UIView(frame: self.bounds)
         self.darkener.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.darkener.layer.borderWidth = self.defaults.border
+        self.darkener.alpha = self.post.darkenerAlpha
         self.insertSubview(self.darkener, aboveSubview: self.background)
         
         if self.post.juicy as Bool {
@@ -196,8 +198,8 @@ class CardView: UIView {
             // Toggle Content
             self.hideContent = !self.hideContent
             UIView.animateWithDuration(self.defaults.duration, delay: self.defaults.delay, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.content.alpha = 1 - self.content.alpha
-                self.darkener.alpha = 1 - self.darkener.alpha
+                self.content.alpha = self.post.darkenerAlpha - self.content.alpha
+                self.darkener.alpha = self.post.darkenerAlpha - self.darkener.alpha
             }, completion: nil)
         }
     }
@@ -249,11 +251,9 @@ class CardView: UIView {
                         self.status = .Shared
                         self.choice.image = UIImage(named: "Share")
                     } else {
-                        delta = 0
-                        percentage = 0
-                        newColor = self.darkenerColor.CGColor
-                        self.status = .None
-                        self.choice.image = UIImage()
+                        newColor = self.defaults.flagColor
+                        self.status = .Flagged
+                        self.choice.image = UIImage(named: "Flag")
                     }
                 }
                 
@@ -279,13 +279,13 @@ class CardView: UIView {
                 let finalPoint: CGPoint = CGPointMake(view.layer.position.x + (velocity.x * slideFactor),
                     view.layer.position.y + (velocity.y * slideFactor));
                 
-                // Calculate final change in x-position that was made
+                // Calculate final change in x & y position that was made
                 let swipeDistanceX: Int = Int(self.startPointInSuperview.x - newLocation.x)
                 let swipeDistanceY: Int = Int(self.startPointInSuperview.y - newLocation.y)
                 let swipeDistance: Int = abs(swipeDistanceX) > abs(swipeDistanceY) ? swipeDistanceX : swipeDistanceY
                 let absSwipeDistance: CGFloat = CGFloat(labs(swipeDistance))
                 
-                if self.locked || absSwipeDistance < self.neededSwipeDistance || (swipeDistance == swipeDistanceY && swipeDistance > 0) {
+                if self.locked || absSwipeDistance < self.neededSwipeDistance {
                     self.delegate?.cardWillReturnToCenter?(self)
                     self.returnCardViewToStartPointAnimated(true)
                 } else {
@@ -311,7 +311,12 @@ class CardView: UIView {
                             
                             view.layer.position = CGPointMake(offscreenX, view.layer.position.y)
                         } else {
-                            offscreenY = superViewHeight! + self.bounds.size.height
+                            if swipeDistance > 0 {
+                                offscreenY = -superviewOriginY! - self.bounds.size.height
+                            } else {
+                                offscreenY = superViewHeight! + self.bounds.size.height
+                            }
+                            
                             view.layer.position = CGPointMake(view.layer.position.x, offscreenY)
                         }
                     }, completion: { _ in

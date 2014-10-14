@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDelegate {
+class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate {
     
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
@@ -25,6 +25,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         let createButtonShare: UIColor = UIColor(red:0.27, green:0.64, blue:0.85, alpha: 0.95)
         let createButtonLike: UIColor = UIColor(red:0.43, green:0.69, blue:0.21, alpha: 0.95)
         let createButtonNope: UIColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.95)
+        let createButtonFlag: UIColor = UIColor(red:0.59, green:0.05, blue:0.04, alpha: 0.95)
     }
     
     // MARK: Instance Variables
@@ -34,6 +35,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var posts: [Post] = []
     private var cards: [CardView] = []
     private var sharePost: Post!
+    private var flagPost: Post!
     private var downloading: Bool = false
     private var usedPosts: [String] = []
     
@@ -272,6 +274,12 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         self.locationLabel.text = "...................."
     }
     
+    // MARK: UIAlertViewDelegate Methods
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        self.flagPost.flag(self.user)
+        self.flagPost = nil
+    }
+    
     // MARK: CardViewDelegate Methods
     func cardDidLeaveScreen(card: CardView) {
         self.cards.removeAtIndex(0)
@@ -304,6 +312,14 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             
             // Track Event
             Track.event("Feed Controller: Card Shared")
+        case .Flagged:
+            // User Flag Post
+            self.flagPost = card.post
+            UIAlertView(title: "Report as Abusive", message: "Please confirm that this post is abusive. The post will be immediately removed from the app",
+                delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Report").show()
+            
+            // Track Event
+            Track.event("Feed Controller: Card Flagged")
         case .None:
             break
         }
@@ -368,6 +384,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             case .Shared:
                 title = "SHARE"
                 color = self.defaults.createButtonShare
+            case .Flagged:
+                title = "REPORT"
+                color = self.defaults.createButtonFlag
             case .None:
                 title = "POST"
                 color = self.defaults.createButton

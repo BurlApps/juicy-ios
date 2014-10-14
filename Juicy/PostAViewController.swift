@@ -128,7 +128,7 @@ class PostAViewController: UIViewController, UITextViewDelegate, LocationDelegat
             
             self.navigationController?.popToViewController(toController, animated: false)
             Post.create(response.content, aboutUsers: response.aboutUsers, image: RBResizeImage(self.capturedImage, imageSize),
-                background: nil, creator: self.user, location: self.cityLocation)
+                background: nil, darkenerAlpha: 1, creator: self.user, location: self.cityLocation)
             
             // Track Event
             Track.event("Post A Controller: Post Created", data: [
