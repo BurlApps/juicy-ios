@@ -315,7 +315,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         case .Flagged:
             // User Flag Post
             self.flagPost = card.post
-            UIAlertView(title: "Report as Abusive", message: "Please confirm that this post is abusive. The post will be immediately removed from the app",
+            UIAlertView(title: "Report as Abusive", message: "Please confirm that this post is abusive and should be immediately removed from Juicy.",
                 delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Report").show()
             
             // Track Event
