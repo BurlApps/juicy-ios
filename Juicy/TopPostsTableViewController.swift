@@ -29,10 +29,12 @@ class TopPostsTableViewController: UITableViewController {
         Track.event("Top Posts Controller: Viewed")
         
         // Configure Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
-        ]
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 18) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font
+            ]
+        }
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()

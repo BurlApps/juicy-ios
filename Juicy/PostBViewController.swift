@@ -156,13 +156,19 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 22)
-        ]
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)
+        
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font
+            ]
+        }
+        
+        if let font = UIFont(name: "HelveticaNeue", size: 20) {
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+                NSFontAttributeName: font
             ], forState: UIControlState.Normal)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -418,9 +424,12 @@ class PostBViewController: UIViewController, UITextViewDelegate, UIActionSheetDe
         
         textView.attributedText = mutalableText
         self.navigationItem.title = "\(mutalableText.length)/75"
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: textColor,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 22)
-        ]
+        
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 22) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: textColor,
+                NSFontAttributeName: font
+            ]
+        }
     }
 }

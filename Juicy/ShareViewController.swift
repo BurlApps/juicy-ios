@@ -87,10 +87,12 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardDidHide:"), name:UIKeyboardDidHideNotification, object: nil)
         
         // Configure Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
-        ]
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 18) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font
+            ]
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -163,8 +165,8 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     }
 
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        cell.textLabel?.attributedText = self.titleForRowAtIndexPath(indexPath)
-        cell.textLabel?.numberOfLines = 2
+        cell.textLabel.attributedText = self.titleForRowAtIndexPath(indexPath)
+        cell.textLabel.numberOfLines = 2
     }
 
     func newFilteringPredicateWithText(text: String) -> NSPredicate {
@@ -180,10 +182,10 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
         var contactGroup = NSMutableAttributedString(string: "\(group)  \(phone)")
         
         contactName.addAttribute(NSForegroundColorAttributeName, value: UIColor.darkGrayColor(), range: NSMakeRange(0, contactName.length))
-        contactName.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue", size: 16), range: NSMakeRange(0, contactName.length))
+        contactName.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue", size: 16)!, range: NSMakeRange(0, contactName.length))
         
         contactGroup.addAttribute(NSForegroundColorAttributeName, value: UIColor.grayColor(), range: NSMakeRange(0, contactGroup.length))
-        contactGroup.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 16), range: NSMakeRange(0, group.utf16Count))
+        contactGroup.addAttribute(NSFontAttributeName, value: UIFont(name: "HelveticaNeue-Bold", size: 16)!, range: NSMakeRange(0, group.utf16Count))
         
         contactName.appendAttributedString(contactGroup)
         

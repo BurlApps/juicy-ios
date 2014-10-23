@@ -53,7 +53,7 @@ class Settings: NSObject {
     }
     
     // MARK: Instance Methods
-    func tester(user: User) -> String {
+    func tester(user: User) -> String {        
         if self.abTesting == true {
             return user.abTester
         } else {

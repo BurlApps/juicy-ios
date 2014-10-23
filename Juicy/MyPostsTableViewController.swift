@@ -30,10 +30,12 @@ class MyPostsTableViewController: UITableViewController {
         Track.event("My Posts Controller: Viewed")
         
         // Configure Navigation Bar
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
-        ]
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 18) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font
+            ]
+        }
         
         // Add Refresh
         self.refreshControl = UIRefreshControl()

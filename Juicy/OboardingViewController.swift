@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OboardingViewController: UIViewController, CardViewDelegate {
+class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDelegate {
     
     // MARK: Class Struct
     private struct State {
@@ -133,12 +133,18 @@ class OboardingViewController: UIViewController, CardViewDelegate {
     func cardDidLeaveScreen(card: CardView) {
         self.state += 1
         
-        if self.state >= self.states.count {
-            self.performSegueWithIdentifier("feedSegue", sender: self)
-            self.user.didOnboarding()
+        if self.card.status == .Flagged {
+            UIAlertView(title: "Report as Abusive", message: "Please confirm that this post is abusive and should be immediately removed from Juicy.",
+                delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Report").show()
         } else {
             self.configureState()
             self.createCard()
         }
+    }
+    
+    // MARK: UIAlertView Methods
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        self.performSegueWithIdentifier("feedSegue", sender: self)
+        self.user.didOnboarding()
     }
 }

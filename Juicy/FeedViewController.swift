@@ -83,11 +83,14 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.96, green:0.33, blue:0.24, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "Balcony Angels", size: 36),
-            NSShadowAttributeName: shadow
-        ]
+        
+        if let font = UIFont(name: "Balcony Angels", size: 36) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font,
+                NSShadowAttributeName: shadow
+            ]
+        }
         
         // Setup Cards
         if self.cards.isEmpty || self.posts.isEmpty {

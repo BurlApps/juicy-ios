@@ -83,12 +83,20 @@ class Contacts {
                         
                         if name.length != 0 {
                             for index: CFIndex in 0...ABMultiValueGetCount(phones) {
-                                let phoneNumber = ABMultiValueCopyValueAtIndex(phones, index).takeRetainedValue() as NSString
-                                let locLabel = ABMultiValueCopyLabelAtIndex(phones, index).takeRetainedValue() as NSString
-                                let phoneLabel = ABAddressBookCopyLocalizedLabel(locLabel).takeRetainedValue() as NSString
-                                
-                                if phoneNumber.length != 0 && phoneLabel.length != 0 {
-                                    phoneList.append(Phone(name: phoneLabel, phone: phoneNumber))
+                                if let number = ABMultiValueCopyValueAtIndex(phones, index) {
+                                    let numberLabel = number.takeRetainedValue() as NSString
+                                    
+                                    if let loc = ABMultiValueCopyLabelAtIndex(phones, index) {
+                                        let locLabel = loc.takeRetainedValue() as NSString
+                                        
+                                        if let phone = ABAddressBookCopyLocalizedLabel(locLabel) {
+                                            let phoneLabel = phone.takeRetainedValue() as NSString
+                                            
+                                            if numberLabel.length != 0 && phoneLabel.length != 0 {
+                                                phoneList.append(Phone(name: phoneLabel, phone: numberLabel))
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             

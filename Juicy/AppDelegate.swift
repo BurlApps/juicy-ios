@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
         // Initialize BugSnag
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let version = infoDictionary["CFBundleShortVersionString"] as NSString
         let build = infoDictionary[kCFBundleVersionKey] as NSString
         var installation = PFInstallation.currentInstallation()

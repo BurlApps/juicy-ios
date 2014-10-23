@@ -72,7 +72,7 @@ class CardTableViewCell: UITableViewCell {
         var labelY = self.frame.height - 35
         
         // Create Location Text
-        var locationImage =  UIImage(named: "Location").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        var locationImage =  UIImage(named: "Location")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.locationImageView = UIImageView(image: locationImage)
         self.containerView.addSubview(locationImageView)
         
@@ -101,7 +101,7 @@ class CardTableViewCell: UITableViewCell {
         self.likes.shadowOffset = CGSize(width: 0, height: 2)
         self.containerView.addSubview(self.likes)
         
-        var likesImage =  UIImage(named: "Heart").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        var likesImage =  UIImage(named: "Heart")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.likesImageView = UIImageView(image: likesImage)
         self.containerView.addSubview(likesImageView)
         
@@ -122,7 +122,7 @@ class CardTableViewCell: UITableViewCell {
         self.shares.shadowOffset = CGSize(width: 0, height: 2)
         self.containerView.addSubview(self.shares)
         
-        var sharesImage =  UIImage(named: "Shared").imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        var sharesImage =  UIImage(named: "Shared")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         self.sharesImageView = UIImageView(image: sharesImage)
         self.containerView.addSubview(sharesImageView)
         
@@ -177,10 +177,12 @@ class CardTableViewCell: UITableViewCell {
         var contentAttr = NSMutableAttributedString()
         
         if standing != nil {
-            var standingAttrString = NSMutableAttributedString(string: "#\(standing)\n")
-            standingAttrString.addAttribute(NSFontAttributeName,
-                value: UIFont(name: "HelveticaNeue-Bold", size: 36), range: NSMakeRange(0, standingAttrString.length))
-            contentAttr.appendAttributedString(standingAttrString)
+            if let font = UIFont(name: "HelveticaNeue-Bold", size: 36) {
+                var standingAttrString = NSMutableAttributedString(string: "#\(standing)\n")
+                standingAttrString.addAttribute(NSFontAttributeName,
+                    value: font, range: NSMakeRange(0, standingAttrString.length))
+                contentAttr.appendAttributedString(standingAttrString)
+            }
         }
         
         for block in post.content as [AnyObject] {

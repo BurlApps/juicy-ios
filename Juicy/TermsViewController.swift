@@ -41,10 +41,13 @@ class TermsViewController: UIViewController {
         self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor(red:0.96, green:0.33, blue:0.24, alpha:1)
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-Bold", size: 18)
-        ]
+        
+        if let font = UIFont(name: "HelveticaNeue-Bold", size: 18) {
+            self.navigationController?.navigationBar.titleTextAttributes = [
+                NSForegroundColorAttributeName: UIColor.whiteColor(),
+                NSFontAttributeName: font
+            ]
+        }
     }
     
     // MARK: IBActions
