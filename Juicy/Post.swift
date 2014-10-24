@@ -111,11 +111,16 @@ class Post: NSObject {
     class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, city: String!, callback: (posts: [Post]) -> Void) {
         Post.batchSave(true, { (success, error) -> Void in
             if success == true && error == nil {
-                PFCloud.callFunctionInBackground("feed", withParameters: [
-                    "limit": limit,
-                    "skip": skip,
-                    "city": city
-                ], block:{ (objects: AnyObject!, error: NSError!) -> Void in
+                var parameters: [String: AnyObject] = [:]
+            
+                parameters["limit"] = limit
+                parameters["skip"] = skip
+                
+                if city != nil {
+                    parameters["city"] = city
+                }
+                
+                PFCloud.callFunctionInBackground("feed", withParameters: parameters, block:{ (objects: AnyObject!, error: NSError!) -> Void in
                     if error == nil {
                         var posts: [Post] = []
                         

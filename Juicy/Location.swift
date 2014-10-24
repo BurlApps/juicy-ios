@@ -26,7 +26,7 @@ class Location: NSObject, CLLocationManagerDelegate {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         
-        if (self.locationManager.respondsToSelector(Selector(":requestWhenInUseAuthorization"))) {
+        if (self.locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization"))) {
             self.locationManager.requestWhenInUseAuthorization()
         }
     }

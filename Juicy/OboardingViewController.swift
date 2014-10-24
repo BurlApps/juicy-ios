@@ -47,7 +47,7 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
         }
         
         // Get 4 Posts
-        Post.find(self.user, withRelations: false, skip: 0, limit: 4, callback: { (posts: [Post]) -> Void in
+        Post.find(self.user, withRelations: false, skip: 0, limit: 4, city: nil, callback: { (posts: [Post]) -> Void in
             if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
                 self.posts = posts
                 self.createCard()

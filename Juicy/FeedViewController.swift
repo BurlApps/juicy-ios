@@ -98,6 +98,9 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             ]
         }
         
+        // Get Current Location
+        self.location.startUpdating()
+        
         // Setup Cards
         if self.cards.isEmpty || self.posts.isEmpty {
             self.seedCards()
@@ -111,9 +114,6 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             
             self.cardWillReturnToCenter(self.cards[0])
         }
-        
-        // Get Current Location
-        self.location.startUpdating()
     }
     
     override func viewDidDisappear(animated: Bool) {
