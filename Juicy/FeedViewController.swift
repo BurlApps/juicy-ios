@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Brian Vallelunga. All rights reserved.
 //
 
-class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate {
+class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate, LocationDelegate {
     
     // MARK: IBOutlets
     @IBOutlet weak var createButton: UIButton!
@@ -38,6 +38,8 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var flagPost: Post!
     private var downloading: Bool = false
     private var usedPosts: [String] = []
+    private var location: Location!
+    private var cityLocation: String!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -64,6 +66,10 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         Settings.sharedInstance { (settings) -> Void in
             self.settings = settings
         }
+        
+        // Create Location Manager
+        self.location = Location()
+        self.location.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -105,6 +111,16 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             
             self.cardWillReturnToCenter(self.cards[0])
         }
+        
+        // Get Current Location
+        self.location.startUpdating()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Stop Getting Current Location
+        self.location.stopUpdating()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -138,6 +154,11 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             sender.backgroundColor = self.defaults.createButton
             self.performSegueWithIdentifier("captureSegue\(abTester)", sender: self)
         }
+    }
+    
+    // MARK: LocationDelegate Methods
+    func locationFound(location: CLPlacemark) {
+        self.cityLocation = location.locality
     }
     
     // MARK: UIActionSheetDelegate Methods
@@ -192,7 +213,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         
         if self.downloading == false {
             self.downloading = true
-            Post.find(self.user, withRelations: false, skip: self.cards.count, callback: { (posts: [Post]) -> Void in
+            Post.find(self.user, withRelations: false, skip: self.cards.count, city: self.cityLocation, callback: { (posts: [Post]) -> Void in
                 self.downloading = false
                 
                 if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {

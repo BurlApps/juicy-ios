@@ -108,12 +108,13 @@ class Post: NSObject {
         post.saveInBackground()
     }
 
-    class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, callback: (posts: [Post]) -> Void) {
+    class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, city: String!, callback: (posts: [Post]) -> Void) {
         Post.batchSave(true, { (success, error) -> Void in
             if success == true && error == nil {
                 PFCloud.callFunctionInBackground("feed", withParameters: [
                     "limit": limit,
-                    "skip": skip
+                    "skip": skip,
+                    "city": city
                 ], block:{ (objects: AnyObject!, error: NSError!) -> Void in
                     if error == nil {
                         var posts: [Post] = []
@@ -164,20 +165,18 @@ class Post: NSObject {
     }
     
     class func batchSave(force: Bool, callback: ((success: Bool, error: NSError!) -> Void)!) {
-        if saveQueue.count != 0 {
-            if force || saveQueue.count > queueSize {
-                var posts: [PFObject] = []
-                
-                for post in saveQueue {
-                    posts.append((post as Post).parse)
-                    saveQueue.removeObject(post)
-                }
-                
-                if callback != nil {
-                    PFObject.saveAllInBackground(posts, callback)
-                } else {
-                    PFObject.saveAllInBackground(posts)
-                }
+        if force || saveQueue.count > queueSize {
+            var posts: [PFObject] = []
+            
+            for post in saveQueue {
+                posts.append((post as Post).parse)
+                saveQueue.removeObject(post)
+            }
+            
+            if callback != nil {
+                PFObject.saveAllInBackground(posts, callback)
+            } else {
+                PFObject.saveAllInBackground(posts)
             }
         } else {
             callback?(success: true, error: nil)
