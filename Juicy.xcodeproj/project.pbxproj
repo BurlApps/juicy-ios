@@ -11,6 +11,7 @@
 		D303880419A313CB00C67E44 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880319A313CB00C67E44 /* Contacts.swift */; };
 		D303880719A31D2200C67E44 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880619A31D2200C67E44 /* Array.swift */; };
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
+		D30E21B519FB24F800AA821F /* TouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30E21B419FB24F800AA821F /* TouchID.swift */; };
 		D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01919D1553B000E7956 /* CaptureBViewController.swift */; };
 		D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01B19D1559F000E7956 /* PostBViewController.swift */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
@@ -126,6 +127,7 @@
 		D303880619A31D2200C67E44 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
+		D30E21B419FB24F800AA821F /* TouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchID.swift; sourceTree = "<group>"; };
 		D311A01919D1553B000E7956 /* CaptureBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureBViewController.swift; sourceTree = "<group>"; };
 		D311A01B19D1559F000E7956 /* PostBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBViewController.swift; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */,
+				D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */,
+				D3A2A8A2194E71DB00FABCC0 /* libsqlite3.dylib in Frameworks */,
+				D3A2A8A0194E71CA00FABCC0 /* libz.1.1.3.dylib in Frameworks */,
 				D326DB5319ECDC5E00EAB0DA /* FacebookSDK.framework in Frameworks */,
 				D3636E1619AAC0F1007402EC /* Security.framework in Frameworks */,
 				D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */,
@@ -206,7 +212,6 @@
 				D3D7A2D219A49C74004AC6FE /* NewRelicAgent.framework in Frameworks */,
 				D3D7A2D119A49C3C004AC6FE /* CoreTelephony.framework in Frameworks */,
 				D3D7A2D019A49C36004AC6FE /* SystemConfiguration.framework in Frameworks */,
-				D3D7A2CF19A49C2E004AC6FE /* libz.dylib in Frameworks */,
 				D3A2A8B2194E723400FABCC0 /* Foundation.framework in Frameworks */,
 				D3A2A8B0194E722A00FABCC0 /* UIKit.framework in Frameworks */,
 				D3A2A8AE194E722000FABCC0 /* AudioToolbox.framework in Frameworks */,
@@ -215,12 +220,9 @@
 				D3A2A8A8194E71FE00FABCC0 /* CFNetwork.framework in Frameworks */,
 				D3A2A8A6194E71F100FABCC0 /* CoreGraphics.framework in Frameworks */,
 				D3A2A8A4194E71E500FABCC0 /* CoreLocation.framework in Frameworks */,
-				D3A2A8A2194E71DB00FABCC0 /* libsqlite3.dylib in Frameworks */,
-				D3A2A8A0194E71CA00FABCC0 /* libz.1.1.3.dylib in Frameworks */,
 				D3A2A89E194E71AB00FABCC0 /* MobileCoreServices.framework in Frameworks */,
 				D3A2A89C194E719D00FABCC0 /* QuartzCore.framework in Frameworks */,
 				D3A2A896194E716000FABCC0 /* Social.framework in Frameworks */,
-				C4DA44618AE846C28EF1757A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +509,7 @@
 				D303880319A313CB00C67E44 /* Contacts.swift */,
 				D337883719D4CE130047BA84 /* Location.swift */,
 				D337883919D4D4A60047BA84 /* Friends.swift */,
+				D30E21B419FB24F800AA821F /* TouchID.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D30E21B519FB24F800AA821F /* TouchID.swift in Sources */,
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */,

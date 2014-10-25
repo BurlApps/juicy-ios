@@ -25,8 +25,8 @@ class HomeViewController: UIViewController, UIPageViewControllerDataSource {
         Track.event("Home Controller: Viewed")
         
         // Move to Feed View if Logged In
-        if PFUser.currentUser() != nil {
-            if User.current().terms == true {
+        if let user = User.current(relations: false) {
+            if user.terms == true {
                 self.performSegueWithIdentifier("onboardSegue", sender: self)
             } else {
                 self.performSegueWithIdentifier("termsSegue", sender: self)

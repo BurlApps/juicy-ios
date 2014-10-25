@@ -40,8 +40,12 @@ class User: NSObject {
     }
     
     // MARK: Class Methods
-    class func current(relations: Bool = false) -> User {
-        return User(PFUser.currentUser(), withRelations: relations)
+    class func current(relations: Bool = false) -> User! {
+        if let user = PFUser.currentUser() {
+            return User(user, withRelations: relations)
+        } else {
+            return nil
+        }
     }
     
     class func logout() {

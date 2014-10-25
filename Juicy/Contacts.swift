@@ -29,7 +29,7 @@ class Contacts {
     
     // MARK: Initializer
     init() {
-    
+        
     }
 
     // MARK: Private Instance Methods
