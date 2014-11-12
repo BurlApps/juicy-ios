@@ -54,8 +54,10 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
             }
         })
         
-        // Hide Headers
+        // Configue Headers
         self.header.alpha = 0
+        self.header.numberOfLines = 0
+        self.header.adjustsFontSizeToFitWidth = true
         self.subheader.alpha = 0
         
         // Setup Onboard State

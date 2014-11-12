@@ -120,7 +120,7 @@ class Post: NSObject {
                     parameters["city"] = city
                 }
                 
-                PFCloud.callFunctionInBackground("feed", withParameters: parameters, block:{ (objects: AnyObject!, error: NSError!) -> Void in
+                PFCloud.callFunctionInBackground("feed", withParameters: parameters, block: { (objects: AnyObject!, error: NSError!) -> Void in
                     if error == nil {
                         var posts: [Post] = []
                         
@@ -142,13 +142,11 @@ class Post: NSObject {
     }
     
     class func topPosts(limit: Int = 10, callback: (posts: [Post]) -> Void) {
-        var postQuery = PFQuery(className: "Posts")
+        var parameters: [String: AnyObject] = [:]
         
-        postQuery.whereKey("show", equalTo: true)
-        postQuery.limit = limit
-        postQuery.orderByDescending("karma")
+        parameters["limit"] = limit
         
-        postQuery.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+        PFCloud.callFunctionInBackground("topPosts", withParameters: parameters, block: { (objects: AnyObject!, error: NSError!) -> Void in
             if error == nil {
                 var posts: [Post] = []
                 
@@ -162,7 +160,7 @@ class Post: NSObject {
             }
             
             return ()
-        }
+        })
     }
     
     class func batchSave(force: Bool = false) {

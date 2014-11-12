@@ -111,12 +111,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
-
         if application.applicationState == UIApplicationState.Inactive {
             // The application was just brought from the background to the foreground,
             // so we consider the app as having been "opened by a push notification."
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+        
+        if let action = userInfo["action"] as? String {
+            if action == "update.config" {
+                Settings.update(nil)
+            }
         }
     }
     
@@ -126,6 +130,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // so we consider the app as having been "opened by a push notification."
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
+        
+        if let action = userInfo["action"] as? String {
+            if action == "update.config" {
+                Settings.update(nil)
+            }
+        }
+        
+        completionHandler(UIBackgroundFetchResult.NewData)
     }
 
     func applicationWillResignActive(application: UIApplication) {

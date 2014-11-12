@@ -335,7 +335,7 @@
             </objects>
             <point key="canvasLocation" x="460" y="23"/>
         </scene>
-        <!--Share Anonmously-->
+        <!--Share The Juice-->
         <scene sceneID="O3T-kF-Nvs">
             <objects>
                 <viewController storyboardIdentifier="ShareViewController" id="3Jy-W0-pcp" customClass="ShareViewController" customModule="Juicy" sceneMemberID="viewController">
@@ -348,7 +348,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Share Anonmously" id="59M-Kg-lJx">
+                    <navigationItem key="navigationItem" title="Share The Juice" id="59M-Kg-lJx">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="bdF-FR-TDy">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>

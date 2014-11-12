@@ -27,10 +27,12 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         let createButtonNope: UIColor = UIColor(red:0.93, green:0.19, blue:0.25, alpha: 0.95)
         let createButtonFlag: UIColor = UIColor(red:0.59, green:0.05, blue:0.04, alpha: 0.95)
     }
+    private enum NextState {
+        case MyPosts, SharedPosts
+    }
     
     // MARK: Instance Variables
     private let defaults = Defaults()
-    private var settings: Settings!
     private var user = User.current()
     private var posts: [Post] = []
     private var cards: [CardView] = []
@@ -40,6 +42,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     private var usedPosts: [String] = []
     private var location: Location!
     private var cityLocation: String!
+    private var nextState: NextState!
     
     // MARK: UIViewController Overrides
     override func viewDidLoad() {
@@ -61,12 +64,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         
         // Set Card Info
         self.resetCardInfo()
-        
-        // Get Settings
-        Settings.sharedInstance { (settings) -> Void in
-            self.settings = settings
-        }
-        
+
         // Create Location Manager
         self.location = Location()
         self.location.delegate = self
@@ -149,8 +147,8 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     }
     
     @IBAction func createPost(sender: UIButton) {
-        if self.settings != nil {
-            let abTester = self.settings.tester(self.user)
+        Settings.sharedInstance { (settings) -> Void in
+            let abTester = settings.tester(self.user)
             sender.backgroundColor = self.defaults.createButton
             self.performSegueWithIdentifier("captureSegue\(abTester)", sender: self)
         }
@@ -165,8 +163,10 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     func actionSheet(actionSheet: UIActionSheet!, clickedButtonAtIndex buttonIndex: Int) {
         switch buttonIndex {
         case 0:
+            self.nextState = .MyPosts
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 1:
+            self.nextState = .SharedPosts
             self.performSegueWithIdentifier("sharedPostsSegue", sender: self)
         case 2:
             self.user.logout()

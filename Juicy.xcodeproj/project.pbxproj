@@ -11,9 +11,16 @@
 		D303880419A313CB00C67E44 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880319A313CB00C67E44 /* Contacts.swift */; };
 		D303880719A31D2200C67E44 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303880619A31D2200C67E44 /* Array.swift */; };
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
-		D30E21B519FB24F800AA821F /* TouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30E21B419FB24F800AA821F /* TouchID.swift */; };
 		D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01919D1553B000E7956 /* CaptureBViewController.swift */; };
 		D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01B19D1559F000E7956 /* PostBViewController.swift */; };
+		D315A1CE19FD5D2E008FEB05 /* Juicy.LTPasscode.xib in Resources */ = {isa = PBXBuildFile; fileRef = D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */; };
+		D315A1CF19FD5D2E008FEB05 /* Latch.png in Resources */ = {isa = PBXBuildFile; fileRef = D315A1C719FD5D2E008FEB05 /* Latch.png */; };
+		D315A1D019FD5D2E008FEB05 /* Latch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1C819FD5D2E008FEB05 /* Latch.swift */; };
+		D315A1D119FD5D2E008FEB05 /* LTPasscode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */; };
+		D315A1D219FD5D2E008FEB05 /* LTPasscodeBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */; };
+		D315A1D319FD5D2E008FEB05 /* LTPasscodeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */; };
+		D315A1D419FD5D2E008FEB05 /* LTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */; };
+		D315A1D519FD5D2E008FEB05 /* LTTouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
 		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
@@ -127,9 +134,16 @@
 		D303880619A31D2200C67E44 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
-		D30E21B419FB24F800AA821F /* TouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchID.swift; sourceTree = "<group>"; };
 		D311A01919D1553B000E7956 /* CaptureBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureBViewController.swift; sourceTree = "<group>"; };
 		D311A01B19D1559F000E7956 /* PostBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBViewController.swift; sourceTree = "<group>"; };
+		D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Juicy.LTPasscode.xib; sourceTree = "<group>"; };
+		D315A1C719FD5D2E008FEB05 /* Latch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Latch.png; sourceTree = "<group>"; };
+		D315A1C819FD5D2E008FEB05 /* Latch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Latch.swift; sourceTree = "<group>"; };
+		D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscode.swift; sourceTree = "<group>"; };
+		D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscodeBubble.swift; sourceTree = "<group>"; };
+		D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscodeKey.swift; sourceTree = "<group>"; };
+		D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStorage.swift; sourceTree = "<group>"; };
+		D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTTouchID.swift; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D320165419BFC18F00497FE2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -315,6 +329,48 @@
 			name = "Terms of Service";
 			sourceTree = "<group>";
 		};
+		D315A1C219FD5C0A008FEB05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D315A1C319FD5C18008FEB05 /* Swift */,
+				D3A2CE3519CE5ADF0009842B /* Objective-C */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D315A1C319FD5C18008FEB05 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				D315A1C519FD5D2E008FEB05 /* Latch */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		D315A1C419FD5C23008FEB05 /* UIImageViewAligned */ = {
+			isa = PBXGroup;
+			children = (
+				D3A2CE3619CE5AF20009842B /* UIImageViewAligned.h */,
+				D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */,
+			);
+			name = UIImageViewAligned;
+			sourceTree = "<group>";
+		};
+		D315A1C519FD5D2E008FEB05 /* Latch */ = {
+			isa = PBXGroup;
+			children = (
+				D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */,
+				D315A1C719FD5D2E008FEB05 /* Latch.png */,
+				D315A1C819FD5D2E008FEB05 /* Latch.swift */,
+				D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */,
+				D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */,
+				D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */,
+				D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */,
+				D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */,
+			);
+			name = Latch;
+			path = Frameworks/Latch;
+			sourceTree = SOURCE_ROOT;
+		};
 		D3229606194F9C7700488B63 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,7 +447,7 @@
 		D3A2A860194E60D500FABCC0 /* Juicy */ = {
 			isa = PBXGroup;
 			children = (
-				D3A2CE3519CE5ADF0009842B /* Objective-C */,
+				D315A1C219FD5C0A008FEB05 /* Frameworks */,
 				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
 				D3A2A88B194E63BE00FABCC0 /* Core */,
 				D34AE4F5199238BC00D0D1C8 /* Models */,
@@ -496,8 +552,7 @@
 		D3A2CE3519CE5ADF0009842B /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
-				D3A2CE3619CE5AF20009842B /* UIImageViewAligned.h */,
-				D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */,
+				D315A1C419FD5C23008FEB05 /* UIImageViewAligned */,
 			);
 			name = "Objective-C";
 			sourceTree = "<group>";
@@ -509,7 +564,6 @@
 				D303880319A313CB00C67E44 /* Contacts.swift */,
 				D337883719D4CE130047BA84 /* Location.swift */,
 				D337883919D4D4A60047BA84 /* Friends.swift */,
-				D30E21B419FB24F800AA821F /* TouchID.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -632,8 +686,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D315A1CF19FD5D2E008FEB05 /* Latch.png in Resources */,
 				D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */,
 				D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */,
+				D315A1CE19FD5D2E008FEB05 /* Juicy.LTPasscode.xib in Resources */,
 				D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */,
 				D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */,
 			);
@@ -714,21 +770,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30E21B519FB24F800AA821F /* TouchID.swift in Sources */,
 				D381C98D19909C3B00AA65F6 /* NoAnimationSegue.swift in Sources */,
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */,
 				D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */,
+				D315A1D119FD5D2E008FEB05 /* LTPasscode.swift in Sources */,
+				D315A1D319FD5D2E008FEB05 /* LTPasscodeKey.swift in Sources */,
 				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D337883819D4CE130047BA84 /* Location.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
+				D315A1D419FD5D2E008FEB05 /* LTStorage.swift in Sources */,
 				D3DD728119DCB68800C9BA80 /* OboardingViewController.swift in Sources */,
 				D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */,
 				D303880419A313CB00C67E44 /* Contacts.swift in Sources */,
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
 				D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */,
+				D315A1D219FD5D2E008FEB05 /* LTPasscodeBubble.swift in Sources */,
 				D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
@@ -739,8 +798,10 @@
 				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
 				D337883A19D4D4A60047BA84 /* Friends.swift in Sources */,
+				D315A1D519FD5D2E008FEB05 /* LTTouchID.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostAViewController.swift in Sources */,
 				D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */,
+				D315A1D019FD5D2E008FEB05 /* Latch.swift in Sources */,
 				D389C5E319D0FCD300BC13E2 /* Settings.swift in Sources */,
 				D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */,
 				D337883C19D54E590047BA84 /* Track.swift in Sources */,
@@ -890,7 +951,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -927,7 +988,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbcdd99f-25e3-4dc4-84bf-b15c2d4dc8ef";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -945,7 +1006,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Juicy/Juicy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: brian vallelunga (7R34TMPWSX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -982,7 +1043,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bbcdd99f-25e3-4dc4-84bf-b15c2d4dc8ef";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Juicy/Juicy-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7s armv7 arm64";
