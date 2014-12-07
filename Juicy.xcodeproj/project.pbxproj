@@ -13,14 +13,6 @@
 		D30A84D41997403F00CBF78F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A84D31997403F00CBF78F /* CardView.swift */; };
 		D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01919D1553B000E7956 /* CaptureBViewController.swift */; };
 		D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D311A01B19D1559F000E7956 /* PostBViewController.swift */; };
-		D315A1CE19FD5D2E008FEB05 /* Juicy.LTPasscode.xib in Resources */ = {isa = PBXBuildFile; fileRef = D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */; };
-		D315A1CF19FD5D2E008FEB05 /* Latch.png in Resources */ = {isa = PBXBuildFile; fileRef = D315A1C719FD5D2E008FEB05 /* Latch.png */; };
-		D315A1D019FD5D2E008FEB05 /* Latch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1C819FD5D2E008FEB05 /* Latch.swift */; };
-		D315A1D119FD5D2E008FEB05 /* LTPasscode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */; };
-		D315A1D219FD5D2E008FEB05 /* LTPasscodeBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */; };
-		D315A1D319FD5D2E008FEB05 /* LTPasscodeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */; };
-		D315A1D419FD5D2E008FEB05 /* LTStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */; };
-		D315A1D519FD5D2E008FEB05 /* LTTouchID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */; };
 		D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31CDB9119AD94490037AD99 /* HomeViewController.swift */; };
 		D320165319BFC18E00497FE2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D7A2C819A473BF004AC6FE /* Parse.framework */; };
 		D320165619BFC18F00497FE2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D320165419BFC18F00497FE2 /* Bolts.framework */; };
@@ -128,22 +120,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		1C23D6F785A54A2AA5E091EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B488849831CA284E7EC44F1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8410EF2A0797F5F327B736EF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D303880319A313CB00C67E44 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		D303880619A31D2200C67E44 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D30A84D31997403F00CBF78F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D30A84DE1998BD0500CBF78F /* tester.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tester.playground; sourceTree = "<group>"; };
 		D311A01919D1553B000E7956 /* CaptureBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureBViewController.swift; sourceTree = "<group>"; };
 		D311A01B19D1559F000E7956 /* PostBViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBViewController.swift; sourceTree = "<group>"; };
-		D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Juicy.LTPasscode.xib; sourceTree = "<group>"; };
-		D315A1C719FD5D2E008FEB05 /* Latch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Latch.png; sourceTree = "<group>"; };
-		D315A1C819FD5D2E008FEB05 /* Latch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Latch.swift; sourceTree = "<group>"; };
-		D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscode.swift; sourceTree = "<group>"; };
-		D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscodeBubble.swift; sourceTree = "<group>"; };
-		D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTPasscodeKey.swift; sourceTree = "<group>"; };
-		D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTStorage.swift; sourceTree = "<group>"; };
-		D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTTouchID.swift; sourceTree = "<group>"; };
 		D31CDB9119AD94490037AD99 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D320165419BFC18F00497FE2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		D320165519BFC18F00497FE2 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = Frameworks/ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -250,6 +235,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051A07D450B372D406719CDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B488849831CA284E7EC44F1 /* Pods.debug.xcconfig */,
+				8410EF2A0797F5F327B736EF /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D303880519A31D1300C67E44 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,7 +251,7 @@
 				D3D7A2D719A4A676004AC6FE /* String.swift */,
 				D3BEFC4C19C23ED90070D3D4 /* Int.swift */,
 			);
-			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D30A84DC1998BC9E00CBF78F /* Playgrounds */ = {
@@ -265,7 +259,7 @@
 			children = (
 				D30A84DE1998BD0500CBF78F /* tester.playground */,
 			);
-			name = Playgrounds;
+			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 		D311A01D19D155A7000E7956 /* Home */ = {
@@ -274,7 +268,7 @@
 				D31CDB9119AD94490037AD99 /* HomeViewController.swift */,
 				D3CFDF7A19ADA32F008F95B8 /* PageContentViewController.swift */,
 			);
-			name = Home;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		D311A01E19D155BA000E7956 /* Content Feed */ = {
@@ -282,7 +276,7 @@
 			children = (
 				D381C98A19908E7900AA65F6 /* FeedViewController.swift */,
 			);
-			name = "Content Feed";
+			path = "Content Feed";
 			sourceTree = "<group>";
 		};
 		D311A01F19D155C8000E7956 /* Create Post A */ = {
@@ -291,7 +285,7 @@
 				D3D5B563199F29D1006E43F1 /* CaptureAViewController.swift */,
 				D3D5B56519A0406F006E43F1 /* PostAViewController.swift */,
 			);
-			name = "Create Post A";
+			path = "Create Post A";
 			sourceTree = "<group>";
 		};
 		D311A02019D155D1000E7956 /* Create Post B */ = {
@@ -300,7 +294,7 @@
 				D311A01919D1553B000E7956 /* CaptureBViewController.swift */,
 				D311A01B19D1559F000E7956 /* PostBViewController.swift */,
 			);
-			name = "Create Post B";
+			path = "Create Post B";
 			sourceTree = "<group>";
 		};
 		D311A02119D155F9000E7956 /* SMS Share */ = {
@@ -308,7 +302,7 @@
 			children = (
 				D37683F319A70EF700F416B4 /* ShareViewController.swift */,
 			);
-			name = "SMS Share";
+			path = "SMS Share";
 			sourceTree = "<group>";
 		};
 		D311A02219D155FF000E7956 /* Posts Lists */ = {
@@ -318,7 +312,7 @@
 				D3D3DACE19CA6D94003A0A04 /* MyPostsTableViewController.swift */,
 				D3B10B1F19D2ABD50013BC8D /* TopPostsTableViewController.swift */,
 			);
-			name = "Posts Lists";
+			path = "Posts Lists";
 			sourceTree = "<group>";
 		};
 		D311A02319D1571C000E7956 /* Terms of Service */ = {
@@ -326,7 +320,7 @@
 			children = (
 				D3A752BC19B0304E0057DA1F /* TermsViewController.swift */,
 			);
-			name = "Terms of Service";
+			path = "Terms of Service";
 			sourceTree = "<group>";
 		};
 		D315A1C219FD5C0A008FEB05 /* Frameworks */ = {
@@ -335,15 +329,14 @@
 				D315A1C319FD5C18008FEB05 /* Swift */,
 				D3A2CE3519CE5ADF0009842B /* Objective-C */,
 			);
-			name = Frameworks;
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		D315A1C319FD5C18008FEB05 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				D315A1C519FD5D2E008FEB05 /* Latch */,
 			);
-			name = Swift;
+			path = Swift;
 			sourceTree = "<group>";
 		};
 		D315A1C419FD5C23008FEB05 /* UIImageViewAligned */ = {
@@ -352,24 +345,8 @@
 				D3A2CE3619CE5AF20009842B /* UIImageViewAligned.h */,
 				D3A2CE3719CE5B110009842B /* UIImageViewAligned.m */,
 			);
-			name = UIImageViewAligned;
+			path = UIImageViewAligned;
 			sourceTree = "<group>";
-		};
-		D315A1C519FD5D2E008FEB05 /* Latch */ = {
-			isa = PBXGroup;
-			children = (
-				D315A1C619FD5D2E008FEB05 /* Juicy.LTPasscode.xib */,
-				D315A1C719FD5D2E008FEB05 /* Latch.png */,
-				D315A1C819FD5D2E008FEB05 /* Latch.swift */,
-				D315A1C919FD5D2E008FEB05 /* LTPasscode.swift */,
-				D315A1CA19FD5D2E008FEB05 /* LTPasscodeBubble.swift */,
-				D315A1CB19FD5D2E008FEB05 /* LTPasscodeKey.swift */,
-				D315A1CC19FD5D2E008FEB05 /* LTStorage.swift */,
-				D315A1CD19FD5D2E008FEB05 /* LTTouchID.swift */,
-			);
-			name = Latch;
-			path = Frameworks/Latch;
-			sourceTree = SOURCE_ROOT;
 		};
 		D3229606194F9C7700488B63 /* Controllers */ = {
 			isa = PBXGroup;
@@ -383,7 +360,7 @@
 				D311A02119D155F9000E7956 /* SMS Share */,
 				D311A02219D155FF000E7956 /* Posts Lists */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D34AE4F21992381500D0D1C8 /* Views */ = {
@@ -392,7 +369,7 @@
 				D30A84D31997403F00CBF78F /* CardView.swift */,
 				D3A752BE19B06ECA0057DA1F /* CardTableViewCell.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D34AE4F5199238BC00D0D1C8 /* Models */ = {
@@ -403,7 +380,7 @@
 				D389C5E219D0FCD300BC13E2 /* Settings.swift */,
 				D337883B19D54E590047BA84 /* Track.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D351EF6B198F86CF00532600 /* Fonts */ = {
@@ -411,7 +388,7 @@
 			children = (
 				D351EF6C198F870B00532600 /* Balcony Angels.ttf */,
 			);
-			name = Fonts;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D3636E2119AAC339007402EC /* Bundles */ = {
@@ -419,19 +396,18 @@
 			children = (
 				D366B14D19CF6B79002C7F59 /* Settings.bundle */,
 			);
-			name = Bundles;
+			path = Bundles;
 			sourceTree = "<group>";
 		};
 		D3A2A855194E60D500FABCC0 = {
 			isa = PBXGroup;
 			children = (
 				D3A2A882194E61C400FABCC0 /* Config */,
-				D3636E2119AAC339007402EC /* Bundles */,
 				D3A2A860194E60D500FABCC0 /* Juicy */,
 				D3A2A871194E60D500FABCC0 /* JuicyTests */,
-				D351EF6B198F86CF00532600 /* Fonts */,
 				D3A2A85F194E60D500FABCC0 /* Products */,
 				D3A2A88F194E65C400FABCC0 /* Frameworks */,
+				051A07D450B372D406719CDC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -447,6 +423,7 @@
 		D3A2A860194E60D500FABCC0 /* Juicy */ = {
 			isa = PBXGroup;
 			children = (
+				D3636E2119AAC339007402EC /* Bundles */,
 				D315A1C219FD5C0A008FEB05 /* Frameworks */,
 				D30A84DC1998BC9E00CBF78F /* Playgrounds */,
 				D3A2A88B194E63BE00FABCC0 /* Core */,
@@ -464,11 +441,12 @@
 		D3A2A861194E60D500FABCC0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D351EF6B198F86CF00532600 /* Fonts */,
 				D3A2A868194E60D500FABCC0 /* Images.xcassets */,
 				D3A2A890194E67E800FABCC0 /* Juicy-Bridging-Header.h */,
 				D3A2A862194E60D500FABCC0 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D3A2A871194E60D500FABCC0 /* JuicyTests */ = {
@@ -485,19 +463,17 @@
 			children = (
 				D3A2A873194E60D500FABCC0 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D3A2A882194E61C400FABCC0 /* Config */ = {
 			isa = PBXGroup;
 			children = (
 				D3F6A44919B6C9E600F9764B /* Juicy.entitlements */,
-				0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */,
 				D3A2A883194E61D600FABCC0 /* Debug.xcconfig */,
 				D3A2A884194E61DF00FABCC0 /* Release.xcconfig */,
 			);
-			name = Config;
-			path = Juicy;
+			path = Config;
 			sourceTree = "<group>";
 		};
 		D3A2A88A194E63AF00FABCC0 /* Storyboards */ = {
@@ -505,7 +481,7 @@
 			children = (
 				D3A2A885194E630300FABCC0 /* Main.storyboard */,
 			);
-			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		D3A2A88B194E63BE00FABCC0 /* Core */ = {
@@ -514,7 +490,7 @@
 				D3A2A863194E60D500FABCC0 /* AppDelegate.swift */,
 				D381C98C19909C3B00AA65F6 /* NoAnimationSegue.swift */,
 			);
-			name = Core;
+			path = Core;
 			sourceTree = "<group>";
 		};
 		D3A2A88F194E65C400FABCC0 /* Frameworks */ = {
@@ -554,7 +530,7 @@
 			children = (
 				D315A1C419FD5C23008FEB05 /* UIImageViewAligned */,
 			);
-			name = "Objective-C";
+			path = "Objective-C";
 			sourceTree = "<group>";
 		};
 		D3D5B56719A09794006E43F1 /* Utils */ = {
@@ -565,7 +541,7 @@
 				D337883719D4CE130047BA84 /* Location.swift */,
 				D337883919D4D4A60047BA84 /* Friends.swift */,
 			);
-			name = Utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D3DD727F19DCAF6000C9BA80 /* Onboarding */ = {
@@ -573,7 +549,7 @@
 			children = (
 				D3DD728019DCB68800C9BA80 /* OboardingViewController.swift */,
 			);
-			name = Onboarding;
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,10 +662,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D315A1CF19FD5D2E008FEB05 /* Latch.png in Resources */,
 				D3A2A869194E60D500FABCC0 /* Images.xcassets in Resources */,
 				D366B14E19CF6B79002C7F59 /* Settings.bundle in Resources */,
-				D315A1CE19FD5D2E008FEB05 /* Juicy.LTPasscode.xib in Resources */,
 				D3A2A886194E630300FABCC0 /* Main.storyboard in Resources */,
 				D351EF6D198F870B00532600 /* Balcony Angels.ttf in Resources */,
 			);
@@ -717,7 +691,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5FC2E475FC834571AD84E836 /* Upload Bugsnag dSYM */ = {
@@ -774,20 +748,16 @@
 				D381C98B19908E7900AA65F6 /* FeedViewController.swift in Sources */,
 				D3D5B564199F29D1006E43F1 /* CaptureAViewController.swift in Sources */,
 				D3B10B2019D2ABD50013BC8D /* TopPostsTableViewController.swift in Sources */,
-				D315A1D119FD5D2E008FEB05 /* LTPasscode.swift in Sources */,
-				D315A1D319FD5D2E008FEB05 /* LTPasscodeKey.swift in Sources */,
 				D343DAAB19AF3A55006D098B /* SavedTableViewController.swift in Sources */,
 				D34AE4F919923E3A00D0D1C8 /* User.swift in Sources */,
 				D337883819D4CE130047BA84 /* Location.swift in Sources */,
 				D31CDB9219AD94490037AD99 /* HomeViewController.swift in Sources */,
 				D3A2A864194E60D500FABCC0 /* AppDelegate.swift in Sources */,
-				D315A1D419FD5D2E008FEB05 /* LTStorage.swift in Sources */,
 				D3DD728119DCB68800C9BA80 /* OboardingViewController.swift in Sources */,
 				D3A752BF19B06ECA0057DA1F /* CardTableViewCell.swift in Sources */,
 				D303880419A313CB00C67E44 /* Contacts.swift in Sources */,
 				D303880719A31D2200C67E44 /* Array.swift in Sources */,
 				D3D3DACF19CA6D94003A0A04 /* MyPostsTableViewController.swift in Sources */,
-				D315A1D219FD5D2E008FEB05 /* LTPasscodeBubble.swift in Sources */,
 				D311A01C19D1559F000E7956 /* PostBViewController.swift in Sources */,
 				D34AE4F7199238D300D0D1C8 /* Post.swift in Sources */,
 				D37683F419A70EF700F416B4 /* ShareViewController.swift in Sources */,
@@ -798,10 +768,8 @@
 				D3A752BD19B0304E0057DA1F /* TermsViewController.swift in Sources */,
 				D3D5B56919A097B9006E43F1 /* RBResizer.swift in Sources */,
 				D337883A19D4D4A60047BA84 /* Friends.swift in Sources */,
-				D315A1D519FD5D2E008FEB05 /* LTTouchID.swift in Sources */,
 				D3D5B56619A0406F006E43F1 /* PostAViewController.swift in Sources */,
 				D311A01A19D1553B000E7956 /* CaptureBViewController.swift in Sources */,
-				D315A1D019FD5D2E008FEB05 /* Latch.swift in Sources */,
 				D389C5E319D0FCD300BC13E2 /* Settings.swift in Sources */,
 				D3CFDF7B19ADA32F008F95B8 /* PageContentViewController.swift in Sources */,
 				D337883C19D54E590047BA84 /* Track.swift in Sources */,
@@ -944,8 +912,9 @@
 		};
 		D3A2A879194E60D500FABCC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */;
+			baseConfigurationReference = 7B488849831CA284E7EC44F1 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -959,7 +928,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				INFOPLIST_FILE = Juicy/Info.plist;
+				INFOPLIST_FILE = "Juicy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
@@ -999,8 +968,9 @@
 		};
 		D3A2A87A194E60D600FABCC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E1846C8816B4904AF9C2F49 /* Pods.xcconfig */;
+			baseConfigurationReference = 8410EF2A0797F5F327B736EF /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1014,7 +984,7 @@
 					"$(PROJECT_DIR)/Frameworks",
 					"$(PROJECT_DIR)/Frameworks/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
-				INFOPLIST_FILE = Juicy/Info.plist;
+				INFOPLIST_FILE = "Juicy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1062,7 +1032,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = JuicyTests/Info.plist;
+				INFOPLIST_FILE = "JuicyTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1078,7 +1048,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = JuicyTests/Info.plist;
+				INFOPLIST_FILE = "JuicyTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
