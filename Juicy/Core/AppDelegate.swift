@@ -20,21 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let userDefaults = NSUserDefaults.standardUserDefaults()
         
-        // Initialize Mint
-        let mintKey = infoDictionary["MintKey"] as NSString
-        Mint.sharedInstance().initAndStartSession(mintKey)
+        //Initialize Parse
+        let parseApplicationID = infoDictionary["ParseApplicationID"] as NSString
+        let parseClientKey = infoDictionary["ParseClientKey"] as  NSString
+        ParseCrashReporting.enable()
+        Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
         
         // Initialize NewRelic
         let newRelicKey = infoDictionary["NewRelicKey"] as NSString
         NewRelicAgent.startWithApplicationToken(newRelicKey)
-        
-        //Initialize Parse
-        let parseApplicationID = infoDictionary["ParseApplicationID"] as NSString
-        let parseClientKey = infoDictionary["ParseClientKey"] as  NSString
-        Parse.setApplicationId(parseApplicationID, clientKey: parseClientKey)
-        
-        //Initialize Facebook
-        PFFacebookUtils.initializeFacebook()
         
         // Register for Push Notitications, if running iOS 8
         if application.respondsToSelector(Selector("registerUserNotificationSettings:")) {
@@ -59,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let noPushPayload = (launchOptions?.objectForKey(UIApplicationLaunchOptionsRemoteNotificationKey) == nil)
             
             if preBackgroundPush || oldPushHandlerOnly || noPushPayload {
-                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+                PFAnalytics.trackAppOpenedWithLaunchOptionsInBackground(launchOptions, block: nil)
             }
         }
         
@@ -83,10 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: NSString, annotation: AnyObject) -> Bool {
-        return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, withSession:PFFacebookUtils.session())
-    }
-    
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         let version = infoDictionary["CFBundleShortVersionString"] as NSString
@@ -99,22 +89,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.addUniqueObject("juicyUser", forKey: "channels")
         installation.addUniqueObject("sharedPost", forKey: "channels")
         installation.setObject("\(version) - \(build)", forKey: "appVersionBuild")
-        installation.saveInBackground()
+        installation.saveEventually()
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
-        FBAppCall.handleDidBecomeActiveWithSession(PFFacebookUtils.session())
-        
         var installation = PFInstallation.currentInstallation()
         installation.badge = 0
-        installation.saveInBackground()
+        installation.saveEventually(nil)
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         if application.applicationState == UIApplicationState.Inactive {
             // The application was just brought from the background to the foreground,
             // so we consider the app as having been "opened by a push notification."
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
         }
         
         if let action = userInfo["action"] as? String {
@@ -128,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState == UIApplicationState.Inactive {
             // The application was just brought from the background to the foreground,
             // so we consider the app as having been "opened by a push notification."
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayloadInBackground(userInfo, block: nil)
         }
         
         if let action = userInfo["action"] as? String {

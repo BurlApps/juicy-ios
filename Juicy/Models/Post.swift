@@ -105,10 +105,10 @@ class Post: NSObject {
         }
         
         // Save Eventually
-        post.saveInBackground()
+        post.saveInBackgroundWithBlock(nil)
     }
 
-    class func find(current: User, withRelations: Bool = true, limit: Int = 15, skip: Int = 0, city: String!, callback: (posts: [Post]) -> Void) {
+    class func find(relations withRelations: Bool = true, limit: Int = 15, skip: Int = 0, city: String!, callback: (posts: [Post]) -> Void) {
         Post.batchSave(true, { (success, error) -> Void in
             if success == true && error == nil {
                 var parameters: [String: AnyObject] = [:]
@@ -177,9 +177,9 @@ class Post: NSObject {
             }
             
             if callback != nil {
-                PFObject.saveAllInBackground(posts, callback)
+                PFObject.saveAllInBackground(posts, block: callback)
             } else {
-                PFObject.saveAllInBackground(posts)
+                PFObject.saveAllInBackground(posts, block: nil)
             }
         } else {
             callback?(success: true, error: nil)
@@ -243,14 +243,14 @@ class Post: NSObject {
                 queue["show"] = false
                 queue["spam"] = true
                 queue["spammer"] = user.parse
-                queue.saveInBackground()
+                queue.saveInBackgroundWithBlock(nil)
             } else {
                 println(error)
             }
         }
         
         self.parse["show"] = false
-        self.parse.saveInBackground()
+        self.parse.saveInBackgroundWithBlock(nil)
     }
     
     func getImage(callback: (image: UIImage) -> Void) {

@@ -165,8 +165,8 @@ class ShareViewController: UIViewController, THContactPickerDelegate, UITableVie
     }
 
     func configureCell(cell: UITableViewCell, indexPath: NSIndexPath) {
-        cell.textLabel.attributedText = self.titleForRowAtIndexPath(indexPath)
-        cell.textLabel.numberOfLines = 2
+        cell.textLabel?.attributedText = self.titleForRowAtIndexPath(indexPath)
+        cell.textLabel?.numberOfLines = 2
     }
 
     func newFilteringPredicateWithText(text: String) -> NSPredicate {

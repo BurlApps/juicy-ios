@@ -19,10 +19,6 @@ class MyPostsTableViewController: UITableViewController {
     private let delay: NSTimeInterval = 0
     
     // MARK: UITableViewController Overrides
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDelegate {
+class OboardingViewController: UIViewController, CardViewDelegate {
     
     // MARK: Class Struct
     private struct State {
@@ -26,8 +26,9 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
     private let duration: NSTimeInterval = 0.5
     private var posts: [Post]!
     private var card: CardView!
-    private var user = User.current()
     private var state: Int = 0
+    private var user: User!
+    private var loadingView: UIImageViewAligned!
     private var states: [State] = [
         State(status: .Liked, color: UIColor(red:0, green:0.59, blue:0.53, alpha: 1), header: "Swipe Right", subheader: "to LIKE this post"),
         State(status: .Noped, color: UIColor(red:0.91, green:0.31, blue:0.25, alpha: 1), header: "Swipe Left", subheader: "to NOPE this post"),
@@ -42,17 +43,24 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
         Track.event("Onboarding Controller: Viewed")
         
         // Move to Feed View if onboarded
-        if self.user.onboarded == true {
+        if let user = User.current(relations: false) {
             self.performSegueWithIdentifier("feedSegue", sender: self)
+        } else {
+            PFAnonymousUtils.logInWithBlock { (user: PFUser!, error: NSError!) -> Void in
+                if error == nil {
+                    self.user = User(user)
+                }
+            }
         }
         
-        // Get 4 Posts
-        Post.find(self.user, withRelations: false, skip: 0, limit: 4, city: nil, callback: { (posts: [Post]) -> Void in
-            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
-                self.posts = posts
-                self.createCard()
-            }
-        })
+        // Start Loading Proccess
+        var image = UIImage(named: "LoadingImage")
+        self.loadingView = UIImageViewAligned(frame: self.view.frame)
+        self.loadingView.image = image
+        self.loadingView.alignTop = true
+        self.loadingView.clipsToBounds = true
+        self.loadingView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.view.addSubview(self.loadingView)
         
         // Configue Headers
         self.header.alpha = 0
@@ -60,8 +68,19 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
         self.header.adjustsFontSizeToFitWidth = true
         self.subheader.alpha = 0
         
-        // Setup Onboard State
-        self.configureState()
+        // Get 4 Posts
+        Post.find(relations: false, skip: 0, limit: 4, city: nil, callback: { (posts: [Post]) -> Void in
+            if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {
+                UIView.animateWithDuration(self.duration, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.loadingView.alpha = 0
+                }, completion: { _ in
+                    self.loadingView.removeFromSuperview()
+                    self.posts = posts
+                    self.configureState()
+                    self.createCard()
+                })
+            }
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -136,17 +155,11 @@ class OboardingViewController: UIViewController, CardViewDelegate, UIAlertViewDe
         self.state += 1
         
         if self.card.status == .Flagged {
-            UIAlertView(title: "Report as Abusive", message: "Please confirm that this post is abusive and should be immediately removed from Juicy.",
-                delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Report").show()
+            self.performSegueWithIdentifier("feedSegue", sender: self)
+            self.user.didOnboarding()
         } else {
             self.configureState()
             self.createCard()
         }
-    }
-    
-    // MARK: UIAlertView Methods
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        self.performSegueWithIdentifier("feedSegue", sender: self)
-        self.user.didOnboarding()
     }
 }

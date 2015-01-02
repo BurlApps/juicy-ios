@@ -130,7 +130,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
     
     // MARK: IBActions
     @IBAction func settingsButton(sender: UIBarButtonItem) {
-        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Shared Posts", "Logout", "Cancel")
+        var actionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: nil, destructiveButtonTitle: nil, otherButtonTitles: "My Posts", "Liked Posts", "Cancel")
         actionSheet.destructiveButtonIndex = 2
         actionSheet.cancelButtonIndex = 3
         actionSheet.actionSheetStyle = UIActionSheetStyle.Automatic
@@ -167,14 +167,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
             self.performSegueWithIdentifier("myPostsSeque", sender: self)
         case 1:
             self.nextState = .SharedPosts
-            self.performSegueWithIdentifier("sharedPostsSegue", sender: self)
-        case 2:
-            self.user.logout()
-            self.navigationController?.popToRootViewControllerAnimated(false)
-            
-            // Track Event
-            Track.event("User: Logout")
-            Track.event("Camera A Controller: Logout")
+            self.performSegueWithIdentifier("likedPostsSegue", sender: self)
         default:
             break
         }
@@ -213,7 +206,7 @@ class FeedViewController: UIViewController, CardViewDelegate, UIActionSheetDeleg
         
         if self.downloading == false {
             self.downloading = true
-            Post.find(self.user, withRelations: false, skip: self.cards.count, city: self.cityLocation, callback: { (posts: [Post]) -> Void in
+            Post.find(relations: false, skip: self.cards.count, city: self.cityLocation, callback: { (posts: [Post]) -> Void in
                 self.downloading = false
                 
                 if !posts.isEmpty && self.isViewLoaded() && self.view.window != nil {

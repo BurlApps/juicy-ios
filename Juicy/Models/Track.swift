@@ -36,7 +36,7 @@ class Track: NSObject {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
             if force || saveQueue.count > queueSize {
                 for event in saveQueue {
-                    PFAnalytics.trackEvent(event.name, dimensions: event.data)
+                    PFAnalytics.trackEventInBackground(event.name, dimensions: event.data, block: nil)
                 }
 
                 saveQueue.removeAll(keepCapacity: false)
